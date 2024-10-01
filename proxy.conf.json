@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://webbackend.volkmann-rossbach.de",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}
