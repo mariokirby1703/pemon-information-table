@@ -98,7 +98,7 @@ export class AppComponent implements OnInit {
 
   // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef[] = [
-    { field: "number", flex: 1.1 },
+    { field: "number", flex: 1.5, cellStyle: { 'text-align': 'center' } },
     {
       field: "level",
       flex: 3,
@@ -115,10 +115,10 @@ export class AppComponent implements OnInit {
         return valueA.toLowerCase().localeCompare(valueB.toLowerCase());
       }
     },
-    { field: "ID", flex: 2 },
+    { field: "ID", flex: 1.8 },
     {
       field: "difficulty",
-      flex: 2,
+      flex: 2.4,
       filter: true,
       cellClassRules: {
         'easy': (p:any) => p.data.difficulty == "Easy Demon",
@@ -140,7 +140,7 @@ export class AppComponent implements OnInit {
     },
     {
       field: "rating",
-      flex: 2,
+      flex: 1.8,
       filter: true,
       cellClassRules: {
         'featured': (p:any) => p.data.rating == "Featured",
@@ -159,9 +159,16 @@ export class AppComponent implements OnInit {
         return indexA - indexB;
       }
     },
-    { field: "userCoins", flex: 2, filter: true },
+    {
+      field: "userCoins",
+      headerName: "Coins",
+      flex: 1.6,
+      filter: true,
+      cellStyle: { 'text-align': 'center' }
+    },
     {
       field: "estimatedTime",
+      headerName: "Time",
       flex: 2,
       valueGetter: (params: any) => this.formatTime(params.data.estimatedTime),
       comparator: (valueA: any, valueB: any, nodeA: any, nodeB: any) => {
@@ -169,8 +176,8 @@ export class AppComponent implements OnInit {
         return nodeA.data.estimatedTime - nodeB.data.estimatedTime;
       }
     },
-    { field: "objects", flex: 2 },
-    { field: "checkpoints", flex: 2 },
+    { field: "objects", flex: 1.8 },
+    { field: "checkpoints", flex: 1.9, cellStyle: { 'text-align': 'center' } },
     {
       field: "primarySong",
       flex: 3,
@@ -189,7 +196,7 @@ export class AppComponent implements OnInit {
     },
     {
       field: "artist",
-      flex: 3,
+      flex: 2.5,
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         // Function to remove all non-alphanumeric characters from the string
@@ -203,10 +210,28 @@ export class AppComponent implements OnInit {
         return sanitizedA.localeCompare(sanitizedB);
       }
     },
-    { field: "songID", flex: 2 },
-    { field: "songs", flex: 1 },
-    { field: "SFX", flex: 1 },
-    { field: "rateDate", flex: 2 }
+    { field: "songID", flex: 1.8 },
+    { field: "songs", flex: 1.3, cellStyle: { 'text-align': 'center' } },
+    { field: "SFX", flex: 1, cellStyle: { 'text-align': 'center' } },
+    { 
+      field: "rateDate", 
+      flex: 1.6,
+      comparator: (dateA: string, dateB: string) => {
+        const parseDate = (dateStr: string) => {
+          const [day, month, year] = dateStr.split('/').map(Number);
+          return new Date(year, month - 1, day); // Parse DD/MM/YYYY
+        };
+  
+        const parsedDateA = parseDate(dateA);
+        const parsedDateB = parseDate(dateB);
+  
+        return parsedDateA.getTime() - parsedDateB.getTime();
+      },
+      valueFormatter: (params: any) => {
+        // Ensure the date remains displayed in DD/MM/YYYY format
+        return params.value;
+      }
+    }
   ];
 
 }

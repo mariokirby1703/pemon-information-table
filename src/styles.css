@@ -3,6 +3,13 @@
 /* Quartz Theme Specific CSS */
 @import 'ag-grid-community/styles/ag-theme-quartz.css';
 
+.ag-header-cell-label .ag-header-cell-text {
+  white-space: nowrap;
+  overflow: hidden; /* Prevent overflowing text */
+  text-overflow: clip; /* Prevent showing ellipsis (...) */
+}
+
+
 /* Global Styles */
 
 * {
@@ -64,4 +71,9 @@ router-outlet + *  {
 
 .mythic {
   background-color: #085357 !important;
+}
+
+.ag-header-cell-center {
+  justify-content: center;
+  text-align: center;
 }
