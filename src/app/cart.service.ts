@@ -47,6 +47,7 @@ export class CartService {
       estimatedTime: number;
       objects: number;
       checkpoints: number;
+      twop: boolean;
       primarySong: string;
       artist: string;
       songID: number;

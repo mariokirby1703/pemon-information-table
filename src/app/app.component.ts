@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   private all_cookies : any ='';
 
   public pagination = true;
-  public paginationPageSize = 25;
+  public paginationPageSize = 50;
   public paginationPageSizeSelector: number[] | boolean = [10, 25, 50, 100, 150, 250, 500, 1000];
 
   constructor(private cartService: CartService, private cookieService: CookieService, private http: HttpClient) { }
@@ -46,6 +46,7 @@ export class AppComponent implements OnInit {
     estimatedTime: number;
     objects: number;
     checkpoints: number;
+    twop: boolean;
     primarySong: string;
     artist: string;
     songID: number;
@@ -98,10 +99,10 @@ export class AppComponent implements OnInit {
 
   // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef[] = [
-    { field: "number", flex: 1.5, cellStyle: { 'text-align': 'center' } },
+    { field: "number", flex: 1.4, cellStyle: { 'text-align': 'center' } },
     {
       field: "level",
-      flex: 3,
+      flex: 3.2,
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         return valueA.toLowerCase().localeCompare(valueB.toLowerCase());
@@ -109,7 +110,7 @@ export class AppComponent implements OnInit {
     },
     {
       field: "creator",
-      flex: 3,
+      flex: 2.6,
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         return valueA.toLowerCase().localeCompare(valueB.toLowerCase());
@@ -140,7 +141,7 @@ export class AppComponent implements OnInit {
     },
     {
       field: "rating",
-      flex: 1.8,
+      flex: 1.7,
       filter: true,
       cellClassRules: {
         'featured': (p:any) => p.data.rating == "Featured",
@@ -176,8 +177,22 @@ export class AppComponent implements OnInit {
         return nodeA.data.estimatedTime - nodeB.data.estimatedTime;
       }
     },
-    { field: "objects", flex: 1.8 },
+    { field: "objects", flex: 1.5 },
     { field: "checkpoints", flex: 1.9, cellStyle: { 'text-align': 'center' } },
+    {
+      field: "twop",
+      flex: 0.85,
+      headerName: "2p",
+      cellStyle: {
+        'text-align': 'center',
+        'white-space': 'nowrap',
+        'overflow': 'hidden',
+        'text-overflow': 'clip'
+      },
+      cellRenderer: (params: any) => {
+        return `<input type="checkbox" ${params.value ? 'checked' : ''} disabled />`;
+      }
+    },
     {
       field: "primarySong",
       flex: 3,
@@ -216,6 +231,7 @@ export class AppComponent implements OnInit {
     { 
       field: "rateDate", 
       flex: 1.6,
+      sortable: false,
       comparator: (dateA: string, dateB: string) => {
         const parseDate = (dateStr: string) => {
           const [day, month, year] = dateStr.split('/').map(Number);
