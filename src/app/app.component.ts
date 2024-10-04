@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   private all_cookies : any ='';
 
   public pagination = true;
-  public paginationPageSize = 50;
+  public paginationPageSize = 100;
   public paginationPageSizeSelector: number[] | boolean = [10, 25, 50, 100, 150, 250, 500, 1000];
 
   constructor(private cartService: CartService, private cookieService: CookieService, private http: HttpClient) { }
@@ -116,7 +116,7 @@ export class AppComponent implements OnInit {
         return valueA.toLowerCase().localeCompare(valueB.toLowerCase());
       }
     },
-    { field: "ID", flex: 1.8 },
+    { field: "ID", flex: 1.8, headerName: "Level ID" },
     {
       field: "difficulty",
       flex: 2.4,
@@ -169,7 +169,7 @@ export class AppComponent implements OnInit {
     },
     {
       field: "estimatedTime",
-      headerName: "Time",
+      headerName: "Est. Time",
       flex: 2,
       valueGetter: (params: any) => this.formatTime(params.data.estimatedTime),
       comparator: (valueA: any, valueB: any, nodeA: any, nodeB: any) => {
