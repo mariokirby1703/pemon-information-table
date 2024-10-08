@@ -49,7 +49,7 @@ export class AppComponent implements OnInit {
     twop: boolean;
     primarySong: string;
     artist: string;
-    songID: number;
+    songID: number | string;
     songs: number;
     SFX: number;
     rateDate: string;
@@ -225,7 +225,33 @@ export class AppComponent implements OnInit {
         return sanitizedA.localeCompare(sanitizedB);
       }
     },
-    { field: "songID", flex: 1.8 },
+    {
+      field: "songID",
+      flex: 1.8,
+      valueFormatter: (params: any) => {
+        // Format the value as is (whether it's a string or number)
+        return params.value;
+      },
+      comparator: (valueA: any, valueB: any) => {
+        // Check if both values are numbers
+        const isNumberA = !isNaN(valueA);
+        const isNumberB = !isNaN(valueB);
+
+        if (isNumberA && isNumberB) {
+          // If both are numbers, sort numerically
+          return valueA - valueB;
+        } else if (isNumberA) {
+          // If only A is a number, it should come first
+          return -1;
+        } else if (isNumberB) {
+          // If only B is a number, it should come first
+          return 1;
+        } else {
+          // If both are strings, sort alphabetically
+          return valueA.localeCompare(valueB);
+        }
+      }
+    },
     { field: "songs", flex: 1.3, cellStyle: { 'text-align': 'center' } },
     { field: "SFX", flex: 1, cellStyle: { 'text-align': 'center' } },
     { 

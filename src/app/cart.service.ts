@@ -50,7 +50,7 @@ export class CartService {
       twop: boolean;
       primarySong: string;
       artist: string;
-      songID: number;
+      songID: number | string;
       songs: number;
       SFX: number;
       rateDate: string;
