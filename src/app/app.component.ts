@@ -18,8 +18,8 @@ export class AppComponent implements OnInit {
   private all_cookies : any ='';
 
   public pagination = true;
-  public paginationPageSize = 301;
-  public paginationPageSizeSelector: number[] | boolean = [10, 25, 50, 100, 150, 301, 500, 1000];
+  public paginationPageSize = 50;
+  public paginationPageSizeSelector: number[] | boolean = [10, 25, 50, 100, 150, 250, 500];
 
   constructor(private cartService: CartService, private cookieService: CookieService, private http: HttpClient) { }
 
@@ -96,7 +96,7 @@ export class AppComponent implements OnInit {
     'insane': (p:any) => p.data.difficulty == "Insane Demon",
     'extreme': (p:any) => p.data.difficulty == "Extreme Demon"
   } */
-
+    
   // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef[] = [
     { field: "number", flex: 1.4, cellStyle: { 'text-align': 'center' } },

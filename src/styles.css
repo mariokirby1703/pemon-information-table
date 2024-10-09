@@ -9,6 +9,12 @@
   text-overflow: clip; /* Prevent showing ellipsis (...) */
 }
 
+.ag-font-style {
+  user-select: initial;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  -webkit-user-select: text;
+}
 
 /* Global Styles */
 
