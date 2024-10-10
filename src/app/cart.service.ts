@@ -25,16 +25,6 @@ export class CartService {
     return this.items;
   }
 
-  /*
-  getData() {
-    return this.http.get<{ Id: number, SystemId: number, Vorname: string, Nachname: string, SimpleRole: string, IsFavorit: boolean, IsActive: boolean, PinCode: string, ColorCode: string, Date: string, State: string }[]>
-    ('https://webbackend.volkmann-rossbach.de/api/mitarbeiter')
-        .subscribe(data => {
-          console.log(JSON.stringify(data));
-        }
-  )};
-  */
-
   getRowData() {
     return this.http.get<{
       number: number;
@@ -55,6 +45,6 @@ export class CartService {
       SFX: number;
       rateDate: string;
     }[]>
-    ('https://webbackend.volkmann-rossbach.de/api/mitarbeiter', {withCredentials: true});
+    ('https://google.com', {withCredentials: true});
   }
 }

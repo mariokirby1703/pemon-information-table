@@ -88,14 +88,6 @@ export class AppComponent implements OnInit {
       return `${secs}s`;
     }
   }
-
-  /* rowClassRules = {
-    'easy': (p:any) => p.data.difficulty == "Easy Demon",
-    'medium': (p:any) => p.data.difficulty == "Medium Demon",
-    'hard': (p:any) => p.data.difficulty == "Hard Demon",
-    'insane': (p:any) => p.data.difficulty == "Insane Demon",
-    'extreme': (p:any) => p.data.difficulty == "Extreme Demon"
-  } */
     
   // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef[] = [
