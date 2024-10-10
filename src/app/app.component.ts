@@ -94,7 +94,7 @@ export class AppComponent implements OnInit {
     { field: "number", flex: 1.4, cellStyle: { 'text-align': 'center' } },
     {
       field: "level",
-      flex: 3.2,
+      flex: 3.3,
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         return valueA.toLowerCase().localeCompare(valueB.toLowerCase());
@@ -102,7 +102,7 @@ export class AppComponent implements OnInit {
     },
     {
       field: "creator",
-      flex: 2.6,
+      flex: 2.5,
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         return valueA.toLowerCase().localeCompare(valueB.toLowerCase());
@@ -203,7 +203,7 @@ export class AppComponent implements OnInit {
     },
     {
       field: "artist",
-      flex: 2.5,
+      flex: 2.3,
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         // Function to remove all non-alphanumeric characters from the string
