@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
   private all_cookies : any ='';
 
   public pagination = true;
-  public paginationPageSize = 50;
+  public paginationPageSize = 500;
   public paginationPageSizeSelector: number[] | boolean = [10, 25, 50, 100, 150, 250, 500];
 
   constructor(private cartService: CartService, private cookieService: CookieService, private http: HttpClient) { }
