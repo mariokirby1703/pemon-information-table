@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './top-bar/top-bar.component';
@@ -14,35 +14,29 @@ import { ShippingComponent } from './shipping/shipping.component';
 import {AgGridAngular} from "ag-grid-angular";
 import {CookieService} from "ngx-cookie-service";
 
-@NgModule({
-  imports: [
-    AgGridAngular,
-    BrowserModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot([
-      { path: '', component: ProductListComponent },
-      { path: 'products/:productId', component: ProductDetailsComponent },
-      { path: 'cart', component: CartComponent },
-      { path: 'shipping', component: ShippingComponent },
-    ]),
-  ],
-  declarations: [
-    AppComponent,
-    TopBarComponent,
-    ProductListComponent,
-    ProductAlertsComponent,
-    ProductDetailsComponent,
-    CartComponent,
-    ShippingComponent
-  ],
-  bootstrap: [
-    AppComponent
-  ],
-  providers: [
-      CookieService
-  ]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        TopBarComponent,
+        ProductListComponent,
+        ProductAlertsComponent,
+        ProductDetailsComponent,
+        CartComponent,
+        ShippingComponent
+    ],
+    bootstrap: [
+        AppComponent
+    ], imports: [AgGridAngular,
+        BrowserModule,
+        ReactiveFormsModule,
+        RouterModule.forRoot([
+            { path: '', component: ProductListComponent },
+            { path: 'products/:productId', component: ProductDetailsComponent },
+            { path: 'cart', component: CartComponent },
+            { path: 'shipping', component: ShippingComponent },
+        ])], providers: [
+        CookieService,
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule {}
 
 /*
