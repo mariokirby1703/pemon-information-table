@@ -244,7 +244,7 @@ export class AppComponent implements OnInit {
         }
       }
     },
-    { field: "songs", flex: 1.3, cellStyle: { 'text-align': 'center' } },
+    { field: "songs", flex: 1.2, cellStyle: { 'text-align': 'center' } },
     { field: "SFX", flex: 1, cellStyle: { 'text-align': 'center' } },
     { 
       field: "rateDate", 
