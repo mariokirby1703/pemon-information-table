@@ -11,6 +11,9 @@
     "test": "ng test",
     "e2e": "ng e2e"
   },
+  "engines": {
+    "node": "20.x"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "17.2.4",
