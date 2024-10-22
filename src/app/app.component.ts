@@ -171,7 +171,7 @@ export class AppComponent implements OnInit {
     {
       field: "twop",
       flex: 0.85,
-      minWidth: 50,  // Ensure checkbox column is not too narrow
+      minWidth: 60,  // Ensure checkbox column is not too narrow
       headerName: "2p",
       cellStyle: {
         'text-align': 'center',
@@ -186,7 +186,7 @@ export class AppComponent implements OnInit {
     {
       field: "primarySong",
       flex: 3,
-      minWidth: 160,  // Ensures song name is readable
+      minWidth: 170,  // Ensures song name is readable
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         const sanitizeString = (str: string) => str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
@@ -198,7 +198,7 @@ export class AppComponent implements OnInit {
     {
       field: "artist",
       flex: 2.3,
-      minWidth: 130,  // Ensures artist name stays visible
+      minWidth: 140,  // Ensures artist name stays visible
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         const sanitizeString = (str: string) => str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
