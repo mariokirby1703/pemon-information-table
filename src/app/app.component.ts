@@ -91,9 +91,10 @@ export class AppComponent implements OnInit {
 
   // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef[] = [
-    { field: "number", flex: 1.4, minWidth: 90, cellStyle: { 'text-align': 'center' } },
+    { field: "number", flex: 1.4, minWidth: 85, cellStyle: { 'text-align': 'center' } },
     {
       field: "level",
+      headerName: "Level Name",
       flex: 3.3,
       minWidth: 190,  // Ensures level name is visible on small screens
       filter: true,
