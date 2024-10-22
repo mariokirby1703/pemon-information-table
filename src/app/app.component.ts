@@ -91,7 +91,7 @@ export class AppComponent implements OnInit {
 
   // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef[] = [
-    { field: "number", flex: 1.4, minWidth: 70, cellStyle: { 'text-align': 'center' } },
+    { field: "number", flex: 1.4, minWidth: 90, cellStyle: { 'text-align': 'center' } },
     {
       field: "level",
       flex: 3.3,
@@ -160,7 +160,7 @@ export class AppComponent implements OnInit {
       field: "estimatedTime",
       headerName: "Est. Time",
       flex: 2,
-      minWidth: 110,
+      minWidth: 115,
       valueGetter: (params: any) => this.formatTime(params.data.estimatedTime),
       comparator: (valueA: any, valueB: any, nodeA: any, nodeB: any) => {
         return nodeA.data.estimatedTime - nodeB.data.estimatedTime;
