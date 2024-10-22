@@ -88,13 +88,14 @@ export class AppComponent implements OnInit {
       return `${secs}s`;
     }
   }
-    
+
   // Column Definitions: Defines the columns to be displayed.
   colDefs: ColDef[] = [
-    { field: "number", flex: 1.4, cellStyle: { 'text-align': 'center' } },
+    { field: "number", flex: 1.4, minWidth: 70, cellStyle: { 'text-align': 'center' } },
     {
       field: "level",
       flex: 3.3,
+      minWidth: 190,  // Ensures level name is visible on small screens
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         return valueA.toLowerCase().localeCompare(valueB.toLowerCase());
@@ -103,15 +104,17 @@ export class AppComponent implements OnInit {
     {
       field: "creator",
       flex: 2.5,
+      minWidth: 150,  // Ensures creator name stays readable
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         return valueA.toLowerCase().localeCompare(valueB.toLowerCase());
       }
     },
-    { field: "ID", flex: 1.8, headerName: "Level ID" },
+    { field: "ID", flex: 1.8, minWidth: 110, headerName: "Level ID" },
     {
       field: "difficulty",
       flex: 2.4,
+      minWidth: 140,
       filter: true,
       cellClassRules: {
         'easy': (p:any) => p.data.difficulty == "Easy Demon",
@@ -122,18 +125,15 @@ export class AppComponent implements OnInit {
       },
       comparator: (valueA: string, valueB: string) => {
         const order = ["Easy Demon", "Medium Demon", "Hard Demon", "Insane Demon", "Extreme Demon"];
-
-        // Get the index of each difficulty in the custom order array
         const indexA = order.indexOf(valueA);
         const indexB = order.indexOf(valueB);
-
-        // Sort based on the index in the custom order array
         return indexA - indexB;
       }
     },
     {
       field: "rating",
       flex: 1.7,
+      minWidth: 100,  // Prevents rating from being too small
       filter: true,
       cellClassRules: {
         'featured': (p:any) => p.data.rating == "Featured",
@@ -143,12 +143,8 @@ export class AppComponent implements OnInit {
       },
       comparator: (valueA: string, valueB: string) => {
         const order = ["Rated", "Featured", "Epic", "Legendary", "Mythic"];
-
-        // Get the index of each rating in the custom order array
         const indexA = order.indexOf(valueA);
         const indexB = order.indexOf(valueB);
-
-        // Sort based on the index in the custom order array
         return indexA - indexB;
       }
     },
@@ -156,6 +152,7 @@ export class AppComponent implements OnInit {
       field: "userCoins",
       headerName: "Coins",
       flex: 1.6,
+      minWidth: 90,  // Keeps the Coins column wide enough to be legible
       filter: true,
       cellStyle: { 'text-align': 'center' }
     },
@@ -163,17 +160,18 @@ export class AppComponent implements OnInit {
       field: "estimatedTime",
       headerName: "Est. Time",
       flex: 2,
+      minWidth: 110,
       valueGetter: (params: any) => this.formatTime(params.data.estimatedTime),
       comparator: (valueA: any, valueB: any, nodeA: any, nodeB: any) => {
-        // Sort based on the raw seconds value, not the formatted time
         return nodeA.data.estimatedTime - nodeB.data.estimatedTime;
       }
     },
-    { field: "objects", flex: 1.5 },
-    { field: "checkpoints", flex: 1.9, cellStyle: { 'text-align': 'center' } },
+    { field: "objects", flex: 1.5, minWidth: 90 }, // Avoids objects column from collapsing
+    { field: "checkpoints", flex: 1.9, minWidth: 110, cellStyle: { 'text-align': 'center' } },
     {
       field: "twop",
       flex: 0.85,
+      minWidth: 50,  // Ensure checkbox column is not too narrow
       headerName: "2p",
       cellStyle: {
         'text-align': 'center',
@@ -188,85 +186,65 @@ export class AppComponent implements OnInit {
     {
       field: "primarySong",
       flex: 3,
+      minWidth: 160,  // Ensures song name is readable
       filter: true,
       comparator: (valueA: string, valueB: string) => {
-        // Function to remove all non-alphanumeric characters from the string
         const sanitizeString = (str: string) => str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-
-        // Sanitize both values to remove special characters
         const sanitizedA = sanitizeString(valueA);
         const sanitizedB = sanitizeString(valueB);
-
-        // Compare the sanitized values
         return sanitizedA.localeCompare(sanitizedB);
       }
     },
     {
       field: "artist",
       flex: 2.3,
+      minWidth: 130,  // Ensures artist name stays visible
       filter: true,
       comparator: (valueA: string, valueB: string) => {
-        // Function to remove all non-alphanumeric characters from the string
         const sanitizeString = (str: string) => str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
-
-        // Sanitize both values to remove special characters
         const sanitizedA = sanitizeString(valueA);
         const sanitizedB = sanitizeString(valueB);
-
-        // Compare the sanitized values
         return sanitizedA.localeCompare(sanitizedB);
       }
     },
     {
       field: "songID",
       flex: 1.8,
+      minWidth: 100,  // Ensures song ID remains visible
       valueFormatter: (params: any) => {
-        // Format the value as is (whether it's a string or number)
         return params.value;
       },
       comparator: (valueA: any, valueB: any) => {
-        // Check if both values are numbers
         const isNumberA = !isNaN(valueA);
         const isNumberB = !isNaN(valueB);
-
-        if (isNumberA && isNumberB) {
-          // If both are numbers, sort numerically
-          return valueA - valueB;
-        } else if (isNumberA) {
-          // If only A is a number, it should come first
-          return -1;
-        } else if (isNumberB) {
-          // If only B is a number, it should come first
-          return 1;
-        } else {
-          // If both are strings, sort alphabetically
-          return valueA.localeCompare(valueB);
-        }
+        if (isNumberA && isNumberB) return valueA - valueB;
+        else if (isNumberA) return -1;
+        else if (isNumberB) return 1;
+        return valueA.localeCompare(valueB);
       }
     },
-    { field: "songs", flex: 1.2, cellStyle: { 'text-align': 'center' } },
-    { field: "SFX", flex: 1, cellStyle: { 'text-align': 'center' } },
-    { 
-      field: "rateDate", 
+    { field: "songs", flex: 1.2, minWidth: 75, cellStyle: { 'text-align': 'center' } },
+    { field: "SFX", flex: 1, minWidth: 60, cellStyle: { 'text-align': 'center' } },
+    {
+      field: "rateDate",
       flex: 1.6,
+      minWidth: 110,
       sortable: false,
       comparator: (dateA: string, dateB: string) => {
         const parseDate = (dateStr: string) => {
           const [day, month, year] = dateStr.split('/').map(Number);
-          return new Date(year, month - 1, day); // Parse DD/MM/YYYY
+          return new Date(year, month - 1, day);
         };
-  
         const parsedDateA = parseDate(dateA);
         const parsedDateB = parseDate(dateB);
-  
         return parsedDateA.getTime() - parsedDateB.getTime();
       },
       valueFormatter: (params: any) => {
-        // Ensure the date remains displayed in DD/MM/YYYY format
         return params.value;
       }
     }
   ];
+
 
 }
 
