@@ -7,15 +7,13 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-root',
-  //standalone: false,
-  //imports: [AgGridAngular], // Add Angular Data Grid Component
   styleUrls: ['./app.component.css'],
   templateUrl: `./app.component.html`
 })
 
 export class AppComponent implements OnInit {
-  private cookie_name='';
-  private all_cookies : any ='';
+  private cookie_name = '';
+  private all_cookies: any = '';
 
   public pagination = true;
   public paginationPageSize = 500;
@@ -23,15 +21,15 @@ export class AppComponent implements OnInit {
 
   constructor(private cartService: CartService, private cookieService: CookieService, private http: HttpClient) { }
 
-  setCookie(){
-    this.cookieService.set('name','Tutorialswebsite');
+  setCookie() {
+    this.cookieService.set('name', 'Tutorialswebsite');
   }
 
-  deleteCookie(){
+  deleteCookie() {
     this.cookieService.delete('name');
   }
 
-  deleteAll(){
+  deleteAll() {
     this.cookieService.deleteAll();
   }
 
@@ -58,19 +56,35 @@ export class AppComponent implements OnInit {
   rawData: any[] = [];
 
   ngOnInit(): void {
-    this.cookie_name=this.cookieService.get('PHPSESSID');
-    this.all_cookies=this.cookieService.getAll();
+    this.cookie_name = this.cookieService.get('PHPSESSID');
+    this.all_cookies = this.cookieService.getAll();
     this.cartService.getRowData().subscribe(value => this.rowData = value);
 
     this.http.get<any[]>('assets/pemons.json').subscribe(
-        data => {
-          this.rawData = data;
-          console.log('JSON data loaded:', this.rawData); // For debugging
-        },
-        error => {
-          console.error('Error loading JSON file:', error);
-        }
+      data => {
+        this.rawData = data;
+        console.log('JSON data loaded:', this.rawData); // For debugging
+      },
+      error => {
+        console.error('Error loading JSON file:', error);
+      }
     );
+  }
+
+  // Method to update the custom pagination text
+  onPaginationChanged(params: any): void {
+    // Get the default AG Grid pagination panel
+    const paginationPanel = document.querySelector('.ag-paging-panel');
+    if (paginationPanel) {
+      // Check if custom text already exists, if not create it
+      let customPaginationText = document.getElementById('customPaginationText');
+      if (!customPaginationText) {
+        customPaginationText = document.createElement('span');
+        customPaginationText.id = 'customPaginationText';
+        customPaginationText.innerText = '© Developed by mariokirby1703 - Information gathered by mariokirby1703 and Lutz127'; // Static text
+        paginationPanel.insertBefore(customPaginationText, paginationPanel.firstChild); // Add the text to the left
+      }
+    }
   }
 
   // Utility function to convert seconds to dynamic time format (H:M:S)
@@ -79,7 +93,6 @@ export class AppComponent implements OnInit {
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
 
-    // Only show hours if it's non-zero, otherwise show only minutes and seconds
     if (hours > 0) {
       return `${hours}h ${minutes}m ${secs}s`;
     } else if (minutes > 0) {

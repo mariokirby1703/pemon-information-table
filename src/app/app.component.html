@@ -1,18 +1,14 @@
 <ag-grid-angular
-        [enableCellTextSelection]="true"
-        [rowData]="rawData"
-        [columnDefs]="colDefs"
-        class="ag-theme-quartz-dark"
-        style="height: 100vh;"
-        [pagination]="true"
-        [paginationPageSize]="paginationPageSize"
-        [paginationPageSizeSelector]="paginationPageSizeSelector"
-/>
+    [enableCellTextSelection]="true"
+    [rowData]="rawData"
+    [columnDefs]="colDefs"
+    class="ag-theme-quartz-dark"
+    style="height: 100vh;"
+    [pagination]="true"
+    [paginationPageSize]="paginationPageSize"
+    [paginationPageSizeSelector]="paginationPageSizeSelector"
+    (paginationChanged)="onPaginationChanged($event)"
+>
+</ag-grid-angular>
 
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
-
-<!-- 
-Copyright Google LLC. All Rights Reserved.
-Use of this source code is governed by an MIT-style license that
-can be found in the LICENSE file at https://angular.io/license
--->

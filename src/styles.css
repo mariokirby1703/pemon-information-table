@@ -16,6 +16,18 @@
   -webkit-user-select: text;
 }
 
+.ag-paging-panel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#customPaginationText {
+  margin-right: auto; /* Align text to the left of the pagination controls */
+  font-weight: bold;
+  padding-left: 10px;
+}
+
 /* Global Styles */
 
 * {

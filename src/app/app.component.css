@@ -1,5 +1,16 @@
 @import "https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap";
 
+.ag-paging-panel {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#customPaginationText {
+    margin-right: auto; /* Align text to the left of the pagination controls */
+    font-weight: bold;
+    padding-left: 10px;
+}
 
 /*
 Copyright Google LLC. All Rights Reserved.
