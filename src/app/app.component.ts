@@ -15,6 +15,10 @@ export class AppComponent implements OnInit {
   private cookie_name = '';
   private all_cookies: any = '';
 
+  public gridOptions = {
+    animateRows: true
+  };
+
   public pagination = true;
   public paginationPageSize = 500;
   public paginationPageSizeSelector: number[] | boolean = [10, 25, 50, 100, 150, 250, 500];
