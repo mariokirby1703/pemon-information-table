@@ -58,12 +58,13 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
     this.cookie_name = this.cookieService.get('PHPSESSID');
     this.all_cookies = this.cookieService.getAll();
-    this.cartService.getRowData().subscribe(value => this.rowData = value);
-
+  
     this.http.get<any[]>('assets/pemons.json').subscribe(
       data => {
         this.rawData = data;
         console.log('JSON data loaded:', this.rawData); // For debugging
+        this.rowData = this.rawData; // Set rowData after loading
+        this.updateCustomPaginationText(); // Update text after data load
       },
       error => {
         console.error('Error loading JSON file:', error);
@@ -71,20 +72,20 @@ export class AppComponent implements OnInit {
     );
   }
 
-  // Method to update the custom pagination text
-  onPaginationChanged(params: any): void {
-    // Get the default AG Grid pagination panel
-    const paginationPanel = document.querySelector('.ag-paging-panel');
-    if (paginationPanel) {
-      // Check if custom text already exists, if not create it
-      let customPaginationText = document.getElementById('customPaginationText');
-      if (!customPaginationText) {
-        customPaginationText = document.createElement('span');
-        customPaginationText.id = 'customPaginationText';
-        customPaginationText.innerText = '© Developed by mariokirby1703 - Information gathered by mariokirby1703 and Lutz127'; // Static text
-        paginationPanel.insertBefore(customPaginationText, paginationPanel.firstChild); // Add the text to the left
+  updateCustomPaginationText(): void {
+    setTimeout(() => {
+      const paginationPanel = document.querySelector('.ag-paging-panel');
+      if (paginationPanel) {
+        // Check if custom text already exists
+        let customPaginationText = document.getElementById('customPaginationText');
+        if (!customPaginationText) {
+          customPaginationText = document.createElement('span');
+          customPaginationText.id = 'customPaginationText';
+          customPaginationText.innerText = '© Developed by mariokirby1703 - Information gathered by mariokirby1703 and Lutz127'; // Static text
+          paginationPanel.insertBefore(customPaginationText, paginationPanel.firstChild); // Add the text to the left
+        }
       }
-    }
+    }, 0); // Ensures this runs after the current call stack clears
   }
 
   // Utility function to convert seconds to dynamic time format (H:M:S)
