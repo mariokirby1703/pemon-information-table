@@ -6287,5 +6287,24 @@
     "songs": 7,
     "SFX": 49,
     "rateDate": "24.10.2024"
+  },
+  {
+    "number": 332,
+    "level": "Project BUZZKILL",
+    "creator": "Superkobster",
+    "ID": 111113059,
+    "difficulty": "Extreme Demon",
+    "rating": "Featured",
+    "userCoins": 0,
+    "estimatedTime": 191,
+    "objects": 11201,
+    "checkpoints": 1,
+    "twop": false,
+    "primarySong": "Silence",
+    "artist": "Steven McDonald",
+    "songID": 10003210,
+    "songs": 2,
+    "SFX": 7,
+    "rateDate": "26.10.2024"
   }
 ]
