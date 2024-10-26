@@ -5650,7 +5650,7 @@
     "difficulty": "Insane Demon",
     "rating": "Featured",
     "userCoins": 1,
-    "estimatedTime": 21053,
+    "estimatedTime": 22651,
     "objects": 18226,
     "checkpoints": 4,
     "twop": false,
@@ -6305,6 +6305,25 @@
     "songID": 10003210,
     "songs": 2,
     "SFX": 7,
+    "rateDate": "26.10.2024"
+  },
+  {
+    "number": 333,
+    "level": "Flipside Skyline",
+    "creator": "btwmag",
+    "ID": 111321868,
+    "difficulty": "Hard Demon",
+    "rating": "Featured",
+    "userCoins": 0,
+    "estimatedTime": 212,
+    "objects": 52301,
+    "checkpoints": 7,
+    "twop": false,
+    "primarySong": "Circuit Board City",
+    "artist": "Andrew Goodwin",
+    "songID": 10003620,
+    "songs": 4,
+    "SFX": 19,
     "rateDate": "26.10.2024"
   }
 ]
