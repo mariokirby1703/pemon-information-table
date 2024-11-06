@@ -5970,7 +5970,7 @@
     "level": "Daniel",
     "creator": "procurador",
     "ID": 110824940,
-    "difficulty": "Medium Demon",
+    "difficulty": "Easy Demon",
     "rating": "Rated",
     "userCoins": 0,
     "estimatedTime": 76,
@@ -6495,6 +6495,25 @@
     "songID": 561968,
     "songs": 2,
     "SFX": 7,
+    "rateDate": "01.11.2024"
+  },
+  {
+    "number": 343,
+    "level": "Tears of Denial",
+    "creator": "MattewGame",
+    "ID": 111832337,
+    "difficulty": "Insane Demon",
+    "rating": "Mythic",
+    "userCoins": 2,
+    "estimatedTime": 641,
+    "objects": 63711,
+    "checkpoints": 6,
+    "twop": true,
+    "primarySong": "Stereo Madness",
+    "artist": "ForeverBound",
+    "songID": "OFFICIAL",
+    "songs": 10,
+    "SFX": 186,
     "rateDate": "01.11.2024"
   }
 ]
