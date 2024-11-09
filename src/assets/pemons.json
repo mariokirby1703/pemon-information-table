@@ -6515,5 +6515,43 @@
     "songs": 10,
     "SFX": 186,
     "rateDate": "01.11.2024"
+  },
+  {
+    "number": 344,
+    "level": "LineN",
+    "creator": "Eefy77",
+    "ID": 111589612,
+    "difficulty": "Insane Demon",
+    "rating": "Epic",
+    "userCoins": 1,
+    "estimatedTime": 0,
+    "objects": 22850,
+    "checkpoints": 27,
+    "twop": false,
+    "primarySong": "River Flows",
+    "artist": "Strikecast",
+    "songID": 10001481,
+    "songs": 5,
+    "SFX": 15,
+    "rateDate": "08.11.2024"
+  },
+  {
+    "number": 345,
+    "level": "Mesabisos",
+    "creator": "KATALYSM",
+    "ID": 110904791,
+    "difficulty": "Extreme Demon",
+    "rating": "Rated",
+    "userCoins": 0,
+    "estimatedTime": 0,
+    "objects": 32689,
+    "checkpoints": 5,
+    "twop": false,
+    "primarySong": "Sound Effect: Wind... (OLD)",
+    "artist": "Force-Music",
+    "songID": "67791",
+    "songs": 4,
+    "SFX": 1,
+    "rateDate": "08.11.2024"
   }
 ]
