@@ -6610,5 +6610,24 @@
     "songs": 7,
     "SFX": 11,
     "rateDate": "13.11.2024"
+  },
+  {
+    "number": 349,
+    "level": "Lilith",
+    "creator": "Elianaaa",
+    "ID": 111690762,
+    "difficulty": "Insane Demon",
+    "rating": "Rated",
+    "userCoins": 3,
+    "estimatedTime": 0,
+    "objects": 36850,
+    "checkpoints": 13,
+    "twop": false,
+    "primarySong": "Psycho",
+    "artist": "Four Eyes",
+    "songID": 10011043,
+    "songs": 6,
+    "SFX": 14,
+    "rateDate": "13.11.2024"
   }
 ]
