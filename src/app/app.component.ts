@@ -249,6 +249,7 @@ export class AppComponent implements OnInit {
       flex: 1.6,
       minWidth: 110,
       sortable: false,
+      filter: true,
       comparator: (dateA: string, dateB: string) => {
         const parseDate = (dateStr: string) => {
           const [day, month, year] = dateStr.split('/').map(Number);
