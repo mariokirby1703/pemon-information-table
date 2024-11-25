@@ -6895,5 +6895,43 @@
     "songs": 4,
     "SFX": 25,
     "rateDate": "23.11.2024"
+  },
+  {
+    "number": 364,
+    "level": "Night of Nights",
+    "creator": "KATALYSM",
+    "ID": 112457569,
+    "difficulty": "Hard Demon",
+    "rating": "Rated",
+    "userCoins": 1,
+    "estimatedTime": 195,
+    "objects": 43064,
+    "checkpoints": 4,
+    "twop": false,
+    "primarySong": "SSJ3 - Night of Nights",
+    "artist": "SSJ3-Goku4567",
+    "songID": 528604,
+    "songs": 1,
+    "SFX": 1,
+    "rateDate": "25.11.2024"
+  },
+  {
+    "number": 365,
+    "level": "Uhm Huh",
+    "creator": "Crerro",
+    "ID": 112426437,
+    "difficulty": "Extreme Demon",
+    "rating": "Rated",
+    "userCoins": 0,
+    "estimatedTime": 44,
+    "objects": 17081,
+    "checkpoints": 0,
+    "twop": false,
+    "primarySong": "Backup Plan",
+    "artist": "zanelittle",
+    "songID": 1182749,
+    "songs": 1,
+    "SFX": 3,
+    "rateDate": "25.11.2024"
   }
 ]
