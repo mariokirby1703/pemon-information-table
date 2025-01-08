@@ -16,7 +16,8 @@
     "songID": 1234495,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "21.12.2023"
+    "rateDate": "21.12.2023",
+    "showcase": "https://www.youtube.com/watch?v=_F5hG-ojiaM"
   },
   {
     "number": 2,
@@ -7826,5 +7827,43 @@
     "songs": 1,
     "SFX": 0,
     "rateDate": "06.01.2024"
+  },
+  {
+    "number": 413,
+    "level": "Picture Museum",
+    "creator": "tornadoGD54",
+    "ID": 112585302,
+    "difficulty": "Medium Demon",
+    "rating": "Rated",
+    "userCoins": 0,
+    "estimatedTime": 153,
+    "objects": 13150,
+    "checkpoints": 20,
+    "twop": false,
+    "primarySong": "Local Forecast",
+    "artist": "Kevin MacLeod",
+    "songID": 10003093,
+    "songs": 4,
+    "SFX": 9,
+    "rateDate": "08.01.2024"
+  },
+  {
+    "number": 414,
+    "level": "Aquanemesis",
+    "creator": "vLibra",
+    "ID": 113045669,
+    "difficulty": "Extreme Demon",
+    "rating": "Featured",
+    "userCoins": 1,
+    "estimatedTime": 89,
+    "objects": 6889,
+    "checkpoints": 1,
+    "twop": false,
+    "primarySong": "Broken Terminal 01",
+    "artist": "Audible Dread",
+    "songID": 10008265,
+    "songs": 5,
+    "SFX": 23,
+    "rateDate": "08.01.2024"
   }
 ]

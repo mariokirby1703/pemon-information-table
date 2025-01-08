@@ -114,12 +114,25 @@ export class AppComponent implements OnInit {
       field: "level",
       headerName: "Level Name",
       flex: 3.3,
-      minWidth: 190,  // Ensures level name is visible on small screens
+      minWidth: 190,
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         return valueA.toLowerCase().localeCompare(valueB.toLowerCase());
+      },
+      cellRenderer: (params: any) => {
+        if (params.data && params.data.showcase) {
+          const link = document.createElement('a');
+          link.href = params.data.showcase;
+          link.target = '_blank'; // Open in a new tab
+          link.rel = 'noopener noreferrer'; // Prevent security issues
+          link.innerText = params.value;
+          link.style.textDecoration = 'none'; // Optional: underline the link
+          return link;
+        }
+        return params.value; // Fallback in case showcase is missing
       }
-    },
+    }
+    ,
     {
       field: "creator",
       flex: 2.5,
