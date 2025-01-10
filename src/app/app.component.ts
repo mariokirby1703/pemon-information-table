@@ -4,6 +4,7 @@ import { ColDef } from 'ag-grid-community'; // Column Definition Type Interface
 import { CartService } from './cart.service';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
+// import { RowStyle, RowClassParams } from 'ag-grid-community';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,23 @@ export class AppComponent implements OnInit {
   public gridOptions = {
     animateRows: true
   };
+
+  /*
+  public getRowStyle = (params: RowClassParams<any, any>): RowStyle | undefined => {
+    if (params.data && params.data.ID) {
+      const levelId = params.data.ID;
+      return {
+        backgroundImage: `url("https://raw.githubusercontent.com/cdc-sys/level-thumbnails/main/thumbs/${levelId}.png")`,
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        backgroundColor: 'rgba(0, 0, 0, 0.3)',
+        backgroundBlendMode: 'darken',
+      };
+    }
+    return undefined; // Return undefined instead of null
+  };
+  */
 
   public pagination = true;
   public paginationPageSize = 500;
@@ -198,7 +216,7 @@ export class AppComponent implements OnInit {
         return nodeA.data.estimatedTime - nodeB.data.estimatedTime;
       }
     },
-    { field: "objects", flex: 1.5, minWidth: 90 }, // Avoids objects column from collapsing
+    { field: "objects", flex: 1.5, minWidth: 90 },
     { field: "checkpoints", flex: 1.9, minWidth: 110, cellStyle: { 'text-align': 'center' } },
     {
       field: "twop",
