@@ -31,9 +31,10 @@ export class AppComponent implements OnInit {
         backgroundPosition: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.3)',
         backgroundBlendMode: 'darken',
+        borderBottom: '2px solid #000',
       };
     }
-    return undefined; // Return undefined instead of null
+    return undefined;
   };
   */
 
