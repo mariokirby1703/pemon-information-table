@@ -1,117 +1,182 @@
-import { Component, OnInit } from '@angular/core';
-import { AgGridAngular } from 'ag-grid-angular'; // Angular Data Grid Component
-import { ColDef } from 'ag-grid-community'; // Column Definition Type Interface
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { AgGridAngular } from 'ag-grid-angular';
+import { ColDef, RowStyle, RowClassParams } from 'ag-grid-community';
 import { CartService } from './cart.service';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
-// import { RowStyle, RowClassParams } from 'ag-grid-community';
 
 @Component({
   selector: 'app-root',
   styleUrls: ['./app.component.css'],
   templateUrl: `./app.component.html`
 })
-
 export class AppComponent implements OnInit {
   private cookie_name = '';
   private all_cookies: any = '';
+  public gridOptions: any = {};
+  public pagination = true;
+  public paginationPageSize = 100;
+  public paginationPageSizeSelector: number[] | boolean = [10, 25, 50, 100, 150, 250, 500];
+  public enableRowStyle = false;
 
-  public gridOptions = {
-    animateRows: true
-  };
+  constructor(private cartService: CartService, private cookieService: CookieService, private http: HttpClient, private cdr: ChangeDetectorRef) {}
 
-  /*
-  public getRowStyle = (params: RowClassParams<any, any>): RowStyle | undefined => {
-    if (params.data && params.data.ID) {
-      const levelId = params.data.ID;
+  rowData!: any[];
+  rawData: any[] = [];
+
+  getRowStyle = (params: RowClassParams<any, any>): RowStyle | undefined => {
+    if (this.enableRowStyle && params.data && params.data.ID) {
       return {
-        backgroundImage: `url("https://raw.githubusercontent.com/cdc-sys/level-thumbnails/main/thumbs/${levelId}.png")`,
+        backgroundImage: `url("https://raw.githubusercontent.com/cdc-sys/level-thumbnails/main/thumbs/${params.data.ID}.png")`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
         backgroundColor: 'rgba(0, 0, 0, 0.3)',
         backgroundBlendMode: 'darken',
-        borderBottom: '2px solid #000',
+        borderBottom: '2px solid #000'
       };
     }
     return undefined;
   };
-  */
-
-  public pagination = true;
-  public paginationPageSize = 100;
-  public paginationPageSizeSelector: number[] | boolean = [10, 25, 50, 100, 150, 250, 500];
-
-  constructor(private cartService: CartService, private cookieService: CookieService, private http: HttpClient) { }
-
-  setCookie() {
-    this.cookieService.set('name', 'Tutorialswebsite');
-  }
-
-  deleteCookie() {
-    this.cookieService.delete('name');
-  }
-
-  deleteAll() {
-    this.cookieService.deleteAll();
-  }
-
-  rowData!: {
-    number: number;
-    level: string;
-    creator: string;
-    ID: number;
-    difficulty: string;
-    rating: string;
-    userCoins: number;
-    estimatedTime: number;
-    objects: number;
-    checkpoints: number;
-    twop: boolean;
-    primarySong: string;
-    artist: string;
-    songID: number | string;
-    songs: number;
-    SFX: number;
-    rateDate: string;
-  }[];
-
-  rawData: any[] = [];
 
   ngOnInit(): void {
+    this.gridOptions = {
+      animateRows: true,
+      getRowStyle: this.getRowStyle
+    };
+
     this.cookie_name = this.cookieService.get('PHPSESSID');
     this.all_cookies = this.cookieService.getAll();
-  
+
     this.http.get<any[]>('assets/pemons.json').subscribe(
-      data => {
-        this.rawData = data;
-        console.log('JSON data loaded:', this.rawData); // For debugging
-        this.rowData = this.rawData; // Set rowData after loading
-        this.updateCustomPaginationText(); // Update text after data load
-      },
-      error => {
-        console.error('Error loading JSON file:', error);
-      }
+        data => {
+          this.rawData = data;
+          this.rowData = [...this.rawData]; // Set initial rowData without sorting
+          this.updateCustomPaginationText();
+          this.cdr.detectChanges();
+        },
+        error => {
+          console.error('Error loading JSON file:', error);
+        }
     );
+  }
+
+  toggleRowStyle(): void {
+    this.enableRowStyle = !this.enableRowStyle;
+    this.updateColumnStyles();
+    if (this.gridOptions.api) {
+      this.gridOptions.api.refreshCells({ force: true, columns: ['difficulty', 'rating'] });
+      this.gridOptions.api.redrawRows();
+    }
+    console.log('Row style toggled:', this.enableRowStyle);
+    this.colDefs = this.colDefs.map(col => {
+      if (col.field === 'difficulty' || col.field === 'rating') {
+        return {
+          ...col,
+          cellClassRules: this.enableRowStyle ? {} : {
+            'easy': (p: any) => p.data.difficulty === 'Easy Demon',
+            'medium': (p: any) => p.data.difficulty === 'Medium Demon',
+            'hard': (p: any) => p.data.difficulty === 'Hard Demon',
+            'insane': (p: any) => p.data.difficulty === 'Insane Demon',
+            'extreme': (p: any) => p.data.difficulty === 'Extreme Demon',
+            'featured': (p: any) => p.data.rating === 'Featured',
+            'epic': (p: any) => p.data.rating === 'Epic',
+            'legendary': (p: any) => p.data.rating === 'Legendary',
+            'mythic': (p: any) => p.data.rating === 'Mythic'
+          }
+        };
+      }
+      return col;
+    });
+    if (this.gridOptions.api) {
+      this.gridOptions.api.setColumnDefs([...this.colDefs]);
+      this.gridOptions.api.refreshCells({ force: true, columns: ['difficulty', 'rating'] });
+      this.gridOptions.api.redrawRows();
+    }
+    console.log('Row style toggled:', this.enableRowStyle);
+    console.log(this.enableRowStyle ? 'Cell styles will be removed.' : 'Cell styles will be applied.');
+    this.updateColumnStyles();
+    if (this.gridOptions.api) {
+      this.gridOptions.api.redrawRows();
+    }
+    this.rowData = [...this.rowData];
+    setTimeout(() => {
+      this.cdr.detectChanges();
+    }, 0);
+  }
+
+  updateColumnStyles(): void {
+    this.colDefs.forEach((col) => {
+      if (col.field === 'difficulty' || col.field === 'rating') {
+        if (this.enableRowStyle) {
+          console.log('Removing cell styles for:', col.field);
+          col.cellClassRules = {};
+        } else {
+          console.log('Applying cell styles for:', col.field);
+          col.cellClassRules = {
+            'easy': (p: any) => p.data.difficulty === 'Easy Demon',
+            'medium': (p: any) => p.data.difficulty === 'Medium Demon',
+            'hard': (p: any) => p.data.difficulty === 'Hard Demon',
+            'insane': (p: any) => p.data.difficulty === 'Insane Demon',
+            'extreme': (p: any) => p.data.difficulty === 'Extreme Demon',
+            'featured': (p: any) => p.data.rating === 'Featured',
+            'epic': (p: any) => p.data.rating === 'Epic',
+            'legendary': (p: any) => p.data.rating === 'Legendary',
+            'mythic': (p: any) => p.data.rating === 'Mythic'
+          };
+        }
+      }
+    });
+    if (this.gridOptions.api) {
+      this.gridOptions.api.setColumnDefs([...this.colDefs]);
+      this.gridOptions.api.refreshCells({ force: true, columns: ['difficulty', 'rating'] });
+      this.gridOptions.api.redrawRows();
+    }
+    if (this.gridOptions.api) {
+      this.gridOptions.api.setColumnDefs([...this.colDefs]);
+      this.gridOptions.api.refreshCells({ force: true, columns: ['difficulty', 'rating'] });
+    }
   }
 
   updateCustomPaginationText(): void {
     setTimeout(() => {
       const paginationPanel = document.querySelector('.ag-paging-panel');
       if (paginationPanel) {
-        // Check if custom text already exists
         let customPaginationText = document.getElementById('customPaginationText');
         if (!customPaginationText) {
           customPaginationText = document.createElement('span');
           customPaginationText.id = 'customPaginationText';
-          customPaginationText.innerText = '© Developed by mariokirby1703 - Information gathered by mariokirby1703 and Lutz127'; // Static text
-          paginationPanel.insertBefore(customPaginationText, paginationPanel.firstChild); // Add the text to the left
+          customPaginationText.innerText = '© Developed by mariokirby1703 - Information gathered by mariokirby1703 and Lutz127';
+          paginationPanel.insertBefore(customPaginationText, paginationPanel.firstChild);
+        }
+
+        let toggleContainer = document.getElementById('toggleContainer');
+        if (!toggleContainer) {
+          toggleContainer = document.createElement('div');
+          toggleContainer.id = 'toggleContainer';
+          toggleContainer.className = 'switch-container';
+
+          toggleContainer.innerHTML = `
+            <label class="switch">
+              <input type="checkbox" id="rowStyleToggle" checked>
+              <span class="slider round"></span>
+            </label>
+            <span class="switch-label">Row Style</span>
+          `;
+
+          paginationPanel.appendChild(toggleContainer);
+
+          document.getElementById('rowStyleToggle')?.addEventListener('change', (event) => {
+            const inputElement = event.target as HTMLInputElement;
+            this.enableRowStyle = inputElement.checked;
+            this.toggleRowStyle();
+          });
         }
       }
-    }, 0); // Ensures this runs after the current call stack clears
+    }, 0);
   }
 
-  // Utility function to convert seconds to dynamic time format (H:M:S)
+// Utility function to convert seconds to dynamic time format (H:M:S)
   formatTime(seconds: number): string {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -150,8 +215,7 @@ export class AppComponent implements OnInit {
         }
         return params.value; // Fallback in case showcase is missing
       }
-    }
-    ,
+    },
     {
       field: "creator",
       flex: 2.5,
@@ -168,35 +232,31 @@ export class AppComponent implements OnInit {
       minWidth: 140,
       filter: true,
       cellClassRules: {
-        'easy': (p:any) => p.data.difficulty == "Easy Demon",
-        'medium': (p:any) => p.data.difficulty == "Medium Demon",
-        'hard': (p:any) => p.data.difficulty == "Hard Demon",
-        'insane': (p:any) => p.data.difficulty == "Insane Demon",
-        'extreme': (p:any) => p.data.difficulty == "Extreme Demon"
+        'easy': (p: any) => p.data.difficulty === 'Easy Demon',
+        'medium': (p: any) => p.data.difficulty === 'Medium Demon',
+        'hard': (p: any) => p.data.difficulty === 'Hard Demon',
+        'insane': (p: any) => p.data.difficulty === 'Insane Demon',
+        'extreme': (p: any) => p.data.difficulty === 'Extreme Demon',
       },
       comparator: (valueA: string, valueB: string) => {
         const order = ["Easy Demon", "Medium Demon", "Hard Demon", "Insane Demon", "Extreme Demon"];
-        const indexA = order.indexOf(valueA);
-        const indexB = order.indexOf(valueB);
-        return indexA - indexB;
+        return order.indexOf(valueA) - order.indexOf(valueB);
       }
     },
     {
       field: "rating",
       flex: 1.7,
-      minWidth: 100,  // Prevents rating from being too small
+      minWidth: 100,
       filter: true,
       cellClassRules: {
-        'featured': (p:any) => p.data.rating == "Featured",
-        'epic': (p:any) => p.data.rating == "Epic",
-        'legendary': (p:any) => p.data.rating == "Legendary",
-        'mythic': (p:any) => p.data.rating == "Mythic"
+        'featured': (p: any) => p.data.rating === 'Featured',
+        'epic': (p: any) => p.data.rating === 'Epic',
+        'legendary': (p: any) => p.data.rating === 'Legendary',
+        'mythic': (p: any) => p.data.rating === 'Mythic'
       },
       comparator: (valueA: string, valueB: string) => {
         const order = ["Rated", "Featured", "Epic", "Legendary", "Mythic"];
-        const indexA = order.indexOf(valueA);
-        const indexB = order.indexOf(valueB);
-        return indexA - indexB;
+        return order.indexOf(valueA) - order.indexOf(valueB);
       }
     },
     {

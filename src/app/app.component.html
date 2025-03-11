@@ -1,12 +1,14 @@
 <ag-grid-angular
-    [enableCellTextSelection]="true"
-    [rowData]="rawData"
-    [columnDefs]="colDefs"
-    class="ag-theme-quartz-dark"
-    style="height: 100vh;"
-    [pagination]="true"
-    [paginationPageSize]="paginationPageSize"
-    [paginationPageSizeSelector]="paginationPageSizeSelector"
+        [enableCellTextSelection]="true"
+        [rowData]="rowData"
+        [columnDefs]="colDefs"
+        class="ag-theme-quartz-dark"
+        style="height: 100vh;"
+        [pagination]="pagination"
+        [paginationPageSize]="paginationPageSize"
+        [paginationPageSizeSelector]="paginationPageSizeSelector"
+        [gridOptions]="gridOptions"
+        [getRowStyle]="getRowStyle"
 >
 </ag-grid-angular>
 
