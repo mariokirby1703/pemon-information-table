@@ -107,18 +107,22 @@ export class AppComponent implements OnInit {
 
   updateColumnStyles(): void {
     this.colDefs.forEach((col) => {
-      if (col.field === 'difficulty' || col.field === 'rating') {
-        if (this.enableRowStyle) {
-          console.log('Removing cell styles for:', col.field);
-          col.cellClassRules = {};
-        } else {
-          console.log('Applying cell styles for:', col.field);
+      if (this.enableRowStyle) {
+        console.log('Removing cell styles for:', col.field);
+        col.cellClassRules = {};
+      } else {
+        console.log('Applying cell styles for:', col.field);
+        
+        if (col.field === 'difficulty') {
           col.cellClassRules = {
             'easy': (p: any) => p.data.difficulty === 'Easy Demon',
             'medium': (p: any) => p.data.difficulty === 'Medium Demon',
             'hard': (p: any) => p.data.difficulty === 'Hard Demon',
             'insane': (p: any) => p.data.difficulty === 'Insane Demon',
             'extreme': (p: any) => p.data.difficulty === 'Extreme Demon',
+          };
+        } else if (col.field === 'rating') {
+          col.cellClassRules  = {
             'featured': (p: any) => p.data.rating === 'Featured',
             'epic': (p: any) => p.data.rating === 'Epic',
             'legendary': (p: any) => p.data.rating === 'Legendary',
