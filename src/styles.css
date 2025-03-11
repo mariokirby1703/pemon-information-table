@@ -162,3 +162,7 @@ router-outlet + *  {
   justify-content: center;
   text-align: center;
 }
+
+.ag-cell-value {
+  text-shadow: 0 0 .25rem black;
+}
