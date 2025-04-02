@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   public gridOptions: any = {};
   public pagination = true;
   public paginationPageSize = 100;
-  public paginationPageSizeSelector: number[] | boolean = [10, 25, 50, 100, 150, 250, 500];
+  public paginationPageSizeSelector: number[] | boolean = [10, 25, 50, 100, 150, 250, 500, 1000];
   public enableRowStyle = false;
 
   constructor(private cartService: CartService, private cookieService: CookieService, private http: HttpClient, private cdr: ChangeDetectorRef) {}
