@@ -10618,5 +10618,25 @@
     "SFX": 12,
     "rateDate": "02.04.2025",
     "showcase": ""
+  },
+  {
+    "number": 532,
+    "level": "Dash Factory",
+    "creator": "Jesus94",
+    "ID": 116880073,
+    "difficulty": "Insane Demon",
+    "rating": "Featured",
+    "userCoins": 0,
+    "estimatedTime": 145,
+    "objects": 107957,
+    "checkpoints": 14,
+    "twop": false,
+    "primarySong": "-Grind District-",
+    "artist": "Waterflame",
+    "songID": 628426,
+    "songs": 3,
+    "SFX": 31,
+    "rateDate": "05.04.2025",
+    "showcase": ""
   }
 ]
