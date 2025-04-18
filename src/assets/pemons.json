@@ -9422,7 +9422,7 @@
   {
     "number": 472,
     "level": "wolf",
-    "creator": "Enouf",
+    "creator": "Eno22",
     "ID": 111427369,
     "difficulty": "Insane Demon",
     "rating": "Featured",
@@ -9924,7 +9924,7 @@
     "level": "SYTTEN",
     "creator": "Moonix37",
     "ID": 115308040,
-    "difficulty": "Medium Demon",
+    "difficulty": "Easy Demon",
     "rating": "Rated",
     "userCoins": 3,
     "estimatedTime": 306,
@@ -10364,7 +10364,7 @@
     "level": "Rodent Adventure",
     "creator": "Uz3rr",
     "ID": 116330412,
-    "difficulty": "Medium Demon",
+    "difficulty": "Easy Demon",
     "rating": "Featured",
     "userCoins": 3,
     "estimatedTime": 269,
@@ -10637,6 +10637,26 @@
     "songs": 3,
     "SFX": 31,
     "rateDate": "05.04.2025",
+    "showcase": ""
+  },
+  {
+    "number": 532,
+    "level": "Dead Of Night",
+    "creator": "TMco",
+    "ID": 117297448,
+    "difficulty": "Extreme Demon",
+    "rating": "Featured",
+    "userCoins": 0,
+    "estimatedTime": 4907,
+    "objects": 950588,
+    "checkpoints": 249,
+    "twop": false,
+    "primarySong": "Chilled 1",
+    "artist": "Recoil",
+    "songID": 2,
+    "songs": 50,
+    "SFX": 225,
+    "rateDate": "13.04.2025",
     "showcase": ""
   }
 ]
