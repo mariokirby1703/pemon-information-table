@@ -72,6 +72,7 @@ def entries_differ(existing, new):
     for key in new:
         if key == "number":
             continue
+
         if key == "objects":
             old_val = existing.get("objects", 0)
             new_val = new.get("objects", 0)
@@ -79,10 +80,19 @@ def entries_differ(existing, new):
                 continue
             if old_val != new_val:
                 return True
-        elif key in ["primarySong", "artist", "songID"] and existing.get("songID") == "NONG":
+
+        elif existing.get("songID") == "NONG" and key in ["primarySong", "artist", "songID"]:
             continue
-        elif key in ["primarySong", "artist"] and existing.get("songID") == "UNKNOWN":
-            continue
+
+        elif existing.get("songID") == "UNKNOWN":
+            if key == "songID":
+                continue  # ignorieren
+            elif key in ["primarySong", "artist"]:
+                # songID bleibt UNKNOWN → diese sollen leer sein → keine Änderung
+                if existing.get(key) != "":
+                    return True
+                continue
+
         else:
             old_val = existing.get(key)
             new_val = new.get(key)
@@ -90,6 +100,7 @@ def entries_differ(existing, new):
                 continue
             if old_val != new_val:
                 return True
+
     return False
 
 def merge_entries(existing, new):
@@ -97,18 +108,25 @@ def merge_entries(existing, new):
     for key, value in new.items():
         if key not in existing:
             merged[key] = value
+
         elif key == "objects":
             old_val = existing.get("objects", 0)
             if value == 0 or (value == 65535 and old_val > 65535):
                 continue
             merged[key] = value
-        elif key in ["primarySong", "artist", "songID"] and existing.get("songID") == "NONG":
-            continue
-        elif existing.get("songID") == "UNKNOWN" and key in ["primarySong", "artist"]:
-            merged[key] = ""
-            continue
+
+        elif existing.get("songID") == "NONG" and key in ["primarySong", "artist", "songID"]:
+            continue  # Behalte NONG-Songs komplett
+
+        elif existing.get("songID") == "UNKNOWN":
+            if key == "songID":
+                continue  # songID bleibt "UNKNOWN"
+            elif key in ["primarySong", "artist"]:
+                merged[key] = ""  # explizit leer setzen
+
         elif value is None or value == "":
             continue
+
         else:
             merged[key] = value
     return merged
@@ -121,6 +139,10 @@ def main():
     limit_input = input("🔢 Wie viele der letzten Level möchtest du verarbeiten? (Leer = alle): ").strip()
     limit = int(limit_input) if limit_input.isdigit() else None
 
+    # Mapping: ID → Zeilennummer (1-basiert)
+    id_to_line = {level_id: idx + 1 for idx, level_id in enumerate(all_ids)}
+
+    # Nur die letzten N IDs bearbeiten (aber mit richtiger Zeilenposition)
     level_ids = all_ids[-limit:] if limit else all_ids
 
     existing_data = load_existing_data(OUTPUT_FILE)
@@ -130,42 +152,45 @@ def main():
     updated_count = 0
     skipped_count = 0
 
-    result_data = []
+    result_data_dict = {}  # Key = ID, Value = final merged entry
     processed_ids = set()
 
     print(f"📦 Verarbeite {len(level_ids)} von {len(all_ids)} Levels...\n")
 
-    for index, level_id in enumerate(level_ids, start=1):
+    for level_id in level_ids:
         if level_id in processed_ids:
             continue
         processed_ids.add(level_id)
 
+        number = id_to_line[level_id]  # echte Zeilennummer verwenden
         old_entry = existing_dict.get(level_id)
-        new_entry = get_level_data(level_id, index, skip_warnings=bool(old_entry))
+        new_entry = get_level_data(level_id, number, skip_warnings=bool(old_entry))
 
         if not new_entry:
             continue
 
         if not old_entry:
             print(f"[+] Added level {level_id}: {new_entry['level']} by {new_entry['creator']}")
-            result_data.append(new_entry)
+            result_data_dict[level_id] = new_entry
             added_count += 1
         elif entries_differ(old_entry, new_entry):
             print(f"[~] Updated level {level_id}: {new_entry['level']} (changes detected)")
             merged = merge_entries(old_entry, new_entry)
-            result_data.append(merged)
+            merged["number"] = number
+            result_data_dict[level_id] = merged
             updated_count += 1
         else:
-            old_entry["number"] = index
-            result_data.append(old_entry)
+            old_entry["number"] = number
+            result_data_dict[level_id] = old_entry
             skipped_count += 1
 
-    # Füge alte, nicht verarbeitete Einträge wieder hinzu
+    # Füge alle anderen (nicht aktualisierten) alten Einträge hinzu
     for old_id, old_entry in existing_dict.items():
         if old_id not in processed_ids:
-            result_data.append(old_entry)
+            result_data_dict[old_id] = old_entry
 
-    result_data.sort(key=lambda x: x["number"])
+    # Sortiere nach number-Feld
+    result_data = sorted(result_data_dict.values(), key=lambda x: x.get("number", 0))
     save_data(OUTPUT_FILE, result_data)
 
     print("\n===== Summary =====")
