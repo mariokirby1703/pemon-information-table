@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   getRowStyle = (params: RowClassParams<any, any>): RowStyle | undefined => {
     if (this.enableRowStyle && params.data && params.data.ID) {
       return {
-        backgroundImage: `url("https://raw.githubusercontent.com/cdc-sys/level-thumbnails/main/thumbs/${params.data.ID}.png")`,
+        backgroundImage: `url("https://levelthumbs.prevter.me/thumbnail/${params.data.ID}")`,
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
