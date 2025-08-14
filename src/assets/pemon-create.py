@@ -167,6 +167,9 @@ def main():
         new_entry = get_level_data(level_id, number, skip_warnings=bool(old_entry))
 
         if not new_entry:
+            if old_entry:
+                result_data_dict[level_id] = old_entry  # bestehenden Eintrag sichern
+                skipped_count += 1
             continue
 
         if not old_entry:
