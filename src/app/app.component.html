@@ -1,15 +1,21 @@
-<ag-grid-angular
-        [enableCellTextSelection]="true"
-        [rowData]="rowData"
-        [columnDefs]="colDefs"
-        class="ag-theme-quartz-dark"
-        style="height: 100vh;"
-        [pagination]="pagination"
-        [paginationPageSize]="paginationPageSize"
-        [paginationPageSizeSelector]="paginationPageSizeSelector"
-        [gridOptions]="gridOptions"
-        [getRowStyle]="getRowStyle"
->
-</ag-grid-angular>
+<!-- Deine Pemons-Grid-Seite: nur sichtbar, wenn NICHT /demons -->
+<div *ngIf="!isDemonsRoute">
+    <ag-grid-angular
+            [enableCellTextSelection]="true"
+            [rowData]="rowData"
+            [columnDefs]="colDefs"
+            class="ag-theme-quartz-dark"
+            style="height: 100vh;"
+            [pagination]="pagination"
+            [paginationPageSize]="paginationPageSize"
+            [paginationPageSizeSelector]="paginationPageSizeSelector"
+            [gridOptions]="gridOptions"
+            [getRowStyle]="getRowStyle"
+            (gridReady)="onGridReady()">
+    </ag-grid-angular>
+</div>
+
+<!-- Hier rendert die /demons-Seite (DemonsGridComponent) -->
+<router-outlet></router-outlet>
 
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap" rel="stylesheet" />

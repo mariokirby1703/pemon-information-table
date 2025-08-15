@@ -29,7 +29,7 @@ def get_level_data(level_id, number, skip_warnings=False):
     level_info = {
         "number": number,
         "level": data.get("name", ""),
-        "creator": data.get("author", ""),
+        "creator": data.get("author", ""),  # kann auch "-" sein, das übernehmen wir für neue Einträge unverändert
         "ID": int(data.get("id", 0)),
         "difficulty": data.get("difficulty", ""),
         "rating": rating,
@@ -68,6 +68,18 @@ def entries_differ(existing, new):
         if key == "number":
             continue
 
+        # Sonderfall: Creator
+        # Wenn API "-" liefert, aber bestehender Creator ein sinnvoller Wert ist, gilt das nicht als Änderung.
+        if key == "creator":
+            new_creator = new.get("creator")
+            old_creator = existing.get("creator")
+            if new_creator == "-" and old_creator not in [None, "", "-"]:
+                continue  # beibehalten, keine Änderung melden
+            # In allen anderen Fällen normal vergleichen (z.B. altes "" -> neues "-" oder richtiger Name)
+            if old_creator != new_creator:
+                return True
+            continue
+
         if key == "objects":
             old_val = existing.get("objects", 0)
             new_val = new.get("objects", 0)
@@ -102,6 +114,15 @@ def merge_entries(existing, new):
     merged = existing.copy()
     for key, value in new.items():
         if key not in existing:
+            merged[key] = value
+
+        # Sonderfall: Creator
+        elif key == "creator":
+            old_creator = existing.get("creator")
+            # Wenn neuer Wert "-" ist und wir bereits einen sinnvollen alten Wert haben, behalten wir den alten.
+            if value == "-" and old_creator not in [None, "", "-"]:
+                continue
+            # Sonst übernehmen (inkl. Fällen: alt leer -> neu "-", alt leer -> neu richtiger Name, etc.)
             merged[key] = value
 
         elif key == "objects":
@@ -162,11 +183,14 @@ def main():
         new_entry = get_level_data(level_id, number, skip_warnings=bool(old_entry))
 
         if not new_entry:
+            if old_entry:
+                result_data_dict[level_id] = old_entry  # bestehenden Eintrag sichern
+                skipped_count += 1
             continue
 
         if not old_entry:
             print(f"[+] Added level {level_id}: {new_entry['level']} by {new_entry['creator']}")
-            result_data_dict[level_id] = new_entry
+            result_data_dict[level_id] = new_entry  # neuer Eintrag, creator bleibt ggf. "-"
             added_count += 1
         elif entries_differ(old_entry, new_entry):
             print(f"[~] Updated level {level_id}: {new_entry['level']} (changes detected)")

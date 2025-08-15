@@ -114,10 +114,6 @@ body {
   flex-direction: row;
 }
 
-router-outlet + *  {
-  padding: 0 16px;
-}
-
 .easy {
   background-color: #4d1875 !important;
 }

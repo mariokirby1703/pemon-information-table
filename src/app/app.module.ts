@@ -13,6 +13,8 @@ import { CartComponent } from './cart/cart.component';
 import { ShippingComponent } from './shipping/shipping.component';
 import {AgGridAngular} from "ag-grid-angular";
 import {CookieService} from "ngx-cookie-service";
+import { AppRoutingModule } from './app-routing.module';
+import { DemonsGridComponent } from './demons-grid/demons-grid.component';
 
 @NgModule({ declarations: [
         AppComponent,
@@ -21,19 +23,17 @@ import {CookieService} from "ngx-cookie-service";
         ProductAlertsComponent,
         ProductDetailsComponent,
         CartComponent,
-        ShippingComponent
+        ShippingComponent,
+        DemonsGridComponent
     ],
     bootstrap: [
         AppComponent
-    ], imports: [AgGridAngular,
+    ], imports: [
+        AgGridAngular,
         BrowserModule,
         ReactiveFormsModule,
-        RouterModule.forRoot([
-            { path: '', component: ProductListComponent },
-            { path: 'products/:productId', component: ProductDetailsComponent },
-            { path: 'cart', component: CartComponent },
-            { path: 'shipping', component: ShippingComponent },
-        ])], providers: [
+        AppRoutingModule // <- statt RouterModule.forRoot(...)
+    ], providers: [
         CookieService,
         provideHttpClient(withInterceptorsFromDi())
     ] })

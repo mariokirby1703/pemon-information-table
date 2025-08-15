@@ -4,6 +4,8 @@ import { ColDef, RowStyle, RowClassParams } from 'ag-grid-community';
 import { CartService } from './cart.service';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -18,8 +20,9 @@ export class AppComponent implements OnInit {
   public paginationPageSize = 100;
   public paginationPageSizeSelector: number[] | boolean = [10, 25, 50, 100, 150, 250, 500, 1000];
   public enableRowStyle = false;
+  public isDemonsRoute = false;
 
-  constructor(private cartService: CartService, private cookieService: CookieService, private http: HttpClient, private cdr: ChangeDetectorRef) {}
+  constructor(private cartService: CartService, private cookieService: CookieService, private http: HttpClient, private cdr: ChangeDetectorRef, private router: Router) {}
 
   rowData!: any[];
   rawData: any[] = [];
@@ -39,11 +42,25 @@ export class AppComponent implements OnInit {
     return undefined;
   };
 
+  onGridReady(): void {
+    // wenn das Grid DOM steht, baue Footer-UI
+    this.updateCustomPaginationText();
+  }
+
   ngOnInit(): void {
     this.gridOptions = {
       animateRows: true,
       getRowStyle: this.getRowStyle
-    };
+    }
+    this.router.events
+        .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+        .subscribe(e => {
+          this.isDemonsRoute = e.urlAfterRedirects.startsWith('/demons');
+          this.cdr.detectChanges();
+          if (!this.isDemonsRoute) {
+            setTimeout(() => this.updateCustomPaginationText(), 0);
+          }
+        });
 
     this.cookie_name = this.cookieService.get('PHPSESSID');
     this.all_cookies = this.cookieService.getAll();
@@ -61,8 +78,32 @@ export class AppComponent implements OnInit {
     );
   }
 
+  private applyColDefsUpdate(): void {
+    const api: any = this.gridOptions?.api;
+    if (!api) return;
+
+    if (typeof api.setColumnDefs === 'function') {
+      api.setColumnDefs([...this.colDefs]);
+    } else if (typeof api.setGridOption === 'function') {
+      api.setGridOption('columnDefs', [...this.colDefs]);
+    }
+  }
+
+  setRowStyle(enabled: boolean): void {
+    if (this.enableRowStyle === enabled) return;
+    this.enableRowStyle = enabled;
+    this.updateColumnStyles();
+    this.applyColDefsUpdate();
+    this.gridOptions?.api?.refreshCells({ force: true, columns: ['difficulty', 'rating'] });
+    this.gridOptions?.api?.redrawRows();
+
+    this.rowData = [...this.rowData];
+    setTimeout(() => this.cdr.detectChanges(), 0);
+  }
+
   toggleRowStyle(): void {
     this.enableRowStyle = !this.enableRowStyle;
+    this.setRowStyle(!this.enableRowStyle);
     this.updateColumnStyles();
     if (this.gridOptions.api) {
       this.gridOptions.api.refreshCells({ force: true, columns: ['difficulty', 'rating'] });
@@ -144,38 +185,80 @@ export class AppComponent implements OnInit {
 
   updateCustomPaginationText(): void {
     setTimeout(() => {
-      const paginationPanel = document.querySelector('.ag-paging-panel');
-      if (paginationPanel) {
-        let customPaginationText = document.getElementById('customPaginationText');
-        if (!customPaginationText) {
-          customPaginationText = document.createElement('span');
-          customPaginationText.id = 'customPaginationText';
-          customPaginationText.innerText = '© Developed by mariokirby1703 - Information gathered by mariokirby1703 and Lutz127';
-          paginationPanel.insertBefore(customPaginationText, paginationPanel.firstChild);
-        }
+      const paginationPanel = document.querySelector('.ag-paging-panel') as HTMLElement | null;
+      if (!paginationPanel) return;
 
-        let toggleContainer = document.getElementById('toggleContainer');
-        if (!toggleContainer) {
-          toggleContainer = document.createElement('div');
-          toggleContainer.id = 'toggleContainer';
-          toggleContainer.className = 'switch-container';
+      // © Hinweis
+      let customPaginationText = document.getElementById('customPaginationText') as HTMLSpanElement | null;
+      if (!customPaginationText) {
+        customPaginationText = document.createElement('span');
+        customPaginationText.id = 'customPaginationText';
+        customPaginationText.innerText = '© Developed by mariokirby1703 - Information gathered by mariokirby1703 and Lutz127';
+        paginationPanel.insertBefore(customPaginationText, paginationPanel.firstChild);
+      }
 
-          toggleContainer.innerHTML = `
-            <label class="switch">
-              <input type="checkbox" id="rowStyleToggle" checked>
-              <span class="slider round"></span>
-            </label>
-            <span class="switch-label">Row Style</span>
-          `;
+      // --- Row Style Toggle ---
+      let toggleContainer = document.getElementById('toggleContainer') as HTMLDivElement | null;
+      if (!toggleContainer) {
+        toggleContainer = document.createElement('div');
+        toggleContainer.id = 'toggleContainer';
+        toggleContainer.className = 'switch-container';
+        toggleContainer.innerHTML = `
+    <label class="switch">
+      <input type="checkbox" id="rowStyleToggle">  <!-- KEIN 'checked' hier -->
+      <span class="slider round"></span>
+    </label>
+    <span class="switch-label">Row Style</span>
+  `;
+        paginationPanel.appendChild(toggleContainer);
+      }
 
-          paginationPanel.appendChild(toggleContainer);
+      // Zustand immer synchronisieren + Listener sauber setzen
+      const rowStyleToggle = document.getElementById('rowStyleToggle') as HTMLInputElement | null;
+      if (rowStyleToggle) {
+        rowStyleToggle.checked = this.enableRowStyle;   // spiegelt aktuellen Zustand
+        rowStyleToggle.onchange = (ev: Event) => {
+          const input = ev.target as HTMLInputElement;
+          this.setRowStyle(input.checked);              // <<— EXPLIZIT setzen
+        };
+      } else {
+        // Bereits vorhanden? Zustand synchronisieren
+        const rowStyleToggle = document.getElementById('rowStyleToggle') as HTMLInputElement | null;
+        if (rowStyleToggle) rowStyleToggle.checked = this.enableRowStyle;
+      }
 
-          document.getElementById('rowStyleToggle')?.addEventListener('change', (event) => {
-            const inputElement = event.target as HTMLInputElement;
-            this.enableRowStyle = inputElement.checked;
-            this.toggleRowStyle();
+      // --- Dataset Switch: Demons ---
+      let datasetSwitch = document.getElementById('datasetSwitch') as HTMLDivElement | null;
+      if (!datasetSwitch) {
+        datasetSwitch = document.createElement('div');
+        datasetSwitch.id = 'datasetSwitch';
+        datasetSwitch.className = 'switch-container';
+        datasetSwitch.style.marginLeft = '12px';
+        datasetSwitch.innerHTML = `
+        <label class="switch">
+          <input type="checkbox" id="datasetToggle">
+          <span class="slider round"></span>
+        </label>
+        <span class="switch-label">Demons</span>
+      `;
+        paginationPanel.appendChild(datasetSwitch);
+
+        const datasetToggle = document.getElementById('datasetToggle') as HTMLInputElement | null;
+        if (datasetToggle) {
+          datasetToggle.checked = this.isDemonsRoute;
+          datasetToggle.addEventListener('change', (event) => {
+            const input = event.target as HTMLInputElement;
+            if (input.checked) {
+              this.router.navigateByUrl('/demons');
+            } else {
+              this.router.navigateByUrl('');
+            }
           });
         }
+      } else {
+        // Bereits vorhanden? Zustand synchronisieren
+        const datasetToggle = document.getElementById('datasetToggle') as HTMLInputElement | null;
+        if (datasetToggle) datasetToggle.checked = this.isDemonsRoute;
       }
     }, 0);
   }
