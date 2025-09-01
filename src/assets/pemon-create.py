@@ -9,34 +9,176 @@ import time
 INPUT_FILE = "pemon_ids.txt"
 OUTPUT_FILE = "pemons.json"
 
-# ===================== Rate Limiter =====================
-# Max. 6 Requests pro Minute (alle Endpoints zusammen)
+# ===================== Safe, configurable Rate Limiter + resilient _post =====================
+import os
+import time
+import random
+from collections import deque
+from threading import Lock
+import requests
+from requests.exceptions import ConnectionError, ReadTimeout, ChunkedEncodingError
+from urllib3.exceptions import ProtocolError
+
+# ---- Easy knobs (per ENV überschreibbar) ----
+# Mindestabstand zwischen zwei Requests (Sekunden, Anti-Burst)
+MIN_INTERVAL = float(os.getenv("RL_MIN_INTERVAL", "5.5"))
+# Fenster-Limits (Fenster_in_Sekunden, max_Requests): z.B. 10 pro Minute, 100 pro 10 Min
+# ENV-Format: RL_WINDOWS="60:10,600:100"
+_windows_env = os.getenv("RL_WINDOWS")
+if _windows_env:
+    WINDOWS = []
+    for part in _windows_env.split(","):
+        w, c = part.split(":")
+        WINDOWS.append((int(w.strip()), int(c.strip())))
+else:
+    WINDOWS = [(60, 10), (600, 100)]
+
+# Retry- und Jitter-Settings
+RETRY_MAX = int(os.getenv("RL_RETRY_MAX", "5"))           # max. Versuche pro Request
+BACKOFF_BASE = float(os.getenv("RL_BACKOFF_BASE", "1.5")) # Basis für Exponential-Backoff
+BACKOFF_CAP = float(os.getenv("RL_BACKOFF_CAP", "30"))    # max. Wartezeit zwischen Retries
+JITTER_MIN = float(os.getenv("RL_JITTER_MIN", "0.2"))
+JITTER_MAX = float(os.getenv("RL_JITTER_MAX", "0.8"))
+
+# Requests-Session Pool (Komfort)
+POOL_CONNECTIONS = int(os.getenv("RL_POOL_CONNECTIONS", "8"))
+POOL_MAXSIZE    = int(os.getenv("RL_POOL_MAXSIZE", "8"))
+
 class RateLimiter:
-    def __init__(self, max_calls=6, period=60.0):
-        self.max_calls = max_calls
-        self.period = period
-        self.calls = deque()
+    """
+    Konfigurierbarer Anti-Burst Limiter:
+      - min_interval: Mindestabstand zwischen zwei Calls
+      - windows: Liste[(dauer_s, max_calls)] als gleitende Fenster
+    Thread-sicher & monotonic (robust gg. Uhrsprünge).
+    """
+    def __init__(self, min_interval: float, windows: list[tuple[int, int]]):
+        self.min_interval = float(min_interval)
+        self.windows = sorted([(int(w), int(c)) for w, c in windows], key=lambda x: x[0])
+        self._lock = Lock()
+        self._last_call = None
+        self._buckets = {w: deque() for w, _ in self.windows}
+
+    def _prune(self, now: float):
+        for w, dq in self._buckets.items():
+            while dq and now - dq[0] >= w:
+                dq.popleft()
+
+    def _time_until_allowed(self, now: float) -> float:
+        sleep_for = 0.0
+        if self._last_call is not None:
+            gap = self.min_interval - (now - self._last_call)
+            if gap > sleep_for:
+                sleep_for = gap
+        for w, max_calls in self.windows:
+            dq = self._buckets[w]
+            if len(dq) >= max_calls:
+                wait_w = w - (now - dq[0])
+                if wait_w > sleep_for:
+                    sleep_for = wait_w
+        return max(0.0, sleep_for)
 
     def wait(self):
-        now = time.time()
-        # Alte Timestamps entfernen
-        while self.calls and now - self.calls[0] >= self.period:
-            self.calls.popleft()
-        if len(self.calls) >= self.max_calls:
-            sleep_for = self.period - (now - self.calls[0])
-            if sleep_for > 0:
-                time.sleep(sleep_for)
-            # Nach dem Schlafen erneut aufräumen
-            now = time.time()
-            while self.calls and now - self.calls[0] >= self.period:
-                self.calls.popleft()
-        self.calls.append(time.time())
+        while True:
+            now = time.monotonic()
+            with self._lock:
+                self._prune(now)
+                sleep_for = self._time_until_allowed(now)
+                if sleep_for <= 0:
+                    now = time.monotonic()
+                    self._prune(now)
+                    for w in self._buckets:
+                        self._buckets[w].append(now)
+                    self._last_call = now
+                    return
+            time.sleep(sleep_for)
 
-rate_limiter = RateLimiter(max_calls=6, period=60.0)
+# Globaler Limiter
+rate_limiter = RateLimiter(min_interval=MIN_INTERVAL, windows=WINDOWS)
+
+# Wiederverwendete Session mit moderatem Pooling
+_session = requests.Session()
+_adapter = requests.adapters.HTTPAdapter(
+    pool_connections=POOL_CONNECTIONS,
+    pool_maxsize=POOL_MAXSIZE,
+    max_retries=0  # wir machen unsere eigenen Retries
+)
+_session.mount("http://", _adapter)
+_session.mount("https://", _adapter)
+
+def _respect_retry_after(resp) -> float:
+    """Liest Retry-After (Sekunden oder HTTP-Date) und gibt Sekunden zurück (oder 0)."""
+    ra = resp.headers.get("Retry-After")
+    if not ra:
+        return 0.0
+    try:
+        # Sekunden?
+        return max(0.0, float(ra))
+    except Exception:
+        # Datumsformat – grob 30s fallback
+        return 30.0
 
 def _post(url, data, headers, timeout=30):
-    rate_limiter.wait()
-    return requests.post(url, data=data, headers=headers, timeout=timeout)
+    """
+    Robuster POST:
+      - Limiter + kleiner Jitter vor jedem Versuch
+      - Retries bei Verbindungsabbrüchen, ReadTimeout, ChunkedEncoding, 429, 5xx
+      - 403: einmal lange Pause, dann aufgeben (Cloudflare/Block)
+    """
+    attempt = 0
+    while True:
+        attempt += 1
+
+        # Pacing (Limiter) + kleiner Zufallsjitter, um regelmäßige Muster zu brechen
+        rate_limiter.wait()
+        time.sleep(random.uniform(JITTER_MIN, JITTER_MAX))
+
+        try:
+            resp = _session.post(url, data=data, headers=headers, timeout=timeout)
+        except (ConnectionError, ProtocolError, ReadTimeout, ChunkedEncodingError):
+            if attempt >= RETRY_MAX:
+                raise
+            sleep_for = min(BACKOFF_CAP, BACKOFF_BASE * (2 ** (attempt - 1)))
+            # leichter Jitter obendrauf
+            sleep_for += random.uniform(JITTER_MIN, JITTER_MAX)
+            time.sleep(sleep_for)
+            continue
+
+        # HTTP-Status prüfen
+        status = resp.status_code
+
+        # 2xx/3xx -> fertig
+        if 200 <= status < 400:
+            return resp
+
+        # 429 Too Many Requests → Retry-After respektieren
+        if status == 429:
+            if attempt >= RETRY_MAX:
+                return resp  # gib zurück, damit der Aufrufer entscheiden kann
+            wait_ra = _respect_retry_after(resp)
+            wait_ra = wait_ra if wait_ra > 0 else min(BACKOFF_CAP, BACKOFF_BASE * (2 ** (attempt - 1)))
+            wait_ra += random.uniform(JITTER_MIN, JITTER_MAX)
+            time.sleep(wait_ra)
+            continue
+
+        # 5xx -> exponentieller Backoff
+        if 500 <= status < 600:
+            if attempt >= RETRY_MAX:
+                return resp
+            sleep_for = min(BACKOFF_CAP, BACKOFF_BASE * (2 ** (attempt - 1)))
+            sleep_for += random.uniform(JITTER_MIN, JITTER_MAX)
+            time.sleep(sleep_for)
+            continue
+
+        # 403 (oft Cloudflare) -> einmal längere Pause, dann aufgeben
+        if status == 403:
+            if attempt >= min(RETRY_MAX, 2):
+                return resp
+            time.sleep(60.0 + random.uniform(0.5, 1.5))
+            continue
+
+        # andere Fehler -> ohne Retry zurückgeben
+        return resp
+# ===================== /Rate Limiter Block =====================
 
 # ===================== Boomlings API =====================
 BASE = "http://www.boomlings.com/database"
