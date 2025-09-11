@@ -4,10 +4,11 @@
 Pemons builder: fetch Geometry Dash level metadata either via GDBrowser
 or directly from the official GD (Boomlings) endpoints.
 
-- Prompts at startup to choose the data source.
-- Respects an optional "limit" of how many last IDs from INPUT_FILE to process.
+- Source choice at startup (GDBrowser or GD-Server).
+- Flexible selection: ranges by position (number), "last N", or explicit IDs via "id:".
 - Merges into OUTPUT_FILE with conservative rules (objects cap, songID states).
 - Robust rate limiting & retry/backoff for Boomlings.
+- 'showcase' field is removed everywhere (added/updated/skipped and legacy).
 
 ENV (optional):
   RL_MIN_INTERVAL, RL_RETRY_MAX, RL_BACKOFF_BASE, RL_BACKOFF_CAP,
@@ -154,6 +155,15 @@ def _kv_block(text: str) -> dict:
             out.setdefault(k, v)
     return out
 
+def _kv_tilde(text: str) -> dict:
+    parts = text.strip().split("~|~")
+    out = {}
+    for i in range(0, len(parts) - 1, 2):
+        k, v = parts[i], parts[i + 1]
+        if k:
+            out[k] = v
+    return out
+
 def _to_int(s, default=0):
     try:
         return int(s)
@@ -180,6 +190,7 @@ def _non_demon_diff(numer: int) -> str:
 def _demon_name(code: int) -> str:
     return {3: "Easy", 4: "Medium", 0: "Hard", 5: "Insane", 6: "Extreme"}.get(code, "Unknown")
 
+# --- Boomlings fetchers & parsers ---
 def _fetch_download(level_id: int) -> dict:
     url = f"{BASE}/downloadGJLevel22.php"
     r = _post(url, data={"levelID": str(level_id), "secret": SECRET}, headers=HEADERS, timeout=30)
@@ -199,76 +210,27 @@ def _fetch_levels21_raw(level_id: int) -> str:
     r.raise_for_status()
     return r.text.strip()
 
-def _parse_levels21_maps(raw: str):
-    """
-    returns:
-      creators_by_playerid: { playerID:int -> username:str }
-      songs_by_id:         { songID:int -> {name, artist, size, url} }
-    """
-    creators_by_playerid = {}
-    songs_by_id = {}
+def _parse_creators_map_from_levels21(raw: str) -> dict[int, str]:
+    """Parse creators section defensively: map any numeric token to the following non-numeric token."""
+    result = {}
     parts = raw.split("#")
+    if len(parts) < 2:
+        return result
+    creators = parts[1]
+    for chunk in creators.split("|"):
+        if not chunk:
+            continue
+        tokens = chunk.split(":")
+        for i in range(len(tokens) - 1):
+            if tokens[i].isdigit() and not tokens[i + 1].isdigit():
+                try:
+                    result[int(tokens[i])] = tokens[i + 1]
+                except Exception:
+                    pass
+    return result
 
-    # creators map
-    if len(parts) >= 2:
-        creators = parts[1]
-        for chunk in creators.split("|"):
-            if not chunk:
-                continue
-            cols = chunk.split(":")
-            if len(cols) >= 2 and cols[0].isdigit():
-                creators_by_playerid[int(cols[0])] = cols[1]
-
-    # songs map
-    if len(parts) >= 3:
-        songs = parts[2]
-        recs = re.split(r":~1~\|~", songs)
-        if recs:
-            if not recs[0].startswith("1~|~"):
-                idx = recs[0].find("1~|~")
-                if idx != -1:
-                    recs[0] = recs[0][idx:]
-            if recs[0] and not recs[0].startswith("1~|~"):
-                recs[0] = "1~|~" + recs[0]
-        for rec in recs:
-            if not rec.strip():
-                continue
-            fields = rec.split("~|~")
-            d = {}
-            for i in range(0, len(fields) - 1, 2):
-                k = fields[i].strip()
-                v = fields[i + 1]
-                d[k] = v
-            sid = _to_int(d.get("1", "0"))
-            if sid:
-                songs_by_id[sid] = {
-                    "name": d.get("2", ""),
-                    "artist": d.get("4", ""),
-                    "size": d.get("5", ""),
-                    "url": d.get("10", "-"),
-                }
-    return creators_by_playerid, songs_by_id
-
-def _fetch_username_fallback_by_userid(player_id: int) -> str:
-    """Fallback: getGJUserInfo20.php (sometimes targetUserID or targetAccountID works)."""
-    url = f"{BASE}/getGJUserInfo20.php"
-    for field in ("targetUserID", "targetAccountID"):
-        r = _post(url, data={field: str(player_id), "secret": SECRET}, headers=HEADERS, timeout=30)
-        if r.status_code == 200 and r.text.strip() and r.text.strip() != "-1":
-            kv = _kv_block(r.text.strip())
-            name = kv.get("2", "")
-            if name:
-                return name
-    return ""
-
-def _fetch_song(song_id: int) -> dict:
-    if not song_id:
-        return {}
-    url = f"{BASE}/getGJSongInfo.php"
-    r = _post(url, data={"songID": str(song_id), "secret": SECRET}, headers=HEADERS, timeout=30)
-    if r.status_code != 200 or r.text.strip() == "-1":
-        return {}
-    kv = _kv_block(r.text.strip())
+def _kv_tilde_song_to_dict(text: str) -> dict:
+    kv = _kv_tilde(text)
     return {
         "id": _to_int(kv.get("1", "0")),
         "name": kv.get("2", ""),
@@ -277,9 +239,54 @@ def _fetch_song(song_id: int) -> dict:
         "url": kv.get("10", "-"),
     }
 
+def _fetch_username_by_account_id(account_id: int) -> str:
+    if not account_id:
+        return ""
+    url = f"{BASE}/getGJUserInfo20.php"
+    r = _post(url, data={"targetAccountID": str(account_id), "secret": SECRET}, headers=HEADERS, timeout=30)
+    if r.status_code != 200:
+        return ""
+    txt = r.text.strip()
+    if not txt or txt == "-1":
+        return ""
+    kv = _kv_block(txt)
+    return kv.get("2", "") or ""
+
+def _fetch_username_by_user_id(user_id: int) -> str:
+    if not user_id:
+        return ""
+    url = f"{BASE}/getGJUserInfo20.php"
+    r = _post(url, data={"targetUserID": str(user_id), "secret": SECRET}, headers=HEADERS, timeout=30)
+    if r.status_code != 200:
+        return ""
+    txt = r.text.strip()
+    if not txt or txt == "-1":
+        return ""
+    kv = _kv_block(txt)
+    return kv.get("2", "") or ""
+
+def _fetch_song(song_id: int) -> dict:
+    if not song_id:
+        return {}
+    url = f"{BASE}/getGJSongInfo.php"
+    r = _post(url, data={"songID": str(song_id), "secret": SECRET}, headers=HEADERS, timeout=30)
+    if r.status_code != 200 or r.text.strip() == "-1":
+        return {}
+    return _kv_tilde_song_to_dict(r.text.strip())
+
+def _fallback_creator_from_gdbrowser(level_id: str) -> str:
+    try:
+        r = requests.get(f"https://gdbrowser.com/api/level/{level_id}", timeout=15)
+        if r.status_code == 200:
+            j = r.json()
+            return j.get("author", "") or ""
+    except Exception:
+        pass
+    return ""
+
 # ===================== Fetchers =====================
 def get_level_data_gdbrowser(level_id: str, number: int, skip_warnings: bool = False):
-    """Fetch via GDBrowser JSON API."""
+    """Fetch via GDBrowser JSON API (unchanged)."""
     url = f"https://gdbrowser.com/api/level/{level_id}"
     try:
         resp = requests.get(url, timeout=30)
@@ -323,14 +330,35 @@ def get_level_data_gdbrowser(level_id: str, number: int, skip_warnings: bool = F
         "songID": song_id_val,
         "songs": None,
         "SFX": None,
-        "rateDate": "",
-        "showcase": ""
+        "rateDate": ""
+        # showcase removed
     }
 
     if level_info["objects"] == 65535 and not skip_warnings:
         print(f"[!] Warning: Level {level_id} has 65535 objects — may be higher (GD limit).")
 
     return level_info
+
+def _resolve_creator_name(level_id: str, user_id: int, account_id: int) -> str:
+    # 1) AccountID
+    name = _fetch_username_by_account_id(account_id)
+    if name:
+        return name
+    # 2) UserID
+    name = _fetch_username_by_user_id(user_id)
+    if name:
+        return name
+    # 3) Creators map from getGJLevels21
+    try:
+        raw21 = _fetch_levels21_raw(int(level_id))
+        cmap = _parse_creators_map_from_levels21(raw21)
+        for k in (account_id, user_id):
+            if k and k in cmap and cmap[k]:
+                return cmap[k]
+    except Exception:
+        pass
+    # 4) Final fallback: GDBrowser author
+    return _fallback_creator_from_gdbrowser(level_id)
 
 def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False):
     """Fetch directly from Boomlings endpoints and map to our output schema."""
@@ -342,85 +370,102 @@ def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False):
 
     # Core fields from downloadGJLevel22.php
     name = kv.get("2", "") or ""
-    player_id = _to_int(kv.get("6", "0"))
+    user_id     = _to_int(kv.get("6", "0"))
+    account_id  = _to_int(kv.get("49", "0"))  # present on many levels
 
-    length_code = _to_int(kv.get("15", "0"))
-    demon_flag = kv.get("17", "0") == "1"
-    stars = _to_int(kv.get("18", "0"))
-    feature_score = _to_int(kv.get("19", "0"))
-    copied_id = _to_int(kv.get("30", "0"))
-    two_player = kv.get("31", "0") == "1"
-    custom_song_id = _to_int(kv.get("35", "0"))
-    coins = _to_int(kv.get("37", "0"))
-    verified_coins = kv.get("38", "0") == "1"
-    stars_requested = _to_int(kv.get("39", "0"))
-    epic_code = _to_int(kv.get("42", "0"))
-    demon_code = _to_int(kv.get("43", "0"))
-    objects = _to_int(kv.get("45", "0"))
+    demon_flag      = kv.get("17", "0") == "1"
+    stars           = _to_int(kv.get("18", "0"))
+    feature_score   = _to_int(kv.get("19", "0"))
+    two_player      = kv.get("31", "0") == "1"
+    custom_song_id  = _to_int(kv.get("35", "0"))
+    coins           = _to_int(kv.get("37", "0"))
+    epic_code       = _to_int(kv.get("42", "0"))
+    demon_code      = _to_int(kv.get("43", "0"))
+    objects         = _to_int(kv.get("45", "0"))
+    editorA         = _to_int(kv.get("46", "0"))
+    editorB         = _to_int(kv.get("47", "0"))
+    official_song_i = _to_int(kv.get("12", "0"))
+    k52_raw         = kv.get("k52", "") or kv.get("52", "")
+    k53_raw         = kv.get("k53", "") or kv.get("53", "")
+    k57_frames      = _to_int(kv.get("57", kv.get("k57", "0")), 0)
+
     level_id_int = _to_int(kv.get("1", str(level_id)))
 
-    # Difficulty text similar to GDBrowser
+    # Difficulty text
     if demon_flag or demon_code in (0, 3, 4, 5, 6):
         difficulty_text = f"{_demon_name(demon_code)} Demon"
     else:
-        # Non-demon difficulty uses a numeric tier found in another field; fall back to 'N/A'
         difficulty_text = _non_demon_diff(_to_int(kv.get("9", "0")))
 
-    # Rating text (cp-ish)
-    if epic_code in (1, 2, 3):
-        cp = 2 + epic_code  # Epic->3, Legendary->4, Mythic->5
-    elif feature_score > 0:
-        cp = 2
-    elif stars > 0:
-        cp = 1
+    # Rating text
+    if epic_code == 0:
+        rating = "Featured" if feature_score >= 1 else ("Rated" if stars > 0 else "")
     else:
-        cp = 0
-    rating_map = {1: "Rated", 2: "Featured", 3: "Epic", 4: "Legendary", 5: "Mythic"}
-    rating = rating_map.get(cp, "")
+        rating = {1: "Epic", 2: "Legendary", 3: "Mythic"}.get(epic_code, "")
 
-    # From getGJLevels21 maps
-    creator_name = None
-    song_meta_from_map = None
+    # Resolve creator
+    creator_name = _resolve_creator_name(level_id, user_id, account_id)
+
+    # Song fields
+    official_song_flag = (official_song_i != 0)
+    song_id_out = "OFFICIAL" if official_song_flag else (custom_song_id if custom_song_id > 0 else "")
+    primary_song = ""
+    artist = ""
+
+    # Try getGJLevels21 songs map first
+    song_meta = {}
     try:
         raw21 = _fetch_levels21_raw(int(level_id))
-        creators_map, songs_map = _parse_levels21_maps(raw21)
-        if player_id in creators_map:
-            creator_name = creators_map[player_id]
-        if custom_song_id and custom_song_id in songs_map:
-            song_meta_from_map = songs_map[custom_song_id]
+        parts = raw21.split("#")
+        if len(parts) >= 3:
+            songs = parts[2]
+            recs = re.split(r":~1~\|~", songs)
+            if recs:
+                if not recs[0].startswith("1~|~"):
+                    idx = recs[0].find("1~|~")
+                    if idx != -1:
+                        recs[0] = recs[0][idx:]
+                if recs[0] and not recs[0].startswith("1~|~"):
+                    recs[0] = "1~|~" + recs[0]
+            for rec in recs:
+                if not rec.strip():
+                    continue
+                fields = rec.split("~|~")
+                d = {}
+                for i in range(0, len(fields) - 1, 2):
+                    d[fields[i]] = fields[i + 1]
+                sid = _to_int(d.get("1", "0"))
+                if sid and sid == custom_song_id:
+                    song_meta = {
+                        "name": d.get("2", ""),
+                        "artist": d.get("4", ""),
+                    }
+                    break
     except Exception:
         pass
 
-    # Creator fallback via getGJUserInfo20
-    if not creator_name:
-        try:
-            creator_name = _fetch_username_fallback_by_userid(player_id) or None
-        except Exception:
-            creator_name = None
+    if not official_song_flag and custom_song_id:
+        if song_meta:
+            primary_song = song_meta.get("name", "") or ""
+            artist = song_meta.get("artist", "") or ""
+        if not primary_song or not artist:
+            sm = _fetch_song(custom_song_id)
+            if sm:
+                primary_song = primary_song or sm.get("name", "") or ""
+                artist = artist or sm.get("artist", "") or ""
 
-    # Song fields
-    official_song_flag = (_to_int(kv.get("12", "0")) != 0)
+    # estimatedTime in **seconds**
+    estimated_seconds = int(round(k57_frames / 240.0)) if k57_frames > 0 else max(0, editorA + editorB)
+    estimated_time_seconds = estimated_seconds if estimated_seconds > 0 else None
 
-    # songID: never write 0, keep "" instead
-    if official_song_flag:
-        song_id_out = "OFFICIAL"
-    else:
-        song_id_out = custom_song_id if custom_song_id > 0 else ""
-
-    primary_song = None
-    artist = None
-
-    # Prefer metadata from map (no extra request)
-    if song_meta_from_map:
-        primary_song = song_meta_from_map.get("name") or None
-        artist = song_meta_from_map.get("artist") or None
-
-    # Fallback to getGJSongInfo for custom songs
-    if (primary_song is None or artist is None) and (not official_song_flag) and custom_song_id:
-        sm = _fetch_song(custom_song_id)
-        if sm:
-            primary_song = primary_song or (sm.get("name") or None)
-            artist = artist or (sm.get("artist") or None)
+    # songs (k52) + SFX (k53) counts
+    songs_count = 0
+    sfx_count = 0
+    if k52_raw:
+        songs_count = len([x.strip() for x in k52_raw.split(",") if x.strip()])
+    if k53_raw:
+        first_part = k53_raw.split("#", 1)[0]
+        sfx_count = len([x.strip() for x in first_part.split(",") if x.strip()])
 
     level_info = {
         "number": number,
@@ -430,17 +475,17 @@ def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False):
         "difficulty": difficulty_text,
         "rating": rating,
         "userCoins": coins,
-        "estimatedTime": None,
+        "estimatedTime": estimated_time_seconds,  # seconds or None
         "objects": objects,
         "checkpoints": None,
         "twop": two_player,
-        "primarySong": (primary_song or ""),
-        "artist": (artist or ""),
+        "primarySong": primary_song,
+        "artist": artist,
         "songID": song_id_out,   # "" means do not overwrite on merge
-        "songs": None,
-        "SFX": None,
-        "rateDate": "",
-        "showcase": ""
+        "songs": songs_count if songs_count > 0 else None,
+        "SFX": sfx_count if sfx_count > 0 else None,
+        "rateDate": ""
+        # showcase removed
     }
 
     if level_info["objects"] == 65535 and not skip_warnings:
@@ -466,12 +511,6 @@ def save_data(filepath, data):
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-def find_entry_by_id(entries, level_id):
-    for entry in entries:
-        if str(entry.get("ID")) == str(level_id):
-            return entry
-    return None
-
 def entries_differ(existing, new):
     for key in new:
         if key == "number":
@@ -489,7 +528,6 @@ def entries_differ(existing, new):
             if key == "songID":
                 continue
             elif key in ["primarySong", "artist"]:
-                # Keep these empty when songID is UNKNOWN
                 if existing.get(key) != "":
                     return True
                 continue
@@ -523,7 +561,87 @@ def merge_entries(existing, new):
             continue
         else:
             merged[key] = value
+
+    # strip deprecated fields on merge
+    merged.pop("showcase", None)
     return merged
+
+def sanitize_entry(entry: dict) -> dict:
+    """Remove deprecated/unused fields before writing to result."""
+    if entry is None:
+        return entry
+    entry.pop("showcase", None)
+    return entry
+
+# ===================== Selection parsing =====================
+def _parse_positions_spec(spec: str, total: int) -> list[int]:
+    """Parse a comma-separated list of 1-based positions and ranges (e.g., '1-5,10,20-25')."""
+    indices: set[int] = set()
+    tokens = [t.strip() for t in spec.split(",") if t.strip()]
+    for tok in tokens:
+        m = re.match(r"^(\d+)\s*-\s*(\d+)$", tok)
+        if m:
+            a = int(m.group(1))
+            b = int(m.group(2))
+            if a > b:
+                a, b = b, a
+            a = max(1, min(a, total))
+            b = max(1, min(b, total))
+            for i in range(a, b + 1):
+                indices.add(i)
+        elif tok.isdigit():
+            i = int(tok)
+            if 1 <= i <= total:
+                indices.add(i)
+    return sorted(indices)
+
+def _parse_id_spec(spec: str, all_ids: list[str]) -> list[str]:
+    """Parse 'id: ...' list; supports single IDs and numeric ranges. Keeps order as in all_ids."""
+    id_set: set[str] = set()
+    body = spec.split(":", 1)[1] if ":" in spec else spec
+    tokens = [t.strip() for t in body.split(",") if t.strip()]
+    for tok in tokens:
+        m = re.match(r"^(\d+)\s*-\s*(\d+)$", tok)
+        if m:
+            a = int(m.group(1)); b = int(m.group(2))
+            if a > b:
+                a, b = b, a
+            # generate numeric strings in range, then filter by membership
+            for x in range(a, b + 1):
+                s = str(x)
+                if s in all_ids:
+                    id_set.add(s)
+        elif tok.isdigit():
+            if tok in all_ids:
+                id_set.add(tok)
+    # preserve original order from file
+    return [lvl_id for lvl_id in all_ids if lvl_id in id_set]
+
+def select_level_ids(selection: str, all_ids: list[str]) -> list[str]:
+    """Return ordered list of selected level IDs, based on selection string."""
+    sel = (selection or "").strip()
+    if not sel:
+        return all_ids[:]  # all
+
+    low = sel.lower()
+    if low.startswith("last "):
+        n_str = low.split(" ", 1)[1].strip()
+        if n_str.isdigit():
+            n = int(n_str)
+            return all_ids[-n:] if n > 0 else []
+        # fall through to positions parsing if malformed
+
+    if low.startswith("id:"):
+        ids = _parse_id_spec(sel, all_ids)
+        return ids
+
+    # default: treat as positions/ranges by "number" (line index in pemon_ids.txt)
+    total = len(all_ids)
+    pos_list = _parse_positions_spec(sel, total)
+    if not pos_list:
+        return all_ids[:]
+    # map 1-based positions to IDs
+    return [all_ids[i - 1] for i in pos_list]
 
 # ===================== Main =====================
 def main():
@@ -534,64 +652,78 @@ def main():
     choice = input("Deine Wahl (1/2, Enter=1): ").strip()
     source = "gd" if choice == "2" else "gdbrowser"
 
-    # Optional limit
-    limit_input = input("🔢 Wie viele der letzten Level möchtest du verarbeiten? (Leer = alle): ").strip()
-    limit = int(limit_input) if limit_input.isdigit() else None
-
-    # Read IDs
+    # Read all IDs from file
     with open(INPUT_FILE, "r", encoding="utf-8") as f:
         all_ids = [line.strip() for line in f if line.strip().isdigit()]
 
+    # Optional selection
+    print("\n🔢 Welche Levels sollen verarbeitet werden?")
+    print("   Beispiele (Positionen = 'number' Spalte):  1-30   |   600-650   |   1,5,9-12,100")
+    print("   Letzte N:  last 50")
+    print("   IDs direkt:  id: 12345, 67890, 100000-100100")
+    selection_input = input("   Eingabe (leer = alle): ").strip()
+
+    # Compute selection (ordered)
+    level_ids = select_level_ids(selection_input, all_ids)
+
+    # Build number mapping (the 'number' is the line index in the full file)
     id_to_line = {level_id: idx + 1 for idx, level_id in enumerate(all_ids)}
-    level_ids = all_ids[-limit:] if limit else all_ids
 
     existing_data = load_existing_data(OUTPUT_FILE)
-    existing_dict = {str(entry["ID"]): entry for entry in existing_data}
+    existing_dict = {str(entry.get("ID")): entry for entry in existing_data if isinstance(entry, dict)}
 
     added_count = 0
     updated_count = 0
     skipped_count = 0
 
-    result_data_dict = {}
-    processed_ids = set()
+    print(f"\n📦 Verarbeite {len(level_ids)} von {len(all_ids)} Levels über '{'GDBrowser' if source=='gdbrowser' else 'GD-Server'}'...\n")
 
-    print(f"📦 Verarbeite {len(level_ids)} von {len(all_ids)} Levels über '{'GDBrowser' if source=='gdbrowser' else 'GD-Server'}'...\n")
+    result_data_dict: dict[str, dict] = {}
+    processed_ids: set[str] = set()
 
     for level_id in level_ids:
         if level_id in processed_ids:
             continue
         processed_ids.add(level_id)
 
-        number = id_to_line[level_id]
+        number = id_to_line.get(level_id, 0)
         old_entry = existing_dict.get(level_id)
         new_entry = get_level_data(level_id, number, source, skip_warnings=bool(old_entry))
 
         if not new_entry:
             if old_entry:
                 print(f"[~] Skipped level {level_id}")
-                result_data_dict[level_id] = old_entry
+                entry = old_entry.copy()
+                entry["number"] = number
+                entry = sanitize_entry(entry)
+                result_data_dict[level_id] = entry
                 skipped_count += 1
             continue
 
         if not old_entry:
             print(f"[+] Added level {level_id}: {new_entry['level']} by {new_entry['creator']}")
-            result_data_dict[level_id] = new_entry
+            entry = sanitize_entry(new_entry)
+            result_data_dict[level_id] = entry
             added_count += 1
         elif entries_differ(old_entry, new_entry):
             print(f"[~] Updated level {level_id}: {new_entry['level']} (changes detected)")
             merged = merge_entries(old_entry, new_entry)
             merged["number"] = number
+            merged = sanitize_entry(merged)
             result_data_dict[level_id] = merged
             updated_count += 1
         else:
-            old_entry["number"] = number
-            result_data_dict[level_id] = old_entry
+            entry = old_entry.copy()
+            entry["number"] = number
+            entry = sanitize_entry(entry)
+            result_data_dict[level_id] = entry
             skipped_count += 1
 
-    # Keep entries not touched in this run
+    # Keep entries not touched in this run (also sanitize)
     for old_id, old_entry in existing_dict.items():
         if old_id not in processed_ids:
-            result_data_dict[old_id] = old_entry
+            entry = sanitize_entry(old_entry.copy())
+            result_data_dict[old_id] = entry
 
     result_data = sorted(result_data_dict.values(), key=lambda x: x.get("number", 0))
     save_data(OUTPUT_FILE, result_data)

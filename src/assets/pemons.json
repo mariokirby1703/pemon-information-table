@@ -7,7 +7,7 @@
     "difficulty": "Medium Demon",
     "rating": "Rated",
     "userCoins": 0,
-    "estimatedTime": 70,
+    "estimatedTime": 71,
     "objects": 5460,
     "checkpoints": 1,
     "twop": false,
@@ -16,8 +16,7 @@
     "songID": 1234495,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "21.12.2023",
-    "showcase": "https://www.youtube.com/watch?v=_F5hG-ojiaM"
+    "rateDate": "21.12.2023"
   },
   {
     "number": 2,
@@ -27,7 +26,7 @@
     "difficulty": "Insane Demon",
     "rating": "Rated",
     "userCoins": 0,
-    "estimatedTime": 123,
+    "estimatedTime": 124,
     "objects": 6991,
     "checkpoints": 10,
     "twop": false,
@@ -36,8 +35,7 @@
     "songID": 1146972,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "22.12.2023",
-    "showcase": "https://www.youtube.com/watch?v=P3b69nt2JtY"
+    "rateDate": "22.12.2023"
   },
   {
     "number": 3,
@@ -47,7 +45,7 @@
     "difficulty": "Extreme Demon",
     "rating": "Rated",
     "userCoins": 0,
-    "estimatedTime": 57,
+    "estimatedTime": 58,
     "objects": 2624,
     "checkpoints": 3,
     "twop": false,
@@ -55,9 +53,8 @@
     "artist": "Intersonic Sound",
     "songID": 10003315,
     "songs": 1,
-    "SFX": 3,
-    "rateDate": "23.12.2023",
-    "showcase": "https://www.youtube.com/watch?v=iehrZFnPMaw"
+    "SFX": 2,
+    "rateDate": "23.12.2023"
   },
   {
     "number": 4,
@@ -76,8 +73,7 @@
     "songID": 742681,
     "songs": 1,
     "SFX": 1,
-    "rateDate": "24.12.2023",
-    "showcase": "https://www.youtube.com/watch?v=Hm45YvY3vbg"
+    "rateDate": "24.12.2023"
   },
   {
     "number": 5,
@@ -87,7 +83,7 @@
     "difficulty": "Medium Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 54,
+    "estimatedTime": 55,
     "objects": 10668,
     "checkpoints": 6,
     "twop": false,
@@ -96,8 +92,7 @@
     "songID": 10001149,
     "songs": 1,
     "SFX": 17,
-    "rateDate": "25.12.2023",
-    "showcase": "https://www.youtube.com/watch?v=kJ1wVt8D-4o"
+    "rateDate": "25.12.2023"
   },
   {
     "number": 6,
@@ -107,7 +102,7 @@
     "difficulty": "Easy Demon",
     "rating": "Featured",
     "userCoins": 1,
-    "estimatedTime": 99,
+    "estimatedTime": 100,
     "objects": 26770,
     "checkpoints": 12,
     "twop": false,
@@ -116,8 +111,7 @@
     "songID": 1098278,
     "songs": 1,
     "SFX": 12,
-    "rateDate": "25.12.2023",
-    "showcase": "https://www.youtube.com/watch?v=KSLKE7TZcmM"
+    "rateDate": "25.12.2023"
   },
   {
     "number": 7,
@@ -127,7 +121,7 @@
     "difficulty": "Insane Demon",
     "rating": "Featured",
     "userCoins": 2,
-    "estimatedTime": 165,
+    "estimatedTime": 166,
     "objects": 13701,
     "checkpoints": 4,
     "twop": false,
@@ -136,8 +130,7 @@
     "songID": 10001513,
     "songs": 1,
     "SFX": 6,
-    "rateDate": "26.12.2023",
-    "showcase": "https://www.youtube.com/watch?v=qROMgEVufNk"
+    "rateDate": "26.12.2023"
   },
   {
     "number": 8,
@@ -147,7 +140,7 @@
     "difficulty": "Hard Demon",
     "rating": "Epic",
     "userCoins": 0,
-    "estimatedTime": 45,
+    "estimatedTime": 46,
     "objects": 5873,
     "checkpoints": 2,
     "twop": false,
@@ -156,8 +149,7 @@
     "songID": 10004192,
     "songs": 3,
     "SFX": 25,
-    "rateDate": "26.12.2023",
-    "showcase": "https://www.youtube.com/watch?v=tLQP0_oxqe8"
+    "rateDate": "26.12.2023"
   },
   {
     "number": 9,
@@ -176,8 +168,7 @@
     "songID": 478283,
     "songs": 1,
     "SFX": 5,
-    "rateDate": "28.12.2023",
-    "showcase": "https://www.youtube.com/watch?v=Fu4Vx0u9g-o"
+    "rateDate": "28.12.2023"
   },
   {
     "number": 10,
@@ -187,7 +178,7 @@
     "difficulty": "Easy Demon",
     "rating": "Featured",
     "userCoins": 0,
-    "estimatedTime": 71,
+    "estimatedTime": 72,
     "objects": 7012,
     "checkpoints": 0,
     "twop": false,
@@ -196,8 +187,7 @@
     "songID": 544108,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "28.12.2023",
-    "showcase": "https://www.youtube.com/watch?v=qkGWbn5CUeY"
+    "rateDate": "28.12.2023"
   },
   {
     "number": 11,
@@ -207,7 +197,7 @@
     "difficulty": "Medium Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 214,
+    "estimatedTime": 234,
     "objects": 22202,
     "checkpoints": 10,
     "twop": false,
@@ -216,8 +206,7 @@
     "songID": 886602,
     "songs": 1,
     "SFX": 9,
-    "rateDate": "29.12.2023",
-    "showcase": ""
+    "rateDate": "29.12.2023"
   },
   {
     "number": 12,
@@ -236,8 +225,7 @@
     "songID": 94726,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "31.12.2023",
-    "showcase": ""
+    "rateDate": "31.12.2023"
   },
   {
     "number": 13,
@@ -247,7 +235,7 @@
     "difficulty": "Medium Demon",
     "rating": "Legendary",
     "userCoins": 3,
-    "estimatedTime": 273,
+    "estimatedTime": 274,
     "objects": 70502,
     "checkpoints": 5,
     "twop": false,
@@ -256,18 +244,17 @@
     "songID": 1271915,
     "songs": 3,
     "SFX": 44,
-    "rateDate": "31.12.2023",
-    "showcase": ""
+    "rateDate": "31.12.2023"
   },
   {
     "number": 14,
     "level": "Logodomy",
     "creator": "TheMilkCat",
     "ID": 98275850,
-    "difficulty": "Hard Demon",
+    "difficulty": "Insane Demon",
     "rating": "Rated",
     "userCoins": 0,
-    "estimatedTime": 112,
+    "estimatedTime": 113,
     "objects": 12789,
     "checkpoints": 1,
     "twop": true,
@@ -276,8 +263,7 @@
     "songID": "OFFICIAL",
     "songs": 6,
     "SFX": 55,
-    "rateDate": "31.12.2023",
-    "showcase": ""
+    "rateDate": "31.12.2023"
   },
   {
     "number": 15,
@@ -287,7 +273,7 @@
     "difficulty": "Insane Demon",
     "rating": "Featured",
     "userCoins": 1,
-    "estimatedTime": 174,
+    "estimatedTime": 175,
     "objects": 19613,
     "checkpoints": 4,
     "twop": false,
@@ -296,8 +282,7 @@
     "songID": 570698,
     "songs": 1,
     "SFX": 11,
-    "rateDate": "02.01.2024",
-    "showcase": ""
+    "rateDate": "02.01.2024"
   },
   {
     "number": 16,
@@ -316,8 +301,7 @@
     "songID": 10001279,
     "songs": 3,
     "SFX": 29,
-    "rateDate": "04.01.2024",
-    "showcase": ""
+    "rateDate": "04.01.2024"
   },
   {
     "number": 17,
@@ -327,7 +311,7 @@
     "difficulty": "Hard Demon",
     "rating": "Rated",
     "userCoins": 0,
-    "estimatedTime": 341,
+    "estimatedTime": 342,
     "objects": 7297,
     "checkpoints": 22,
     "twop": false,
@@ -336,8 +320,7 @@
     "songID": 906521,
     "songs": 1,
     "SFX": 8,
-    "rateDate": "05.01.2024",
-    "showcase": ""
+    "rateDate": "05.01.2024"
   },
   {
     "number": 18,
@@ -347,7 +330,7 @@
     "difficulty": "Easy Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 86,
+    "estimatedTime": 87,
     "objects": 19445,
     "checkpoints": 6,
     "twop": false,
@@ -356,8 +339,7 @@
     "songID": 10005189,
     "songs": 1,
     "SFX": 50,
-    "rateDate": "06.01.2024",
-    "showcase": ""
+    "rateDate": "06.01.2024"
   },
   {
     "number": 19,
@@ -367,7 +349,7 @@
     "difficulty": "Medium Demon",
     "rating": "Rated",
     "userCoins": 3,
-    "estimatedTime": 170,
+    "estimatedTime": 171,
     "objects": 13985,
     "checkpoints": 0,
     "twop": false,
@@ -376,8 +358,7 @@
     "songID": 10001983,
     "songs": 6,
     "SFX": 13,
-    "rateDate": "08.01.2024",
-    "showcase": ""
+    "rateDate": "08.01.2024"
   },
   {
     "number": 20,
@@ -387,7 +368,7 @@
     "difficulty": "Hard Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 132,
+    "estimatedTime": 133,
     "objects": 14228,
     "checkpoints": 9,
     "twop": false,
@@ -396,8 +377,7 @@
     "songID": 1106698,
     "songs": 2,
     "SFX": 21,
-    "rateDate": "09.01.2024",
-    "showcase": ""
+    "rateDate": "09.01.2024"
   },
   {
     "number": 21,
@@ -407,7 +387,7 @@
     "difficulty": "Easy Demon",
     "rating": "Epic",
     "userCoins": 3,
-    "estimatedTime": 222,
+    "estimatedTime": 223,
     "objects": 14846,
     "checkpoints": 20,
     "twop": true,
@@ -416,8 +396,7 @@
     "songID": 1256797,
     "songs": 3,
     "SFX": 21,
-    "rateDate": "14.01.2024",
-    "showcase": ""
+    "rateDate": "14.01.2024"
   },
   {
     "number": 22,
@@ -427,7 +406,7 @@
     "difficulty": "Extreme Demon",
     "rating": "Rated",
     "userCoins": 3,
-    "estimatedTime": 867,
+    "estimatedTime": 868,
     "objects": 96501,
     "checkpoints": 23,
     "twop": false,
@@ -436,8 +415,7 @@
     "songID": 1070978,
     "songs": 10,
     "SFX": 22,
-    "rateDate": "14.01.2024",
-    "showcase": ""
+    "rateDate": "14.01.2024"
   },
   {
     "number": 23,
@@ -456,8 +434,7 @@
     "songID": 10002358,
     "songs": 1,
     "SFX": 11,
-    "rateDate": "15.01.2024",
-    "showcase": ""
+    "rateDate": "15.01.2024"
   },
   {
     "number": 24,
@@ -476,8 +453,7 @@
     "songID": 10003232,
     "songs": 2,
     "SFX": 25,
-    "rateDate": "15.01.2024",
-    "showcase": ""
+    "rateDate": "15.01.2024"
   },
   {
     "number": 25,
@@ -496,8 +472,7 @@
     "songID": 10005185,
     "songs": 1,
     "SFX": 12,
-    "rateDate": "16.01.2024",
-    "showcase": ""
+    "rateDate": "16.01.2024"
   },
   {
     "number": 26,
@@ -507,7 +482,7 @@
     "difficulty": "Insane Demon",
     "rating": "Featured",
     "userCoins": 2,
-    "estimatedTime": 98,
+    "estimatedTime": 99,
     "objects": 19660,
     "checkpoints": 0,
     "twop": false,
@@ -516,8 +491,7 @@
     "songID": 10006555,
     "songs": 1,
     "SFX": 6,
-    "rateDate": "16.01.2024",
-    "showcase": ""
+    "rateDate": "16.01.2024"
   },
   {
     "number": 27,
@@ -527,7 +501,7 @@
     "difficulty": "Hard Demon",
     "rating": "Featured",
     "userCoins": 0,
-    "estimatedTime": 176,
+    "estimatedTime": 177,
     "objects": 7919,
     "checkpoints": 15,
     "twop": false,
@@ -536,8 +510,7 @@
     "songID": 10002974,
     "songs": 1,
     "SFX": 12,
-    "rateDate": "16.01.2024",
-    "showcase": ""
+    "rateDate": "16.01.2024"
   },
   {
     "number": 28,
@@ -547,7 +520,7 @@
     "difficulty": "Medium Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 140,
+    "estimatedTime": 141,
     "objects": 17894,
     "checkpoints": 6,
     "twop": true,
@@ -556,8 +529,7 @@
     "songID": 740749,
     "songs": 1,
     "SFX": 25,
-    "rateDate": "17.01.2024",
-    "showcase": ""
+    "rateDate": "17.01.2024"
   },
   {
     "number": 29,
@@ -576,8 +548,7 @@
     "songID": 10002984,
     "songs": 4,
     "SFX": 23,
-    "rateDate": "18.01.2024",
-    "showcase": ""
+    "rateDate": "18.01.2024"
   },
   {
     "number": 30,
@@ -587,7 +558,7 @@
     "difficulty": "Easy Demon",
     "rating": "Featured",
     "userCoins": 0,
-    "estimatedTime": 163,
+    "estimatedTime": 164,
     "objects": 29839,
     "checkpoints": 1,
     "twop": false,
@@ -596,8 +567,7 @@
     "songID": 1180181,
     "songs": 1,
     "SFX": 6,
-    "rateDate": "22.01.2024",
-    "showcase": ""
+    "rateDate": "22.01.2024"
   },
   {
     "number": 31,
@@ -607,7 +577,7 @@
     "difficulty": "Insane Demon",
     "rating": "Epic",
     "userCoins": 3,
-    "estimatedTime": 1401,
+    "estimatedTime": 1402,
     "objects": 95327,
     "checkpoints": 48,
     "twop": true,
@@ -616,8 +586,7 @@
     "songID": 136087,
     "songs": 9,
     "SFX": 121,
-    "rateDate": "22.01.2024",
-    "showcase": ""
+    "rateDate": "22.01.2024"
   },
   {
     "number": 32,
@@ -636,8 +605,7 @@
     "songID": 10003346,
     "songs": 5,
     "SFX": 7,
-    "rateDate": "25.01.2024",
-    "showcase": ""
+    "rateDate": "25.01.2024"
   },
   {
     "number": 33,
@@ -647,7 +615,7 @@
     "difficulty": "Extreme Demon",
     "rating": "Featured",
     "userCoins": 0,
-    "estimatedTime": 251,
+    "estimatedTime": 252,
     "objects": 19551,
     "checkpoints": 1,
     "twop": false,
@@ -656,8 +624,7 @@
     "songID": 74690,
     "songs": 5,
     "SFX": 26,
-    "rateDate": "25.01.2024",
-    "showcase": ""
+    "rateDate": "25.01.2024"
   },
   {
     "number": 34,
@@ -667,7 +634,7 @@
     "difficulty": "Insane Demon",
     "rating": "Epic",
     "userCoins": 3,
-    "estimatedTime": 1223,
+    "estimatedTime": 1224,
     "objects": 46990,
     "checkpoints": 0,
     "twop": false,
@@ -676,8 +643,7 @@
     "songID": 711933,
     "songs": 6,
     "SFX": 18,
-    "rateDate": "28.01.2024",
-    "showcase": ""
+    "rateDate": "28.01.2024"
   },
   {
     "number": 35,
@@ -687,7 +653,7 @@
     "difficulty": "Insane Demon",
     "rating": "Rated",
     "userCoins": 0,
-    "estimatedTime": 1031,
+    "estimatedTime": 1033,
     "objects": 39981,
     "checkpoints": 0,
     "twop": false,
@@ -696,8 +662,7 @@
     "songID": 10001740,
     "songs": 9,
     "SFX": 19,
-    "rateDate": "29.01.2024",
-    "showcase": ""
+    "rateDate": "29.01.2024"
   },
   {
     "number": 36,
@@ -707,7 +672,7 @@
     "difficulty": "Insane Demon",
     "rating": "Rated",
     "userCoins": 3,
-    "estimatedTime": 236,
+    "estimatedTime": 237,
     "objects": 4369,
     "checkpoints": 1,
     "twop": true,
@@ -716,8 +681,7 @@
     "songID": 94726,
     "songs": 2,
     "SFX": 6,
-    "rateDate": "29.01.2024",
-    "showcase": ""
+    "rateDate": "29.01.2024"
   },
   {
     "number": 37,
@@ -727,7 +691,7 @@
     "difficulty": "Medium Demon",
     "rating": "Rated",
     "userCoins": 3,
-    "estimatedTime": 117,
+    "estimatedTime": 118,
     "objects": 14066,
     "checkpoints": 5,
     "twop": false,
@@ -736,8 +700,7 @@
     "songID": 10003144,
     "songs": 1,
     "SFX": 12,
-    "rateDate": "29.01.2024",
-    "showcase": ""
+    "rateDate": "29.01.2024"
   },
   {
     "number": 38,
@@ -747,7 +710,7 @@
     "difficulty": "Easy Demon",
     "rating": "Rated",
     "userCoins": 0,
-    "estimatedTime": 120,
+    "estimatedTime": 121,
     "objects": 7052,
     "checkpoints": 4,
     "twop": false,
@@ -756,8 +719,7 @@
     "songID": 10004615,
     "songs": 3,
     "SFX": 41,
-    "rateDate": "29.01.2024",
-    "showcase": ""
+    "rateDate": "29.01.2024"
   },
   {
     "number": 39,
@@ -767,7 +729,7 @@
     "difficulty": "Medium Demon",
     "rating": "Rated",
     "userCoins": 0,
-    "estimatedTime": 158,
+    "estimatedTime": 159,
     "objects": 18731,
     "checkpoints": 10,
     "twop": false,
@@ -776,8 +738,7 @@
     "songID": 922602,
     "songs": 1,
     "SFX": 1,
-    "rateDate": "30.01.2024",
-    "showcase": ""
+    "rateDate": "30.01.2024"
   },
   {
     "number": 40,
@@ -796,8 +757,7 @@
     "songID": 1190013,
     "songs": 6,
     "SFX": 16,
-    "rateDate": "30.01.2024",
-    "showcase": ""
+    "rateDate": "30.01.2024"
   },
   {
     "number": 41,
@@ -816,8 +776,7 @@
     "songID": 10005372,
     "songs": 1,
     "SFX": 12,
-    "rateDate": "30.01.2024",
-    "showcase": ""
+    "rateDate": "30.01.2024"
   },
   {
     "number": 42,
@@ -827,7 +786,7 @@
     "difficulty": "Medium Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 94,
+    "estimatedTime": 95,
     "objects": 13912,
     "checkpoints": 6,
     "twop": false,
@@ -836,8 +795,7 @@
     "songID": 10003748,
     "songs": 5,
     "SFX": 39,
-    "rateDate": "30.01.2024",
-    "showcase": ""
+    "rateDate": "30.01.2024"
   },
   {
     "number": 43,
@@ -847,7 +805,7 @@
     "difficulty": "Hard Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 103,
+    "estimatedTime": 104,
     "objects": 16145,
     "checkpoints": 6,
     "twop": false,
@@ -856,8 +814,7 @@
     "songID": 322053,
     "songs": 1,
     "SFX": 13,
-    "rateDate": "30.01.2024",
-    "showcase": ""
+    "rateDate": "30.01.2024"
   },
   {
     "number": 44,
@@ -867,7 +824,7 @@
     "difficulty": "Medium Demon",
     "rating": "Epic",
     "userCoins": 3,
-    "estimatedTime": 2672,
+    "estimatedTime": 2673,
     "objects": 25502,
     "checkpoints": 1,
     "twop": false,
@@ -876,8 +833,7 @@
     "songID": 10000880,
     "songs": 5,
     "SFX": 37,
-    "rateDate": "30.01.2024",
-    "showcase": ""
+    "rateDate": "30.01.2024"
   },
   {
     "number": 45,
@@ -896,8 +852,7 @@
     "songID": 10000869,
     "songs": 4,
     "SFX": 0,
-    "rateDate": "30.01.2024",
-    "showcase": ""
+    "rateDate": "30.01.2024"
   },
   {
     "number": 46,
@@ -907,7 +862,7 @@
     "difficulty": "Easy Demon",
     "rating": "Featured",
     "userCoins": 0,
-    "estimatedTime": 58,
+    "estimatedTime": 59,
     "objects": 5125,
     "checkpoints": 3,
     "twop": false,
@@ -916,8 +871,7 @@
     "songID": 571101,
     "songs": 1,
     "SFX": 6,
-    "rateDate": "01.02.2024",
-    "showcase": ""
+    "rateDate": "01.02.2024"
   },
   {
     "number": 47,
@@ -927,7 +881,7 @@
     "difficulty": "Extreme Demon",
     "rating": "Featured",
     "userCoins": 1,
-    "estimatedTime": 261,
+    "estimatedTime": 262,
     "objects": 72088,
     "checkpoints": 12,
     "twop": false,
@@ -936,8 +890,7 @@
     "songID": 93205,
     "songs": 3,
     "SFX": 30,
-    "rateDate": "04.02.2024",
-    "showcase": ""
+    "rateDate": "04.02.2024"
   },
   {
     "number": 48,
@@ -947,7 +900,7 @@
     "difficulty": "Insane Demon",
     "rating": "Featured",
     "userCoins": 1,
-    "estimatedTime": 329,
+    "estimatedTime": 330,
     "objects": 47314,
     "checkpoints": 5,
     "twop": false,
@@ -956,8 +909,7 @@
     "songID": 620959,
     "songs": 4,
     "SFX": 130,
-    "rateDate": "04.02.2024",
-    "showcase": ""
+    "rateDate": "04.02.2024"
   },
   {
     "number": 49,
@@ -976,8 +928,7 @@
     "songID": 10003210,
     "songs": 3,
     "SFX": 70,
-    "rateDate": "07.02.2024",
-    "showcase": ""
+    "rateDate": "07.02.2024"
   },
   {
     "number": 50,
@@ -987,7 +938,7 @@
     "difficulty": "Hard Demon",
     "rating": "Featured",
     "userCoins": 0,
-    "estimatedTime": 206,
+    "estimatedTime": 207,
     "objects": 29819,
     "checkpoints": 7,
     "twop": false,
@@ -996,8 +947,7 @@
     "songID": 20171,
     "songs": 1,
     "SFX": 5,
-    "rateDate": "09.02.2024",
-    "showcase": ""
+    "rateDate": "09.02.2024"
   },
   {
     "number": 51,
@@ -1007,7 +957,7 @@
     "difficulty": "Medium Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 158,
+    "estimatedTime": 159,
     "objects": 59442,
     "checkpoints": 19,
     "twop": true,
@@ -1016,8 +966,7 @@
     "songID": 575768,
     "songs": 1,
     "SFX": 30,
-    "rateDate": "11.02.2024",
-    "showcase": ""
+    "rateDate": "11.02.2024"
   },
   {
     "number": 52,
@@ -1036,8 +985,7 @@
     "songID": 284843,
     "songs": 8,
     "SFX": 85,
-    "rateDate": "16.02.2024",
-    "showcase": ""
+    "rateDate": "16.02.2024"
   },
   {
     "number": 53,
@@ -1047,7 +995,7 @@
     "difficulty": "Easy Demon",
     "rating": "Rated",
     "userCoins": 0,
-    "estimatedTime": 303,
+    "estimatedTime": 287,
     "objects": 15795,
     "checkpoints": 5,
     "twop": false,
@@ -1056,8 +1004,7 @@
     "songID": 568672,
     "songs": 6,
     "SFX": 1,
-    "rateDate": "16.02.2024",
-    "showcase": ""
+    "rateDate": "16.02.2024"
   },
   {
     "number": 54,
@@ -1067,7 +1014,7 @@
     "difficulty": "Hard Demon",
     "rating": "Featured",
     "userCoins": 0,
-    "estimatedTime": 216,
+    "estimatedTime": 217,
     "objects": 47677,
     "checkpoints": 1,
     "twop": true,
@@ -1076,8 +1023,7 @@
     "songID": 793091,
     "songs": 5,
     "SFX": 61,
-    "rateDate": "18.02.2024",
-    "showcase": ""
+    "rateDate": "18.02.2024"
   },
   {
     "number": 55,
@@ -1087,7 +1033,7 @@
     "difficulty": "Insane Demon",
     "rating": "Rated",
     "userCoins": 1,
-    "estimatedTime": 56,
+    "estimatedTime": 57,
     "objects": 18020,
     "checkpoints": 3,
     "twop": false,
@@ -1096,8 +1042,7 @@
     "songID": 1042393,
     "songs": 1,
     "SFX": 16,
-    "rateDate": "19.02.2024",
-    "showcase": ""
+    "rateDate": "19.02.2024"
   },
   {
     "number": 56,
@@ -1116,8 +1061,7 @@
     "songID": 1239944,
     "songs": 1,
     "SFX": 5,
-    "rateDate": "19.02.2024",
-    "showcase": ""
+    "rateDate": "19.02.2024"
   },
   {
     "number": 57,
@@ -1127,7 +1071,7 @@
     "difficulty": "Hard Demon",
     "rating": "Featured",
     "userCoins": 1,
-    "estimatedTime": 191,
+    "estimatedTime": 202,
     "objects": 29920,
     "checkpoints": 7,
     "twop": false,
@@ -1136,8 +1080,7 @@
     "songID": 885164,
     "songs": 4,
     "SFX": 25,
-    "rateDate": "19.02.2024",
-    "showcase": ""
+    "rateDate": "19.02.2024"
   },
   {
     "number": 58,
@@ -1147,7 +1090,7 @@
     "difficulty": "Hard Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 369,
+    "estimatedTime": 34,
     "objects": 34374,
     "checkpoints": 1,
     "twop": true,
@@ -1156,8 +1099,7 @@
     "songID": 10003712,
     "songs": 3,
     "SFX": 27,
-    "rateDate": "19.02.2024",
-    "showcase": ""
+    "rateDate": "19.02.2024"
   },
   {
     "number": 59,
@@ -1167,7 +1109,7 @@
     "difficulty": "Hard Demon",
     "rating": "Rated",
     "userCoins": 3,
-    "estimatedTime": 655,
+    "estimatedTime": 656,
     "objects": 15689,
     "checkpoints": 4,
     "twop": true,
@@ -1176,8 +1118,7 @@
     "songID": 10002093,
     "songs": 5,
     "SFX": 42,
-    "rateDate": "19.02.2024",
-    "showcase": ""
+    "rateDate": "19.02.2024"
   },
   {
     "number": 60,
@@ -1196,8 +1137,7 @@
     "songID": 351638,
     "songs": 2,
     "SFX": 2,
-    "rateDate": "19.02.2024",
-    "showcase": ""
+    "rateDate": "19.02.2024"
   },
   {
     "number": 61,
@@ -1207,7 +1147,7 @@
     "difficulty": "Insane Demon",
     "rating": "Featured",
     "userCoins": 0,
-    "estimatedTime": 105,
+    "estimatedTime": 106,
     "objects": 13705,
     "checkpoints": 1,
     "twop": false,
@@ -1216,8 +1156,7 @@
     "songID": 878221,
     "songs": 3,
     "SFX": 7,
-    "rateDate": "21.02.2024",
-    "showcase": ""
+    "rateDate": "21.02.2024"
   },
   {
     "number": 62,
@@ -1227,7 +1166,7 @@
     "difficulty": "Hard Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 333,
+    "estimatedTime": 334,
     "objects": 22527,
     "checkpoints": 14,
     "twop": false,
@@ -1236,8 +1175,7 @@
     "songID": 1188934,
     "songs": 6,
     "SFX": 50,
-    "rateDate": "25.02.2024",
-    "showcase": ""
+    "rateDate": "25.02.2024"
   },
   {
     "number": 63,
@@ -1247,7 +1185,7 @@
     "difficulty": "Easy Demon",
     "rating": "Featured",
     "userCoins": 1,
-    "estimatedTime": 71,
+    "estimatedTime": 72,
     "objects": 16220,
     "checkpoints": 1,
     "twop": false,
@@ -1256,8 +1194,7 @@
     "songID": 1281205,
     "songs": 1,
     "SFX": 17,
-    "rateDate": "25.02.2024",
-    "showcase": ""
+    "rateDate": "25.02.2024"
   },
   {
     "number": 64,
@@ -1276,8 +1213,7 @@
     "songID": 575768,
     "songs": 3,
     "SFX": 25,
-    "rateDate": "25.02.2024",
-    "showcase": ""
+    "rateDate": "25.02.2024"
   },
   {
     "number": 65,
@@ -1287,7 +1223,7 @@
     "difficulty": "Extreme Demon",
     "rating": "Rated",
     "userCoins": 0,
-    "estimatedTime": 141,
+    "estimatedTime": 96,
     "objects": 67235,
     "checkpoints": 8,
     "twop": false,
@@ -1296,8 +1232,7 @@
     "songID": 10003230,
     "songs": 3,
     "SFX": 1,
-    "rateDate": "27.02.2024",
-    "showcase": ""
+    "rateDate": "27.02.2024"
   },
   {
     "number": 66,
@@ -1307,7 +1242,7 @@
     "difficulty": "Insane Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 2148,
+    "estimatedTime": 2149,
     "objects": 35000,
     "checkpoints": 0,
     "twop": false,
@@ -1316,8 +1251,7 @@
     "songID": 459080,
     "songs": 1,
     "SFX": 40,
-    "rateDate": "29.02.2024",
-    "showcase": ""
+    "rateDate": "29.02.2024"
   },
   {
     "number": 67,
@@ -1327,7 +1261,7 @@
     "difficulty": "Extreme Demon",
     "rating": "Featured",
     "userCoins": 2,
-    "estimatedTime": 260,
+    "estimatedTime": 261,
     "objects": 24320,
     "checkpoints": 17,
     "twop": false,
@@ -1336,8 +1270,7 @@
     "songID": 866047,
     "songs": 7,
     "SFX": 13,
-    "rateDate": "29.02.2024",
-    "showcase": ""
+    "rateDate": "29.02.2024"
   },
   {
     "number": 68,
@@ -1356,8 +1289,7 @@
     "songID": 1097337,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "03.03.2024",
-    "showcase": ""
+    "rateDate": "03.03.2024"
   },
   {
     "number": 69,
@@ -1367,7 +1299,7 @@
     "difficulty": "Easy Demon",
     "rating": "Featured",
     "userCoins": 1,
-    "estimatedTime": 30,
+    "estimatedTime": 31,
     "objects": 39884,
     "checkpoints": 2,
     "twop": true,
@@ -1376,8 +1308,7 @@
     "songID": 718319,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "03.03.2024",
-    "showcase": ""
+    "rateDate": "03.03.2024"
   },
   {
     "number": 70,
@@ -1387,7 +1318,7 @@
     "difficulty": "Hard Demon",
     "rating": "Epic",
     "userCoins": 0,
-    "estimatedTime": 129,
+    "estimatedTime": 155,
     "objects": 46331,
     "checkpoints": 15,
     "twop": false,
@@ -1396,8 +1327,7 @@
     "songID": 786343,
     "songs": 1,
     "SFX": 9,
-    "rateDate": "04.03.2024",
-    "showcase": ""
+    "rateDate": "04.03.2024"
   },
   {
     "number": 71,
@@ -1407,7 +1337,7 @@
     "difficulty": "Hard Demon",
     "rating": "Featured",
     "userCoins": 0,
-    "estimatedTime": 104,
+    "estimatedTime": 105,
     "objects": 16875,
     "checkpoints": 16,
     "twop": true,
@@ -1416,8 +1346,7 @@
     "songID": 10003025,
     "songs": 2,
     "SFX": 17,
-    "rateDate": "04.03.2024",
-    "showcase": ""
+    "rateDate": "04.03.2024"
   },
   {
     "number": 72,
@@ -1427,7 +1356,7 @@
     "difficulty": "Medium Demon",
     "rating": "Rated",
     "userCoins": 0,
-    "estimatedTime": 95,
+    "estimatedTime": 96,
     "objects": 10964,
     "checkpoints": 0,
     "twop": false,
@@ -1436,8 +1365,7 @@
     "songID": 691034,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "05.03.2024",
-    "showcase": ""
+    "rateDate": "05.03.2024"
   },
   {
     "number": 73,
@@ -1447,7 +1375,7 @@
     "difficulty": "Medium Demon",
     "rating": "Rated",
     "userCoins": 0,
-    "estimatedTime": 105,
+    "estimatedTime": 106,
     "objects": 16848,
     "checkpoints": 1,
     "twop": false,
@@ -1456,8 +1384,7 @@
     "songID": 10003548,
     "songs": 2,
     "SFX": 27,
-    "rateDate": "05.03.2024",
-    "showcase": ""
+    "rateDate": "05.03.2024"
   },
   {
     "number": 74,
@@ -1467,7 +1394,7 @@
     "difficulty": "Extreme Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 872,
+    "estimatedTime": 873,
     "objects": 103079,
     "checkpoints": 13,
     "twop": false,
@@ -1476,8 +1403,7 @@
     "songID": 10001563,
     "songs": 3,
     "SFX": 46,
-    "rateDate": "07.03.2024",
-    "showcase": ""
+    "rateDate": "07.03.2024"
   },
   {
     "number": 75,
@@ -1487,7 +1413,7 @@
     "difficulty": "Easy Demon",
     "rating": "Featured",
     "userCoins": 0,
-    "estimatedTime": 156,
+    "estimatedTime": 157,
     "objects": 7284,
     "checkpoints": 0,
     "twop": false,
@@ -1496,8 +1422,7 @@
     "songID": 10007320,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "08.03.2024",
-    "showcase": ""
+    "rateDate": "08.03.2024"
   },
   {
     "number": 76,
@@ -1507,17 +1432,16 @@
     "difficulty": "Medium Demon",
     "rating": "Featured",
     "userCoins": 0,
-    "estimatedTime": 84,
+    "estimatedTime": 81,
     "objects": 32050,
     "checkpoints": 9,
     "twop": false,
     "primarySong": "Clair de Lune",
     "artist": "JosephAS1",
     "songID": 558232,
-    "songs": 1,
+    "songs": 2,
     "SFX": 3,
-    "rateDate": "08.03.2024",
-    "showcase": ""
+    "rateDate": "08.03.2024"
   },
   {
     "number": 77,
@@ -1536,8 +1460,7 @@
     "songID": 1077996,
     "songs": 8,
     "SFX": 70,
-    "rateDate": "09.03.2024",
-    "showcase": ""
+    "rateDate": "09.03.2024"
   },
   {
     "number": 78,
@@ -1547,7 +1470,7 @@
     "difficulty": "Insane Demon",
     "rating": "Rated",
     "userCoins": 1,
-    "estimatedTime": 166,
+    "estimatedTime": 167,
     "objects": 18608,
     "checkpoints": 11,
     "twop": false,
@@ -1556,8 +1479,7 @@
     "songID": 674039,
     "songs": 11,
     "SFX": 9,
-    "rateDate": "09.03.2024",
-    "showcase": ""
+    "rateDate": "09.03.2024"
   },
   {
     "number": 79,
@@ -1576,8 +1498,7 @@
     "songID": 744716,
     "songs": 1,
     "SFX": 14,
-    "rateDate": "09.03.2024",
-    "showcase": ""
+    "rateDate": "09.03.2024"
   },
   {
     "number": 80,
@@ -1587,7 +1508,7 @@
     "difficulty": "Hard Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 184,
+    "estimatedTime": 185,
     "objects": 17000,
     "checkpoints": 10,
     "twop": true,
@@ -1596,8 +1517,7 @@
     "songID": 1211770,
     "songs": 1,
     "SFX": 14,
-    "rateDate": "09.03.2024",
-    "showcase": ""
+    "rateDate": "09.03.2024"
   },
   {
     "number": 81,
@@ -1607,7 +1527,7 @@
     "difficulty": "Hard Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 183,
+    "estimatedTime": 184,
     "objects": 22327,
     "checkpoints": 19,
     "twop": true,
@@ -1616,8 +1536,7 @@
     "songID": 619310,
     "songs": 2,
     "SFX": 19,
-    "rateDate": "09.03.2024",
-    "showcase": ""
+    "rateDate": "09.03.2024"
   },
   {
     "number": 82,
@@ -1636,8 +1555,7 @@
     "songID": 10003232,
     "songs": 4,
     "SFX": 21,
-    "rateDate": "10.03.2024",
-    "showcase": ""
+    "rateDate": "10.03.2024"
   },
   {
     "number": 83,
@@ -1647,7 +1565,7 @@
     "difficulty": "Insane Demon",
     "rating": "Rated",
     "userCoins": 3,
-    "estimatedTime": 253,
+    "estimatedTime": 254,
     "objects": 12137,
     "checkpoints": 1,
     "twop": false,
@@ -1656,8 +1574,7 @@
     "songID": 10000033,
     "songs": 6,
     "SFX": 14,
-    "rateDate": "10.03.2024",
-    "showcase": ""
+    "rateDate": "10.03.2024"
   },
   {
     "number": 84,
@@ -1667,7 +1584,7 @@
     "difficulty": "Hard Demon",
     "rating": "Rated",
     "userCoins": 0,
-    "estimatedTime": 177,
+    "estimatedTime": 178,
     "objects": 10082,
     "checkpoints": 0,
     "twop": false,
@@ -1676,8 +1593,7 @@
     "songID": 1172046,
     "songs": 1,
     "SFX": 1,
-    "rateDate": "12.03.2024",
-    "showcase": ""
+    "rateDate": "12.03.2024"
   },
   {
     "number": 85,
@@ -1696,8 +1612,7 @@
     "songID": 1116213,
     "songs": 1,
     "SFX": 1,
-    "rateDate": "13.03.2024",
-    "showcase": ""
+    "rateDate": "13.03.2024"
   },
   {
     "number": 86,
@@ -1707,7 +1622,7 @@
     "difficulty": "Hard Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 108,
+    "estimatedTime": 78,
     "objects": 11954,
     "checkpoints": 7,
     "twop": false,
@@ -1715,9 +1630,8 @@
     "artist": "Owl Theory Music",
     "songID": 10003700,
     "songs": 7,
-    "SFX": 37,
-    "rateDate": "15.03.2024",
-    "showcase": ""
+    "SFX": 38,
+    "rateDate": "15.03.2024"
   },
   {
     "number": 87,
@@ -1736,8 +1650,7 @@
     "songID": 1158842,
     "songs": 4,
     "SFX": 12,
-    "rateDate": "17.03.2024",
-    "showcase": ""
+    "rateDate": "17.03.2024"
   },
   {
     "number": 88,
@@ -1756,8 +1669,7 @@
     "songID": 969351,
     "songs": 1,
     "SFX": 1,
-    "rateDate": "17.03.2024",
-    "showcase": ""
+    "rateDate": "17.03.2024"
   },
   {
     "number": 89,
@@ -1776,8 +1688,7 @@
     "songID": 501037,
     "songs": 4,
     "SFX": 3,
-    "rateDate": "17.03.2024",
-    "showcase": ""
+    "rateDate": "17.03.2024"
   },
   {
     "number": 90,
@@ -1796,8 +1707,7 @@
     "songID": 576166,
     "songs": 6,
     "SFX": 100,
-    "rateDate": "18.03.2024",
-    "showcase": ""
+    "rateDate": "18.03.2024"
   },
   {
     "number": 91,
@@ -1807,7 +1717,7 @@
     "difficulty": "Easy Demon",
     "rating": "Featured",
     "userCoins": 3,
-    "estimatedTime": 39,
+    "estimatedTime": 40,
     "objects": 5169,
     "checkpoints": 2,
     "twop": false,
@@ -1816,8 +1726,7 @@
     "songID": 10001008,
     "songs": 1,
     "SFX": 9,
-    "rateDate": "18.03.2024",
-    "showcase": ""
+    "rateDate": "18.03.2024"
   },
   {
     "number": 92,
@@ -1836,13 +1745,12 @@
     "songID": 10001513,
     "songs": 1,
     "SFX": 12,
-    "rateDate": "20.03.2024",
-    "showcase": ""
+    "rateDate": "20.03.2024"
   },
   {
     "number": 93,
     "level": "Poisonous Chamber",
-    "creator": "meowpuri",
+    "creator": "Nekopuri",
     "ID": 99127186,
     "difficulty": "Hard Demon",
     "rating": "Featured",
@@ -1856,8 +1764,7 @@
     "songID": 959666,
     "songs": 7,
     "SFX": 35,
-    "rateDate": "20.03.2024",
-    "showcase": ""
+    "rateDate": "20.03.2024"
   },
   {
     "number": 94,
@@ -1876,8 +1783,7 @@
     "songID": 658498,
     "songs": 2,
     "SFX": 10,
-    "rateDate": "20.03.2024",
-    "showcase": ""
+    "rateDate": "20.03.2024"
   },
   {
     "number": 95,
@@ -1887,7 +1793,7 @@
     "difficulty": "Easy Demon",
     "rating": "Epic",
     "userCoins": 2,
-    "estimatedTime": 63,
+    "estimatedTime": 64,
     "objects": 9249,
     "checkpoints": 1,
     "twop": false,
@@ -1896,8 +1802,7 @@
     "songID": 1153919,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "22.03.2024",
-    "showcase": ""
+    "rateDate": "22.03.2024"
   },
   {
     "number": 96,
@@ -1916,8 +1821,7 @@
     "songID": 10001702,
     "songs": 7,
     "SFX": 61,
-    "rateDate": "22.03.2024",
-    "showcase": ""
+    "rateDate": "22.03.2024"
   },
   {
     "number": 97,
@@ -1927,7 +1831,7 @@
     "difficulty": "Hard Demon",
     "rating": "Mythic",
     "userCoins": 3,
-    "estimatedTime": 1058,
+    "estimatedTime": 1082,
     "objects": 63935,
     "checkpoints": 21,
     "twop": false,
@@ -1936,8 +1840,7 @@
     "songID": 673210,
     "songs": 10,
     "SFX": 259,
-    "rateDate": "23.03.2024",
-    "showcase": ""
+    "rateDate": "23.03.2024"
   },
   {
     "number": 98,
@@ -1956,8 +1859,7 @@
     "songID": 10001254,
     "songs": 3,
     "SFX": 36,
-    "rateDate": "23.03.2024",
-    "showcase": ""
+    "rateDate": "23.03.2024"
   },
   {
     "number": 99,
@@ -1967,7 +1869,7 @@
     "difficulty": "Easy Demon",
     "rating": "Featured",
     "userCoins": 2,
-    "estimatedTime": 178,
+    "estimatedTime": 175,
     "objects": 11269,
     "checkpoints": 21,
     "twop": false,
@@ -1976,8 +1878,7 @@
     "songID": 971268,
     "songs": 3,
     "SFX": 8,
-    "rateDate": "24.03.2024",
-    "showcase": ""
+    "rateDate": "24.03.2024"
   },
   {
     "number": 100,
@@ -1996,8 +1897,7 @@
     "songID": 10004088,
     "songs": 4,
     "SFX": 67,
-    "rateDate": "24.03.2024",
-    "showcase": ""
+    "rateDate": "24.03.2024"
   },
   {
     "number": 101,
@@ -2016,8 +1916,7 @@
     "songID": 1258757,
     "songs": 1,
     "SFX": 10,
-    "rateDate": "25.03.2024",
-    "showcase": ""
+    "rateDate": "25.03.2024"
   },
   {
     "number": 102,
@@ -2036,8 +1935,7 @@
     "songID": 10004345,
     "songs": 3,
     "SFX": 14,
-    "rateDate": "25.03.2024",
-    "showcase": ""
+    "rateDate": "25.03.2024"
   },
   {
     "number": 103,
@@ -2056,8 +1954,7 @@
     "songID": 10000104,
     "songs": 2,
     "SFX": 5,
-    "rateDate": "25.03.2024",
-    "showcase": ""
+    "rateDate": "25.03.2024"
   },
   {
     "number": 104,
@@ -2076,8 +1973,7 @@
     "songID": 1220566,
     "songs": 5,
     "SFX": 16,
-    "rateDate": "29.03.2024",
-    "showcase": ""
+    "rateDate": "29.03.2024"
   },
   {
     "number": 105,
@@ -2096,8 +1992,7 @@
     "songID": 627535,
     "songs": 2,
     "SFX": 17,
-    "rateDate": "30.03.2024",
-    "showcase": ""
+    "rateDate": "30.03.2024"
   },
   {
     "number": 106,
@@ -2116,8 +2011,7 @@
     "songID": 475234,
     "songs": 1,
     "SFX": 7,
-    "rateDate": "30.03.2024",
-    "showcase": ""
+    "rateDate": "30.03.2024"
   },
   {
     "number": 107,
@@ -2136,8 +2030,7 @@
     "songID": 10005151,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "30.03.2024",
-    "showcase": ""
+    "rateDate": "30.03.2024"
   },
   {
     "number": 108,
@@ -2156,8 +2049,7 @@
     "songID": 10003109,
     "songs": 11,
     "SFX": 26,
-    "rateDate": "31.03.2024",
-    "showcase": ""
+    "rateDate": "31.03.2024"
   },
   {
     "number": 109,
@@ -2176,8 +2068,7 @@
     "songID": 10004004,
     "songs": 4,
     "SFX": 32,
-    "rateDate": "04.04.2024",
-    "showcase": ""
+    "rateDate": "04.04.2024"
   },
   {
     "number": 110,
@@ -2196,8 +2087,7 @@
     "songID": 605280,
     "songs": 6,
     "SFX": 9,
-    "rateDate": "04.04.2024",
-    "showcase": ""
+    "rateDate": "04.04.2024"
   },
   {
     "number": 111,
@@ -2216,8 +2106,7 @@
     "songID": 841655,
     "songs": 10,
     "SFX": 10,
-    "rateDate": "08.04.2024",
-    "showcase": ""
+    "rateDate": "08.04.2024"
   },
   {
     "number": 112,
@@ -2236,8 +2125,7 @@
     "songID": 793443,
     "songs": 2,
     "SFX": 21,
-    "rateDate": "11.04.2024",
-    "showcase": ""
+    "rateDate": "11.04.2024"
   },
   {
     "number": 113,
@@ -2256,8 +2144,7 @@
     "songID": 10001566,
     "songs": 3,
     "SFX": 75,
-    "rateDate": "12.04.2024",
-    "showcase": ""
+    "rateDate": "12.04.2024"
   },
   {
     "number": 114,
@@ -2276,8 +2163,7 @@
     "songID": 1021290,
     "songs": 1,
     "SFX": 18,
-    "rateDate": "12.04.2024",
-    "showcase": ""
+    "rateDate": "12.04.2024"
   },
   {
     "number": 115,
@@ -2296,8 +2182,7 @@
     "songID": 1241195,
     "songs": 9,
     "SFX": 7,
-    "rateDate": "12.04.2024",
-    "showcase": ""
+    "rateDate": "12.04.2024"
   },
   {
     "number": 116,
@@ -2316,8 +2201,7 @@
     "songID": 22562,
     "songs": 3,
     "SFX": 13,
-    "rateDate": "12.04.2024",
-    "showcase": ""
+    "rateDate": "12.04.2024"
   },
   {
     "number": 117,
@@ -2336,8 +2220,7 @@
     "songID": 316681,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "14.04.2024",
-    "showcase": ""
+    "rateDate": "14.04.2024"
   },
   {
     "number": 118,
@@ -2356,8 +2239,7 @@
     "songID": 1218578,
     "songs": 2,
     "SFX": 22,
-    "rateDate": "14.04.2024",
-    "showcase": ""
+    "rateDate": "14.04.2024"
   },
   {
     "number": 119,
@@ -2376,8 +2258,7 @@
     "songID": 10007044,
     "songs": 3,
     "SFX": 5,
-    "rateDate": "15.04.2024",
-    "showcase": ""
+    "rateDate": "15.04.2024"
   },
   {
     "number": 120,
@@ -2396,8 +2277,7 @@
     "songID": 1153522,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "17.04.2024",
-    "showcase": ""
+    "rateDate": "17.04.2024"
   },
   {
     "number": 121,
@@ -2416,8 +2296,7 @@
     "songID": 1229829,
     "songs": 1,
     "SFX": 32,
-    "rateDate": "18.04.2024",
-    "showcase": ""
+    "rateDate": "18.04.2024"
   },
   {
     "number": 122,
@@ -2436,8 +2315,7 @@
     "songID": 482139,
     "songs": 4,
     "SFX": 36,
-    "rateDate": "18.04.2024",
-    "showcase": ""
+    "rateDate": "18.04.2024"
   },
   {
     "number": 123,
@@ -2456,8 +2334,7 @@
     "songID": 882325,
     "songs": 3,
     "SFX": 10,
-    "rateDate": "18.04.2024",
-    "showcase": ""
+    "rateDate": "18.04.2024"
   },
   {
     "number": 124,
@@ -2476,8 +2353,7 @@
     "songID": 959666,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "18.04.2024",
-    "showcase": ""
+    "rateDate": "18.04.2024"
   },
   {
     "number": 125,
@@ -2496,8 +2372,7 @@
     "songID": 472253,
     "songs": 3,
     "SFX": 11,
-    "rateDate": "20.04.2024",
-    "showcase": ""
+    "rateDate": "20.04.2024"
   },
   {
     "number": 126,
@@ -2516,8 +2391,7 @@
     "songID": 10005418,
     "songs": 9,
     "SFX": 10,
-    "rateDate": "22.02.2024",
-    "showcase": ""
+    "rateDate": "22.02.2024"
   },
   {
     "number": 127,
@@ -2536,8 +2410,7 @@
     "songID": 971267,
     "songs": 1,
     "SFX": 6,
-    "rateDate": "23.04.2024",
-    "showcase": ""
+    "rateDate": "23.04.2024"
   },
   {
     "number": 128,
@@ -2556,8 +2429,7 @@
     "songID": 10002980,
     "songs": 10,
     "SFX": 1,
-    "rateDate": "24.04.2024",
-    "showcase": ""
+    "rateDate": "24.04.2024"
   },
   {
     "number": 129,
@@ -2576,8 +2448,7 @@
     "songID": 894762,
     "songs": 8,
     "SFX": 27,
-    "rateDate": "26.04.2024",
-    "showcase": ""
+    "rateDate": "26.04.2024"
   },
   {
     "number": 130,
@@ -2596,8 +2467,7 @@
     "songID": 717743,
     "songs": 4,
     "SFX": 76,
-    "rateDate": "26.04.2024",
-    "showcase": ""
+    "rateDate": "26.04.2024"
   },
   {
     "number": 131,
@@ -2616,8 +2486,7 @@
     "songID": 10006632,
     "songs": 6,
     "SFX": 198,
-    "rateDate": "26.04.2024",
-    "showcase": ""
+    "rateDate": "26.04.2024"
   },
   {
     "number": 132,
@@ -2636,8 +2505,7 @@
     "songID": 1058661,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "27.04.2024",
-    "showcase": ""
+    "rateDate": "27.04.2024"
   },
   {
     "number": 133,
@@ -2656,8 +2524,7 @@
     "songID": 10004318,
     "songs": 2,
     "SFX": 13,
-    "rateDate": "28.04.2024",
-    "showcase": ""
+    "rateDate": "28.04.2024"
   },
   {
     "number": 134,
@@ -2676,8 +2543,7 @@
     "songID": 1208733,
     "songs": 1,
     "SFX": 5,
-    "rateDate": "28.04.2024",
-    "showcase": ""
+    "rateDate": "28.04.2024"
   },
   {
     "number": 135,
@@ -2696,8 +2562,7 @@
     "songID": 684652,
     "songs": 1,
     "SFX": 24,
-    "rateDate": "28.04.2024",
-    "showcase": ""
+    "rateDate": "28.04.2024"
   },
   {
     "number": 136,
@@ -2716,8 +2581,7 @@
     "songID": 10000192,
     "songs": 6,
     "SFX": 5,
-    "rateDate": "05.05.2024",
-    "showcase": ""
+    "rateDate": "05.05.2024"
   },
   {
     "number": 137,
@@ -2736,8 +2600,7 @@
     "songID": 985258,
     "songs": 1,
     "SFX": 5,
-    "rateDate": "06.05.2024",
-    "showcase": ""
+    "rateDate": "06.05.2024"
   },
   {
     "number": 138,
@@ -2756,8 +2619,7 @@
     "songID": 91017,
     "songs": 2,
     "SFX": 4,
-    "rateDate": "07.05.2024",
-    "showcase": ""
+    "rateDate": "07.05.2024"
   },
   {
     "number": 139,
@@ -2776,8 +2638,7 @@
     "songID": "OFFICIAL",
     "songs": 3,
     "SFX": 115,
-    "rateDate": "08.05.2024",
-    "showcase": ""
+    "rateDate": "08.05.2024"
   },
   {
     "number": 140,
@@ -2796,8 +2657,7 @@
     "songID": 10005710,
     "songs": 4,
     "SFX": 26,
-    "rateDate": "10.05.2024",
-    "showcase": ""
+    "rateDate": "10.05.2024"
   },
   {
     "number": 141,
@@ -2816,8 +2676,7 @@
     "songID": 10003210,
     "songs": 5,
     "SFX": 49,
-    "rateDate": "10.05.2024",
-    "showcase": ""
+    "rateDate": "10.05.2024"
   },
   {
     "number": 142,
@@ -2836,8 +2695,7 @@
     "songID": 1290139,
     "songs": 2,
     "SFX": 6,
-    "rateDate": "10.05.2024",
-    "showcase": ""
+    "rateDate": "10.05.2024"
   },
   {
     "number": 143,
@@ -2856,8 +2714,7 @@
     "songID": 10004601,
     "songs": 2,
     "SFX": 11,
-    "rateDate": "11.05.2024",
-    "showcase": ""
+    "rateDate": "11.05.2024"
   },
   {
     "number": 144,
@@ -2876,8 +2733,7 @@
     "songID": 10003086,
     "songs": 11,
     "SFX": 79,
-    "rateDate": "11.05.2024",
-    "showcase": ""
+    "rateDate": "11.05.2024"
   },
   {
     "number": 145,
@@ -2896,8 +2752,7 @@
     "songID": 971836,
     "songs": 7,
     "SFX": 45,
-    "rateDate": "11.05.2024",
-    "showcase": ""
+    "rateDate": "11.05.2024"
   },
   {
     "number": 146,
@@ -2916,8 +2771,7 @@
     "songID": 960100,
     "songs": 3,
     "SFX": 34,
-    "rateDate": "12.05.2024",
-    "showcase": ""
+    "rateDate": "12.05.2024"
   },
   {
     "number": 147,
@@ -2936,8 +2790,7 @@
     "songID": 10007404,
     "songs": 2,
     "SFX": 36,
-    "rateDate": "12.05.2024",
-    "showcase": ""
+    "rateDate": "12.05.2024"
   },
   {
     "number": 148,
@@ -2956,8 +2809,7 @@
     "songID": 1237042,
     "songs": 2,
     "SFX": 5,
-    "rateDate": "20.05.2024",
-    "showcase": ""
+    "rateDate": "20.05.2024"
   },
   {
     "number": 149,
@@ -2976,8 +2828,7 @@
     "songID": 1091203,
     "songs": 7,
     "SFX": 13,
-    "rateDate": "20.05.2024",
-    "showcase": ""
+    "rateDate": "20.05.2024"
   },
   {
     "number": 150,
@@ -2996,8 +2847,7 @@
     "songID": 1200404,
     "songs": 2,
     "SFX": 16,
-    "rateDate": "23.05.2024",
-    "showcase": ""
+    "rateDate": "23.05.2024"
   },
   {
     "number": 151,
@@ -3016,8 +2866,7 @@
     "songID": 1198004,
     "songs": 3,
     "SFX": 16,
-    "rateDate": "23.05.2024",
-    "showcase": ""
+    "rateDate": "23.05.2024"
   },
   {
     "number": 152,
@@ -3036,8 +2885,7 @@
     "songID": 711933,
     "songs": 2,
     "SFX": 7,
-    "rateDate": "23.05.2024",
-    "showcase": ""
+    "rateDate": "23.05.2024"
   },
   {
     "number": 153,
@@ -3056,8 +2904,7 @@
     "songID": 932635,
     "songs": 2,
     "SFX": 7,
-    "rateDate": "25.05.2024",
-    "showcase": ""
+    "rateDate": "25.05.2024"
   },
   {
     "number": 154,
@@ -3076,8 +2923,7 @@
     "songID": 702912,
     "songs": 3,
     "SFX": 7,
-    "rateDate": "27.05.2024",
-    "showcase": ""
+    "rateDate": "27.05.2024"
   },
   {
     "number": 155,
@@ -3096,8 +2942,7 @@
     "songID": 1305420,
     "songs": 2,
     "SFX": 10,
-    "rateDate": "31.05.2024",
-    "showcase": ""
+    "rateDate": "31.05.2024"
   },
   {
     "number": 156,
@@ -3116,8 +2961,7 @@
     "songID": 1271486,
     "songs": 7,
     "SFX": 25,
-    "rateDate": "03.06.2024",
-    "showcase": ""
+    "rateDate": "03.06.2024"
   },
   {
     "number": 157,
@@ -3136,8 +2980,7 @@
     "songID": 602261,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "03.06.2024",
-    "showcase": ""
+    "rateDate": "03.06.2024"
   },
   {
     "number": 158,
@@ -3156,8 +2999,7 @@
     "songID": 10001483,
     "songs": 7,
     "SFX": 18,
-    "rateDate": "05.06.2024",
-    "showcase": ""
+    "rateDate": "05.06.2024"
   },
   {
     "number": 159,
@@ -3176,8 +3018,7 @@
     "songID": 1233089,
     "songs": 2,
     "SFX": 35,
-    "rateDate": "09.06.2024",
-    "showcase": ""
+    "rateDate": "09.06.2024"
   },
   {
     "number": 160,
@@ -3196,8 +3037,7 @@
     "songID": 10003144,
     "songs": 2,
     "SFX": 0,
-    "rateDate": "10.06.2024",
-    "showcase": ""
+    "rateDate": "10.06.2024"
   },
   {
     "number": 161,
@@ -3216,8 +3056,7 @@
     "songID": 1144781,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "12.06.2024",
-    "showcase": ""
+    "rateDate": "12.06.2024"
   },
   {
     "number": 162,
@@ -3236,8 +3075,7 @@
     "songID": 811051,
     "songs": 5,
     "SFX": 5,
-    "rateDate": "12.06.2024",
-    "showcase": ""
+    "rateDate": "12.06.2024"
   },
   {
     "number": 163,
@@ -3256,8 +3094,7 @@
     "songID": 117474,
     "songs": 1,
     "SFX": 9,
-    "rateDate": "15.06.2024",
-    "showcase": ""
+    "rateDate": "15.06.2024"
   },
   {
     "number": 164,
@@ -3276,8 +3113,7 @@
     "songID": 10007049,
     "songs": 3,
     "SFX": 10,
-    "rateDate": "15.06.2024",
-    "showcase": ""
+    "rateDate": "15.06.2024"
   },
   {
     "number": 165,
@@ -3296,8 +3132,7 @@
     "songID": 342542,
     "songs": 2,
     "SFX": 3,
-    "rateDate": "19.06.2024",
-    "showcase": ""
+    "rateDate": "19.06.2024"
   },
   {
     "number": 166,
@@ -3316,8 +3151,7 @@
     "songID": 1233081,
     "songs": 1,
     "SFX": 18,
-    "rateDate": "20.06.2024",
-    "showcase": ""
+    "rateDate": "20.06.2024"
   },
   {
     "number": 167,
@@ -3336,8 +3170,7 @@
     "songID": 10002980,
     "songs": 7,
     "SFX": 11,
-    "rateDate": "21.06.2024",
-    "showcase": ""
+    "rateDate": "21.06.2024"
   },
   {
     "number": 168,
@@ -3356,8 +3189,7 @@
     "songID": 380497,
     "songs": 9,
     "SFX": 76,
-    "rateDate": "22.06.2024",
-    "showcase": ""
+    "rateDate": "22.06.2024"
   },
   {
     "number": 169,
@@ -3376,8 +3208,7 @@
     "songID": 10006026,
     "songs": 1,
     "SFX": 18,
-    "rateDate": "23.06.2024",
-    "showcase": ""
+    "rateDate": "23.06.2024"
   },
   {
     "number": 170,
@@ -3396,8 +3227,7 @@
     "songID": 65711,
     "songs": 9,
     "SFX": 63,
-    "rateDate": "23.06.2024",
-    "showcase": ""
+    "rateDate": "23.06.2024"
   },
   {
     "number": 171,
@@ -3416,8 +3246,7 @@
     "songID": 959666,
     "songs": 2,
     "SFX": 20,
-    "rateDate": "26.06.2024",
-    "showcase": ""
+    "rateDate": "26.06.2024"
   },
   {
     "number": 172,
@@ -3436,8 +3265,7 @@
     "songID": 10003671,
     "songs": 11,
     "SFX": 280,
-    "rateDate": "01.07.2024",
-    "showcase": ""
+    "rateDate": "01.07.2024"
   },
   {
     "number": 173,
@@ -3456,8 +3284,7 @@
     "songID": 718168,
     "songs": 2,
     "SFX": 12,
-    "rateDate": "01.07.2024",
-    "showcase": ""
+    "rateDate": "01.07.2024"
   },
   {
     "number": 174,
@@ -3476,8 +3303,7 @@
     "songID": 505813,
     "songs": 6,
     "SFX": 132,
-    "rateDate": "05.07.2024",
-    "showcase": ""
+    "rateDate": "05.07.2024"
   },
   {
     "number": 175,
@@ -3496,8 +3322,7 @@
     "songID": 1027874,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "05.07.2024",
-    "showcase": ""
+    "rateDate": "05.07.2024"
   },
   {
     "number": 176,
@@ -3516,8 +3341,7 @@
     "songID": 10001513,
     "songs": 8,
     "SFX": 130,
-    "rateDate": "05.07.2024",
-    "showcase": ""
+    "rateDate": "05.07.2024"
   },
   {
     "number": 177,
@@ -3536,8 +3360,7 @@
     "songID": 1271359,
     "songs": 1,
     "SFX": 11,
-    "rateDate": "05.07.2024",
-    "showcase": ""
+    "rateDate": "05.07.2024"
   },
   {
     "number": 178,
@@ -3556,8 +3379,7 @@
     "songID": 10003604,
     "songs": 1,
     "SFX": 7,
-    "rateDate": "05.07.2024",
-    "showcase": ""
+    "rateDate": "05.07.2024"
   },
   {
     "number": 179,
@@ -3576,8 +3398,7 @@
     "songID": 1146229,
     "songs": 6,
     "SFX": 17,
-    "rateDate": "07.07.2024",
-    "showcase": ""
+    "rateDate": "07.07.2024"
   },
   {
     "number": 180,
@@ -3596,8 +3417,7 @@
     "songID": 10006200,
     "songs": 2,
     "SFX": 113,
-    "rateDate": "14.07.2024",
-    "showcase": ""
+    "rateDate": "14.07.2024"
   },
   {
     "number": 181,
@@ -3616,8 +3436,7 @@
     "songID": 10008536,
     "songs": 6,
     "SFX": 5,
-    "rateDate": "14.07.2024",
-    "showcase": ""
+    "rateDate": "14.07.2024"
   },
   {
     "number": 182,
@@ -3636,8 +3455,7 @@
     "songID": 10001862,
     "songs": 4,
     "SFX": 109,
-    "rateDate": "17.07.2024",
-    "showcase": ""
+    "rateDate": "17.07.2024"
   },
   {
     "number": 183,
@@ -3656,8 +3474,7 @@
     "songID": 722695,
     "songs": 4,
     "SFX": 13,
-    "rateDate": "18.07.2024",
-    "showcase": ""
+    "rateDate": "18.07.2024"
   },
   {
     "number": 184,
@@ -3676,8 +3493,7 @@
     "songID": 718319,
     "songs": 3,
     "SFX": 8,
-    "rateDate": "19.07.2024",
-    "showcase": ""
+    "rateDate": "19.07.2024"
   },
   {
     "number": 185,
@@ -3696,8 +3512,7 @@
     "songID": 10006026,
     "songs": 5,
     "SFX": 43,
-    "rateDate": "20.07.2024",
-    "showcase": ""
+    "rateDate": "20.07.2024"
   },
   {
     "number": 186,
@@ -3716,8 +3531,7 @@
     "songID": 10009370,
     "songs": 1,
     "SFX": 9,
-    "rateDate": "22.07.2024",
-    "showcase": ""
+    "rateDate": "22.07.2024"
   },
   {
     "number": 187,
@@ -3736,8 +3550,7 @@
     "songID": 1314233,
     "songs": 3,
     "SFX": 5,
-    "rateDate": "23.07.2024",
-    "showcase": ""
+    "rateDate": "23.07.2024"
   },
   {
     "number": 188,
@@ -3756,8 +3569,7 @@
     "songID": 10003706,
     "songs": 5,
     "SFX": 26,
-    "rateDate": "24.07.2024",
-    "showcase": ""
+    "rateDate": "24.07.2024"
   },
   {
     "number": 189,
@@ -3776,8 +3588,7 @@
     "songID": 416891,
     "songs": 1,
     "SFX": 12,
-    "rateDate": "25.07.2024",
-    "showcase": ""
+    "rateDate": "25.07.2024"
   },
   {
     "number": 190,
@@ -3796,8 +3607,7 @@
     "songID": 1163253,
     "songs": 11,
     "SFX": 225,
-    "rateDate": "26.07.2024",
-    "showcase": ""
+    "rateDate": "26.07.2024"
   },
   {
     "number": 191,
@@ -3816,8 +3626,7 @@
     "songID": 779829,
     "songs": 3,
     "SFX": 7,
-    "rateDate": "30.07.2024",
-    "showcase": ""
+    "rateDate": "30.07.2024"
   },
   {
     "number": 192,
@@ -3836,8 +3645,7 @@
     "songID": 1340367,
     "songs": 6,
     "SFX": 7,
-    "rateDate": "31.07.2024",
-    "showcase": ""
+    "rateDate": "31.07.2024"
   },
   {
     "number": 193,
@@ -3856,8 +3664,7 @@
     "songID": 10007320,
     "songs": 3,
     "SFX": 20,
-    "rateDate": "01.08.2024",
-    "showcase": ""
+    "rateDate": "01.08.2024"
   },
   {
     "number": 194,
@@ -3876,8 +3683,7 @@
     "songID": 792910,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "01.08.2024",
-    "showcase": ""
+    "rateDate": "01.08.2024"
   },
   {
     "number": 195,
@@ -3896,8 +3702,7 @@
     "songID": 1340625,
     "songs": 4,
     "SFX": 15,
-    "rateDate": "07.08.2024",
-    "showcase": ""
+    "rateDate": "07.08.2024"
   },
   {
     "number": 196,
@@ -3916,8 +3721,7 @@
     "songID": 1111694,
     "songs": 1,
     "SFX": 11,
-    "rateDate": "07.08.2024",
-    "showcase": ""
+    "rateDate": "07.08.2024"
   },
   {
     "number": 197,
@@ -3936,8 +3740,7 @@
     "songID": 10005186,
     "songs": 3,
     "SFX": 21,
-    "rateDate": "07.08.2024",
-    "showcase": ""
+    "rateDate": "07.08.2024"
   },
   {
     "number": 198,
@@ -3956,8 +3759,7 @@
     "songID": 964034,
     "songs": 9,
     "SFX": 24,
-    "rateDate": "07.08.2024",
-    "showcase": ""
+    "rateDate": "07.08.2024"
   },
   {
     "number": 199,
@@ -3976,8 +3778,7 @@
     "songID": 10006114,
     "songs": 5,
     "SFX": 5,
-    "rateDate": "07.08.2024",
-    "showcase": ""
+    "rateDate": "07.08.2024"
   },
   {
     "number": 200,
@@ -3996,8 +3797,7 @@
     "songID": 10001097,
     "songs": 7,
     "SFX": 28,
-    "rateDate": "08.08.2024",
-    "showcase": ""
+    "rateDate": "08.08.2024"
   },
   {
     "number": 201,
@@ -4016,8 +3816,7 @@
     "songID": 629681,
     "songs": 1,
     "SFX": 16,
-    "rateDate": "08.08.2024",
-    "showcase": ""
+    "rateDate": "08.08.2024"
   },
   {
     "number": 202,
@@ -4036,8 +3835,7 @@
     "songID": 894185,
     "songs": 4,
     "SFX": 109,
-    "rateDate": "09.08.2024",
-    "showcase": ""
+    "rateDate": "09.08.2024"
   },
   {
     "number": 203,
@@ -4056,8 +3854,7 @@
     "songID": 1312295,
     "songs": 1,
     "SFX": 12,
-    "rateDate": "09.08.2024",
-    "showcase": ""
+    "rateDate": "09.08.2024"
   },
   {
     "number": 204,
@@ -4076,8 +3873,7 @@
     "songID": 1020445,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "10.08.2024",
-    "showcase": ""
+    "rateDate": "10.08.2024"
   },
   {
     "number": 205,
@@ -4096,8 +3892,7 @@
     "songID": 10006067,
     "songs": 5,
     "SFX": 5,
-    "rateDate": "10.08.2024",
-    "showcase": ""
+    "rateDate": "10.08.2024"
   },
   {
     "number": 206,
@@ -4116,8 +3911,7 @@
     "songID": 1261592,
     "songs": 2,
     "SFX": 23,
-    "rateDate": "10.08.2024",
-    "showcase": ""
+    "rateDate": "10.08.2024"
   },
   {
     "number": 207,
@@ -4136,8 +3930,7 @@
     "songID": 1335798,
     "songs": 11,
     "SFX": 4,
-    "rateDate": "10.08.2024",
-    "showcase": ""
+    "rateDate": "10.08.2024"
   },
   {
     "number": 208,
@@ -4156,8 +3949,7 @@
     "songID": 265993,
     "songs": 2,
     "SFX": 0,
-    "rateDate": "10.08.2024",
-    "showcase": ""
+    "rateDate": "10.08.2024"
   },
   {
     "number": 209,
@@ -4176,8 +3968,7 @@
     "songID": "NONG",
     "songs": 2,
     "SFX": 8,
-    "rateDate": "10.08.2024",
-    "showcase": ""
+    "rateDate": "10.08.2024"
   },
   {
     "number": 210,
@@ -4196,8 +3987,7 @@
     "songID": 817366,
     "songs": 10,
     "SFX": 3,
-    "rateDate": "10.08.2024",
-    "showcase": ""
+    "rateDate": "10.08.2024"
   },
   {
     "number": 211,
@@ -4216,8 +4006,7 @@
     "songID": 10006013,
     "songs": 1,
     "SFX": 9,
-    "rateDate": "10.08.2024",
-    "showcase": ""
+    "rateDate": "10.08.2024"
   },
   {
     "number": 212,
@@ -4236,8 +4025,7 @@
     "songID": 1278993,
     "songs": 2,
     "SFX": 58,
-    "rateDate": "10.08.2024",
-    "showcase": ""
+    "rateDate": "10.08.2024"
   },
   {
     "number": 213,
@@ -4256,8 +4044,7 @@
     "songID": 1225072,
     "songs": 2,
     "SFX": 49,
-    "rateDate": "11.08.2024",
-    "showcase": ""
+    "rateDate": "11.08.2024"
   },
   {
     "number": 214,
@@ -4276,8 +4063,7 @@
     "songID": 1079423,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "11.08.2024",
-    "showcase": ""
+    "rateDate": "11.08.2024"
   },
   {
     "number": 215,
@@ -4296,8 +4082,7 @@
     "songID": 850364,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "11.08.2024",
-    "showcase": ""
+    "rateDate": "11.08.2024"
   },
   {
     "number": 216,
@@ -4316,8 +4101,7 @@
     "songID": 1138669,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "11.08.2024",
-    "showcase": ""
+    "rateDate": "11.08.2024"
   },
   {
     "number": 217,
@@ -4336,8 +4120,7 @@
     "songID": 162703,
     "songs": 8,
     "SFX": 6,
-    "rateDate": "11.08.2024",
-    "showcase": ""
+    "rateDate": "11.08.2024"
   },
   {
     "number": 218,
@@ -4356,8 +4139,7 @@
     "songID": 292093,
     "songs": 2,
     "SFX": 2,
-    "rateDate": "12.08.2024",
-    "showcase": ""
+    "rateDate": "12.08.2024"
   },
   {
     "number": 219,
@@ -4376,8 +4158,7 @@
     "songID": 518106,
     "songs": 2,
     "SFX": 10,
-    "rateDate": "12.08.2024",
-    "showcase": ""
+    "rateDate": "12.08.2024"
   },
   {
     "number": 220,
@@ -4396,8 +4177,7 @@
     "songID": 171702,
     "songs": 5,
     "SFX": 5,
-    "rateDate": "12.08.2024",
-    "showcase": ""
+    "rateDate": "12.08.2024"
   },
   {
     "number": 221,
@@ -4416,8 +4196,7 @@
     "songID": 67791,
     "songs": 7,
     "SFX": 30,
-    "rateDate": "12.08.2024",
-    "showcase": ""
+    "rateDate": "12.08.2024"
   },
   {
     "number": 222,
@@ -4436,8 +4215,7 @@
     "songID": 555910,
     "songs": 8,
     "SFX": 9,
-    "rateDate": "12.08.2024",
-    "showcase": ""
+    "rateDate": "12.08.2024"
   },
   {
     "number": 223,
@@ -4456,8 +4234,7 @@
     "songID": 708497,
     "songs": 1,
     "SFX": 14,
-    "rateDate": "12.08.2024",
-    "showcase": ""
+    "rateDate": "12.08.2024"
   },
   {
     "number": 224,
@@ -4476,8 +4253,7 @@
     "songID": 1093723,
     "songs": 8,
     "SFX": 28,
-    "rateDate": "13.08.2024",
-    "showcase": ""
+    "rateDate": "13.08.2024"
   },
   {
     "number": 225,
@@ -4496,8 +4272,7 @@
     "songID": 811165,
     "songs": 3,
     "SFX": 14,
-    "rateDate": "13.08.2024",
-    "showcase": ""
+    "rateDate": "13.08.2024"
   },
   {
     "number": 226,
@@ -4516,8 +4291,7 @@
     "songID": 1146482,
     "songs": 1,
     "SFX": 16,
-    "rateDate": "13.08.2024",
-    "showcase": ""
+    "rateDate": "13.08.2024"
   },
   {
     "number": 227,
@@ -4536,8 +4310,7 @@
     "songID": 1271915,
     "songs": 9,
     "SFX": 39,
-    "rateDate": "13.08.2024",
-    "showcase": ""
+    "rateDate": "13.08.2024"
   },
   {
     "number": 228,
@@ -4556,8 +4329,7 @@
     "songID": 1182562,
     "songs": 1,
     "SFX": 10,
-    "rateDate": "15.08.2024",
-    "showcase": ""
+    "rateDate": "15.08.2024"
   },
   {
     "number": 229,
@@ -4576,8 +4348,7 @@
     "songID": 1048360,
     "songs": 3,
     "SFX": 83,
-    "rateDate": "15.08.2024",
-    "showcase": ""
+    "rateDate": "15.08.2024"
   },
   {
     "number": 230,
@@ -4596,8 +4367,7 @@
     "songID": 10001607,
     "songs": 1,
     "SFX": 11,
-    "rateDate": "15.08.2024",
-    "showcase": ""
+    "rateDate": "15.08.2024"
   },
   {
     "number": 231,
@@ -4616,8 +4386,7 @@
     "songID": 922602,
     "songs": 2,
     "SFX": 13,
-    "rateDate": "15.08.2024",
-    "showcase": ""
+    "rateDate": "15.08.2024"
   },
   {
     "number": 232,
@@ -4636,8 +4405,7 @@
     "songID": 10007302,
     "songs": 2,
     "SFX": 18,
-    "rateDate": "15.08.2024",
-    "showcase": ""
+    "rateDate": "15.08.2024"
   },
   {
     "number": 233,
@@ -4656,8 +4424,7 @@
     "songID": 1239944,
     "songs": 3,
     "SFX": 19,
-    "rateDate": "15.08.2024",
-    "showcase": ""
+    "rateDate": "15.08.2024"
   },
   {
     "number": 234,
@@ -4676,8 +4443,7 @@
     "songID": 10000880,
     "songs": 2,
     "SFX": 16,
-    "rateDate": "16.08.2024",
-    "showcase": ""
+    "rateDate": "16.08.2024"
   },
   {
     "number": 235,
@@ -4696,8 +4462,7 @@
     "songID": 514911,
     "songs": 2,
     "SFX": 2,
-    "rateDate": "18.08.2024",
-    "showcase": ""
+    "rateDate": "18.08.2024"
   },
   {
     "number": 236,
@@ -4716,8 +4481,7 @@
     "songID": 693367,
     "songs": 3,
     "SFX": 25,
-    "rateDate": "18.08.2024",
-    "showcase": ""
+    "rateDate": "18.08.2024"
   },
   {
     "number": 237,
@@ -4736,8 +4500,7 @@
     "songID": 792910,
     "songs": 1,
     "SFX": 4,
-    "rateDate": "19.08.2024",
-    "showcase": ""
+    "rateDate": "19.08.2024"
   },
   {
     "number": 238,
@@ -4756,8 +4519,7 @@
     "songID": 10004088,
     "songs": 4,
     "SFX": 67,
-    "rateDate": "19.08.2024",
-    "showcase": ""
+    "rateDate": "19.08.2024"
   },
   {
     "number": 239,
@@ -4776,8 +4538,7 @@
     "songID": 10007328,
     "songs": 10,
     "SFX": 83,
-    "rateDate": "20.08.2024",
-    "showcase": ""
+    "rateDate": "20.08.2024"
   },
   {
     "number": 240,
@@ -4796,8 +4557,7 @@
     "songID": 10009708,
     "songs": 7,
     "SFX": 81,
-    "rateDate": "21.08.2024",
-    "showcase": ""
+    "rateDate": "21.08.2024"
   },
   {
     "number": 241,
@@ -4816,8 +4576,7 @@
     "songID": 1331444,
     "songs": 1,
     "SFX": 4,
-    "rateDate": "22.08.2024",
-    "showcase": ""
+    "rateDate": "22.08.2024"
   },
   {
     "number": 242,
@@ -4836,8 +4595,7 @@
     "songID": "NONG",
     "songs": 1,
     "SFX": 0,
-    "rateDate": "22.08.2024",
-    "showcase": ""
+    "rateDate": "22.08.2024"
   },
   {
     "number": 243,
@@ -4856,8 +4614,7 @@
     "songID": 10002975,
     "songs": 4,
     "SFX": 13,
-    "rateDate": "22.08.2024",
-    "showcase": ""
+    "rateDate": "22.08.2024"
   },
   {
     "number": 244,
@@ -4876,8 +4633,7 @@
     "songID": 1001834,
     "songs": 2,
     "SFX": 24,
-    "rateDate": "22.08.2024",
-    "showcase": ""
+    "rateDate": "22.08.2024"
   },
   {
     "number": 245,
@@ -4896,8 +4652,7 @@
     "songID": 959666,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "22.08.2024",
-    "showcase": ""
+    "rateDate": "22.08.2024"
   },
   {
     "number": 246,
@@ -4916,8 +4671,7 @@
     "songID": 435494,
     "songs": 5,
     "SFX": 50,
-    "rateDate": "22.08.2024",
-    "showcase": ""
+    "rateDate": "22.08.2024"
   },
   {
     "number": 247,
@@ -4936,8 +4690,7 @@
     "songID": 862252,
     "songs": 1,
     "SFX": 16,
-    "rateDate": "23.08.2024",
-    "showcase": ""
+    "rateDate": "23.08.2024"
   },
   {
     "number": 248,
@@ -4956,8 +4709,7 @@
     "songID": 10003096,
     "songs": 11,
     "SFX": 412,
-    "rateDate": "24.08.2024",
-    "showcase": ""
+    "rateDate": "24.08.2024"
   },
   {
     "number": 249,
@@ -4976,8 +4728,7 @@
     "songID": 10005607,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "24.08.2024",
-    "showcase": ""
+    "rateDate": "24.08.2024"
   },
   {
     "number": 250,
@@ -4996,8 +4747,7 @@
     "songID": 10010905,
     "songs": 4,
     "SFX": 46,
-    "rateDate": "25.08.2024",
-    "showcase": ""
+    "rateDate": "25.08.2024"
   },
   {
     "number": 251,
@@ -5016,8 +4766,7 @@
     "songID": 10001516,
     "songs": 1,
     "SFX": 12,
-    "rateDate": "25.08.2024",
-    "showcase": ""
+    "rateDate": "25.08.2024"
   },
   {
     "number": 252,
@@ -5036,8 +4785,7 @@
     "songID": 926482,
     "songs": 1,
     "SFX": 58,
-    "rateDate": "26.08.2024",
-    "showcase": ""
+    "rateDate": "26.08.2024"
   },
   {
     "number": 253,
@@ -5056,8 +4804,7 @@
     "songID": 689654,
     "songs": 1,
     "SFX": 5,
-    "rateDate": "26.08.2024",
-    "showcase": ""
+    "rateDate": "26.08.2024"
   },
   {
     "number": 254,
@@ -5076,8 +4823,7 @@
     "songID": 864714,
     "songs": 10,
     "SFX": 12,
-    "rateDate": "26.08.2024",
-    "showcase": ""
+    "rateDate": "26.08.2024"
   },
   {
     "number": 255,
@@ -5096,8 +4842,7 @@
     "songID": 10008534,
     "songs": 3,
     "SFX": 10,
-    "rateDate": "27.08.2024",
-    "showcase": ""
+    "rateDate": "27.08.2024"
   },
   {
     "number": 256,
@@ -5116,8 +4861,7 @@
     "songID": "NONG",
     "songs": 3,
     "SFX": 7,
-    "rateDate": "27.08.2024",
-    "showcase": ""
+    "rateDate": "27.08.2024"
   },
   {
     "number": 257,
@@ -5136,8 +4880,7 @@
     "songID": 817366,
     "songs": 1,
     "SFX": 6,
-    "rateDate": "29.08.2024",
-    "showcase": ""
+    "rateDate": "29.08.2024"
   },
   {
     "number": 258,
@@ -5156,8 +4899,7 @@
     "songID": "OFFICIAL",
     "songs": 2,
     "SFX": 4,
-    "rateDate": "31.08.2024",
-    "showcase": ""
+    "rateDate": "31.08.2024"
   },
   {
     "number": 259,
@@ -5176,8 +4918,7 @@
     "songID": 771277,
     "songs": 2,
     "SFX": 12,
-    "rateDate": "02.09.2024",
-    "showcase": ""
+    "rateDate": "02.09.2024"
   },
   {
     "number": 260,
@@ -5196,8 +4937,7 @@
     "songID": 1221862,
     "songs": 2,
     "SFX": 10,
-    "rateDate": "02.09.2024",
-    "showcase": ""
+    "rateDate": "02.09.2024"
   },
   {
     "number": 261,
@@ -5216,8 +4956,7 @@
     "songID": 1288183,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "02.09.2024",
-    "showcase": ""
+    "rateDate": "02.09.2024"
   },
   {
     "number": 262,
@@ -5236,8 +4975,7 @@
     "songID": 10005164,
     "songs": 8,
     "SFX": 37,
-    "rateDate": "03.09.2024",
-    "showcase": ""
+    "rateDate": "03.09.2024"
   },
   {
     "number": 263,
@@ -5256,8 +4994,7 @@
     "songID": "OFFICIAL",
     "songs": 2,
     "SFX": 2,
-    "rateDate": "04.09.2024",
-    "showcase": ""
+    "rateDate": "04.09.2024"
   },
   {
     "number": 264,
@@ -5276,8 +5013,7 @@
     "songID": 1181403,
     "songs": 1,
     "SFX": 15,
-    "rateDate": "07.09.2024",
-    "showcase": ""
+    "rateDate": "07.09.2024"
   },
   {
     "number": 265,
@@ -5296,8 +5032,7 @@
     "songID": 1134741,
     "songs": 2,
     "SFX": 20,
-    "rateDate": "07.09.2024",
-    "showcase": ""
+    "rateDate": "07.09.2024"
   },
   {
     "number": 266,
@@ -5316,8 +5051,7 @@
     "songID": 850364,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "07.09.2024",
-    "showcase": ""
+    "rateDate": "07.09.2024"
   },
   {
     "number": 267,
@@ -5336,8 +5070,7 @@
     "songID": 1321252,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "08.09.2024",
-    "showcase": ""
+    "rateDate": "08.09.2024"
   },
   {
     "number": 268,
@@ -5356,8 +5089,7 @@
     "songID": 10005074,
     "songs": 4,
     "SFX": 3,
-    "rateDate": "09.09.2024",
-    "showcase": ""
+    "rateDate": "09.09.2024"
   },
   {
     "number": 269,
@@ -5376,8 +5108,7 @@
     "songID": 10001504,
     "songs": 5,
     "SFX": 8,
-    "rateDate": "09.09.2024",
-    "showcase": ""
+    "rateDate": "09.09.2024"
   },
   {
     "number": 270,
@@ -5396,8 +5127,7 @@
     "songID": 41301,
     "songs": 3,
     "SFX": 39,
-    "rateDate": "09.09.2024",
-    "showcase": ""
+    "rateDate": "09.09.2024"
   },
   {
     "number": 271,
@@ -5416,8 +5146,7 @@
     "songID": 573098,
     "songs": 7,
     "SFX": 17,
-    "rateDate": "09.09.2024",
-    "showcase": ""
+    "rateDate": "09.09.2024"
   },
   {
     "number": 272,
@@ -5436,8 +5165,7 @@
     "songID": 646873,
     "songs": 2,
     "SFX": 20,
-    "rateDate": "11.09.2024",
-    "showcase": ""
+    "rateDate": "11.09.2024"
   },
   {
     "number": 273,
@@ -5456,8 +5184,7 @@
     "songID": 1132447,
     "songs": 2,
     "SFX": 20,
-    "rateDate": "11.09.2024",
-    "showcase": ""
+    "rateDate": "11.09.2024"
   },
   {
     "number": 274,
@@ -5476,8 +5203,7 @@
     "songID": 938967,
     "songs": 1,
     "SFX": 1,
-    "rateDate": "11.09.2024",
-    "showcase": ""
+    "rateDate": "11.09.2024"
   },
   {
     "number": 275,
@@ -5496,8 +5222,7 @@
     "songID": "OFFICIAL",
     "songs": 1,
     "SFX": 2,
-    "rateDate": "11.09.2024",
-    "showcase": ""
+    "rateDate": "11.09.2024"
   },
   {
     "number": 276,
@@ -5516,8 +5241,7 @@
     "songID": 172808,
     "songs": 3,
     "SFX": 12,
-    "rateDate": "11.09.2024",
-    "showcase": ""
+    "rateDate": "11.09.2024"
   },
   {
     "number": 277,
@@ -5536,8 +5260,7 @@
     "songID": 730911,
     "songs": 1,
     "SFX": 32,
-    "rateDate": "14.09.2024",
-    "showcase": ""
+    "rateDate": "14.09.2024"
   },
   {
     "number": 278,
@@ -5556,8 +5279,7 @@
     "songID": 710518,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "14.09.2024",
-    "showcase": ""
+    "rateDate": "14.09.2024"
   },
   {
     "number": 279,
@@ -5576,8 +5298,7 @@
     "songID": 10003064,
     "songs": 3,
     "SFX": 30,
-    "rateDate": "14.09.2024",
-    "showcase": ""
+    "rateDate": "14.09.2024"
   },
   {
     "number": 280,
@@ -5596,8 +5317,7 @@
     "songID": 540968,
     "songs": 1,
     "SFX": 27,
-    "rateDate": "14.09.2024",
-    "showcase": ""
+    "rateDate": "14.09.2024"
   },
   {
     "number": 281,
@@ -5616,8 +5336,7 @@
     "songID": 1070978,
     "songs": 6,
     "SFX": 65,
-    "rateDate": "17.09.2024",
-    "showcase": ""
+    "rateDate": "17.09.2024"
   },
   {
     "number": 282,
@@ -5636,8 +5355,7 @@
     "songID": 10003662,
     "songs": 8,
     "SFX": 26,
-    "rateDate": "19.09.2024",
-    "showcase": ""
+    "rateDate": "19.09.2024"
   },
   {
     "number": 283,
@@ -5656,8 +5374,7 @@
     "songID": 10006743,
     "songs": 2,
     "SFX": 43,
-    "rateDate": "21.09.2024",
-    "showcase": ""
+    "rateDate": "21.09.2024"
   },
   {
     "number": 284,
@@ -5676,8 +5393,7 @@
     "songID": 1,
     "songs": 4,
     "SFX": 7,
-    "rateDate": "21.09.2024",
-    "showcase": ""
+    "rateDate": "21.09.2024"
   },
   {
     "number": 285,
@@ -5696,8 +5412,7 @@
     "songID": 10007960,
     "songs": 2,
     "SFX": 21,
-    "rateDate": "21.09.2024",
-    "showcase": ""
+    "rateDate": "21.09.2024"
   },
   {
     "number": 286,
@@ -5716,8 +5431,7 @@
     "songID": 771277,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "21.09.2024",
-    "showcase": ""
+    "rateDate": "21.09.2024"
   },
   {
     "number": 287,
@@ -5736,8 +5450,7 @@
     "songID": 10006228,
     "songs": 5,
     "SFX": 10,
-    "rateDate": "21.09.2024",
-    "showcase": ""
+    "rateDate": "21.09.2024"
   },
   {
     "number": 288,
@@ -5756,8 +5469,7 @@
     "songID": 1045764,
     "songs": 2,
     "SFX": 25,
-    "rateDate": "21.09.2024",
-    "showcase": ""
+    "rateDate": "21.09.2024"
   },
   {
     "number": 289,
@@ -5776,8 +5488,7 @@
     "songID": 10003933,
     "songs": 6,
     "SFX": 93,
-    "rateDate": "21.09.2024",
-    "showcase": ""
+    "rateDate": "21.09.2024"
   },
   {
     "number": 290,
@@ -5796,8 +5507,7 @@
     "songID": 1106698,
     "songs": 5,
     "SFX": 10,
-    "rateDate": "23.09.2024",
-    "showcase": ""
+    "rateDate": "23.09.2024"
   },
   {
     "number": 291,
@@ -5816,8 +5526,7 @@
     "songID": 10006617,
     "songs": 2,
     "SFX": 9,
-    "rateDate": "25.09.2024",
-    "showcase": ""
+    "rateDate": "25.09.2024"
   },
   {
     "number": 292,
@@ -5836,8 +5545,7 @@
     "songID": 368997,
     "songs": 3,
     "SFX": 10,
-    "rateDate": "25.09.2024",
-    "showcase": ""
+    "rateDate": "25.09.2024"
   },
   {
     "number": 293,
@@ -5856,8 +5564,7 @@
     "songID": 623714,
     "songs": 1,
     "SFX": 14,
-    "rateDate": "25.09.2024",
-    "showcase": ""
+    "rateDate": "25.09.2024"
   },
   {
     "number": 294,
@@ -5876,8 +5583,7 @@
     "songID": 971268,
     "songs": 2,
     "SFX": 16,
-    "rateDate": "26.09.2024",
-    "showcase": ""
+    "rateDate": "26.09.2024"
   },
   {
     "number": 295,
@@ -5896,8 +5602,7 @@
     "songID": 707843,
     "songs": 1,
     "SFX": 9,
-    "rateDate": "28.09.2024",
-    "showcase": ""
+    "rateDate": "28.09.2024"
   },
   {
     "number": 296,
@@ -5916,8 +5621,7 @@
     "songID": 10011086,
     "songs": 4,
     "SFX": 1,
-    "rateDate": "01.10.2024",
-    "showcase": ""
+    "rateDate": "01.10.2024"
   },
   {
     "number": 297,
@@ -5936,8 +5640,7 @@
     "songID": 10001852,
     "songs": 5,
     "SFX": 27,
-    "rateDate": "01.10.2024",
-    "showcase": ""
+    "rateDate": "01.10.2024"
   },
   {
     "number": 298,
@@ -5956,8 +5659,7 @@
     "songID": 10002993,
     "songs": 2,
     "SFX": 1,
-    "rateDate": "01.10.2024",
-    "showcase": ""
+    "rateDate": "01.10.2024"
   },
   {
     "number": 299,
@@ -5976,8 +5678,7 @@
     "songID": 10005699,
     "songs": 2,
     "SFX": 9,
-    "rateDate": "02.10.2024",
-    "showcase": ""
+    "rateDate": "02.10.2024"
   },
   {
     "number": 300,
@@ -5996,8 +5697,7 @@
     "songID": "OFFICIAL",
     "songs": 0,
     "SFX": 8,
-    "rateDate": "04.10.2024",
-    "showcase": ""
+    "rateDate": "04.10.2024"
   },
   {
     "number": 301,
@@ -6016,8 +5716,7 @@
     "songID": 456963,
     "songs": 2,
     "SFX": 25,
-    "rateDate": "04.10.2024",
-    "showcase": ""
+    "rateDate": "04.10.2024"
   },
   {
     "number": 302,
@@ -6036,8 +5735,7 @@
     "songID": 1312248,
     "songs": 4,
     "SFX": 110,
-    "rateDate": "08.10.2024",
-    "showcase": ""
+    "rateDate": "08.10.2024"
   },
   {
     "number": 303,
@@ -6056,8 +5754,7 @@
     "songID": 10003060,
     "songs": 8,
     "SFX": 43,
-    "rateDate": "08.10.2024",
-    "showcase": ""
+    "rateDate": "08.10.2024"
   },
   {
     "number": 304,
@@ -6076,8 +5773,7 @@
     "songID": "NONG",
     "songs": 7,
     "SFX": 15,
-    "rateDate": "08.10.2024",
-    "showcase": ""
+    "rateDate": "08.10.2024"
   },
   {
     "number": 305,
@@ -6096,8 +5792,7 @@
     "songID": 508935,
     "songs": 5,
     "SFX": 55,
-    "rateDate": "08.10.2024",
-    "showcase": ""
+    "rateDate": "08.10.2024"
   },
   {
     "number": 306,
@@ -6116,8 +5811,7 @@
     "songID": 1149556,
     "songs": 2,
     "SFX": 3,
-    "rateDate": "08.10.2024",
-    "showcase": ""
+    "rateDate": "08.10.2024"
   },
   {
     "number": 307,
@@ -6136,8 +5830,7 @@
     "songID": 10001184,
     "songs": 2,
     "SFX": 26,
-    "rateDate": "09.10.2024",
-    "showcase": ""
+    "rateDate": "09.10.2024"
   },
   {
     "number": 308,
@@ -6156,8 +5849,7 @@
     "songID": 10008712,
     "songs": 1,
     "SFX": 6,
-    "rateDate": "09.10.2024",
-    "showcase": ""
+    "rateDate": "09.10.2024"
   },
   {
     "number": 309,
@@ -6176,8 +5868,7 @@
     "songID": 623714,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "09.10.2024",
-    "showcase": ""
+    "rateDate": "09.10.2024"
   },
   {
     "number": 310,
@@ -6196,8 +5887,7 @@
     "songID": 1143340,
     "songs": 5,
     "SFX": 49,
-    "rateDate": "09.10.2024",
-    "showcase": ""
+    "rateDate": "09.10.2024"
   },
   {
     "number": 311,
@@ -6216,8 +5906,7 @@
     "songID": 10006359,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "09.10.2024",
-    "showcase": ""
+    "rateDate": "09.10.2024"
   },
   {
     "number": 312,
@@ -6236,8 +5925,7 @@
     "songID": "NONG",
     "songs": 2,
     "SFX": 16,
-    "rateDate": "10.10.2024",
-    "showcase": ""
+    "rateDate": "10.10.2024"
   },
   {
     "number": 313,
@@ -6256,8 +5944,7 @@
     "songID": 1054216,
     "songs": 1,
     "SFX": 18,
-    "rateDate": "11.10.2024",
-    "showcase": ""
+    "rateDate": "11.10.2024"
   },
   {
     "number": 314,
@@ -6276,8 +5963,7 @@
     "songID": 10006877,
     "songs": 4,
     "SFX": 32,
-    "rateDate": "12.10.2024",
-    "showcase": ""
+    "rateDate": "12.10.2024"
   },
   {
     "number": 315,
@@ -6296,8 +5982,7 @@
     "songID": 10001894,
     "songs": 3,
     "SFX": 6,
-    "rateDate": "12.10.2024",
-    "showcase": ""
+    "rateDate": "12.10.2024"
   },
   {
     "number": 316,
@@ -6316,8 +6001,7 @@
     "songID": 827441,
     "songs": 2,
     "SFX": 15,
-    "rateDate": "13.10.2024",
-    "showcase": ""
+    "rateDate": "13.10.2024"
   },
   {
     "number": 317,
@@ -6336,8 +6020,7 @@
     "songID": 1161909,
     "songs": 5,
     "SFX": 5,
-    "rateDate": "13.10.2024",
-    "showcase": ""
+    "rateDate": "13.10.2024"
   },
   {
     "number": 318,
@@ -6356,8 +6039,7 @@
     "songID": 593661,
     "songs": 2,
     "SFX": 8,
-    "rateDate": "13.10.2024",
-    "showcase": ""
+    "rateDate": "13.10.2024"
   },
   {
     "number": 319,
@@ -6376,8 +6058,7 @@
     "songID": 10006067,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "14.10.2024",
-    "showcase": ""
+    "rateDate": "14.10.2024"
   },
   {
     "number": 320,
@@ -6396,8 +6077,7 @@
     "songID": 112527,
     "songs": 1,
     "SFX": 5,
-    "rateDate": "15.10.2024",
-    "showcase": ""
+    "rateDate": "15.10.2024"
   },
   {
     "number": 321,
@@ -6416,8 +6096,7 @@
     "songID": 108415,
     "songs": 2,
     "SFX": 59,
-    "rateDate": "17.10.2024",
-    "showcase": ""
+    "rateDate": "17.10.2024"
   },
   {
     "number": 322,
@@ -6436,8 +6115,7 @@
     "songID": 1054129,
     "songs": 1,
     "SFX": 12,
-    "rateDate": "17.10.2024",
-    "showcase": ""
+    "rateDate": "17.10.2024"
   },
   {
     "number": 323,
@@ -6456,8 +6134,7 @@
     "songID": 568699,
     "songs": 4,
     "SFX": 11,
-    "rateDate": "17.10.2024",
-    "showcase": ""
+    "rateDate": "17.10.2024"
   },
   {
     "number": 324,
@@ -6476,8 +6153,7 @@
     "songID": 10000404,
     "songs": 4,
     "SFX": 8,
-    "rateDate": "17.10.2024",
-    "showcase": ""
+    "rateDate": "17.10.2024"
   },
   {
     "number": 325,
@@ -6496,8 +6172,7 @@
     "songID": 718168,
     "songs": 1,
     "SFX": 23,
-    "rateDate": "18.10.2024",
-    "showcase": ""
+    "rateDate": "18.10.2024"
   },
   {
     "number": 326,
@@ -6516,8 +6191,7 @@
     "songID": 524693,
     "songs": 2,
     "SFX": 20,
-    "rateDate": "19.10.2024",
-    "showcase": ""
+    "rateDate": "19.10.2024"
   },
   {
     "number": 327,
@@ -6536,8 +6210,7 @@
     "songID": 10006086,
     "songs": 2,
     "SFX": 5,
-    "rateDate": "20.10.2024",
-    "showcase": ""
+    "rateDate": "20.10.2024"
   },
   {
     "number": 328,
@@ -6556,8 +6229,7 @@
     "songID": 1317577,
     "songs": 11,
     "SFX": 48,
-    "rateDate": "21.10.2024",
-    "showcase": ""
+    "rateDate": "21.10.2024"
   },
   {
     "number": 329,
@@ -6576,8 +6248,7 @@
     "songID": 850364,
     "songs": 2,
     "SFX": 28,
-    "rateDate": "24.10.2024",
-    "showcase": ""
+    "rateDate": "24.10.2024"
   },
   {
     "number": 330,
@@ -6596,8 +6267,7 @@
     "songID": 1022765,
     "songs": 2,
     "SFX": 3,
-    "rateDate": "24.10.2024",
-    "showcase": ""
+    "rateDate": "24.10.2024"
   },
   {
     "number": 331,
@@ -6616,8 +6286,7 @@
     "songID": 1138796,
     "songs": 7,
     "SFX": 49,
-    "rateDate": "24.10.2024",
-    "showcase": ""
+    "rateDate": "24.10.2024"
   },
   {
     "number": 332,
@@ -6636,8 +6305,7 @@
     "songID": 10003210,
     "songs": 2,
     "SFX": 7,
-    "rateDate": "26.10.2024",
-    "showcase": ""
+    "rateDate": "26.10.2024"
   },
   {
     "number": 333,
@@ -6656,8 +6324,7 @@
     "songID": 10003620,
     "songs": 4,
     "SFX": 19,
-    "rateDate": "26.10.2024",
-    "showcase": ""
+    "rateDate": "26.10.2024"
   },
   {
     "number": 334,
@@ -6676,8 +6343,7 @@
     "songID": 926898,
     "songs": 3,
     "SFX": 10,
-    "rateDate": "26.10.2024",
-    "showcase": ""
+    "rateDate": "26.10.2024"
   },
   {
     "number": 335,
@@ -6696,8 +6362,7 @@
     "songID": 10009996,
     "songs": 2,
     "SFX": 33,
-    "rateDate": "26.10.2024",
-    "showcase": ""
+    "rateDate": "26.10.2024"
   },
   {
     "number": 336,
@@ -6716,8 +6381,7 @@
     "songID": 10001852,
     "songs": 1,
     "SFX": 14,
-    "rateDate": "26.10.2024",
-    "showcase": ""
+    "rateDate": "26.10.2024"
   },
   {
     "number": 337,
@@ -6736,8 +6400,7 @@
     "songID": 10010716,
     "songs": 1,
     "SFX": 1,
-    "rateDate": "27.10.2024",
-    "showcase": ""
+    "rateDate": "27.10.2024"
   },
   {
     "number": 338,
@@ -6756,8 +6419,7 @@
     "songID": 679002,
     "songs": 5,
     "SFX": 15,
-    "rateDate": "01.11.2024",
-    "showcase": ""
+    "rateDate": "01.11.2024"
   },
   {
     "number": 339,
@@ -6776,8 +6438,7 @@
     "songID": 1153522,
     "songs": 5,
     "SFX": 17,
-    "rateDate": "01.11.2024",
-    "showcase": ""
+    "rateDate": "01.11.2024"
   },
   {
     "number": 340,
@@ -6796,8 +6457,7 @@
     "songID": 10001486,
     "songs": 3,
     "SFX": 12,
-    "rateDate": "01.11.2024",
-    "showcase": ""
+    "rateDate": "01.11.2024"
   },
   {
     "number": 341,
@@ -6816,8 +6476,7 @@
     "songID": 1242555,
     "songs": 3,
     "SFX": 31,
-    "rateDate": "01.11.2024",
-    "showcase": ""
+    "rateDate": "01.11.2024"
   },
   {
     "number": 342,
@@ -6836,8 +6495,7 @@
     "songID": 561968,
     "songs": 2,
     "SFX": 7,
-    "rateDate": "01.11.2024",
-    "showcase": ""
+    "rateDate": "01.11.2024"
   },
   {
     "number": 343,
@@ -6856,8 +6514,7 @@
     "songID": "OFFICIAL",
     "songs": 10,
     "SFX": 186,
-    "rateDate": "01.11.2024",
-    "showcase": ""
+    "rateDate": "01.11.2024"
   },
   {
     "number": 344,
@@ -6876,8 +6533,7 @@
     "songID": 10001481,
     "songs": 5,
     "SFX": 15,
-    "rateDate": "08.11.2024",
-    "showcase": ""
+    "rateDate": "08.11.2024"
   },
   {
     "number": 345,
@@ -6896,8 +6552,7 @@
     "songID": 67791,
     "songs": 4,
     "SFX": 1,
-    "rateDate": "08.11.2024",
-    "showcase": ""
+    "rateDate": "08.11.2024"
   },
   {
     "number": 346,
@@ -6916,8 +6571,7 @@
     "songID": "OFFICIAL",
     "songs": 11,
     "SFX": 95,
-    "rateDate": "10.11.2024",
-    "showcase": ""
+    "rateDate": "10.11.2024"
   },
   {
     "number": 347,
@@ -6936,8 +6590,7 @@
     "songID": 10003933,
     "songs": 6,
     "SFX": 50,
-    "rateDate": "12.11.2024",
-    "showcase": ""
+    "rateDate": "12.11.2024"
   },
   {
     "number": 348,
@@ -6956,8 +6609,7 @@
     "songID": 10004164,
     "songs": 7,
     "SFX": 11,
-    "rateDate": "13.11.2024",
-    "showcase": ""
+    "rateDate": "13.11.2024"
   },
   {
     "number": 349,
@@ -6976,8 +6628,7 @@
     "songID": 10011043,
     "songs": 6,
     "SFX": 14,
-    "rateDate": "13.11.2024",
-    "showcase": ""
+    "rateDate": "13.11.2024"
   },
   {
     "number": 350,
@@ -6996,8 +6647,7 @@
     "songID": 655466,
     "songs": 3,
     "SFX": 44,
-    "rateDate": "15.11.2024",
-    "showcase": ""
+    "rateDate": "15.11.2024"
   },
   {
     "number": 351,
@@ -7016,8 +6666,7 @@
     "songID": 1138796,
     "songs": 2,
     "SFX": 28,
-    "rateDate": "15.11.2024",
-    "showcase": ""
+    "rateDate": "15.11.2024"
   },
   {
     "number": 352,
@@ -7036,8 +6685,7 @@
     "songID": 106783,
     "songs": 1,
     "SFX": 118,
-    "rateDate": "16.11.2024",
-    "showcase": ""
+    "rateDate": "16.11.2024"
   },
   {
     "number": 353,
@@ -7056,8 +6704,7 @@
     "songID": 10011151,
     "songs": 1,
     "SFX": 10,
-    "rateDate": "17.11.2024",
-    "showcase": ""
+    "rateDate": "17.11.2024"
   },
   {
     "number": 354,
@@ -7076,8 +6723,7 @@
     "songID": 10011606,
     "songs": 6,
     "SFX": 19,
-    "rateDate": "17.11.2024",
-    "showcase": ""
+    "rateDate": "17.11.2024"
   },
   {
     "number": 355,
@@ -7096,8 +6742,7 @@
     "songID": 1194039,
     "songs": 5,
     "SFX": 56,
-    "rateDate": "17.11.2024",
-    "showcase": ""
+    "rateDate": "17.11.2024"
   },
   {
     "number": 356,
@@ -7116,8 +6761,7 @@
     "songID": 996814,
     "songs": 2,
     "SFX": 4,
-    "rateDate": "19.11.2024",
-    "showcase": ""
+    "rateDate": "19.11.2024"
   },
   {
     "number": 357,
@@ -7136,8 +6780,7 @@
     "songID": 10007227,
     "songs": 1,
     "SFX": 9,
-    "rateDate": "19.11.2024",
-    "showcase": ""
+    "rateDate": "19.11.2024"
   },
   {
     "number": 358,
@@ -7156,8 +6799,7 @@
     "songID": 114645,
     "songs": 3,
     "SFX": 17,
-    "rateDate": "19.11.2024",
-    "showcase": ""
+    "rateDate": "19.11.2024"
   },
   {
     "number": 359,
@@ -7176,8 +6818,7 @@
     "songID": 1375206,
     "songs": 4,
     "SFX": 0,
-    "rateDate": "20.11.2024",
-    "showcase": ""
+    "rateDate": "20.11.2024"
   },
   {
     "number": 360,
@@ -7196,8 +6837,7 @@
     "songID": 1268485,
     "songs": 2,
     "SFX": 7,
-    "rateDate": "21.11.2024",
-    "showcase": ""
+    "rateDate": "21.11.2024"
   },
   {
     "number": 361,
@@ -7216,8 +6856,7 @@
     "songID": 383158,
     "songs": 4,
     "SFX": 3,
-    "rateDate": "21.11.2024",
-    "showcase": ""
+    "rateDate": "21.11.2024"
   },
   {
     "number": 362,
@@ -7236,8 +6875,7 @@
     "songID": 1290139,
     "songs": 2,
     "SFX": 10,
-    "rateDate": "22.11.2024",
-    "showcase": ""
+    "rateDate": "22.11.2024"
   },
   {
     "number": 363,
@@ -7256,8 +6894,7 @@
     "songID": 10007749,
     "songs": 4,
     "SFX": 25,
-    "rateDate": "23.11.2024",
-    "showcase": ""
+    "rateDate": "23.11.2024"
   },
   {
     "number": 364,
@@ -7276,8 +6913,7 @@
     "songID": 528604,
     "songs": 1,
     "SFX": 1,
-    "rateDate": "25.11.2024",
-    "showcase": ""
+    "rateDate": "25.11.2024"
   },
   {
     "number": 365,
@@ -7296,8 +6932,7 @@
     "songID": 1182749,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "25.11.2024",
-    "showcase": ""
+    "rateDate": "25.11.2024"
   },
   {
     "number": 366,
@@ -7316,8 +6951,7 @@
     "songID": 1129283,
     "songs": 1,
     "SFX": 13,
-    "rateDate": "28.11.2024",
-    "showcase": ""
+    "rateDate": "28.11.2024"
   },
   {
     "number": 367,
@@ -7336,8 +6970,7 @@
     "songID": 10000044,
     "songs": 1,
     "SFX": 45,
-    "rateDate": "28.11.2024",
-    "showcase": ""
+    "rateDate": "28.11.2024"
   },
   {
     "number": 368,
@@ -7356,8 +6989,7 @@
     "songID": 684669,
     "songs": 3,
     "SFX": 1,
-    "rateDate": "01.12.2024",
-    "showcase": ""
+    "rateDate": "01.12.2024"
   },
   {
     "number": 369,
@@ -7376,8 +7008,7 @@
     "songID": 1258643,
     "songs": 1,
     "SFX": 27,
-    "rateDate": "01.12.2024",
-    "showcase": ""
+    "rateDate": "01.12.2024"
   },
   {
     "number": 370,
@@ -7396,8 +7027,7 @@
     "songID": 1253006,
     "songs": 4,
     "SFX": 21,
-    "rateDate": "01.12.2024",
-    "showcase": ""
+    "rateDate": "01.12.2024"
   },
   {
     "number": 371,
@@ -7416,8 +7046,7 @@
     "songID": 10002337,
     "songs": 6,
     "SFX": 150,
-    "rateDate": "01.12.2024",
-    "showcase": ""
+    "rateDate": "01.12.2024"
   },
   {
     "number": 372,
@@ -7436,8 +7065,7 @@
     "songID": 898615,
     "songs": 1,
     "SFX": 12,
-    "rateDate": "02.12.2024",
-    "showcase": ""
+    "rateDate": "02.12.2024"
   },
   {
     "number": 373,
@@ -7456,8 +7084,7 @@
     "songID": 1150263,
     "songs": 3,
     "SFX": 20,
-    "rateDate": "02.12.2024",
-    "showcase": ""
+    "rateDate": "02.12.2024"
   },
   {
     "number": 374,
@@ -7476,8 +7103,7 @@
     "songID": 497523,
     "songs": 14,
     "SFX": 70,
-    "rateDate": "02.12.2024",
-    "showcase": ""
+    "rateDate": "02.12.2024"
   },
   {
     "number": 375,
@@ -7496,8 +7122,7 @@
     "songID": 10005155,
     "songs": 1,
     "SFX": 6,
-    "rateDate": "03.12.2024",
-    "showcase": ""
+    "rateDate": "03.12.2024"
   },
   {
     "number": 376,
@@ -7516,8 +7141,7 @@
     "songID": 1221862,
     "songs": 2,
     "SFX": 24,
-    "rateDate": "03.12.2024",
-    "showcase": ""
+    "rateDate": "03.12.2024"
   },
   {
     "number": 377,
@@ -7536,8 +7160,7 @@
     "songID": 806266,
     "songs": 4,
     "SFX": 9,
-    "rateDate": "03.12.2024",
-    "showcase": ""
+    "rateDate": "03.12.2024"
   },
   {
     "number": 378,
@@ -7556,8 +7179,7 @@
     "songID": 10000269,
     "songs": 9,
     "SFX": 237,
-    "rateDate": "03.12.2024",
-    "showcase": ""
+    "rateDate": "03.12.2024"
   },
   {
     "number": 379,
@@ -7576,8 +7198,7 @@
     "songID": 1021674,
     "songs": 2,
     "SFX": 14,
-    "rateDate": "05.12.2024",
-    "showcase": ""
+    "rateDate": "05.12.2024"
   },
   {
     "number": 380,
@@ -7596,8 +7217,7 @@
     "songID": 1278240,
     "songs": 1,
     "SFX": 12,
-    "rateDate": "05.12.2024",
-    "showcase": ""
+    "rateDate": "05.12.2024"
   },
   {
     "number": 381,
@@ -7616,8 +7236,7 @@
     "songID": 926325,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "05.12.2024",
-    "showcase": ""
+    "rateDate": "05.12.2024"
   },
   {
     "number": 382,
@@ -7636,8 +7255,7 @@
     "songID": 1233089,
     "songs": 4,
     "SFX": 35,
-    "rateDate": "05.12.2024",
-    "showcase": ""
+    "rateDate": "05.12.2024"
   },
   {
     "number": 383,
@@ -7656,8 +7274,7 @@
     "songID": 1329610,
     "songs": 1,
     "SFX": 10,
-    "rateDate": "05.12.2024",
-    "showcase": ""
+    "rateDate": "05.12.2024"
   },
   {
     "number": 384,
@@ -7676,8 +7293,7 @@
     "songID": 1218075,
     "songs": 1,
     "SFX": 14,
-    "rateDate": "07.12.2024",
-    "showcase": ""
+    "rateDate": "07.12.2024"
   },
   {
     "number": 385,
@@ -7696,8 +7312,7 @@
     "songID": 10008766,
     "songs": 2,
     "SFX": 9,
-    "rateDate": "07.12.2024",
-    "showcase": ""
+    "rateDate": "07.12.2024"
   },
   {
     "number": 386,
@@ -7716,8 +7331,7 @@
     "songID": 1288183,
     "songs": 2,
     "SFX": 22,
-    "rateDate": "07.12.2024",
-    "showcase": ""
+    "rateDate": "07.12.2024"
   },
   {
     "number": 387,
@@ -7736,8 +7350,7 @@
     "songID": 10001097,
     "songs": 3,
     "SFX": 5,
-    "rateDate": "08.12.2024",
-    "showcase": ""
+    "rateDate": "08.12.2024"
   },
   {
     "number": 388,
@@ -7756,8 +7369,7 @@
     "songID": 10008353,
     "songs": 9,
     "SFX": 100,
-    "rateDate": "09.12.2024",
-    "showcase": ""
+    "rateDate": "09.12.2024"
   },
   {
     "number": 389,
@@ -7776,8 +7388,7 @@
     "songID": 786343,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "09.12.2024",
-    "showcase": ""
+    "rateDate": "09.12.2024"
   },
   {
     "number": 390,
@@ -7796,8 +7407,7 @@
     "songID": 149930,
     "songs": 2,
     "SFX": 24,
-    "rateDate": "10.12.2024",
-    "showcase": ""
+    "rateDate": "10.12.2024"
   },
   {
     "number": 391,
@@ -7816,8 +7426,7 @@
     "songID": 732494,
     "songs": 2,
     "SFX": 16,
-    "rateDate": "11.12.2024",
-    "showcase": ""
+    "rateDate": "11.12.2024"
   },
   {
     "number": 392,
@@ -7836,8 +7445,7 @@
     "songID": 10010702,
     "songs": 1,
     "SFX": 1,
-    "rateDate": "12.12.2024",
-    "showcase": ""
+    "rateDate": "12.12.2024"
   },
   {
     "number": 393,
@@ -7856,8 +7464,7 @@
     "songID": 10011136,
     "songs": 2,
     "SFX": 13,
-    "rateDate": "14.12.2024",
-    "showcase": ""
+    "rateDate": "14.12.2024"
   },
   {
     "number": 394,
@@ -7876,8 +7483,7 @@
     "songID": 10003091,
     "songs": 8,
     "SFX": 14,
-    "rateDate": "15.12.2024",
-    "showcase": ""
+    "rateDate": "15.12.2024"
   },
   {
     "number": 395,
@@ -7896,8 +7502,7 @@
     "songID": 745084,
     "songs": 7,
     "SFX": 17,
-    "rateDate": "21.12.2024",
-    "showcase": ""
+    "rateDate": "21.12.2024"
   },
   {
     "number": 396,
@@ -7916,8 +7521,7 @@
     "songID": 10006067,
     "songs": 2,
     "SFX": 7,
-    "rateDate": "22.12.2024",
-    "showcase": ""
+    "rateDate": "22.12.2024"
   },
   {
     "number": 397,
@@ -7936,8 +7540,7 @@
     "songID": 10009985,
     "songs": 7,
     "SFX": 29,
-    "rateDate": "22.12.2024",
-    "showcase": ""
+    "rateDate": "22.12.2024"
   },
   {
     "number": 398,
@@ -7956,8 +7559,7 @@
     "songID": 10007930,
     "songs": 8,
     "SFX": 10,
-    "rateDate": "22.12.2024",
-    "showcase": ""
+    "rateDate": "22.12.2024"
   },
   {
     "number": 399,
@@ -7976,8 +7578,7 @@
     "songID": 1175445,
     "songs": 10,
     "SFX": 49,
-    "rateDate": "22.12.2024",
-    "showcase": ""
+    "rateDate": "22.12.2024"
   },
   {
     "number": 400,
@@ -7996,8 +7597,7 @@
     "songID": 10000720,
     "songs": 6,
     "SFX": 134,
-    "rateDate": "03.01.2025",
-    "showcase": ""
+    "rateDate": "03.01.2025"
   },
   {
     "number": 401,
@@ -8016,8 +7616,7 @@
     "songID": 10010233,
     "songs": 4,
     "SFX": 21,
-    "rateDate": "03.01.2025",
-    "showcase": ""
+    "rateDate": "03.01.2025"
   },
   {
     "number": 402,
@@ -8036,8 +7635,7 @@
     "songID": 10005836,
     "songs": 3,
     "SFX": 20,
-    "rateDate": "03.01.2025",
-    "showcase": ""
+    "rateDate": "03.01.2025"
   },
   {
     "number": 403,
@@ -8056,8 +7654,7 @@
     "songID": 662119,
     "songs": 1,
     "SFX": 5,
-    "rateDate": "03.01.2025",
-    "showcase": ""
+    "rateDate": "03.01.2025"
   },
   {
     "number": 404,
@@ -8076,8 +7673,7 @@
     "songID": 582442,
     "songs": 4,
     "SFX": 57,
-    "rateDate": "03.01.2025",
-    "showcase": ""
+    "rateDate": "03.01.2025"
   },
   {
     "number": 405,
@@ -8096,8 +7692,7 @@
     "songID": 912275,
     "songs": 1,
     "SFX": 38,
-    "rateDate": "03.01.2025",
-    "showcase": ""
+    "rateDate": "03.01.2025"
   },
   {
     "number": 406,
@@ -8116,8 +7711,7 @@
     "songID": 402816,
     "songs": 3,
     "SFX": 65,
-    "rateDate": "03.01.2025",
-    "showcase": ""
+    "rateDate": "03.01.2025"
   },
   {
     "number": 407,
@@ -8136,8 +7730,7 @@
     "songID": 10012532,
     "songs": 3,
     "SFX": 53,
-    "rateDate": "03.01.2025",
-    "showcase": ""
+    "rateDate": "03.01.2025"
   },
   {
     "number": 408,
@@ -8156,8 +7749,7 @@
     "songID": 10008764,
     "songs": 2,
     "SFX": 0,
-    "rateDate": "03.01.2025",
-    "showcase": ""
+    "rateDate": "03.01.2025"
   },
   {
     "number": 409,
@@ -8176,8 +7768,7 @@
     "songID": 1132306,
     "songs": 1,
     "SFX": 7,
-    "rateDate": "03.01.2025",
-    "showcase": ""
+    "rateDate": "03.01.2025"
   },
   {
     "number": 410,
@@ -8196,8 +7787,7 @@
     "songID": 10010952,
     "songs": 2,
     "SFX": 7,
-    "rateDate": "04.01.2025",
-    "showcase": ""
+    "rateDate": "04.01.2025"
   },
   {
     "number": 411,
@@ -8216,8 +7806,7 @@
     "songID": 1387253,
     "songs": 6,
     "SFX": 85,
-    "rateDate": "06.01.2025",
-    "showcase": ""
+    "rateDate": "06.01.2025"
   },
   {
     "number": 412,
@@ -8236,8 +7825,7 @@
     "songID": 10006824,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "06.01.2025",
-    "showcase": ""
+    "rateDate": "06.01.2025"
   },
   {
     "number": 413,
@@ -8256,8 +7844,7 @@
     "songID": 10003093,
     "songs": 4,
     "SFX": 9,
-    "rateDate": "08.01.2025",
-    "showcase": ""
+    "rateDate": "08.01.2025"
   },
   {
     "number": 414,
@@ -8276,8 +7863,7 @@
     "songID": 10008265,
     "songs": 5,
     "SFX": 23,
-    "rateDate": "08.01.2025",
-    "showcase": ""
+    "rateDate": "08.01.2025"
   },
   {
     "number": 415,
@@ -8296,8 +7882,7 @@
     "songID": 1199709,
     "songs": 1,
     "SFX": 19,
-    "rateDate": "10.01.2025",
-    "showcase": ""
+    "rateDate": "10.01.2025"
   },
   {
     "number": 416,
@@ -8316,8 +7901,7 @@
     "songID": 544108,
     "songs": 7,
     "SFX": 89,
-    "rateDate": "10.01.2025",
-    "showcase": ""
+    "rateDate": "10.01.2025"
   },
   {
     "number": 417,
@@ -8336,8 +7920,7 @@
     "songID": 1329782,
     "songs": 2,
     "SFX": 33,
-    "rateDate": "10.01.2025",
-    "showcase": ""
+    "rateDate": "10.01.2025"
   },
   {
     "number": 418,
@@ -8356,8 +7939,7 @@
     "songID": 913545,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "10.01.2025",
-    "showcase": ""
+    "rateDate": "10.01.2025"
   },
   {
     "number": 419,
@@ -8376,8 +7958,7 @@
     "songID": 1351052,
     "songs": 1,
     "SFX": 8,
-    "rateDate": "12.01.2025",
-    "showcase": ""
+    "rateDate": "12.01.2025"
   },
   {
     "number": 420,
@@ -8396,8 +7977,7 @@
     "songID": "UNKNOWN",
     "songs": 7,
     "SFX": 18,
-    "rateDate": "12.01.2025",
-    "showcase": ""
+    "rateDate": "12.01.2025"
   },
   {
     "number": 421,
@@ -8416,8 +7996,7 @@
     "songID": 192586,
     "songs": 11,
     "SFX": 12,
-    "rateDate": "12.01.2025",
-    "showcase": ""
+    "rateDate": "12.01.2025"
   },
   {
     "number": 422,
@@ -8436,8 +8015,7 @@
     "songID": 10010467,
     "songs": 10,
     "SFX": 161,
-    "rateDate": "12.01.2025",
-    "showcase": ""
+    "rateDate": "12.01.2025"
   },
   {
     "number": 423,
@@ -8456,8 +8034,7 @@
     "songID": 1382258,
     "songs": 5,
     "SFX": 139,
-    "rateDate": "14.01.2025",
-    "showcase": ""
+    "rateDate": "14.01.2025"
   },
   {
     "number": 424,
@@ -8476,8 +8053,7 @@
     "songID": 931658,
     "songs": 2,
     "SFX": 20,
-    "rateDate": "15.01.2025",
-    "showcase": ""
+    "rateDate": "15.01.2025"
   },
   {
     "number": 425,
@@ -8496,8 +8072,7 @@
     "songID": 10006617,
     "songs": 4,
     "SFX": 14,
-    "rateDate": "15.01.2025",
-    "showcase": ""
+    "rateDate": "15.01.2025"
   },
   {
     "number": 426,
@@ -8516,8 +8091,7 @@
     "songID": 10007384,
     "songs": 6,
     "SFX": 3,
-    "rateDate": "16.01.2025",
-    "showcase": ""
+    "rateDate": "16.01.2025"
   },
   {
     "number": 427,
@@ -8536,8 +8110,7 @@
     "songID": 888517,
     "songs": 2,
     "SFX": 26,
-    "rateDate": "16.01.2025",
-    "showcase": ""
+    "rateDate": "16.01.2025"
   },
   {
     "number": 428,
@@ -8556,8 +8129,7 @@
     "songID": 10006891,
     "songs": 2,
     "SFX": 7,
-    "rateDate": "16.01.2025",
-    "showcase": ""
+    "rateDate": "16.01.2025"
   },
   {
     "number": 429,
@@ -8576,8 +8148,7 @@
     "songID": 897629,
     "songs": 4,
     "SFX": 0,
-    "rateDate": "16.01.2025",
-    "showcase": ""
+    "rateDate": "16.01.2025"
   },
   {
     "number": 430,
@@ -8596,8 +8167,7 @@
     "songID": 1233081,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "16.01.2025",
-    "showcase": ""
+    "rateDate": "16.01.2025"
   },
   {
     "number": 431,
@@ -8616,8 +8186,7 @@
     "songID": 10010606,
     "songs": 1,
     "SFX": 5,
-    "rateDate": "16.01.2025",
-    "showcase": ""
+    "rateDate": "16.01.2025"
   },
   {
     "number": 432,
@@ -8636,8 +8205,7 @@
     "songID": 10007612,
     "songs": 7,
     "SFX": 9,
-    "rateDate": "18.01.2025",
-    "showcase": ""
+    "rateDate": "18.01.2025"
   },
   {
     "number": 433,
@@ -8656,8 +8224,7 @@
     "songID": 10009575,
     "songs": 1,
     "SFX": 15,
-    "rateDate": "18.01.2025",
-    "showcase": ""
+    "rateDate": "18.01.2025"
   },
   {
     "number": 434,
@@ -8676,8 +8243,7 @@
     "songID": 10003243,
     "songs": 4,
     "SFX": 39,
-    "rateDate": "18.01.2025",
-    "showcase": ""
+    "rateDate": "18.01.2025"
   },
   {
     "number": 435,
@@ -8696,8 +8262,7 @@
     "songID": 10000120,
     "songs": 4,
     "SFX": 5,
-    "rateDate": "18.01.2025",
-    "showcase": ""
+    "rateDate": "18.01.2025"
   },
   {
     "number": 436,
@@ -8716,8 +8281,7 @@
     "songID": 351638,
     "songs": 1,
     "SFX": 14,
-    "rateDate": "18.01.2025",
-    "showcase": ""
+    "rateDate": "18.01.2025"
   },
   {
     "number": 437,
@@ -8736,8 +8300,7 @@
     "songID": 519229,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "18.01.2025",
-    "showcase": ""
+    "rateDate": "18.01.2025"
   },
   {
     "number": 438,
@@ -8756,8 +8319,7 @@
     "songID": 10004855,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "22.01.2025",
-    "showcase": ""
+    "rateDate": "22.01.2025"
   },
   {
     "number": 439,
@@ -8776,8 +8338,7 @@
     "songID": 10001384,
     "songs": 4,
     "SFX": 1,
-    "rateDate": "22.01.2025",
-    "showcase": ""
+    "rateDate": "22.01.2025"
   },
   {
     "number": 440,
@@ -8796,8 +8357,7 @@
     "songID": 707798,
     "songs": 1,
     "SFX": 10,
-    "rateDate": "22.01.2025",
-    "showcase": ""
+    "rateDate": "22.01.2025"
   },
   {
     "number": 441,
@@ -8816,8 +8376,7 @@
     "songID": 10012353,
     "songs": 13,
     "SFX": 88,
-    "rateDate": "22.01.2025",
-    "showcase": ""
+    "rateDate": "22.01.2025"
   },
   {
     "number": 442,
@@ -8836,8 +8395,7 @@
     "songID": 10005071,
     "songs": 3,
     "SFX": 88,
-    "rateDate": "23.01.2025",
-    "showcase": ""
+    "rateDate": "23.01.2025"
   },
   {
     "number": 443,
@@ -8856,8 +8414,7 @@
     "songID": 10008651,
     "songs": 1,
     "SFX": 1,
-    "rateDate": "26.01.2025",
-    "showcase": ""
+    "rateDate": "26.01.2025"
   },
   {
     "number": 444,
@@ -8876,8 +8433,7 @@
     "songID": 1008984,
     "songs": 2,
     "SFX": 6,
-    "rateDate": "26.01.2025",
-    "showcase": ""
+    "rateDate": "26.01.2025"
   },
   {
     "number": 445,
@@ -8896,8 +8452,7 @@
     "songID": 10006657,
     "songs": 14,
     "SFX": 391,
-    "rateDate": "28.01.2025",
-    "showcase": ""
+    "rateDate": "28.01.2025"
   },
   {
     "number": 446,
@@ -8916,8 +8471,7 @@
     "songID": 642765,
     "songs": 6,
     "SFX": 5,
-    "rateDate": "29.01.2025",
-    "showcase": ""
+    "rateDate": "29.01.2025"
   },
   {
     "number": 447,
@@ -8936,8 +8490,7 @@
     "songID": 1123551,
     "songs": 3,
     "SFX": 72,
-    "rateDate": "29.01.2025",
-    "showcase": ""
+    "rateDate": "29.01.2025"
   },
   {
     "number": 448,
@@ -8956,8 +8509,7 @@
     "songID": 1290139,
     "songs": 6,
     "SFX": 71,
-    "rateDate": "31.01.2025",
-    "showcase": ""
+    "rateDate": "31.01.2025"
   },
   {
     "number": 449,
@@ -8976,8 +8528,7 @@
     "songID": 10004009,
     "songs": 13,
     "SFX": 251,
-    "rateDate": "31.01.2025",
-    "showcase": ""
+    "rateDate": "31.01.2025"
   },
   {
     "number": 450,
@@ -8996,8 +8547,7 @@
     "songID": 573244,
     "songs": 3,
     "SFX": 5,
-    "rateDate": "31.01.2025",
-    "showcase": ""
+    "rateDate": "31.01.2025"
   },
   {
     "number": 451,
@@ -9016,8 +8566,7 @@
     "songID": 1142119,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "31.01.2025",
-    "showcase": ""
+    "rateDate": "31.01.2025"
   },
   {
     "number": 452,
@@ -9036,8 +8585,7 @@
     "songID": 10004037,
     "songs": 5,
     "SFX": 22,
-    "rateDate": "31.01.2025",
-    "showcase": ""
+    "rateDate": "31.01.2025"
   },
   {
     "number": 453,
@@ -9056,8 +8604,7 @@
     "songID": 1047424,
     "songs": 1,
     "SFX": 11,
-    "rateDate": "31.01.2025",
-    "showcase": ""
+    "rateDate": "31.01.2025"
   },
   {
     "number": 454,
@@ -9076,8 +8623,7 @@
     "songID": 10004593,
     "songs": 6,
     "SFX": 106,
-    "rateDate": "03.02.2025",
-    "showcase": ""
+    "rateDate": "03.02.2025"
   },
   {
     "number": 455,
@@ -9096,8 +8642,7 @@
     "songID": 10000563,
     "songs": 3,
     "SFX": 26,
-    "rateDate": "03.02.2025",
-    "showcase": ""
+    "rateDate": "03.02.2025"
   },
   {
     "number": 456,
@@ -9116,8 +8661,7 @@
     "songID": 718171,
     "songs": 6,
     "SFX": 71,
-    "rateDate": "04.02.2025",
-    "showcase": ""
+    "rateDate": "04.02.2025"
   },
   {
     "number": 457,
@@ -9136,8 +8680,7 @@
     "songID": 65332,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "04.02.2025",
-    "showcase": ""
+    "rateDate": "04.02.2025"
   },
   {
     "number": 458,
@@ -9156,8 +8699,7 @@
     "songID": 1261595,
     "songs": 1,
     "SFX": 9,
-    "rateDate": "04.02.2025",
-    "showcase": ""
+    "rateDate": "04.02.2025"
   },
   {
     "number": 459,
@@ -9176,8 +8718,7 @@
     "songID": 10010343,
     "songs": 16,
     "SFX": 134,
-    "rateDate": "04.02.2025",
-    "showcase": ""
+    "rateDate": "04.02.2025"
   },
   {
     "number": 460,
@@ -9196,8 +8737,7 @@
     "songID": 1258781,
     "songs": 5,
     "SFX": 135,
-    "rateDate": "08.02.2025",
-    "showcase": ""
+    "rateDate": "08.02.2025"
   },
   {
     "number": 461,
@@ -9216,8 +8756,7 @@
     "songID": 792908,
     "songs": 2,
     "SFX": 3,
-    "rateDate": "11.02.2025",
-    "showcase": ""
+    "rateDate": "11.02.2025"
   },
   {
     "number": 462,
@@ -9236,8 +8775,7 @@
     "songID": 10012368,
     "songs": 3,
     "SFX": 0,
-    "rateDate": "11.02.2025",
-    "showcase": ""
+    "rateDate": "11.02.2025"
   },
   {
     "number": 463,
@@ -9256,8 +8794,7 @@
     "songID": 10007406,
     "songs": 3,
     "SFX": 35,
-    "rateDate": "11.02.2025",
-    "showcase": ""
+    "rateDate": "11.02.2025"
   },
   {
     "number": 464,
@@ -9276,8 +8813,7 @@
     "songID": 760983,
     "songs": 1,
     "SFX": 4,
-    "rateDate": "11.02.2025",
-    "showcase": ""
+    "rateDate": "11.02.2025"
   },
   {
     "number": 465,
@@ -9296,8 +8832,7 @@
     "songID": 1249646,
     "songs": 1,
     "SFX": 8,
-    "rateDate": "11.02.2025",
-    "showcase": ""
+    "rateDate": "11.02.2025"
   },
   {
     "number": 466,
@@ -9316,8 +8851,7 @@
     "songID": 1207659,
     "songs": 1,
     "SFX": 41,
-    "rateDate": "25.02.2025",
-    "showcase": ""
+    "rateDate": "25.02.2025"
   },
   {
     "number": 467,
@@ -9336,8 +8870,7 @@
     "songID": 995441,
     "songs": 2,
     "SFX": 0,
-    "rateDate": "25.02.2025",
-    "showcase": ""
+    "rateDate": "25.02.2025"
   },
   {
     "number": 468,
@@ -9356,8 +8889,7 @@
     "songID": 1361746,
     "songs": 10,
     "SFX": 3,
-    "rateDate": "25.02.2025",
-    "showcase": ""
+    "rateDate": "25.02.2025"
   },
   {
     "number": 469,
@@ -9376,8 +8908,7 @@
     "songID": 10007163,
     "songs": 18,
     "SFX": 161,
-    "rateDate": "25.02.2025",
-    "showcase": ""
+    "rateDate": "25.02.2025"
   },
   {
     "number": 470,
@@ -9396,8 +8927,7 @@
     "songID": 1364062,
     "songs": 7,
     "SFX": 42,
-    "rateDate": "25.02.2025",
-    "showcase": ""
+    "rateDate": "25.02.2025"
   },
   {
     "number": 471,
@@ -9416,8 +8946,7 @@
     "songID": 10000096,
     "songs": 4,
     "SFX": 34,
-    "rateDate": "25.02.2025",
-    "showcase": ""
+    "rateDate": "25.02.2025"
   },
   {
     "number": 472,
@@ -9436,8 +8965,7 @@
     "songID": 1357710,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "26.02.2025",
-    "showcase": ""
+    "rateDate": "26.02.2025"
   },
   {
     "number": 473,
@@ -9456,8 +8984,7 @@
     "songID": 1253069,
     "songs": 1,
     "SFX": 12,
-    "rateDate": "26.02.2025",
-    "showcase": ""
+    "rateDate": "26.02.2025"
   },
   {
     "number": 474,
@@ -9476,8 +9003,7 @@
     "songID": 437224,
     "songs": 7,
     "SFX": 50,
-    "rateDate": "26.02.2025",
-    "showcase": ""
+    "rateDate": "26.02.2025"
   },
   {
     "number": 475,
@@ -9496,8 +9022,7 @@
     "songID": 964029,
     "songs": 21,
     "SFX": 158,
-    "rateDate": "26.02.2025",
-    "showcase": ""
+    "rateDate": "26.02.2025"
   },
   {
     "number": 476,
@@ -9516,8 +9041,7 @@
     "songID": 10006067,
     "songs": 7,
     "SFX": 2,
-    "rateDate": "26.02.2025",
-    "showcase": ""
+    "rateDate": "26.02.2025"
   },
   {
     "number": 477,
@@ -9536,8 +9060,7 @@
     "songID": 1403143,
     "songs": 2,
     "SFX": 0,
-    "rateDate": "04.03.2025",
-    "showcase": ""
+    "rateDate": "04.03.2025"
   },
   {
     "number": 478,
@@ -9556,8 +9079,7 @@
     "songID": 10007158,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "06.03.2025",
-    "showcase": ""
+    "rateDate": "06.03.2025"
   },
   {
     "number": 479,
@@ -9576,8 +9098,7 @@
     "songID": 297566,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "06.03.2025",
-    "showcase": ""
+    "rateDate": "06.03.2025"
   },
   {
     "number": 480,
@@ -9596,8 +9117,7 @@
     "songID": 707798,
     "songs": 2,
     "SFX": 25,
-    "rateDate": "06.03.2025",
-    "showcase": ""
+    "rateDate": "06.03.2025"
   },
   {
     "number": 481,
@@ -9616,8 +9136,7 @@
     "songID": 200425,
     "songs": 2,
     "SFX": 0,
-    "rateDate": "06.03.2025",
-    "showcase": ""
+    "rateDate": "06.03.2025"
   },
   {
     "number": 482,
@@ -9636,8 +9155,7 @@
     "songID": 833658,
     "songs": 2,
     "SFX": 62,
-    "rateDate": "07.03.2025",
-    "showcase": ""
+    "rateDate": "07.03.2025"
   },
   {
     "number": 483,
@@ -9656,8 +9174,7 @@
     "songID": 1122932,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "08.03.2025",
-    "showcase": ""
+    "rateDate": "08.03.2025"
   },
   {
     "number": 484,
@@ -9676,8 +9193,7 @@
     "songID": 284253,
     "songs": 1,
     "SFX": 4,
-    "rateDate": "08.03.2025",
-    "showcase": ""
+    "rateDate": "08.03.2025"
   },
   {
     "number": 485,
@@ -9696,8 +9212,7 @@
     "songID": 845162,
     "songs": 3,
     "SFX": 9,
-    "rateDate": "08.03.2025",
-    "showcase": ""
+    "rateDate": "08.03.2025"
   },
   {
     "number": 486,
@@ -9716,8 +9231,7 @@
     "songID": 10005708,
     "songs": 2,
     "SFX": 14,
-    "rateDate": "08.03.2025",
-    "showcase": ""
+    "rateDate": "08.03.2025"
   },
   {
     "number": 487,
@@ -9736,8 +9250,7 @@
     "songID": 1318510,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "08.03.2025",
-    "showcase": ""
+    "rateDate": "08.03.2025"
   },
   {
     "number": 488,
@@ -9756,8 +9269,7 @@
     "songID": "NONG",
     "songs": 1,
     "SFX": 0,
-    "rateDate": "08.03.2025",
-    "showcase": ""
+    "rateDate": "08.03.2025"
   },
   {
     "number": 489,
@@ -9776,8 +9288,7 @@
     "songID": "NONG",
     "songs": 1,
     "SFX": 0,
-    "rateDate": "08.03.2025",
-    "showcase": ""
+    "rateDate": "08.03.2025"
   },
   {
     "number": 490,
@@ -9796,8 +9307,7 @@
     "songID": 748465,
     "songs": 2,
     "SFX": 6,
-    "rateDate": "08.03.2025",
-    "showcase": ""
+    "rateDate": "08.03.2025"
   },
   {
     "number": 491,
@@ -9816,8 +9326,7 @@
     "songID": 1311313,
     "songs": 1,
     "SFX": 6,
-    "rateDate": "08.03.2025",
-    "showcase": ""
+    "rateDate": "08.03.2025"
   },
   {
     "number": 492,
@@ -9836,8 +9345,7 @@
     "songID": "OFFICIAL",
     "songs": 7,
     "SFX": 126,
-    "rateDate": "08.03.2025",
-    "showcase": ""
+    "rateDate": "08.03.2025"
   },
   {
     "number": 493,
@@ -9856,8 +9364,7 @@
     "songID": 10004224,
     "songs": 1,
     "SFX": 12,
-    "rateDate": "08.03.2025",
-    "showcase": ""
+    "rateDate": "08.03.2025"
   },
   {
     "number": 494,
@@ -9876,8 +9383,7 @@
     "songID": 1096599,
     "songs": 1,
     "SFX": 10,
-    "rateDate": "08.03.2025",
-    "showcase": ""
+    "rateDate": "08.03.2025"
   },
   {
     "number": 495,
@@ -9896,8 +9402,7 @@
     "songID": "NONG",
     "songs": 1,
     "SFX": 0,
-    "rateDate": "10.03.2025",
-    "showcase": ""
+    "rateDate": "10.03.2025"
   },
   {
     "number": 496,
@@ -9916,8 +9421,7 @@
     "songID": 926025,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "10.03.2025",
-    "showcase": ""
+    "rateDate": "10.03.2025"
   },
   {
     "number": 497,
@@ -9936,8 +9440,7 @@
     "songID": 1230804,
     "songs": 5,
     "SFX": 49,
-    "rateDate": "10.03.2025",
-    "showcase": ""
+    "rateDate": "10.03.2025"
   },
   {
     "number": 498,
@@ -9956,8 +9459,7 @@
     "songID": 10003117,
     "songs": 13,
     "SFX": 29,
-    "rateDate": "10.03.2025",
-    "showcase": ""
+    "rateDate": "10.03.2025"
   },
   {
     "number": 499,
@@ -9976,8 +9478,7 @@
     "songID": 544108,
     "songs": 1,
     "SFX": 4,
-    "rateDate": "11.03.2025",
-    "showcase": ""
+    "rateDate": "11.03.2025"
   },
   {
     "number": 500,
@@ -9996,8 +9497,7 @@
     "songID": 10009585,
     "songs": 3,
     "SFX": 1,
-    "rateDate": "11.03.2025",
-    "showcase": ""
+    "rateDate": "11.03.2025"
   },
   {
     "number": 501,
@@ -10016,8 +9516,7 @@
     "songID": 386872,
     "songs": 21,
     "SFX": 239,
-    "rateDate": "13.03.2025",
-    "showcase": ""
+    "rateDate": "13.03.2025"
   },
   {
     "number": 502,
@@ -10036,8 +9535,7 @@
     "songID": 10011791,
     "songs": 4,
     "SFX": 53,
-    "rateDate": "13.03.2025",
-    "showcase": ""
+    "rateDate": "13.03.2025"
   },
   {
     "number": 503,
@@ -10056,8 +9554,7 @@
     "songID": 937734,
     "songs": 3,
     "SFX": 36,
-    "rateDate": "13.03.2025",
-    "showcase": ""
+    "rateDate": "13.03.2025"
   },
   {
     "number": 504,
@@ -10076,8 +9573,7 @@
     "songID": 10009943,
     "songs": 3,
     "SFX": 18,
-    "rateDate": "16.03.2025",
-    "showcase": ""
+    "rateDate": "16.03.2025"
   },
   {
     "number": 505,
@@ -10096,8 +9592,7 @@
     "songID": 1234536,
     "songs": 1,
     "SFX": 4,
-    "rateDate": "16.03.2025",
-    "showcase": ""
+    "rateDate": "16.03.2025"
   },
   {
     "number": 506,
@@ -10116,8 +9611,7 @@
     "songID": 10006028,
     "songs": 2,
     "SFX": 0,
-    "rateDate": "17.03.2025",
-    "showcase": ""
+    "rateDate": "17.03.2025"
   },
   {
     "number": 507,
@@ -10136,8 +9630,7 @@
     "songID": 1323436,
     "songs": 1,
     "SFX": 4,
-    "rateDate": "17.03.2025",
-    "showcase": ""
+    "rateDate": "17.03.2025"
   },
   {
     "number": 508,
@@ -10156,8 +9649,7 @@
     "songID": 10010308,
     "songs": 4,
     "SFX": 24,
-    "rateDate": "17.03.2025",
-    "showcase": ""
+    "rateDate": "17.03.2025"
   },
   {
     "number": 509,
@@ -10176,8 +9668,7 @@
     "songID": 1110215,
     "songs": 8,
     "SFX": 96,
-    "rateDate": "17.03.2025",
-    "showcase": ""
+    "rateDate": "17.03.2025"
   },
   {
     "number": 510,
@@ -10196,8 +9687,7 @@
     "songID": "OFFICIAL",
     "songs": 1,
     "SFX": 0,
-    "rateDate": "20.03.2025",
-    "showcase": ""
+    "rateDate": "20.03.2025"
   },
   {
     "number": 511,
@@ -10216,8 +9706,7 @@
     "songID": 464352,
     "songs": 5,
     "SFX": 44,
-    "rateDate": "20.03.2025",
-    "showcase": ""
+    "rateDate": "20.03.2025"
   },
   {
     "number": 512,
@@ -10236,8 +9725,7 @@
     "songID": 482883,
     "songs": 5,
     "SFX": 50,
-    "rateDate": "20.03.2025",
-    "showcase": ""
+    "rateDate": "20.03.2025"
   },
   {
     "number": 513,
@@ -10256,8 +9744,7 @@
     "songID": 959666,
     "songs": 1,
     "SFX": 10,
-    "rateDate": "20.03.2025",
-    "showcase": ""
+    "rateDate": "20.03.2025"
   },
   {
     "number": 514,
@@ -10276,8 +9763,7 @@
     "songID": 1312293,
     "songs": 1,
     "SFX": 4,
-    "rateDate": "20.03.2025",
-    "showcase": ""
+    "rateDate": "20.03.2025"
   },
   {
     "number": 515,
@@ -10296,8 +9782,7 @@
     "songID": 10003938,
     "songs": 9,
     "SFX": 84,
-    "rateDate": "20.03.2025",
-    "showcase": ""
+    "rateDate": "20.03.2025"
   },
   {
     "number": 516,
@@ -10316,8 +9801,7 @@
     "songID": 10009855,
     "songs": 3,
     "SFX": 9,
-    "rateDate": "22.03.2025",
-    "showcase": ""
+    "rateDate": "22.03.2025"
   },
   {
     "number": 517,
@@ -10336,8 +9820,7 @@
     "songID": 10001502,
     "songs": 2,
     "SFX": 10,
-    "rateDate": "22.03.2025",
-    "showcase": ""
+    "rateDate": "22.03.2025"
   },
   {
     "number": 518,
@@ -10356,8 +9839,7 @@
     "songID": 10001080,
     "songs": 4,
     "SFX": 4,
-    "rateDate": "22.03.2025",
-    "showcase": ""
+    "rateDate": "22.03.2025"
   },
   {
     "number": 519,
@@ -10376,8 +9858,7 @@
     "songID": 857915,
     "songs": 4,
     "SFX": 61,
-    "rateDate": "23.03.2025",
-    "showcase": ""
+    "rateDate": "23.03.2025"
   },
   {
     "number": 520,
@@ -10396,8 +9877,7 @@
     "songID": 10008780,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "25.03.2025",
-    "showcase": ""
+    "rateDate": "25.03.2025"
   },
   {
     "number": 521,
@@ -10416,8 +9896,7 @@
     "songID": 578786,
     "songs": 1,
     "SFX": 19,
-    "rateDate": "28.03.2025",
-    "showcase": ""
+    "rateDate": "28.03.2025"
   },
   {
     "number": 522,
@@ -10436,8 +9915,7 @@
     "songID": 1348603,
     "songs": 14,
     "SFX": 275,
-    "rateDate": "28.03.2025",
-    "showcase": ""
+    "rateDate": "28.03.2025"
   },
   {
     "number": 523,
@@ -10456,8 +9934,7 @@
     "songID": 1125115,
     "songs": 2,
     "SFX": 0,
-    "rateDate": "28.03.2025",
-    "showcase": ""
+    "rateDate": "28.03.2025"
   },
   {
     "number": 524,
@@ -10476,8 +9953,7 @@
     "songID": 10007349,
     "songs": 3,
     "SFX": 17,
-    "rateDate": "30.03.2025",
-    "showcase": ""
+    "rateDate": "30.03.2025"
   },
   {
     "number": 525,
@@ -10496,8 +9972,7 @@
     "songID": 10001008,
     "songs": 4,
     "SFX": 5,
-    "rateDate": "30.03.2025",
-    "showcase": ""
+    "rateDate": "30.03.2025"
   },
   {
     "number": 526,
@@ -10516,8 +9991,7 @@
     "songID": 673473,
     "songs": 3,
     "SFX": 36,
-    "rateDate": "30.03.2025",
-    "showcase": ""
+    "rateDate": "30.03.2025"
   },
   {
     "number": 527,
@@ -10536,8 +10010,7 @@
     "songID": 1146229,
     "songs": 2,
     "SFX": 10,
-    "rateDate": "02.04.2025",
-    "showcase": ""
+    "rateDate": "02.04.2025"
   },
   {
     "number": 528,
@@ -10556,8 +10029,7 @@
     "songID": "OFFICIAL",
     "songs": 2,
     "SFX": 13,
-    "rateDate": "02.04.2025",
-    "showcase": ""
+    "rateDate": "02.04.2025"
   },
   {
     "number": 529,
@@ -10576,8 +10048,7 @@
     "songID": 1354871,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "02.04.2025",
-    "showcase": ""
+    "rateDate": "02.04.2025"
   },
   {
     "number": 530,
@@ -10596,8 +10067,7 @@
     "songID": 10000053,
     "songs": 4,
     "SFX": 57,
-    "rateDate": "02.04.2025",
-    "showcase": ""
+    "rateDate": "02.04.2025"
   },
   {
     "number": 531,
@@ -10616,8 +10086,7 @@
     "songID": 1286008,
     "songs": 3,
     "SFX": 12,
-    "rateDate": "02.04.2025",
-    "showcase": ""
+    "rateDate": "02.04.2025"
   },
   {
     "number": 532,
@@ -10636,8 +10105,7 @@
     "songID": 628426,
     "songs": 3,
     "SFX": 31,
-    "rateDate": "05.04.2025",
-    "showcase": ""
+    "rateDate": "05.04.2025"
   },
   {
     "number": 533,
@@ -10656,8 +10124,7 @@
     "songID": 2,
     "songs": 50,
     "SFX": 225,
-    "rateDate": "13.04.2025",
-    "showcase": ""
+    "rateDate": "13.04.2025"
   },
   {
     "number": 534,
@@ -10676,8 +10143,7 @@
     "songID": 188489,
     "songs": 7,
     "SFX": 32,
-    "rateDate": "19.04.2025",
-    "showcase": ""
+    "rateDate": "19.04.2025"
   },
   {
     "number": 535,
@@ -10696,8 +10162,7 @@
     "songID": 64061,
     "songs": 1,
     "SFX": 4,
-    "rateDate": "19.04.2025",
-    "showcase": ""
+    "rateDate": "19.04.2025"
   },
   {
     "number": 536,
@@ -10716,8 +10181,7 @@
     "songID": 639895,
     "songs": 5,
     "SFX": 14,
-    "rateDate": "19.04.2025",
-    "showcase": ""
+    "rateDate": "19.04.2025"
   },
   {
     "number": 537,
@@ -10736,8 +10200,7 @@
     "songID": 10003718,
     "songs": 13,
     "SFX": 142,
-    "rateDate": "19.04.2025",
-    "showcase": ""
+    "rateDate": "19.04.2025"
   },
   {
     "number": 538,
@@ -10756,8 +10219,7 @@
     "songID": 10005070,
     "songs": 8,
     "SFX": 116,
-    "rateDate": "19.04.2025",
-    "showcase": ""
+    "rateDate": "19.04.2025"
   },
   {
     "number": 539,
@@ -10776,8 +10238,7 @@
     "songID": 571314,
     "songs": 7,
     "SFX": 146,
-    "rateDate": "19.04.2025",
-    "showcase": ""
+    "rateDate": "19.04.2025"
   },
   {
     "number": 540,
@@ -10796,8 +10257,7 @@
     "songID": 10009918,
     "songs": 3,
     "SFX": 8,
-    "rateDate": "28.04.2025",
-    "showcase": ""
+    "rateDate": "28.04.2025"
   },
   {
     "number": 541,
@@ -10816,8 +10276,7 @@
     "songID": 690156,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "28.04.2025",
-    "showcase": ""
+    "rateDate": "28.04.2025"
   },
   {
     "number": 542,
@@ -10836,8 +10295,7 @@
     "songID": 975213,
     "songs": 3,
     "SFX": 4,
-    "rateDate": "30.04.2025",
-    "showcase": ""
+    "rateDate": "30.04.2025"
   },
   {
     "number": 543,
@@ -10856,8 +10314,7 @@
     "songID": 1059512,
     "songs": 2,
     "SFX": 0,
-    "rateDate": "15.05.2025",
-    "showcase": ""
+    "rateDate": "15.05.2025"
   },
   {
     "number": 544,
@@ -10876,8 +10333,7 @@
     "songID": 943554,
     "songs": 1,
     "SFX": 16,
-    "rateDate": "16.05.2025",
-    "showcase": ""
+    "rateDate": "16.05.2025"
   },
   {
     "number": 545,
@@ -10896,8 +10352,7 @@
     "songID": 1216039,
     "songs": 2,
     "SFX": 12,
-    "rateDate": "16.05.2025",
-    "showcase": ""
+    "rateDate": "16.05.2025"
   },
   {
     "number": 546,
@@ -10916,8 +10371,7 @@
     "songID": 590229,
     "songs": 5,
     "SFX": 6,
-    "rateDate": "16.05.2025",
-    "showcase": ""
+    "rateDate": "16.05.2025"
   },
   {
     "number": 547,
@@ -10936,8 +10390,7 @@
     "songID": 10009918,
     "songs": 11,
     "SFX": 74,
-    "rateDate": "16.05.2025",
-    "showcase": ""
+    "rateDate": "16.05.2025"
   },
   {
     "number": 548,
@@ -10956,8 +10409,7 @@
     "songID": 1089010,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "16.05.2025",
-    "showcase": ""
+    "rateDate": "16.05.2025"
   },
   {
     "number": 549,
@@ -10976,8 +10428,7 @@
     "songID": 1066935,
     "songs": 9,
     "SFX": 43,
-    "rateDate": "16.05.2025",
-    "showcase": ""
+    "rateDate": "16.05.2025"
   },
   {
     "number": 550,
@@ -10996,8 +10447,7 @@
     "songID": 991965,
     "songs": 3,
     "SFX": 59,
-    "rateDate": "16.05.2025",
-    "showcase": ""
+    "rateDate": "16.05.2025"
   },
   {
     "number": 551,
@@ -11016,8 +10466,7 @@
     "songID": 678064,
     "songs": 1,
     "SFX": 18,
-    "rateDate": "16.05.2025",
-    "showcase": ""
+    "rateDate": "16.05.2025"
   },
   {
     "number": 552,
@@ -11036,8 +10485,7 @@
     "songID": 10004340,
     "songs": 16,
     "SFX": 91,
-    "rateDate": "16.05.2025",
-    "showcase": ""
+    "rateDate": "16.05.2025"
   },
   {
     "number": 553,
@@ -11056,8 +10504,7 @@
     "songID": 349761,
     "songs": 4,
     "SFX": 15,
-    "rateDate": "19.05.2025",
-    "showcase": ""
+    "rateDate": "19.05.2025"
   },
   {
     "number": 554,
@@ -11076,8 +10523,7 @@
     "songID": 494623,
     "songs": 2,
     "SFX": 16,
-    "rateDate": "19.05.2025",
-    "showcase": ""
+    "rateDate": "19.05.2025"
   },
   {
     "number": 555,
@@ -11096,8 +10542,7 @@
     "songID": 1288909,
     "songs": 3,
     "SFX": 25,
-    "rateDate": "19.05.2025",
-    "showcase": ""
+    "rateDate": "19.05.2025"
   },
   {
     "number": 556,
@@ -11116,8 +10561,7 @@
     "songID": 320927,
     "songs": 4,
     "SFX": 2,
-    "rateDate": "24.05.2025",
-    "showcase": ""
+    "rateDate": "24.05.2025"
   },
   {
     "number": 557,
@@ -11136,8 +10580,7 @@
     "songID": 1274879,
     "songs": 5,
     "SFX": 34,
-    "rateDate": "24.05.2025",
-    "showcase": ""
+    "rateDate": "24.05.2025"
   },
   {
     "number": 558,
@@ -11156,8 +10599,7 @@
     "songID": 1379011,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "24.05.2025",
-    "showcase": ""
+    "rateDate": "24.05.2025"
   },
   {
     "number": 559,
@@ -11176,8 +10618,7 @@
     "songID": 10004614,
     "songs": 9,
     "SFX": 77,
-    "rateDate": "24.05.2025",
-    "showcase": ""
+    "rateDate": "24.05.2025"
   },
   {
     "number": 560,
@@ -11196,8 +10637,7 @@
     "songID": 10001177,
     "songs": 7,
     "SFX": 163,
-    "rateDate": "25.05.2025",
-    "showcase": ""
+    "rateDate": "25.05.2025"
   },
   {
     "number": 561,
@@ -11216,8 +10656,7 @@
     "songID": 1297191,
     "songs": 1,
     "SFX": 9,
-    "rateDate": "27.05.2025",
-    "showcase": ""
+    "rateDate": "27.05.2025"
   },
   {
     "number": 562,
@@ -11236,8 +10675,7 @@
     "songID": 1245478,
     "songs": 2,
     "SFX": 0,
-    "rateDate": "27.05.2025",
-    "showcase": ""
+    "rateDate": "27.05.2025"
   },
   {
     "number": 563,
@@ -11256,8 +10694,7 @@
     "songID": 1318510,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "02.06.2025",
-    "showcase": ""
+    "rateDate": "02.06.2025"
   },
   {
     "number": 564,
@@ -11276,8 +10713,7 @@
     "songID": 1331313,
     "songs": 2,
     "SFX": 1,
-    "rateDate": "02.06.2025",
-    "showcase": ""
+    "rateDate": "02.06.2025"
   },
   {
     "number": 565,
@@ -11296,8 +10732,7 @@
     "songID": 787354,
     "songs": 2,
     "SFX": 55,
-    "rateDate": "04.06.2025",
-    "showcase": ""
+    "rateDate": "04.06.2025"
   },
   {
     "number": 566,
@@ -11316,8 +10751,7 @@
     "songID": 1326354,
     "songs": 2,
     "SFX": 14,
-    "rateDate": "04.06.2025",
-    "showcase": ""
+    "rateDate": "04.06.2025"
   },
   {
     "number": 567,
@@ -11336,8 +10770,7 @@
     "songID": 1386255,
     "songs": 6,
     "SFX": 45,
-    "rateDate": "05.06.2025",
-    "showcase": ""
+    "rateDate": "05.06.2025"
   },
   {
     "number": 568,
@@ -11356,8 +10789,7 @@
     "songID": 1018448,
     "songs": 12,
     "SFX": 28,
-    "rateDate": "05.06.2025",
-    "showcase": ""
+    "rateDate": "05.06.2025"
   },
   {
     "number": 569,
@@ -11376,8 +10808,7 @@
     "songID": 10007222,
     "songs": 1,
     "SFX": 64,
-    "rateDate": "06.06.2025",
-    "showcase": ""
+    "rateDate": "06.06.2025"
   },
   {
     "number": 570,
@@ -11396,8 +10827,7 @@
     "songID": 970271,
     "songs": 1,
     "SFX": 16,
-    "rateDate": "06.06.2025",
-    "showcase": ""
+    "rateDate": "06.06.2025"
   },
   {
     "number": 571,
@@ -11416,8 +10846,7 @@
     "songID": 1115577,
     "songs": 1,
     "SFX": 14,
-    "rateDate": "11.06.2025",
-    "showcase": ""
+    "rateDate": "11.06.2025"
   },
   {
     "number": 572,
@@ -11436,8 +10865,7 @@
     "songID": 936853,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "11.06.2025",
-    "showcase": ""
+    "rateDate": "11.06.2025"
   },
   {
     "number": 573,
@@ -11456,8 +10884,7 @@
     "songID": 10002518,
     "songs": 1,
     "SFX": 21,
-    "rateDate": "12.06.2025",
-    "showcase": ""
+    "rateDate": "12.06.2025"
   },
   {
     "number": 574,
@@ -11476,8 +10903,7 @@
     "songID": 1189889,
     "songs": 18,
     "SFX": 144,
-    "rateDate": "12.06.2025",
-    "showcase": ""
+    "rateDate": "12.06.2025"
   },
   {
     "number": 575,
@@ -11496,8 +10922,7 @@
     "songID": 76743,
     "songs": 6,
     "SFX": 51,
-    "rateDate": "12.06.2025",
-    "showcase": ""
+    "rateDate": "12.06.2025"
   },
   {
     "number": 576,
@@ -11516,8 +10941,7 @@
     "songID": 68714,
     "songs": 1,
     "SFX": 6,
-    "rateDate": "12.06.2025",
-    "showcase": ""
+    "rateDate": "12.06.2025"
   },
   {
     "number": 577,
@@ -11536,8 +10960,7 @@
     "songID": 10007049,
     "songs": 17,
     "SFX": 108,
-    "rateDate": "12.06.2025",
-    "showcase": ""
+    "rateDate": "12.06.2025"
   },
   {
     "number": 578,
@@ -11556,8 +10979,7 @@
     "songID": 1210043,
     "songs": 13,
     "SFX": 7,
-    "rateDate": "15.06.2025",
-    "showcase": ""
+    "rateDate": "15.06.2025"
   },
   {
     "number": 579,
@@ -11576,8 +10998,7 @@
     "songID": 1163161,
     "songs": 2,
     "SFX": 15,
-    "rateDate": "15.06.2025",
-    "showcase": ""
+    "rateDate": "15.06.2025"
   },
   {
     "number": 580,
@@ -11596,8 +11017,7 @@
     "songID": "NONG",
     "songs": 2,
     "SFX": 0,
-    "rateDate": "15.06.2025",
-    "showcase": ""
+    "rateDate": "15.06.2025"
   },
   {
     "number": 581,
@@ -11616,8 +11036,7 @@
     "songID": 975213,
     "songs": 1,
     "SFX": 11,
-    "rateDate": "15.06.2025",
-    "showcase": ""
+    "rateDate": "15.06.2025"
   },
   {
     "number": 582,
@@ -11636,8 +11055,7 @@
     "songID": 10004453,
     "songs": 1,
     "SFX": 48,
-    "rateDate": "15.06.2025",
-    "showcase": ""
+    "rateDate": "15.06.2025"
   },
   {
     "number": 583,
@@ -11656,8 +11074,7 @@
     "songID": 10008557,
     "songs": 1,
     "SFX": 1,
-    "rateDate": "16.06.2025",
-    "showcase": ""
+    "rateDate": "16.06.2025"
   },
   {
     "number": 584,
@@ -11676,8 +11093,7 @@
     "songID": 10004088,
     "songs": 6,
     "SFX": 40,
-    "rateDate": "16.06.2025",
-    "showcase": ""
+    "rateDate": "16.06.2025"
   },
   {
     "number": 585,
@@ -11696,8 +11112,7 @@
     "songID": 10007440,
     "songs": 5,
     "SFX": 21,
-    "rateDate": "16.06.2025",
-    "showcase": ""
+    "rateDate": "16.06.2025"
   },
   {
     "number": 586,
@@ -11716,8 +11131,7 @@
     "songID": 10007125,
     "songs": 5,
     "SFX": 11,
-    "rateDate": "18.06.2025",
-    "showcase": ""
+    "rateDate": "18.06.2025"
   },
   {
     "number": 587,
@@ -11736,8 +11150,7 @@
     "songID": 551069,
     "songs": 1,
     "SFX": 3,
-    "rateDate": "20.06.2025",
-    "showcase": ""
+    "rateDate": "20.06.2025"
   },
   {
     "number": 588,
@@ -11756,8 +11169,7 @@
     "songID": 1331998,
     "songs": 21,
     "SFX": 193,
-    "rateDate": "20.06.2025",
-    "showcase": ""
+    "rateDate": "20.06.2025"
   },
   {
     "number": 589,
@@ -11776,8 +11188,7 @@
     "songID": 1281828,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "20.06.2025",
-    "showcase": ""
+    "rateDate": "20.06.2025"
   },
   {
     "number": 590,
@@ -11796,8 +11207,7 @@
     "songID": 93089,
     "songs": 2,
     "SFX": 10,
-    "rateDate": "25.06.2025",
-    "showcase": ""
+    "rateDate": "25.06.2025"
   },
   {
     "number": 591,
@@ -11816,8 +11226,7 @@
     "songID": 10011089,
     "songs": 4,
     "SFX": 1,
-    "rateDate": "25.06.2025",
-    "showcase": ""
+    "rateDate": "25.06.2025"
   },
   {
     "number": 592,
@@ -11836,8 +11245,7 @@
     "songID": 10009529,
     "songs": 2,
     "SFX": 13,
-    "rateDate": "25.06.2025",
-    "showcase": ""
+    "rateDate": "25.06.2025"
   },
   {
     "number": 593,
@@ -11856,8 +11264,7 @@
     "songID": 10012353,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "25.06.2025",
-    "showcase": ""
+    "rateDate": "25.06.2025"
   },
   {
     "number": 594,
@@ -11876,8 +11283,7 @@
     "songID": 1092050,
     "songs": 1,
     "SFX": 1,
-    "rateDate": "29.06.2025",
-    "showcase": ""
+    "rateDate": "29.06.2025"
   },
   {
     "number": 595,
@@ -11896,8 +11302,7 @@
     "songID": 1379328,
     "songs": 1,
     "SFX": 39,
-    "rateDate": "29.06.2025",
-    "showcase": ""
+    "rateDate": "29.06.2025"
   },
   {
     "number": 596,
@@ -11916,8 +11321,7 @@
     "songID": 10004224,
     "songs": 1,
     "SFX": 14,
-    "rateDate": "29.06.2025",
-    "showcase": ""
+    "rateDate": "29.06.2025"
   },
   {
     "number": 597,
@@ -11936,8 +11340,7 @@
     "songID": 1442871,
     "songs": 1,
     "SFX": 27,
-    "rateDate": "29.06.2025",
-    "showcase": ""
+    "rateDate": "29.06.2025"
   },
   {
     "number": 598,
@@ -11956,8 +11359,7 @@
     "songID": 525125,
     "songs": 1,
     "SFX": 2,
-    "rateDate": "29.06.2025",
-    "showcase": ""
+    "rateDate": "29.06.2025"
   },
   {
     "number": 599,
@@ -11976,8 +11378,7 @@
     "songID": 10003156,
     "songs": 2,
     "SFX": 9,
-    "rateDate": "02.07.2025",
-    "showcase": ""
+    "rateDate": "02.07.2025"
   },
   {
     "number": 600,
@@ -11996,8 +11397,7 @@
     "songID": 10009558,
     "songs": 3,
     "SFX": 21,
-    "rateDate": "02.07.2025",
-    "showcase": ""
+    "rateDate": "02.07.2025"
   },
   {
     "number": 601,
@@ -12016,8 +11416,7 @@
     "songID": 898286,
     "songs": 1,
     "SFX": 10,
-    "rateDate": "07.07.2025",
-    "showcase": ""
+    "rateDate": "07.07.2025"
   },
   {
     "number": 602,
@@ -12036,8 +11435,7 @@
     "songID": 1195005,
     "songs": 3,
     "SFX": 41,
-    "rateDate": "07.07.2025",
-    "showcase": ""
+    "rateDate": "07.07.2025"
   },
   {
     "number": 603,
@@ -12056,8 +11454,7 @@
     "songID": 10003601,
     "songs": 7,
     "SFX": 164,
-    "rateDate": "07.07.2025",
-    "showcase": ""
+    "rateDate": "07.07.2025"
   },
   {
     "number": 604,
@@ -12076,8 +11473,7 @@
     "songID": 1330393,
     "songs": 1,
     "SFX": 49,
-    "rateDate": "08.07.2025",
-    "showcase": ""
+    "rateDate": "08.07.2025"
   },
   {
     "number": 605,
@@ -12096,8 +11492,7 @@
     "songID": 342847,
     "songs": 8,
     "SFX": 31,
-    "rateDate": "08.07.2025",
-    "showcase": ""
+    "rateDate": "08.07.2025"
   },
   {
     "number": 606,
@@ -12116,8 +11511,7 @@
     "songID": 10007746,
     "songs": 2,
     "SFX": 3,
-    "rateDate": "08.07.2025",
-    "showcase": ""
+    "rateDate": "08.07.2025"
   },
   {
     "number": 607,
@@ -12136,8 +11530,7 @@
     "songID": 10011489,
     "songs": 3,
     "SFX": 7,
-    "rateDate": "08.07.2025",
-    "showcase": ""
+    "rateDate": "08.07.2025"
   },
   {
     "number": 608,
@@ -12156,8 +11549,7 @@
     "songID": 10007404,
     "songs": 4,
     "SFX": 18,
-    "rateDate": "08.07.2025",
-    "showcase": ""
+    "rateDate": "08.07.2025"
   },
   {
     "number": 609,
@@ -12176,8 +11568,7 @@
     "songID": 1407746,
     "songs": 7,
     "SFX": 16,
-    "rateDate": "14.07.2025",
-    "showcase": ""
+    "rateDate": "14.07.2025"
   },
   {
     "number": 610,
@@ -12196,8 +11587,7 @@
     "songID": 1260684,
     "songs": 19,
     "SFX": 11,
-    "rateDate": "15.07.2025",
-    "showcase": ""
+    "rateDate": "15.07.2025"
   },
   {
     "number": 611,
@@ -12216,8 +11606,7 @@
     "songID": 10001235,
     "songs": 2,
     "SFX": 29,
-    "rateDate": "15.07.2025",
-    "showcase": ""
+    "rateDate": "15.07.2025"
   },
   {
     "number": 612,
@@ -12236,8 +11625,7 @@
     "songID": 10002989,
     "songs": 6,
     "SFX": 69,
-    "rateDate": "18.07.2025",
-    "showcase": ""
+    "rateDate": "18.07.2025"
   },
   {
     "number": 613,
@@ -12256,8 +11644,7 @@
     "songID": 1362038,
     "songs": 1,
     "SFX": 4,
-    "rateDate": "18.07.2025",
-    "showcase": ""
+    "rateDate": "18.07.2025"
   },
   {
     "number": 614,
@@ -12276,8 +11663,7 @@
     "songID": 10006747,
     "songs": 3,
     "SFX": 68,
-    "rateDate": "18.07.2025",
-    "showcase": ""
+    "rateDate": "18.07.2025"
   },
   {
     "number": 615,
@@ -12296,8 +11682,7 @@
     "songID": 128067,
     "songs": 4,
     "SFX": 25,
-    "rateDate": "18.07.2025",
-    "showcase": ""
+    "rateDate": "18.07.2025"
   },
   {
     "number": 616,
@@ -12316,8 +11701,7 @@
     "songID": 1303104,
     "songs": 2,
     "SFX": 2,
-    "rateDate": "18.07.2025",
-    "showcase": ""
+    "rateDate": "18.07.2025"
   },
   {
     "number": 617,
@@ -12336,8 +11720,7 @@
     "songID": 10006662,
     "songs": 9,
     "SFX": 10,
-    "rateDate": "18.07.2025",
-    "showcase": ""
+    "rateDate": "18.07.2025"
   },
   {
     "number": 618,
@@ -12356,8 +11739,7 @@
     "songID": 499082,
     "songs": 3,
     "SFX": 7,
-    "rateDate": "18.07.2025",
-    "showcase": ""
+    "rateDate": "18.07.2025"
   },
   {
     "number": 619,
@@ -12376,8 +11758,7 @@
     "songID": 10007715,
     "songs": 6,
     "SFX": 38,
-    "rateDate": "18.07.2025",
-    "showcase": ""
+    "rateDate": "18.07.2025"
   },
   {
     "number": 620,
@@ -12396,8 +11777,7 @@
     "songID": 250843,
     "songs": 4,
     "SFX": 14,
-    "rateDate": "21.07.2025",
-    "showcase": ""
+    "rateDate": "21.07.2025"
   },
   {
     "number": 621,
@@ -12416,8 +11796,7 @@
     "songID": 1297738,
     "songs": 2,
     "SFX": 3,
-    "rateDate": "21.07.2025",
-    "showcase": ""
+    "rateDate": "21.07.2025"
   },
   {
     "number": 622,
@@ -12436,8 +11815,7 @@
     "songID": 849762,
     "songs": 21,
     "SFX": 164,
-    "rateDate": "25.07.2025",
-    "showcase": ""
+    "rateDate": "25.07.2025"
   },
   {
     "number": 623,
@@ -12456,8 +11834,7 @@
     "songID": 10005934,
     "songs": 3,
     "SFX": 12,
-    "rateDate": "25.07.2025",
-    "showcase": ""
+    "rateDate": "25.07.2025"
   },
   {
     "number": 624,
@@ -12476,8 +11853,7 @@
     "songID": 1076360,
     "songs": 6,
     "SFX": 61,
-    "rateDate": "25.07.2025",
-    "showcase": ""
+    "rateDate": "25.07.2025"
   },
   {
     "number": 625,
@@ -12496,8 +11872,7 @@
     "songID": 175820,
     "songs": 5,
     "SFX": 27,
-    "rateDate": "25.07.2025",
-    "showcase": ""
+    "rateDate": "25.07.2025"
   },
   {
     "number": 626,
@@ -12516,8 +11891,7 @@
     "songID": 1398007,
     "songs": 1,
     "SFX": 4,
-    "rateDate": "25.07.2025",
-    "showcase": ""
+    "rateDate": "25.07.2025"
   },
   {
     "number": 627,
@@ -12536,8 +11910,7 @@
     "songID": 10001563,
     "songs": 2,
     "SFX": 3,
-    "rateDate": "25.07.2025",
-    "showcase": ""
+    "rateDate": "25.07.2025"
   },
   {
     "number": 628,
@@ -12556,8 +11929,7 @@
     "songID": 10008915,
     "songs": 1,
     "SFX": 4,
-    "rateDate": "03.08.2025",
-    "showcase": ""
+    "rateDate": "03.08.2025"
   },
   {
     "number": 629,
@@ -12576,8 +11948,7 @@
     "songID": 10006685,
     "songs": 5,
     "SFX": 27,
-    "rateDate": "03.08.2025",
-    "showcase": ""
+    "rateDate": "03.08.2025"
   },
   {
     "number": 630,
@@ -12596,8 +11967,7 @@
     "songID": 621135,
     "songs": 3,
     "SFX": 10,
-    "rateDate": "03.08.2025",
-    "showcase": ""
+    "rateDate": "03.08.2025"
   },
   {
     "number": 631,
@@ -12616,8 +11986,7 @@
     "songID": 67791,
     "songs": 7,
     "SFX": 119,
-    "rateDate": "03.08.2025",
-    "showcase": ""
+    "rateDate": "03.08.2025"
   },
   {
     "number": 632,
@@ -12636,8 +12005,7 @@
     "songID": 10006065,
     "songs": 1,
     "SFX": 9,
-    "rateDate": "11.08.2025",
-    "showcase": ""
+    "rateDate": "11.08.2025"
   },
   {
     "number": 633,
@@ -12656,8 +12024,7 @@
     "songID": 1346456,
     "songs": 3,
     "SFX": 1,
-    "rateDate": "11.08.2025",
-    "showcase": ""
+    "rateDate": "11.08.2025"
   },
   {
     "number": 634,
@@ -12676,8 +12043,7 @@
     "songID": 462681,
     "songs": 1,
     "SFX": 1,
-    "rateDate": "11.08.2025",
-    "showcase": ""
+    "rateDate": "11.08.2025"
   },
   {
     "number": 635,
@@ -12696,8 +12062,7 @@
     "songID": 908129,
     "songs": 5,
     "SFX": 46,
-    "rateDate": "11.08.2025",
-    "showcase": ""
+    "rateDate": "11.08.2025"
   },
   {
     "number": 636,
@@ -12716,8 +12081,7 @@
     "songID": 1204306,
     "songs": 3,
     "SFX": 58,
-    "rateDate": "11.08.2025",
-    "showcase": ""
+    "rateDate": "11.08.2025"
   },
   {
     "number": 637,
@@ -12736,8 +12100,7 @@
     "songID": 10002875,
     "songs": 4,
     "SFX": 6,
-    "rateDate": "11.08.2025",
-    "showcase": ""
+    "rateDate": "11.08.2025"
   },
   {
     "number": 638,
@@ -12756,8 +12119,7 @@
     "songID": 10011864,
     "songs": 3,
     "SFX": 13,
-    "rateDate": "11.08.2025",
-    "showcase": ""
+    "rateDate": "11.08.2025"
   },
   {
     "number": 639,
@@ -12776,8 +12138,7 @@
     "songID": 10010902,
     "songs": 6,
     "SFX": 32,
-    "rateDate": "11.08.2025",
-    "showcase": ""
+    "rateDate": "11.08.2025"
   },
   {
     "number": 640,
@@ -12796,8 +12157,7 @@
     "songID": 27436,
     "songs": 1,
     "SFX": 5,
-    "rateDate": "11.08.2025",
-    "showcase": ""
+    "rateDate": "11.08.2025"
   },
   {
     "number": 641,
@@ -12816,8 +12176,7 @@
     "songID": 1091340,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "11.08.2025",
-    "showcase": ""
+    "rateDate": "11.08.2025"
   },
   {
     "number": 642,
@@ -12836,8 +12195,7 @@
     "songID": 133,
     "songs": 2,
     "SFX": 0,
-    "rateDate": "11.08.2025",
-    "showcase": ""
+    "rateDate": "11.08.2025"
   },
   {
     "number": 643,
@@ -12856,8 +12214,7 @@
     "songID": 544108,
     "songs": 2,
     "SFX": 6,
-    "rateDate": "11.08.2025",
-    "showcase": ""
+    "rateDate": "11.08.2025"
   },
   {
     "number": 644,
@@ -12876,8 +12233,7 @@
     "songID": 10001543,
     "songs": 2,
     "SFX": 8,
-    "rateDate": "11.08.2025",
-    "showcase": ""
+    "rateDate": "11.08.2025"
   },
   {
     "number": 645,
@@ -12896,8 +12252,7 @@
     "songID": "OFFICIAL",
     "songs": 3,
     "SFX": 185,
-    "rateDate": "15.08.2025",
-    "showcase": ""
+    "rateDate": "15.08.2025"
   },
   {
     "number": 646,
@@ -12916,8 +12271,7 @@
     "songID": 10006730,
     "songs": 13,
     "SFX": 113,
-    "rateDate": "15.08.2025",
-    "showcase": ""
+    "rateDate": "15.08.2025"
   },
   {
     "number": 647,
@@ -12936,8 +12290,7 @@
     "songID": 10012712,
     "songs": 9,
     "SFX": 109,
-    "rateDate": "15.08.2025",
-    "showcase": ""
+    "rateDate": "15.08.2025"
   },
   {
     "number": 648,
@@ -12956,8 +12309,7 @@
     "songID": 10006036,
     "songs": 6,
     "SFX": 90,
-    "rateDate": "16.08.2025",
-    "showcase": ""
+    "rateDate": "16.08.2025"
   },
   {
     "number": 649,
@@ -12976,8 +12328,7 @@
     "songID": 10003067,
     "songs": 10,
     "SFX": 10,
-    "rateDate": "16.08.2025",
-    "showcase": ""
+    "rateDate": "16.08.2025"
   },
   {
     "number": 650,
@@ -12996,8 +12347,7 @@
     "songID": 1192983,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "17.08.2025",
-    "showcase": ""
+    "rateDate": "17.08.2025"
   },
   {
     "number": 651,
@@ -13016,8 +12366,7 @@
     "songID": 932635,
     "songs": 11,
     "SFX": 14,
-    "rateDate": "17.08.2025",
-    "showcase": ""
+    "rateDate": "17.08.2025"
   },
   {
     "number": 652,
@@ -13036,8 +12385,7 @@
     "songID": 1434852,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "17.08.2025",
-    "showcase": ""
+    "rateDate": "17.08.2025"
   },
   {
     "number": 653,
@@ -13056,8 +12404,7 @@
     "songID": "OFFICIAL",
     "songs": 6,
     "SFX": 26,
-    "rateDate": "17.08.2025",
-    "showcase": ""
+    "rateDate": "17.08.2025"
   },
   {
     "number": 654,
@@ -13076,8 +12423,7 @@
     "songID": 10006470,
     "songs": 2,
     "SFX": 92,
-    "rateDate": "17.08.2025",
-    "showcase": ""
+    "rateDate": "17.08.2025"
   },
   {
     "number": 655,
@@ -13096,8 +12442,7 @@
     "songID": 10004097,
     "songs": 2,
     "SFX": 25,
-    "rateDate": "17.08.2025",
-    "showcase": ""
+    "rateDate": "17.08.2025"
   },
   {
     "number": 656,
@@ -13116,8 +12461,7 @@
     "songID": 1189843,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "17.08.2025",
-    "showcase": ""
+    "rateDate": "17.08.2025"
   },
   {
     "number": 657,
@@ -13136,8 +12480,7 @@
     "songID": 299299,
     "songs": 2,
     "SFX": 0,
-    "rateDate": "17.08.2025",
-    "showcase": ""
+    "rateDate": "17.08.2025"
   },
   {
     "number": 658,
@@ -13156,8 +12499,7 @@
     "songID": 1459052,
     "songs": 8,
     "SFX": 9,
-    "rateDate": "17.08.2025",
-    "showcase": ""
+    "rateDate": "17.08.2025"
   },
   {
     "number": 659,
@@ -13176,8 +12518,7 @@
     "songID": 733545,
     "songs": 16,
     "SFX": 75,
-    "rateDate": "17.08.2025",
-    "showcase": ""
+    "rateDate": "17.08.2025"
   },
   {
     "number": 660,
@@ -13196,8 +12537,7 @@
     "songID": 10002887,
     "songs": 3,
     "SFX": 136,
-    "rateDate": "17.08.2025",
-    "showcase": ""
+    "rateDate": "17.08.2025"
   },
   {
     "number": 661,
@@ -13216,8 +12556,7 @@
     "songID": 10004598,
     "songs": 5,
     "SFX": 5,
-    "rateDate": "18.08.2025",
-    "showcase": ""
+    "rateDate": "18.08.2025"
   },
   {
     "number": 662,
@@ -13236,8 +12575,7 @@
     "songID": 1245478,
     "songs": 2,
     "SFX": 0,
-    "rateDate": "18.08.2025",
-    "showcase": ""
+    "rateDate": "18.08.2025"
   },
   {
     "number": 663,
@@ -13256,8 +12594,7 @@
     "songID": 941913,
     "songs": 3,
     "SFX": 10,
-    "rateDate": "18.08.2025",
-    "showcase": ""
+    "rateDate": "18.08.2025"
   },
   {
     "number": 664,
@@ -13276,8 +12613,7 @@
     "songID": 10011154,
     "songs": 3,
     "SFX": 26,
-    "rateDate": "20.08.2025",
-    "showcase": ""
+    "rateDate": "20.08.2025"
   },
   {
     "number": 665,
@@ -13296,8 +12632,7 @@
     "songID": 1049212,
     "songs": 11,
     "SFX": 1,
-    "rateDate": "20.08.2025",
-    "showcase": ""
+    "rateDate": "20.08.2025"
   },
   {
     "number": 666,
@@ -13316,8 +12651,7 @@
     "songID": 482883,
     "songs": 2,
     "SFX": 16,
-    "rateDate": "20.08.2025",
-    "showcase": ""
+    "rateDate": "20.08.2025"
   },
   {
     "number": 667,
@@ -13336,8 +12670,7 @@
     "songID": 10002887,
     "songs": 3,
     "SFX": 111,
-    "rateDate": "20.08.2025",
-    "showcase": ""
+    "rateDate": "20.08.2025"
   },
   {
     "number": 668,
@@ -13356,8 +12689,7 @@
     "songID": 503544,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "20.08.2025",
-    "showcase": ""
+    "rateDate": "20.08.2025"
   },
   {
     "number": 669,
@@ -13376,8 +12708,7 @@
     "songID": 273968,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "20.08.2025",
-    "showcase": ""
+    "rateDate": "20.08.2025"
   },
   {
     "number": 670,
@@ -13396,8 +12727,7 @@
     "songID": 1280933,
     "songs": 4,
     "SFX": 7,
-    "rateDate": "20.08.2025",
-    "showcase": ""
+    "rateDate": "20.08.2025"
   },
   {
     "number": 671,
@@ -13416,8 +12746,7 @@
     "songID": 591346,
     "songs": 2,
     "SFX": 10,
-    "rateDate": "20.08.2025",
-    "showcase": ""
+    "rateDate": "20.08.2025"
   },
   {
     "number": 672,
@@ -13436,8 +12765,7 @@
     "songID": 10009872,
     "songs": 1,
     "SFX": 6,
-    "rateDate": "20.08.2025",
-    "showcase": ""
+    "rateDate": "20.08.2025"
   },
   {
     "number": 673,
@@ -13456,8 +12784,7 @@
     "songID": 1091340,
     "songs": 1,
     "SFX": 0,
-    "rateDate": "20.08.2025",
-    "showcase": ""
+    "rateDate": "20.08.2025"
   },
   {
     "number": 674,
@@ -13476,8 +12803,7 @@
     "songID": 644761,
     "songs": 1,
     "SFX": 1,
-    "rateDate": "20.08.2025",
-    "showcase": ""
+    "rateDate": "20.08.2025"
   },
   {
     "number": 675,
@@ -13496,8 +12822,7 @@
     "songID": 614361,
     "songs": 4,
     "SFX": 11,
-    "rateDate": "22.08.2025",
-    "showcase": ""
+    "rateDate": "22.08.2025"
   },
   {
     "number": 676,
@@ -13516,8 +12841,7 @@
     "songID": 1338447,
     "songs": 1,
     "SFX": 21,
-    "rateDate": "22.08.2025",
-    "showcase": ""
+    "rateDate": "22.08.2025"
   },
   {
     "number": 677,
@@ -13536,8 +12860,7 @@
     "songID": 1268960,
     "songs": 3,
     "SFX": 22,
-    "rateDate": "23.08.2025",
-    "showcase": ""
+    "rateDate": "23.08.2025"
   },
   {
     "number": 678,
@@ -13556,8 +12879,7 @@
     "songID": 10008715,
     "songs": 2,
     "SFX": 6,
-    "rateDate": "23.08.2025",
-    "showcase": ""
+    "rateDate": "23.08.2025"
   },
   {
     "number": 679,
@@ -13576,8 +12898,7 @@
     "songID": 10000053,
     "songs": 1,
     "SFX": 10,
-    "rateDate": "24.08.2025",
-    "showcase": ""
+    "rateDate": "24.08.2025"
   },
   {
     "number": 680,
@@ -13596,8 +12917,7 @@
     "songID": 1395312,
     "songs": 6,
     "SFX": 13,
-    "rateDate": "24.08.2025",
-    "showcase": ""
+    "rateDate": "24.08.2025"
   },
   {
     "number": 681,
@@ -13616,8 +12936,7 @@
     "songID": 10002767,
     "songs": 3,
     "SFX": 13,
-    "rateDate": "24.08.2025",
-    "showcase": ""
+    "rateDate": "24.08.2025"
   },
   {
     "number": 682,
@@ -13636,8 +12955,7 @@
     "songID": 10005263,
     "songs": 5,
     "SFX": 26,
-    "rateDate": "24.08.2025",
-    "showcase": ""
+    "rateDate": "24.08.2025"
   },
   {
     "number": 683,
@@ -13656,8 +12974,7 @@
     "songID": 10007673,
     "songs": 1,
     "SFX": 5,
-    "rateDate": "24.08.2025",
-    "showcase": ""
+    "rateDate": "24.08.2025"
   },
   {
     "number": 684,
@@ -13676,8 +12993,7 @@
     "songID": 1373625,
     "songs": 3,
     "SFX": 19,
-    "rateDate": "28.08.2025",
-    "showcase": ""
+    "rateDate": "28.08.2025"
   },
   {
     "number": 685,
@@ -13696,8 +13012,7 @@
     "songID": 10004088,
     "songs": 2,
     "SFX": 1,
-    "rateDate": "28.08.2025",
-    "showcase": ""
+    "rateDate": "28.08.2025"
   },
   {
     "number": 686,
@@ -13707,7 +13022,7 @@
     "difficulty": "Easy Demon",
     "rating": "Mythic",
     "userCoins": 3,
-    "estimatedTime": 1813,
+    "estimatedTime": 1814,
     "objects": 100008,
     "checkpoints": 30,
     "twop": false,
@@ -13716,7 +13031,253 @@
     "songID": 616845,
     "songs": 20,
     "SFX": 632,
-    "rateDate": "01.09.2025",
-    "showcase": ""
+    "rateDate": "01.09.2025"
+  },
+  {
+    "number": 687,
+    "level": "Heavenly Canopy",
+    "creator": "iownfish",
+    "ID": 124819317,
+    "difficulty": "Insane Demon",
+    "rating": "Rated",
+    "userCoins": 0,
+    "estimatedTime": 152,
+    "objects": 12115,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "Hidden Paradise",
+    "artist": "Daniel Carl",
+    "songID": 10012752,
+    "songs": 2,
+    "SFX": 6,
+    "rateDate": "07.09.2025"
+  },
+  {
+    "number": 688,
+    "level": "Current Current",
+    "creator": "Crerro",
+    "ID": 121817525,
+    "difficulty": "Extreme Demon",
+    "rating": "Rated",
+    "userCoins": 0,
+    "estimatedTime": 66,
+    "objects": 12929,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "Geometric Rainy Day",
+    "artist": "Sound Airyluvs",
+    "songID": 10001038,
+    "songs": 1,
+    "SFX": 4,
+    "rateDate": "07.09.2025"
+  },
+  {
+    "number": 689,
+    "level": "BOSS RUSH 2",
+    "creator": "GDTicLos",
+    "ID": 125385088,
+    "difficulty": "Medium Demon",
+    "rating": "Mythic",
+    "userCoins": 3,
+    "estimatedTime": 2379,
+    "objects": 65535,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "BOSS RUSH 2 - Original Soundtrack",
+    "artist": "gafufu",
+    "songID": 1465358,
+    "songs": 12,
+    "SFX": 265,
+    "rateDate": "08.09.2025"
+  },
+  {
+    "number": 690,
+    "level": "Vinelight",
+    "creator": "BrothersFTW",
+    "ID": 125365201,
+    "difficulty": "Insane Demon",
+    "rating": "Epic",
+    "userCoins": 3,
+    "estimatedTime": 1172,
+    "objects": 65535,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "Calm Evening Forest",
+    "artist": "David Dumais",
+    "songID": 10006663,
+    "songs": 10,
+    "SFX": 321,
+    "rateDate": "09.09.2025"
+  },
+  {
+    "number": 691,
+    "level": "Operation Extraction",
+    "creator": "KingEggplant987",
+    "ID": 125681724,
+    "difficulty": "Easy Demon",
+    "rating": "Epic",
+    "userCoins": 1,
+    "estimatedTime": 205,
+    "objects": 50091,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "Necromancy (drum n bass)",
+    "artist": "zirconmusic",
+    "songID": 216300,
+    "songs": 4,
+    "SFX": 57,
+    "rateDate": "09.09.2025"
+  },
+  {
+    "number": 692,
+    "level": "Cascabel",
+    "creator": "StyphonTV",
+    "ID": 125032366,
+    "difficulty": "Hard Demon",
+    "rating": "Epic",
+    "userCoins": 3,
+    "estimatedTime": 221,
+    "objects": 50539,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "Comet",
+    "artist": "Wiktoria Zac",
+    "songID": 10012432,
+    "songs": 6,
+    "SFX": 51,
+    "rateDate": "09.09.2025"
+  },
+  {
+    "number": 693,
+    "level": "Tomb of the Pain",
+    "creator": "IshmaelBahamut",
+    "ID": 125163063,
+    "difficulty": "Insane Demon",
+    "rating": "Featured",
+    "userCoins": 3,
+    "estimatedTime": 2234,
+    "objects": 65535,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "ELEPS - POWERSOUND (DUBSTEP)",
+    "artist": "ELEPS44",
+    "songID": 839572,
+    "songs": 14,
+    "SFX": 21,
+    "rateDate": "09.09.2025"
+  },
+  {
+    "number": 694,
+    "level": "Ascent",
+    "creator": "Elivyne",
+    "ID": 120738873,
+    "difficulty": "Hard Demon",
+    "rating": "Featured",
+    "userCoins": 3,
+    "estimatedTime": 279,
+    "objects": 43595,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "-Unstable Geometry-",
+    "artist": "Waterflame",
+    "songID": 1237698,
+    "songs": 4,
+    "SFX": 18,
+    "rateDate": "09.09.2025"
+  },
+  {
+    "number": 695,
+    "level": "Brick Climbing",
+    "creator": "Trulex750",
+    "ID": 124748068,
+    "difficulty": "Insane Demon",
+    "rating": "Rated",
+    "userCoins": 0,
+    "estimatedTime": 86,
+    "objects": 3312,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "FD - 87 97",
+    "artist": "ForgottenDawn",
+    "songID": 604528,
+    "songs": 1,
+    "SFX": 4,
+    "rateDate": "10.09.2025"
+  },
+  {
+    "number": 696,
+    "level": "Rate apricot tower",
+    "creator": "dpoopoop",
+    "ID": 116532794,
+    "difficulty": "Medium Demon",
+    "rating": "Featured",
+    "userCoins": 0,
+    "estimatedTime": 98,
+    "objects": 3050,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "Plains Of Wind",
+    "artist": "Brooklyn Game Audio",
+    "songID": 10009660,
+    "songs": 2,
+    "SFX": 6,
+    "rateDate": "10.09.2025"
+  },
+  {
+    "number": 697,
+    "level": "Heavenly Echo",
+    "creator": "IplmaI",
+    "ID": 125698552,
+    "difficulty": "Extreme Demon",
+    "rating": "Rated",
+    "userCoins": 0,
+    "estimatedTime": 79,
+    "objects": 49976,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "World Fragments III",
+    "artist": "xi",
+    "songID": 10008756,
+    "songs": 1,
+    "SFX": 3,
+    "rateDate": "10.09.2025"
+  },
+  {
+    "number": 698,
+    "level": "Azure depths",
+    "creator": "TNTking531",
+    "ID": 125774708,
+    "difficulty": "Easy Demon",
+    "rating": "Featured",
+    "userCoins": 0,
+    "estimatedTime": 100,
+    "objects": 16610,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "Calm But Careful",
+    "artist": "Dave Deville",
+    "songID": 10002552,
+    "songs": 3,
+    "SFX": 32,
+    "rateDate": "10.09.2025"
+  },
+  {
+    "number": 699,
+    "level": "Ocean Commotion",
+    "creator": "Crerro",
+    "ID": 113790975,
+    "difficulty": "Hard Demon",
+    "rating": "Rated",
+    "userCoins": 0,
+    "estimatedTime": 101,
+    "objects": 0,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "AIM - Elegy to a Fallen Star",
+    "artist": "ForgottenDawn",
+    "songID": 1222880,
+    "songs": 1,
+    "SFX": 7,
+    "rateDate": "10.09.2025"
   }
 ]

@@ -67,7 +67,17 @@ export class AppComponent implements OnInit {
 
     this.http.get<any[]>('assets/pemons.json').subscribe(
         data => {
-          this.rawData = data;
+          // strip any legacy "showcase" keys from the loaded JSON
+          this.rawData = Array.isArray(data)
+              ? data.map((d: any) => {
+                if (d && typeof d === 'object' && 'showcase' in d) {
+                  const { showcase, ...rest } = d;
+                  return rest;
+                }
+                return d;
+              })
+              : [];
+
           this.rowData = [...this.rawData]; // Set initial rowData without sorting
           this.updateCustomPaginationText();
           this.cdr.detectChanges();
@@ -153,7 +163,7 @@ export class AppComponent implements OnInit {
         col.cellClassRules = {};
       } else {
         console.log('Applying cell styles for:', col.field);
-        
+
         if (col.field === 'difficulty') {
           col.cellClassRules = {
             'easy': (p: any) => p.data.difficulty === 'Easy Demon',
@@ -263,7 +273,7 @@ export class AppComponent implements OnInit {
     }, 0);
   }
 
-// Utility function to convert seconds to dynamic time format (H:M:S)
+  // Utility function to convert seconds to dynamic time format (H:M:S)
   formatTime(seconds: number): string {
     const hours = Math.floor(seconds / 3600);
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -289,24 +299,13 @@ export class AppComponent implements OnInit {
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         return valueA.toLowerCase().localeCompare(valueB.toLowerCase());
-      },
-      cellRenderer: (params: any) => {
-        if (params.data && params.data.showcase) {
-          const link = document.createElement('a');
-          link.href = params.data.showcase;
-          link.target = '_blank'; // Open in a new tab
-          link.rel = 'noopener noreferrer'; // Prevent security issues
-          link.innerText = params.value;
-          link.style.textDecoration = 'none'; // Optional: underline the link
-          return link;
-        }
-        return params.value; // Fallback in case showcase is missing
       }
+      // showcase link logic removed – we just display the plain name
     },
     {
       field: "creator",
       flex: 2.5,
-      minWidth: 150,  // Ensures creator name stays readable
+      minWidth: 150,
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         return valueA.toLowerCase().localeCompare(valueB.toLowerCase());
@@ -350,7 +349,7 @@ export class AppComponent implements OnInit {
       field: "userCoins",
       headerName: "Coins",
       flex: 1.6,
-      minWidth: 90,  // Keeps the Coins column wide enough to be legible
+      minWidth: 90,
       filter: true,
       cellStyle: { 'text-align': 'center' }
     },
@@ -359,9 +358,9 @@ export class AppComponent implements OnInit {
       headerName: "Est. Time",
       flex: 2,
       minWidth: 115,
-      valueGetter: (params: any) => this.formatTime(params.data.estimatedTime),
+      valueGetter: (params: any) => this.formatTime(Number(params.data?.estimatedTime || 0)),
       comparator: (valueA: any, valueB: any, nodeA: any, nodeB: any) => {
-        return nodeA.data.estimatedTime - nodeB.data.estimatedTime;
+        return (Number(nodeA.data?.estimatedTime || 0)) - (Number(nodeB.data?.estimatedTime || 0));
       }
     },
     { field: "objects", flex: 1.5, minWidth: 90 },
@@ -369,7 +368,7 @@ export class AppComponent implements OnInit {
     {
       field: "twop",
       flex: 0.85,
-      minWidth: 60,  // Ensure checkbox column is not too narrow
+      minWidth: 60,
       headerName: "2p",
       cellStyle: {
         'text-align': 'center',
@@ -384,7 +383,7 @@ export class AppComponent implements OnInit {
     {
       field: "primarySong",
       flex: 3,
-      minWidth: 170,  // Ensures song name is readable
+      minWidth: 170,
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         const sanitizeString = (str: string) => str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
@@ -396,7 +395,7 @@ export class AppComponent implements OnInit {
     {
       field: "artist",
       flex: 2.3,
-      minWidth: 140,  // Ensures artist name stays visible
+      minWidth: 140,
       filter: true,
       comparator: (valueA: string, valueB: string) => {
         const sanitizeString = (str: string) => str.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
@@ -408,7 +407,7 @@ export class AppComponent implements OnInit {
     {
       field: "songID",
       flex: 1.8,
-      minWidth: 100,  // Ensures song ID remains visible
+      minWidth: 100,
       valueFormatter: (params: any) => {
         return params.value;
       },
@@ -418,7 +417,7 @@ export class AppComponent implements OnInit {
         if (isNumberA && isNumberB) return valueA - valueB;
         else if (isNumberA) return -1;
         else if (isNumberB) return 1;
-        return valueA.localeCompare(valueB);
+        return String(valueA).localeCompare(String(valueB));
       }
     },
     { field: "songs", flex: 1.2, minWidth: 75, cellStyle: { 'text-align': 'center' } },
@@ -443,10 +442,7 @@ export class AppComponent implements OnInit {
       }
     }
   ];
-
-
 }
-
 
 /*
 Copyright Google LLC. All Rights Reserved.
