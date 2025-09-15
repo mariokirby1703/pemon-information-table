@@ -456,7 +456,7 @@ def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False):
 
     # estimatedTime in **seconds**
     estimated_seconds = int(round(k57_frames / 240.0)) if k57_frames > 0 else None
-    estimated_time_seconds = estimated_seconds if estimated_seconds > 0 else None
+    estimated_time_seconds = estimated_seconds if isinstance(estimated_seconds, int) and estimated_seconds > 0 else None
 
     # songs (k52) + SFX (k53) counts
     songs_count = 0
