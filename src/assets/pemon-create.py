@@ -32,14 +32,14 @@ INPUT_FILE = "pemon_ids.txt"
 OUTPUT_FILE = "pemons.json"
 
 # ===================== Rate Limiter (6 req/min) + robust POST =====================
-MIN_INTERVAL = float(os.getenv("RL_MIN_INTERVAL", "10.5"))  # ~6/min
-WINDOWS = [(60, 6)]  # 6 per 60s
+MIN_INTERVAL = float(os.getenv("RL_MIN_INTERVAL", "6"))  # ~6/min
+WINDOWS = [(60, 10)]  # 6 per 60s
 
 RETRY_MAX = int(os.getenv("RL_RETRY_MAX", "5"))
 BACKOFF_BASE = float(os.getenv("RL_BACKOFF_BASE", "1.5"))
 BACKOFF_CAP = float(os.getenv("RL_BACKOFF_CAP", "30"))
-JITTER_MIN = float(os.getenv("RL_JITTER_MIN", "0.2"))
-JITTER_MAX = float(os.getenv("RL_JITTER_MAX", "0.8"))
+JITTER_MIN = float(os.getenv("RL_JITTER_MIN", "0.1"))
+JITTER_MAX = float(os.getenv("RL_JITTER_MAX", "0.3"))
 
 POOL_CONNECTIONS = int(os.getenv("RL_POOL_CONNECTIONS", "8"))
 POOL_MAXSIZE    = int(os.getenv("RL_POOL_MAXSIZE", "8"))
