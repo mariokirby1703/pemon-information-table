@@ -13412,5 +13412,43 @@
     "songs": 12,
     "SFX": 93,
     "rateDate": "23.09.2025"
+  },
+  {
+    "number": 707,
+    "level": "Snow Castle",
+    "creator": "Xepheron",
+    "ID": 125725323,
+    "difficulty": "Medium Demon",
+    "rating": "Featured",
+    "userCoins": 1,
+    "estimatedTime": 548,
+    "objects": 68498,
+    "checkpoints": 14,
+    "twop": false,
+    "primarySong": "Alptraum",
+    "artist": "ThorrMusic",
+    "songID": 10006104,
+    "songs": 19,
+    "SFX": 259,
+    "rateDate": "25.09.2025"
+  },
+  {
+    "number": 708,
+    "level": "RUN",
+    "creator": "newSakePlayS",
+    "ID": 109188084,
+    "difficulty": "Medium Demon",
+    "rating": "Rated",
+    "userCoins": 3,
+    "estimatedTime": 131,
+    "objects": 8112,
+    "checkpoints": 0,
+    "twop": false,
+    "primarySong": "Slipstream 2.0",
+    "artist": "Noisysundae",
+    "songID": 678175,
+    "songs": 1,
+    "SFX": 9,
+    "rateDate": "25.09.2025"
   }
 ]
