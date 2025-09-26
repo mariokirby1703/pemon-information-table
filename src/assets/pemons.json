@@ -13450,5 +13450,43 @@
     "songs": 1,
     "SFX": 9,
     "rateDate": "25.09.2025"
+  },
+  {
+    "number": 709,
+    "level": "Generic cube Level",
+    "creator": "Marpro750",
+    "ID": 113269555,
+    "difficulty": "Medium Demon",
+    "rating": "Featured",
+    "userCoins": 2,
+    "estimatedTime": 162,
+    "objects": 30539,
+    "checkpoints": 26,
+    "twop": false,
+    "primarySong": "Casual Game Music 11",
+    "artist": "Cafofo",
+    "songID": 10004041,
+    "songs": 8,
+    "SFX": 21,
+    "rateDate": "26.09.2025"
+  },
+  {
+    "number": 710,
+    "level": "Geometry Quest II",
+    "creator": "MyNameIsGreen",
+    "ID": 125030038,
+    "difficulty": "Hard Demon",
+    "rating": "Mythic",
+    "userCoins": 3,
+    "estimatedTime": 3327,
+    "objects": 235086,
+    "checkpoints": 64,
+    "twop": false,
+    "primarySong": "pearlbluesoul",
+    "artist": "VOLANT",
+    "songID": 998860,
+    "songs": 13,
+    "SFX": 145,
+    "rateDate": "26.09.2025"
   }
 ]
