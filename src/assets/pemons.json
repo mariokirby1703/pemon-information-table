@@ -251,7 +251,7 @@
     "level": "Logodomy",
     "creator": "TheMilkCat",
     "ID": 98275850,
-    "difficulty": "Insane Demon",
+    "difficulty": "Hard Demon",
     "rating": "Rated",
     "userCoins": 0,
     "estimatedTime": 113,
@@ -13792,5 +13792,24 @@
     "songs": 7,
     "SFX": 42,
     "rateDate": "12.10.2025"
+  },
+  {
+    "number": 727,
+    "level": "Telewarp Dreams",
+    "creator": "parrett",
+    "ID": 126212984,
+    "difficulty": "Insane Demon",
+    "rating": "Rated",
+    "userCoins": 3,
+    "estimatedTime": 301,
+    "objects": 64753,
+    "checkpoints": 31,
+    "twop": true,
+    "primarySong": "-BattleTown-",
+    "artist": "Waterflame",
+    "songID": 664136,
+    "songs": 2,
+    "SFX": 70,
+    "rateDate": "14.10.2025"
   }
 ]
