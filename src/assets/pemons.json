@@ -2835,7 +2835,7 @@
     "level": "Toggling Theory",
     "creator": "Shinxray",
     "ID": 99517459,
-    "difficulty": "Easy Demon",
+    "difficulty": "Medium Demon",
     "rating": "Rated",
     "userCoins": 1,
     "estimatedTime": 69,
@@ -13887,5 +13887,24 @@
     "songs": 2,
     "SFX": 15,
     "rateDate": "23.10.2025"
+  },
+  {
+    "number": 732,
+    "level": "Snowball Checkpoints",
+    "creator": "FakeHATETAG",
+    "ID": 127290819,
+    "difficulty": "Easy Demon",
+    "rating": "Featured",
+    "userCoins": 3,
+    "estimatedTime": 87,
+    "objects": 6887,
+    "checkpoints": null,
+    "twop": true,
+    "primarySong": "Digital Thoughts",
+    "artist": "LawnReality",
+    "songID": 842450,
+    "songs": 1,
+    "SFX": 7,
+    "rateDate": ""
   }
 ]
