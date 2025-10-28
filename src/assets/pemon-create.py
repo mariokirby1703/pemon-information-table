@@ -31,15 +31,32 @@ from urllib3.exceptions import ProtocolError
 INPUT_FILE = "pemon_ids.txt"
 OUTPUT_FILE = "pemons.json"
 
-# ===================== Rate Limiter (6 req/min) + robust POST =====================
-MIN_INTERVAL = float(os.getenv("RL_MIN_INTERVAL", "6"))  # ~6/min
-WINDOWS = [(60, 10)]  # 6 per 60s
+# ===================== Rate Limiter (20 req/min) + robust POST =====================
+MIN_INTERVAL = float(os.getenv("RL_MIN_INTERVAL", "3"))  # ~20/min
+# Max 4 in 10s (sanft), max 20 in 60s (Zielrate)
+WINDOWS = [(10, 4), (60, 20)]
 
 RETRY_MAX = int(os.getenv("RL_RETRY_MAX", "5"))
 BACKOFF_BASE = float(os.getenv("RL_BACKOFF_BASE", "1.5"))
 BACKOFF_CAP = float(os.getenv("RL_BACKOFF_CAP", "30"))
-JITTER_MIN = float(os.getenv("RL_JITTER_MIN", "0.1"))
-JITTER_MAX = float(os.getenv("RL_JITTER_MAX", "0.3"))
+JITTER_MIN = float(os.getenv("RL_JITTER_MIN", "0.05"))
+JITTER_MAX = float(os.getenv("RL_JITTER_MAX", "0.15"))
+
+# ===================== Telemetry & Caches =====================
+stats = {
+    "creator_from_21": 0,
+    "creator_from_account": 0,
+    "creator_from_user": 0,
+    "creator_from_gdb": 0,
+    "creator_missing": 0,
+    "song_from_21": 0,
+    "song_from_api": 0,
+    "song_missing": 0,
+}
+levels21_cache: dict[str, str] = {}
+account_name_cache: dict[int, str] = {}
+user_name_cache: dict[int, str] = {}
+song_cache: dict[int, dict] = {}
 
 POOL_CONNECTIONS = int(os.getenv("RL_POOL_CONNECTIONS", "8"))
 POOL_MAXSIZE    = int(os.getenv("RL_POOL_MAXSIZE", "8"))
@@ -284,6 +301,37 @@ def _fallback_creator_from_gdbrowser(level_id: str) -> str:
         pass
     return ""
 
+def _extract_song_meta_from_levels21(raw21: str, custom_song_id: int) -> dict:
+    """Liest Song-Name/Artist aus dem Songs-Block von getGJLevels21."""
+    if not raw21 or not custom_song_id:
+        return {}
+    try:
+        parts = raw21.split("#")
+        if len(parts) < 3:
+            return {}
+        songs = parts[2]
+        recs = re.split(r":~1~\|~", songs)
+        if recs:
+            if not recs[0].startswith("1~|~"):
+                idx = recs[0].find("1~|~")
+                if idx != -1:
+                    recs[0] = recs[0][idx:]
+            if recs[0] and not recs[0].startswith("1~|~"):
+                recs[0] = "1~|~" + recs[0]
+        for rec in recs:
+            if not rec.strip():
+                continue
+            fields = rec.split("~|~")
+            d = {}
+            for i in range(0, len(fields) - 1, 2):
+                d[fields[i]] = fields[i + 1]
+            sid = _to_int(d.get("1", "0"))
+            if sid and sid == custom_song_id:
+                return {"name": d.get("2", ""), "artist": d.get("4", "")}
+    except Exception:
+        return {}
+    return {}
+
 # ===================== Fetchers =====================
 def get_level_data_gdbrowser(level_id: str, number: int, skip_warnings: bool = False):
     """Fetch via GDBrowser JSON API (unchanged)."""
@@ -339,26 +387,38 @@ def get_level_data_gdbrowser(level_id: str, number: int, skip_warnings: bool = F
 
     return level_info
 
-def _resolve_creator_name(level_id: str, user_id: int, account_id: int) -> str:
-    # 1) AccountID
-    name = _fetch_username_by_account_id(account_id)
+def _resolve_creator_name(level_id: str, user_id: int, account_id: int, raw21: str) -> str:
+    """Bevorzugt creators-map aus raw21, danach Account/User mit Cache, zuletzt GDB."""
+    # 1) creators-map aus raw21
+    if raw21:
+        try:
+            cmap = _parse_creators_map_from_levels21(raw21)
+            for k in (account_id, user_id):
+                if k and k in cmap and cmap[k]:
+                    stats["creator_from_21"] += 1
+                    return cmap[k]
+        except Exception:
+            pass
+    # 2) AccountID / UserID mit Memoization
+    if account_id:
+        if account_id not in account_name_cache:
+            account_name_cache[account_id] = _fetch_username_by_account_id(account_id) or ""
+        if account_name_cache[account_id]:
+            stats["creator_from_account"] += 1
+            return account_name_cache[account_id]
+    if user_id:
+        if user_id not in user_name_cache:
+            user_name_cache[user_id] = _fetch_username_by_user_id(user_id) or ""
+        if user_name_cache[user_id]:
+            stats["creator_from_user"] += 1
+            return user_name_cache[user_id]
+    # 3) Fallback GDBrowser
+    name = _fallback_creator_from_gdbrowser(level_id)
     if name:
-        return name
-    # 2) UserID
-    name = _fetch_username_by_user_id(user_id)
-    if name:
-        return name
-    # 3) Creators map from getGJLevels21
-    try:
-        raw21 = _fetch_levels21_raw(int(level_id))
-        cmap = _parse_creators_map_from_levels21(raw21)
-        for k in (account_id, user_id):
-            if k and k in cmap and cmap[k]:
-                return cmap[k]
-    except Exception:
-        pass
-    # 4) Final fallback: GDBrowser author
-    return _fallback_creator_from_gdbrowser(level_id)
+        stats["creator_from_gdb"] += 1
+    else:
+        stats["creator_missing"] += 1
+    return name
 
 def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False):
     """Fetch directly from Boomlings endpoints and map to our output schema."""
@@ -391,6 +451,15 @@ def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False):
 
     level_id_int = _to_int(kv.get("1", str(level_id)))
 
+    # Einmaliges Laden von getGJLevels21 (Cache-Hit bevorzugt)
+    raw21 = levels21_cache.get(level_id)
+    if raw21 is None:
+        try:
+            raw21 = _fetch_levels21_raw(int(level_id))
+        except Exception:
+            raw21 = ""
+        levels21_cache[level_id] = raw21
+
     # Difficulty text
     if demon_flag or demon_code in (0, 3, 4, 5, 6):
         difficulty_text = f"{_demon_name(demon_code)} Demon"
@@ -403,8 +472,8 @@ def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False):
     else:
         rating = {1: "Epic", 2: "Legendary", 3: "Mythic"}.get(epic_code, "")
 
-    # Resolve creator
-    creator_name = _resolve_creator_name(level_id, user_id, account_id)
+    # Resolve creator (nutzt raw21 bevorzugt)
+    creator_name = _resolve_creator_name(level_id, user_id, account_id, raw21)
 
     # Song fields
     official_song_flag = (official_song_i != 0)
@@ -412,47 +481,30 @@ def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False):
     primary_song = ""
     artist = ""
 
-    # Try getGJLevels21 songs map first
-    song_meta = {}
-    try:
-        raw21 = _fetch_levels21_raw(int(level_id))
-        parts = raw21.split("#")
-        if len(parts) >= 3:
-            songs = parts[2]
-            recs = re.split(r":~1~\|~", songs)
-            if recs:
-                if not recs[0].startswith("1~|~"):
-                    idx = recs[0].find("1~|~")
-                    if idx != -1:
-                        recs[0] = recs[0][idx:]
-                if recs[0] and not recs[0].startswith("1~|~"):
-                    recs[0] = "1~|~" + recs[0]
-            for rec in recs:
-                if not rec.strip():
-                    continue
-                fields = rec.split("~|~")
-                d = {}
-                for i in range(0, len(fields) - 1, 2):
-                    d[fields[i]] = fields[i + 1]
-                sid = _to_int(d.get("1", "0"))
-                if sid and sid == custom_song_id:
-                    song_meta = {
-                        "name": d.get("2", ""),
-                        "artist": d.get("4", ""),
-                    }
-                    break
-    except Exception:
-        pass
-
+    # Custom/NONG: erst aus raw21, dann Song-API (mit Cache)
     if not official_song_flag and custom_song_id:
+        # 1) Aus raw21 ziehen
+        song_meta = _extract_song_meta_from_levels21(raw21, custom_song_id)
         if song_meta:
             primary_song = song_meta.get("name", "") or ""
             artist = song_meta.get("artist", "") or ""
-        if not primary_song or not artist:
-            sm = _fetch_song(custom_song_id)
+            if primary_song and artist:
+                stats["song_from_21"] += 1
+        # 2) Fallback: getGJSongInfo (mit Cache)
+        if (not primary_song or not artist):
+            sm = song_cache.get(custom_song_id)
+            if sm is None:
+                sm = _fetch_song(custom_song_id)
+                song_cache[custom_song_id] = sm
             if sm:
-                primary_song = primary_song or sm.get("name", "") or ""
-                artist = artist or sm.get("artist", "") or ""
+                if sm.get("name"):
+                    primary_song = primary_song or sm.get("name", "") or ""
+                if sm.get("artist"):
+                    artist = artist or sm.get("artist", "") or ""
+            if primary_song and artist:
+                stats["song_from_api"] += 1
+        if not primary_song or not artist:
+            stats["song_missing"] += 1
 
     # estimatedTime in **seconds**
     estimated_seconds = int(round(k57_frames / 240.0)) if k57_frames > 0 else None
@@ -734,6 +786,16 @@ def main():
     print(f"🔄 Updated: {updated_count}")
     print(f"✅ Skipped: {skipped_count}")
     print(f"📄 Output saved to: {OUTPUT_FILE}")
+    # Telemetry
+    print("\n----- Telemetry -----")
+    print(f"Creator via levels21:   {stats['creator_from_21']}")
+    print(f"Creator via accountID:  {stats['creator_from_account']}")
+    print(f"Creator via userID:     {stats['creator_from_user']}")
+    print(f"Creator via GDBrowser:  {stats['creator_from_gdb']}")
+    print(f"Creator missing:        {stats['creator_missing']}")
+    print(f"Song via levels21:      {stats['song_from_21']}")
+    print(f"Song via getGJSongInfo: {stats['song_from_api']}")
+    print(f"Song missing fields:    {stats['song_missing']}")
 
 if __name__ == "__main__":
     main()
