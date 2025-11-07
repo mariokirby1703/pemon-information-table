@@ -14058,5 +14058,43 @@
     "songs": 2,
     "SFX": 22,
     "rateDate": "04.11.2025"
+  },
+  {
+    "number": 741,
+    "level": "Astoria",
+    "creator": "HumanBeing99999",
+    "ID": 126818141,
+    "difficulty": "Insane Demon",
+    "rating": "Epic",
+    "userCoins": 3,
+    "estimatedTime": 1423,
+    "objects": 154949,
+    "checkpoints": 54,
+    "twop": false,
+    "primarySong": "Glacier",
+    "artist": "Daniel Carl",
+    "songID": 10006066,
+    "songs": 15,
+    "SFX": 296,
+    "rateDate": "06.11.2025"
+  },
+  {
+    "number": 742,
+    "level": "Twisted Reality",
+    "creator": "NightThemeGMD",
+    "ID": 117247616,
+    "difficulty": "Insane Demon",
+    "rating": "Featured",
+    "userCoins": 3,
+    "estimatedTime": 288,
+    "objects": 93461,
+    "checkpoints": 0,
+    "twop": true,
+    "primarySong": "MegaloDapper - Twisted Reality",
+    "artist": "RUDELICE",
+    "songID": 1477133,
+    "songs": 3,
+    "SFX": 23,
+    "rateDate": "06.11.2025"
   }
 ]
