@@ -2113,7 +2113,7 @@
     "level": "The Devourer of Gods",
     "creator": "IAMHER0BRINE",
     "ID": 98716888,
-    "difficulty": "Easy Demon",
+    "difficulty": "Medium Demon",
     "rating": "Rated",
     "userCoins": 0,
     "estimatedTime": 134,
@@ -5267,7 +5267,7 @@
     "level": "Over The Seas",
     "creator": "Xepheron",
     "ID": 110099292,
-    "difficulty": "Insane Demon",
+    "difficulty": "Hard Demon",
     "rating": "Rated",
     "userCoins": 2,
     "estimatedTime": 96,
@@ -14153,5 +14153,24 @@
     "songs": 2,
     "SFX": 22,
     "rateDate": "09.11.2025"
+  },
+  {
+    "number": 746,
+    "level": "BuildoStroy",
+    "creator": "itzCybercube",
+    "ID": 127729537,
+    "difficulty": "Hard Demon",
+    "rating": "Epic",
+    "userCoins": 2,
+    "estimatedTime": 1957,
+    "objects": 33866,
+    "checkpoints": 24,
+    "twop": true,
+    "primarySong": "PALACE OF ETERNAL DECAYING NO EXIT NO ENTERANCE NO PURPOSE I TOLKO ETO",
+    "artist": "M1ndbreaker",
+    "songID": 1411651,
+    "songs": 3,
+    "SFX": 13,
+    "rateDate": "17.11.2025"
   }
 ]
