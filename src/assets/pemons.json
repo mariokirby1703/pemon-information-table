@@ -5267,7 +5267,7 @@
     "level": "Over The Seas",
     "creator": "Xepheron",
     "ID": 110099292,
-    "difficulty": "Hard Demon",
+    "difficulty": "Insane Demon",
     "rating": "Rated",
     "userCoins": 2,
     "estimatedTime": 96,
@@ -12449,7 +12449,7 @@
     "level": "ball that bounces",
     "creator": "newSakePlayS",
     "ID": 119733044,
-    "difficulty": "Extreme Demon",
+    "difficulty": "Insane Demon",
     "rating": "Featured",
     "userCoins": 0,
     "estimatedTime": 72,
@@ -14248,5 +14248,24 @@
     "songs": 2,
     "SFX": 11,
     "rateDate": "20.11.2025"
+  },
+  {
+    "number": 751,
+    "level": "Jumper",
+    "creator": "Binary0",
+    "ID": 113958105,
+    "difficulty": "Insane Demon",
+    "rating": "Rated",
+    "userCoins": 0,
+    "estimatedTime": 187,
+    "objects": 74723,
+    "checkpoints": 18,
+    "twop": false,
+    "primarySong": "Upbeat Upstreet",
+    "artist": "Syntrus",
+    "songID": 952306,
+    "songs": 4,
+    "SFX": 5,
+    "rateDate": "22.11.2025"
   }
 ]
