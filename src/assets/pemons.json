@@ -14267,5 +14267,43 @@
     "songs": 4,
     "SFX": 5,
     "rateDate": "22.11.2025"
+  },
+  {
+    "number": 752,
+    "level": "transfer",
+    "creator": "Spycold",
+    "ID": 125152046,
+    "difficulty": "Easy Demon",
+    "rating": "Featured",
+    "userCoins": 0,
+    "estimatedTime": 97,
+    "objects": 6563,
+    "checkpoints": 6,
+    "twop": false,
+    "primarySong": "nymph lodes",
+    "artist": "littlbox",
+    "songID": 1298813,
+    "songs": 2,
+    "SFX": 5,
+    "rateDate": "24.11.2025"
+  },
+  {
+    "number": 753,
+    "level": "Geo Picross",
+    "creator": "Enlightenment",
+    "ID": 126945191,
+    "difficulty": "Hard Demon",
+    "rating": "Epic",
+    "userCoins": 3,
+    "estimatedTime": 7206,
+    "objects": 60178,
+    "checkpoints": 30,
+    "twop": true,
+    "primarySong": "Geometry Dash Menu Theme",
+    "artist": "Zhenmuron",
+    "songID": 584131,
+    "songs": 7,
+    "SFX": 29,
+    "rateDate": "24.11.2025"
   }
 ]
