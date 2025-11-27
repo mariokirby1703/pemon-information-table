@@ -12487,7 +12487,7 @@
     "level": "aoiro",
     "creator": "roadkiller",
     "ID": 124313257,
-    "difficulty": "Medium Demon",
+    "difficulty": "Hard Demon",
     "rating": "Featured",
     "userCoins": 1,
     "estimatedTime": 628,
@@ -14305,5 +14305,24 @@
     "songs": 7,
     "SFX": 29,
     "rateDate": "24.11.2025"
+  },
+  {
+    "number": 754,
+    "level": "Kristal",
+    "creator": "akreik",
+    "ID": 128512953,
+    "difficulty": "Medium Demon",
+    "rating": "Epic",
+    "userCoins": 1,
+    "estimatedTime": 185,
+    "objects": 24277,
+    "checkpoints": 3,
+    "twop": false,
+    "primarySong": "Creo - Aura",
+    "artist": "CreoMusic",
+    "songID": 844658,
+    "songs": 3,
+    "SFX": 6,
+    "rateDate": "27.11.2025"
   }
 ]
