@@ -192,7 +192,7 @@
   {
     "number": 11,
     "level": "old site gdside",
-    "creator": "ArcadiacManiac",
+    "creator": "Arcadiac",
     "ID": 98147815,
     "difficulty": "Medium Demon",
     "rating": "Featured",
@@ -2835,7 +2835,7 @@
     "level": "Toggling Theory",
     "creator": "Shinxray",
     "ID": 99517459,
-    "difficulty": "Medium Demon",
+    "difficulty": "Easy Demon",
     "rating": "Rated",
     "userCoins": 1,
     "estimatedTime": 69,
@@ -7374,7 +7374,7 @@
   {
     "number": 389,
     "level": "Conductive",
-    "creator": "ArcadiacManiac",
+    "creator": "Arcadiac",
     "ID": 112456555,
     "difficulty": "Medium Demon",
     "rating": "Featured",
@@ -10737,7 +10737,7 @@
   {
     "number": 566,
     "level": "Swingin It",
-    "creator": "ArcadiacManiac",
+    "creator": "Arcadiac",
     "ID": 119731044,
     "difficulty": "Medium Demon",
     "rating": "Featured",
@@ -12487,7 +12487,7 @@
     "level": "aoiro",
     "creator": "roadkiller",
     "ID": 124313257,
-    "difficulty": "Hard Demon",
+    "difficulty": "Medium Demon",
     "rating": "Featured",
     "userCoins": 1,
     "estimatedTime": 628,
@@ -14083,7 +14083,7 @@
     "level": "Twisted Reality",
     "creator": "NightThemeGMD",
     "ID": 117247616,
-    "difficulty": "Insane Demon",
+    "difficulty": "Extreme Demon",
     "rating": "Featured",
     "userCoins": 3,
     "estimatedTime": 288,
@@ -14324,5 +14324,24 @@
     "songs": 3,
     "SFX": 6,
     "rateDate": "27.11.2025"
+  },
+  {
+    "number": 755,
+    "level": "Waybeam",
+    "creator": "YESEvoi",
+    "ID": 127728736,
+    "difficulty": "Hard Demon",
+    "rating": "Featured",
+    "userCoins": 3,
+    "estimatedTime": 493,
+    "objects": 29100,
+    "checkpoints": 14,
+    "twop": true,
+    "primarySong": "-Sinking Feeling-",
+    "artist": "Waterflame",
+    "songID": 719950,
+    "songs": 3,
+    "SFX": 27,
+    "rateDate": "29.11.2025"
   }
 ]
