@@ -14419,5 +14419,43 @@
     "songs": 21,
     "SFX": 849,
     "rateDate": "03.12.2025"
+  },
+  {
+    "number": 760,
+    "level": "Top Shell Maverick",
+    "creator": "ReJoi",
+    "ID": 129086943,
+    "difficulty": "Hard Demon",
+    "rating": "Featured",
+    "userCoins": 3,
+    "estimatedTime": 212,
+    "objects": 39466,
+    "checkpoints": 16,
+    "twop": false,
+    "primarySong": "DKC2 - Stickerbrush Symphony.",
+    "artist": "SockpuppetRemix",
+    "songID": 184818,
+    "songs": 4,
+    "SFX": 54,
+    "rateDate": "10.12.2025"
+  },
+  {
+    "number": 761,
+    "level": "The Mineshaft",
+    "creator": "Adriot",
+    "ID": 128772143,
+    "difficulty": "Insane Demon",
+    "rating": "Epic",
+    "userCoins": 3,
+    "estimatedTime": 2009,
+    "objects": 43659,
+    "checkpoints": 2,
+    "twop": true,
+    "primarySong": "Horror Background Loop 03",
+    "artist": "Cyberwave Orchestra",
+    "songID": 10008032,
+    "songs": 10,
+    "SFX": 197,
+    "rateDate": "10.12.2025"
   }
 ]
