@@ -14476,5 +14476,24 @@
     "songs": 7,
     "SFX": 40,
     "rateDate": "11.12.2025"
+  },
+  {
+    "number": 763,
+    "level": "Catch",
+    "creator": "blobh",
+    "ID": 128291901,
+    "difficulty": "Insane Demon",
+    "rating": "Epic",
+    "userCoins": 0,
+    "estimatedTime": 80,
+    "objects": 20493,
+    "checkpoints": 8,
+    "twop": true,
+    "primarySong": "cYsmix - Classic Pursuit",
+    "artist": "cysmix",
+    "songID": 718171,
+    "songs": 8,
+    "SFX": 24,
+    "rateDate": "14.12.2025"
   }
 ]
