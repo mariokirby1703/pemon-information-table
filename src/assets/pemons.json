@@ -14913,5 +14913,43 @@
     "songs": 19,
     "SFX": 233,
     "rateDate": "01.01.2026"
+  },
+  {
+    "number": 786,
+    "level": "The Hidden Passage",
+    "creator": "Veno7",
+    "ID": 125586132,
+    "difficulty": "Medium Demon",
+    "rating": "Featured",
+    "userCoins": 3,
+    "estimatedTime": 224,
+    "objects": 22437,
+    "checkpoints": 8,
+    "twop": false,
+    "primarySong": "Jungle",
+    "artist": "DuckMonster",
+    "songID": 495532,
+    "songs": 2,
+    "SFX": 17,
+    "rateDate": "03.01.2026"
+  },
+  {
+    "number": 787,
+    "level": "The Dashlands",
+    "creator": "CreatorMoldy",
+    "ID": 104397950,
+    "difficulty": "Medium Demon",
+    "rating": "Featured",
+    "userCoins": 3,
+    "estimatedTime": 607,
+    "objects": 24712,
+    "checkpoints": 6,
+    "twop": true,
+    "primarySong": "A Chill Place To Be",
+    "artist": "Brooklyn Game Audio",
+    "songID": 10007627,
+    "songs": 11,
+    "SFX": 33,
+    "rateDate": "03.01.2026"
   }
 ]
