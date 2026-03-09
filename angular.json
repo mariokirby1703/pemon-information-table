@@ -21,7 +21,21 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "pit_logo2.png",
+                "input": "src/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "pemons.json",
+                "input": "src/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "demons.json",
+                "input": "src/assets",
+                "output": "assets"
+              }
             ],
             "styles": [
               "src/styles.css"
@@ -83,7 +97,21 @@
             "tsConfig": "tsconfig.spec.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              {
+                "glob": "pit_logo2.png",
+                "input": "src/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "pemons.json",
+                "input": "src/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "demons.json",
+                "input": "src/assets",
+                "output": "assets"
+              }
             ],
             "styles": [
               "src/styles.css"
