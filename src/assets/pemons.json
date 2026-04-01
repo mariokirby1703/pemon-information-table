@@ -16104,11 +16104,11 @@
     "objects": 34825,
     "checkpoints": 0,
     "twop": false,
-    "primarySong": "Monitoring - Clarinet Trio",
-    "artist": "mega-mashuu",
-    "songID": 1390241,
-    "songs": null,
-    "SFX": null,
+    "primarySong": "Monitoring",
+    "artist": "DECO*27",
+    "songID": "NONG",
+    "songs": 1,
+    "SFX": 0,
     "rateDate": "01.04.2026"
   },
   {
@@ -16184,7 +16184,7 @@
     "artist": "Xorberax",
     "songID": 1119625,
     "songs": 6,
-    "SFX": null,
+    "SFX": 0,
     "rateDate": "01.04.2026"
   },
   {
