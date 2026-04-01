@@ -88,22 +88,9 @@ export class AppComponent implements OnInit {
     );
   }
 
-  private applyColDefsUpdate(): void {
-    const api: any = this.gridOptions?.api;
-    if (!api) return;
-
-    if (typeof api.setColumnDefs === 'function') {
-      api.setColumnDefs([...this.colDefs]);
-    } else if (typeof api.setGridOption === 'function') {
-      api.setGridOption('columnDefs', [...this.colDefs]);
-    }
-  }
-
   setRowStyle(enabled: boolean): void {
     if (this.enableRowStyle === enabled) return;
     this.enableRowStyle = enabled;
-    this.updateColumnStyles();
-    this.applyColDefsUpdate();
     this.gridOptions?.api?.refreshCells({ force: true, columns: ['difficulty', 'rating'] });
     this.gridOptions?.api?.redrawRows();
 
@@ -112,85 +99,7 @@ export class AppComponent implements OnInit {
   }
 
   toggleRowStyle(): void {
-    this.enableRowStyle = !this.enableRowStyle;
     this.setRowStyle(!this.enableRowStyle);
-    this.updateColumnStyles();
-    if (this.gridOptions.api) {
-      this.gridOptions.api.refreshCells({ force: true, columns: ['difficulty', 'rating'] });
-      this.gridOptions.api.redrawRows();
-    }
-    console.log('Row style toggled:', this.enableRowStyle);
-    this.colDefs = this.colDefs.map(col => {
-      if (col.field === 'difficulty' || col.field === 'rating') {
-        return {
-          ...col,
-          cellClassRules: this.enableRowStyle ? {} : {
-            'easy': (p: any) => p.data.difficulty === 'Easy Demon',
-            'medium': (p: any) => p.data.difficulty === 'Medium Demon',
-            'hard': (p: any) => p.data.difficulty === 'Hard Demon',
-            'insane': (p: any) => p.data.difficulty === 'Insane Demon',
-            'extreme': (p: any) => p.data.difficulty === 'Extreme Demon',
-            'featured': (p: any) => p.data.rating === 'Featured',
-            'epic': (p: any) => p.data.rating === 'Epic',
-            'legendary': (p: any) => p.data.rating === 'Legendary',
-            'mythic': (p: any) => p.data.rating === 'Mythic'
-          }
-        };
-      }
-      return col;
-    });
-    if (this.gridOptions.api) {
-      this.gridOptions.api.setColumnDefs([...this.colDefs]);
-      this.gridOptions.api.refreshCells({ force: true, columns: ['difficulty', 'rating'] });
-      this.gridOptions.api.redrawRows();
-    }
-    console.log('Row style toggled:', this.enableRowStyle);
-    console.log(this.enableRowStyle ? 'Cell styles will be removed.' : 'Cell styles will be applied.');
-    this.updateColumnStyles();
-    if (this.gridOptions.api) {
-      this.gridOptions.api.redrawRows();
-    }
-    this.rowData = [...this.rowData];
-    setTimeout(() => {
-      this.cdr.detectChanges();
-    }, 0);
-  }
-
-  updateColumnStyles(): void {
-    this.colDefs.forEach((col) => {
-      if (this.enableRowStyle) {
-        console.log('Removing cell styles for:', col.field);
-        col.cellClassRules = {};
-      } else {
-        console.log('Applying cell styles for:', col.field);
-
-        if (col.field === 'difficulty') {
-          col.cellClassRules = {
-            'easy': (p: any) => p.data.difficulty === 'Easy Demon',
-            'medium': (p: any) => p.data.difficulty === 'Medium Demon',
-            'hard': (p: any) => p.data.difficulty === 'Hard Demon',
-            'insane': (p: any) => p.data.difficulty === 'Insane Demon',
-            'extreme': (p: any) => p.data.difficulty === 'Extreme Demon',
-          };
-        } else if (col.field === 'rating') {
-          col.cellClassRules  = {
-            'featured': (p: any) => p.data.rating === 'Featured',
-            'epic': (p: any) => p.data.rating === 'Epic',
-            'legendary': (p: any) => p.data.rating === 'Legendary',
-            'mythic': (p: any) => p.data.rating === 'Mythic'
-          };
-        }
-      }
-    });
-    if (this.gridOptions.api) {
-      this.gridOptions.api.setColumnDefs([...this.colDefs]);
-      this.gridOptions.api.refreshCells({ force: true, columns: ['difficulty', 'rating'] });
-      this.gridOptions.api.redrawRows();
-    }
-    if (this.gridOptions.api) {
-      this.gridOptions.api.setColumnDefs([...this.colDefs]);
-      this.gridOptions.api.refreshCells({ force: true, columns: ['difficulty', 'rating'] });
-    }
   }
 
   updateCustomPaginationText(): void {
@@ -318,11 +227,11 @@ export class AppComponent implements OnInit {
       minWidth: 140,
       filter: true,
       cellClassRules: {
-        'easy': (p: any) => p.data.difficulty === 'Easy Demon',
-        'medium': (p: any) => p.data.difficulty === 'Medium Demon',
-        'hard': (p: any) => p.data.difficulty === 'Hard Demon',
-        'insane': (p: any) => p.data.difficulty === 'Insane Demon',
-        'extreme': (p: any) => p.data.difficulty === 'Extreme Demon',
+        'easy': (p: any) => !this.enableRowStyle && p.data?.difficulty === 'Easy Demon',
+        'medium': (p: any) => !this.enableRowStyle && p.data?.difficulty === 'Medium Demon',
+        'hard': (p: any) => !this.enableRowStyle && p.data?.difficulty === 'Hard Demon',
+        'insane': (p: any) => !this.enableRowStyle && p.data?.difficulty === 'Insane Demon',
+        'extreme': (p: any) => !this.enableRowStyle && p.data?.difficulty === 'Extreme Demon',
       },
       comparator: (valueA: string, valueB: string) => {
         const order = ["Easy Demon", "Medium Demon", "Hard Demon", "Insane Demon", "Extreme Demon"];
@@ -335,10 +244,10 @@ export class AppComponent implements OnInit {
       minWidth: 100,
       filter: true,
       cellClassRules: {
-        'featured': (p: any) => p.data.rating === 'Featured',
-        'epic': (p: any) => p.data.rating === 'Epic',
-        'legendary': (p: any) => p.data.rating === 'Legendary',
-        'mythic': (p: any) => p.data.rating === 'Mythic'
+        'featured': (p: any) => !this.enableRowStyle && p.data?.rating === 'Featured',
+        'epic': (p: any) => !this.enableRowStyle && p.data?.rating === 'Epic',
+        'legendary': (p: any) => !this.enableRowStyle && p.data?.rating === 'Legendary',
+        'mythic': (p: any) => !this.enableRowStyle && p.data?.rating === 'Mythic'
       },
       comparator: (valueA: string, valueB: string) => {
         const order = ["Rated", "Featured", "Epic", "Legendary", "Mythic"];
