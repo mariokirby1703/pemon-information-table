@@ -493,13 +493,33 @@ def save_data(filepath, data):
         json.dump(data, f, indent=2, ensure_ascii=False)
 
 
-def save_partial_output(existing_dict, result_data_dict, processed_ids):
+def save_partial_output(existing_dict, result_data_dict, processed_ids, id_to_line):
     snapshot_dict = dict(result_data_dict)
     for old_id, old_entry in existing_dict.items():
         if old_id not in processed_ids:
-            snapshot_dict[old_id] = old_entry
+            entry = old_entry.copy()
+            if old_id in id_to_line:
+                entry["number"] = id_to_line[old_id]
+            snapshot_dict[old_id] = entry
     result_data = sorted(snapshot_dict.values(), key=lambda x: x.get("number", 0))
     save_data(OUTPUT_FILE, result_data)
+
+
+def load_sorted_ids(filepath: str) -> list[str]:
+    with open(filepath, "r", encoding="utf-8") as f:
+        ids_in_file = [line.strip() for line in f if line.strip().isdigit()]
+
+    sorted_unique_ids = [str(x) for x in sorted({int(level_id) for level_id in ids_in_file})]
+
+    if ids_in_file != sorted_unique_ids:
+        with open(filepath, "w", encoding="utf-8") as f:
+            if sorted_unique_ids:
+                f.write("\n".join(sorted_unique_ids) + "\n")
+            else:
+                f.write("")
+        print(f"[i] Sorted and normalized {filepath} ({len(sorted_unique_ids)} IDs).")
+
+    return sorted_unique_ids
 
 
 def _parse_positions_spec(spec: str, total: int) -> list[int]:
@@ -651,8 +671,7 @@ def merge_entries(existing, new):
 
 
 def main():
-    with open(INPUT_FILE, "r", encoding="utf-8") as f:
-        all_ids = [line.strip() for line in f if line.strip().isdigit()]
+    all_ids = load_sorted_ids(INPUT_FILE)
 
     id_to_line = {level_id: idx + 1 for idx, level_id in enumerate(all_ids)}
 
@@ -663,6 +682,26 @@ def main():
     selection_input = input("Selection (empty = all): ").strip()
     level_ids = select_level_ids(selection_input, all_ids)
 
+    existing_data = load_existing_data(OUTPUT_FILE)
+    existing_dict = {str(entry["ID"]): entry for entry in existing_data}
+
+    selected_lines = [id_to_line[level_id] for level_id in level_ids if level_id in id_to_line]
+    selection_start_line = min(selected_lines) if selected_lines else 1
+
+    missing_ids = [
+        level_id
+        for level_id in all_ids
+        if level_id not in existing_dict and id_to_line[level_id] < selection_start_line
+    ]
+    if missing_ids:
+        selected_set = set(level_ids)
+        selected_set.update(missing_ids)
+        level_ids = [level_id for level_id in all_ids if level_id in selected_set]
+        print(
+            f"[i] Auto-including {len(missing_ids)} missing IDs before line "
+            f"{selection_start_line} from {OUTPUT_FILE}."
+        )
+
     autosave_input = input("Auto-save every N processed levels? (default 50, 0 = off): ").strip()
     if autosave_input == "":
         autosave_every = 50
@@ -670,9 +709,6 @@ def main():
         autosave_every = int(autosave_input)
     else:
         autosave_every = 50
-
-    existing_data = load_existing_data(OUTPUT_FILE)
-    existing_dict = {str(entry["ID"]): entry for entry in existing_data}
 
     added_count = 0
     updated_count = 0
@@ -696,7 +732,9 @@ def main():
 
             if not new_entry:
                 if old_entry:
-                    result_data_dict[level_id] = old_entry
+                    entry = old_entry.copy()
+                    entry["number"] = number
+                    result_data_dict[level_id] = entry
                     skipped_count += 1
                 continue
 
@@ -711,18 +749,19 @@ def main():
                 result_data_dict[level_id] = merged
                 updated_count += 1
             else:
-                old_entry["number"] = number
-                result_data_dict[level_id] = old_entry
+                entry = old_entry.copy()
+                entry["number"] = number
+                result_data_dict[level_id] = entry
                 skipped_count += 1
 
             if autosave_every > 0 and len(processed_ids) % autosave_every == 0:
-                save_partial_output(existing_dict, result_data_dict, processed_ids)
+                save_partial_output(existing_dict, result_data_dict, processed_ids, id_to_line)
                 print(f"[i] Auto-saved progress at {len(processed_ids)} processed levels.")
     except KeyboardInterrupt:
         interrupted = True
         print("\n[!] Interrupted by user (Ctrl+C). Saving partial progress...")
     finally:
-        save_partial_output(existing_dict, result_data_dict, processed_ids)
+        save_partial_output(existing_dict, result_data_dict, processed_ids, id_to_line)
 
     print("\n===== Summary =====")
     print(f"Total levels targeted:  {len(level_ids)}")
