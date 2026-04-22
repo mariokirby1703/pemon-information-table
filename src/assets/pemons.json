@@ -10701,7 +10701,7 @@
     "level": "Withering Gallery",
     "creator": "vsowanted",
     "ID": 114308040,
-    "difficulty": "Extreme Demon",
+    "difficulty": "Insane Demon",
     "rating": "Rated",
     "userCoins": 0,
     "estimatedTime": 59,
@@ -16463,14 +16463,14 @@
     "userCoins": 3,
     "estimatedTime": 148,
     "objects": 28190,
-    "checkpoints": null,
+    "checkpoints": 13,
     "twop": true,
     "primarySong": "[SNES] Knockout!",
     "artist": "KawaiSprite",
     "songID": 906468,
     "songs": 1,
     "SFX": 27,
-    "rateDate": ""
+    "rateDate": "21.04.2026"
   },
   {
     "number": 868,
@@ -16482,14 +16482,14 @@
     "userCoins": 2,
     "estimatedTime": 531,
     "objects": 24683,
-    "checkpoints": null,
+    "checkpoints": 9,
     "twop": true,
     "primarySong": "Electrocution",
     "artist": "EODTC",
     "songID": 1007758,
     "songs": 4,
     "SFX": 93,
-    "rateDate": ""
+    "rateDate": "21.04.2026"
   },
   {
     "number": 869,
@@ -16501,14 +16501,14 @@
     "userCoins": 0,
     "estimatedTime": 152,
     "objects": 25271,
-    "checkpoints": null,
+    "checkpoints": 20,
     "twop": false,
     "primarySong": "Kirbys Grape Garden",
     "artist": "HyperDoom",
     "songID": 311494,
     "songs": 1,
     "SFX": 2,
-    "rateDate": ""
+    "rateDate": "21.04.2026"
   },
   {
     "number": 870,
@@ -16520,14 +16520,14 @@
     "userCoins": 2,
     "estimatedTime": 77,
     "objects": 15797,
-    "checkpoints": null,
+    "checkpoints": 4,
     "twop": false,
     "primarySong": "Fisher Price",
     "artist": "CricketSaysChill",
     "songID": 778652,
     "songs": 1,
     "SFX": 1,
-    "rateDate": ""
+    "rateDate": "21.04.2026"
   },
   {
     "number": 871,
@@ -16537,16 +16537,16 @@
     "difficulty": "Extreme Demon",
     "rating": "Featured",
     "userCoins": 0,
-    "estimatedTime": null,
+    "estimatedTime": 506,
     "objects": 15946,
-    "checkpoints": null,
+    "checkpoints": 0,
     "twop": false,
     "primarySong": "Alien Planet",
     "artist": "coolyy",
     "songID": 1502031,
     "songs": 6,
     "SFX": 9,
-    "rateDate": ""
+    "rateDate": "21.04.2026"
   },
   {
     "number": 872,
@@ -16558,14 +16558,14 @@
     "userCoins": 0,
     "estimatedTime": 287,
     "objects": 50466,
-    "checkpoints": null,
+    "checkpoints": 9,
     "twop": true,
     "primarySong": "DenX - Spiked Choker",
     "artist": "lhceist41",
     "songID": 461563,
     "songs": 8,
     "SFX": 10,
-    "rateDate": ""
+    "rateDate": "22.04.2026"
   },
   {
     "number": 873,
@@ -16576,14 +16576,14 @@
     "rating": "Featured",
     "userCoins": 1,
     "estimatedTime": 698,
-    "objects": 65535,
-    "checkpoints": null,
+    "objects": 130118,
+    "checkpoints": 12,
     "twop": true,
     "primarySong": "Bass Knight",
     "artist": "BoomKitty",
     "songID": 10006560,
     "songs": 5,
     "SFX": 57,
-    "rateDate": ""
+    "rateDate": "22.04.2026"
   }
 ]
