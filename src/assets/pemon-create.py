@@ -30,6 +30,33 @@ from urllib3.exceptions import ProtocolError
 # ===================== Config =====================
 INPUT_FILE = "pemon_ids.txt"
 OUTPUT_FILE = "pemons.json"
+INVALID_CREATORS = {"ArathhSA"}
+
+# Official song index from GD-Server key 12 (0-based) -> (song name, artist)
+OFFICIAL_SONGS = {
+    0: ("Stereo Madness", "ForeverBound"),
+    1: ("Back on Track", "DJVI"),
+    2: ("Polargeist", "Step"),
+    3: ("Dry Out", "DJVI"),
+    4: ("Base After Base", "DJVI"),
+    5: ("Cant Let Go", "DJVI"),
+    6: ("Jumper", "Waterflame"),
+    7: ("Time Machine", "Waterflame"),
+    8: ("Cycles", "DJVI"),
+    9: ("xStep", "DJVI"),
+    10: ("Clutterfunk", "Waterflame"),
+    11: ("Theory of Everything", "DJ-Nate"),
+    12: ("Electroman Adventures", "Waterflame"),
+    13: ("Clubstep", "DJ-Nate"),
+    14: ("Electrodynamix", "DJ-Nate"),
+    15: ("Hexagon Force", "Waterflame"),
+    16: ("Blast Processing", "Waterflame"),
+    17: ("Theory of Everything 2", "DJ-Nate"),
+    18: ("Geometrical Dominator", "Waterflame"),
+    19: ("Deadlocked", "F-777"),
+    20: ("Fingerdash", "MDK"),
+    21: ("Dash", "MDK"),
+}
 
 # ===================== Rate Limiter (20 req/min) + robust POST =====================
 MIN_INTERVAL = float(os.getenv("RL_MIN_INTERVAL", "3"))  # ~20/min
@@ -296,7 +323,8 @@ def _fallback_creator_from_gdbrowser(level_id: str) -> str:
         r = requests.get(f"https://gdbrowser.com/api/level/{level_id}", timeout=15)
         if r.status_code == 200:
             j = r.json()
-            return j.get("author", "") or ""
+            author = j.get("author", "") or ""
+            return "" if author in INVALID_CREATORS else author
     except Exception:
         pass
     return ""
@@ -376,8 +404,8 @@ def get_level_data_gdbrowser(level_id: str, number: int, skip_warnings: bool = F
         "primarySong": song_name,
         "artist": song_author,
         "songID": song_id_val,
-        "songs": None,
-        "SFX": None,
+        "songs": 1 if official else None,
+        "SFX": 0,
         "rateDate": ""
         # showcase removed
     }
@@ -387,14 +415,17 @@ def get_level_data_gdbrowser(level_id: str, number: int, skip_warnings: bool = F
 
     return level_info
 
-def _resolve_creator_name(level_id: str, user_id: int, account_id: int, raw21: str) -> str:
-    """Bevorzugt creators-map aus raw21, danach Account/User mit Cache, zuletzt GDB."""
+def _valid_creator_name(name: str) -> str:
+    return "" if name in INVALID_CREATORS else (name or "")
+
+def _resolve_creator_name(level_id: str, user_id: int, account_id: int, raw21: str, allow_gdbrowser_fallback: bool = False) -> str:
+    """Bevorzugt creators-map aus raw21, danach Account/User mit Cache."""
     # 1) creators-map aus raw21
     if raw21:
         try:
             cmap = _parse_creators_map_from_levels21(raw21)
             for k in (account_id, user_id):
-                if k and k in cmap and cmap[k]:
+                if k and k in cmap and _valid_creator_name(cmap[k]):
                     stats["creator_from_21"] += 1
                     return cmap[k]
         except Exception:
@@ -403,22 +434,22 @@ def _resolve_creator_name(level_id: str, user_id: int, account_id: int, raw21: s
     if account_id:
         if account_id not in account_name_cache:
             account_name_cache[account_id] = _fetch_username_by_account_id(account_id) or ""
-        if account_name_cache[account_id]:
+        if _valid_creator_name(account_name_cache[account_id]):
             stats["creator_from_account"] += 1
             return account_name_cache[account_id]
     if user_id:
         if user_id not in user_name_cache:
             user_name_cache[user_id] = _fetch_username_by_user_id(user_id) or ""
-        if user_name_cache[user_id]:
+        if _valid_creator_name(user_name_cache[user_id]):
             stats["creator_from_user"] += 1
             return user_name_cache[user_id]
-    # 3) Fallback GDBrowser
-    name = _fallback_creator_from_gdbrowser(level_id)
-    if name:
-        stats["creator_from_gdb"] += 1
-    else:
-        stats["creator_missing"] += 1
-    return name
+    if allow_gdbrowser_fallback:
+        name = _fallback_creator_from_gdbrowser(level_id)
+        if name:
+            stats["creator_from_gdb"] += 1
+            return name
+    stats["creator_missing"] += 1
+    return ""
 
 def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False):
     """Fetch directly from Boomlings endpoints and map to our output schema."""
@@ -473,7 +504,7 @@ def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False):
         rating = {1: "Epic", 2: "Legendary", 3: "Mythic"}.get(epic_code, "")
 
     # Resolve creator (nutzt raw21 bevorzugt)
-    creator_name = _resolve_creator_name(level_id, user_id, account_id, raw21)
+    creator_name = _resolve_creator_name(level_id, user_id, account_id, raw21, allow_gdbrowser_fallback=True)
 
     # Song fields
     official_song_flag = (official_song_i != 0)
@@ -481,8 +512,10 @@ def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False):
     primary_song = ""
     artist = ""
 
+    if official_song_flag:
+        primary_song, artist = OFFICIAL_SONGS.get(official_song_i, ("", ""))
     # Custom/NONG: erst aus raw21, dann Song-API (mit Cache)
-    if not official_song_flag and custom_song_id:
+    elif custom_song_id:
         # 1) Aus raw21 ziehen
         song_meta = _extract_song_meta_from_levels21(raw21, custom_song_id)
         if song_meta:
@@ -534,8 +567,8 @@ def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False):
         "primarySong": primary_song,
         "artist": artist,
         "songID": song_id_out,   # "" means do not overwrite on merge
-        "songs": songs_count if songs_count > 0 else None,
-        "SFX": sfx_count if sfx_count > 0 else None,
+        "songs": 1 if official_song_flag else (songs_count if songs_count > 0 else None),
+        "SFX": sfx_count,
         "rateDate": ""
         # showcase removed
     }
@@ -563,6 +596,9 @@ def save_data(filepath, data):
     with open(filepath, "w", encoding="utf-8") as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
+def _is_lower_positive_number(new_value, old_value) -> bool:
+    return isinstance(new_value, (int, float)) and isinstance(old_value, (int, float)) and new_value > 0 and old_value > 0 and new_value < old_value
+
 def entries_differ(existing, new):
     for key in new:
         if key == "number":
@@ -570,7 +606,14 @@ def entries_differ(existing, new):
         if key == "objects":
             old_val = existing.get("objects", 0)
             new_val = new.get("objects", 0)
-            if new_val == 0 or (new_val == 65535 and old_val > 65535):
+            if new_val == 0 or (new_val == 65535 and old_val > 65535) or _is_lower_positive_number(new_val, old_val):
+                continue
+            if old_val != new_val:
+                return True
+        elif key == "estimatedTime":
+            old_val = existing.get("estimatedTime")
+            new_val = new.get("estimatedTime")
+            if new_val is None or _is_lower_positive_number(new_val, old_val):
                 continue
             if old_val != new_val:
                 return True
@@ -596,10 +639,15 @@ def merge_entries(existing, new):
     merged = existing.copy()
     for key, value in new.items():
         if key not in existing:
-            merged[key] = value
+            merged[key] = _valid_creator_name(value) if key == "creator" else value
         elif key == "objects":
             old_val = existing.get("objects", 0)
-            if value == 0 or (value == 65535 and old_val > 65535):
+            if value == 0 or (value == 65535 and old_val > 65535) or _is_lower_positive_number(value, old_val):
+                continue
+            merged[key] = _valid_creator_name(value) if key == "creator" else value
+        elif key == "estimatedTime":
+            old_val = existing.get("estimatedTime")
+            if value is None or _is_lower_positive_number(value, old_val):
                 continue
             merged[key] = value
         elif existing.get("songID") == "NONG" and key in ["primarySong", "artist", "songID"]:
@@ -616,6 +664,7 @@ def merge_entries(existing, new):
 
     # strip deprecated fields on merge
     merged.pop("showcase", None)
+    merged["creator"] = _valid_creator_name(merged.get("creator", ""))
     return merged
 
 def sanitize_entry(entry: dict) -> dict:
@@ -623,6 +672,9 @@ def sanitize_entry(entry: dict) -> dict:
     if entry is None:
         return entry
     entry.pop("showcase", None)
+    entry["creator"] = _valid_creator_name(entry.get("creator", ""))
+    if entry.get("primarySong") and entry.get("artist") and entry.get("songs") is None:
+        entry["songs"] = 1
     return entry
 
 # ===================== Selection parsing =====================

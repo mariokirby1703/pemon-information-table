@@ -273,7 +273,6 @@ export class AppComponent implements OnInit {
       }
     },
     { field: "objects", flex: 1.5, minWidth: 90 },
-    { field: "checkpoints", flex: 1.9, minWidth: 110, cellStyle: { 'text-align': 'center' } },
     {
       field: "twop",
       flex: 0.85,
