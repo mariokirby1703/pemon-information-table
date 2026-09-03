@@ -18,18 +18,33 @@ ENV (optional):
 import os
 import re
 import json
+import sys
 import time
 import base64
 import random
-import requests
+from pathlib import Path
+
+try:
+    import requests
+    from requests.exceptions import ConnectionError, ReadTimeout, ChunkedEncodingError
+    from urllib3.exceptions import ProtocolError
+except ModuleNotFoundError as exc:
+    if exc.name not in {"requests", "urllib3"}:
+        raise
+    print(
+        "Fehlende Python-Abhaengigkeit. Installiere sie im Projektordner mit:\n"
+        "  py -m pip install -r requirements.txt",
+        file=sys.stderr,
+    )
+    raise SystemExit(1) from exc
+
 from collections import deque
 from threading import Lock
-from requests.exceptions import ConnectionError, ReadTimeout, ChunkedEncodingError
-from urllib3.exceptions import ProtocolError
 
 # ===================== Config =====================
-INPUT_FILE = "pemon_ids.txt"
-OUTPUT_FILE = "pemons.json"
+SCRIPT_DIR = Path(__file__).resolve().parent
+INPUT_FILE = SCRIPT_DIR / "pemon_ids.txt"
+OUTPUT_FILE = SCRIPT_DIR / "pemons.json"
 INVALID_CREATORS = {"ArathhSA"}
 
 # Official song index from GD-Server key 12 (0-based) -> (song name, artist)
