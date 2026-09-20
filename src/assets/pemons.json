@@ -18266,7 +18266,7 @@
     "difficulty": "Medium Demon",
     "rating": "Legendary",
     "userCoins": 1,
-    "estimatedTime": 56,
+    "estimatedTime": 243,
     "objects": 6081,
     "checkpoints": null,
     "twop": true,
@@ -18275,7 +18275,7 @@
     "songID": 10003210,
     "songs": 2,
     "SFX": 66,
-    "rateDate": ""
+    "rateDate": "19.09.2026"
   },
   {
     "number": 963,
@@ -18294,14 +18294,14 @@
     "songID": 1351870,
     "songs": 2,
     "SFX": 5,
-    "rateDate": ""
+    "rateDate": "19.09.2026"
   },
   {
     "number": 964,
     "level": "Replica Rooftops",
     "creator": "tookaGD",
     "ID": 139288227,
-    "difficulty": "Hard Demon",
+    "difficulty": "Medium Demon",
     "rating": "Featured",
     "userCoins": 0,
     "estimatedTime": 313,
@@ -18313,7 +18313,7 @@
     "songID": 1161213,
     "songs": 1,
     "SFX": 6,
-    "rateDate": ""
+    "rateDate": "19.09.2026"
   },
   {
     "number": 965,
@@ -18332,7 +18332,7 @@
     "songID": 1017115,
     "songs": 2,
     "SFX": 14,
-    "rateDate": ""
+    "rateDate": "19.09.2026"
   },
   {
     "number": 966,
@@ -18351,7 +18351,7 @@
     "songID": 499961,
     "songs": 5,
     "SFX": 32,
-    "rateDate": ""
+    "rateDate": "19.09.2026"
   },
   {
     "number": 967,
@@ -18370,6 +18370,6 @@
     "songID": 754277,
     "songs": 14,
     "SFX": 24,
-    "rateDate": ""
+    "rateDate": "19.09.2026"
   }
 ]
