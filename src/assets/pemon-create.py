@@ -263,14 +263,25 @@ def _fetch_download(level_id: int) -> dict:
 
 def _fetch_levels21_raw(level_id: int) -> str:
     url = f"{BASE}/getGJLevels21.php"
-    r = _post(url, data={"levelID": str(level_id), "secret": SECRET}, headers=HEADERS, timeout=30)
+    # getGJLevels21 searches through ``str``; ``levelID`` is not a supported
+    # search parameter and can therefore return an unrelated/default page.
+    r = _post(
+        url,
+        data={"type": "0", "str": str(level_id), "secret": SECRET},
+        headers=HEADERS,
+        timeout=30,
+    )
     if r.status_code == 403:
         raise RuntimeError("403/Cloudflare (getGJLevels21).")
     r.raise_for_status()
     return r.text.strip()
 
 def _parse_creators_map_from_levels21(raw: str) -> dict[int, str]:
-    """Parse creators section defensively: map any numeric token to the following non-numeric token."""
+    """Map both player ID and account ID to the creator name.
+
+    Creator records use ``playerID:username:accountID``. Mapping the two IDs
+    explicitly avoids accidentally interpreting another numeric field as an ID.
+    """
     result = {}
     parts = raw.split("#")
     if len(parts) < 2:
@@ -280,12 +291,14 @@ def _parse_creators_map_from_levels21(raw: str) -> dict[int, str]:
         if not chunk:
             continue
         tokens = chunk.split(":")
-        for i in range(len(tokens) - 1):
-            if tokens[i].isdigit() and not tokens[i + 1].isdigit():
-                try:
-                    result[int(tokens[i])] = tokens[i + 1]
-                except Exception:
-                    pass
+        if len(tokens) < 2 or not tokens[0].isdigit():
+            continue
+        name = _valid_creator_name(tokens[1].strip())
+        if not name:
+            continue
+        result[int(tokens[0])] = name
+        if len(tokens) >= 3 and tokens[2].isdigit() and int(tokens[2]) > 0:
+            result[int(tokens[2])] = name
     return result
 
 def _kv_tilde_song_to_dict(text: str) -> dict:
@@ -314,15 +327,20 @@ def _fetch_username_by_account_id(account_id: int) -> str:
 def _fetch_username_by_user_id(user_id: int) -> str:
     if not user_id:
         return ""
-    url = f"{BASE}/getGJUserInfo20.php"
-    r = _post(url, data={"targetUserID": str(user_id), "secret": SECRET}, headers=HEADERS, timeout=30)
+    # getGJUserInfo20 only resolves account IDs. Player/user IDs are looked up
+    # through the user-search endpoint instead.
+    url = f"{BASE}/getGJUsers20.php"
+    r = _post(url, data={"str": str(user_id), "secret": SECRET}, headers=HEADERS, timeout=30)
     if r.status_code != 200:
         return ""
     txt = r.text.strip()
     if not txt or txt == "-1":
         return ""
-    kv = _kv_block(txt)
-    return kv.get("2", "") or ""
+    for chunk in txt.split("|"):
+        kv = _kv_block(chunk)
+        if _to_int(kv.get("2", "0")) == user_id:
+            return kv.get("1", "") or ""
+    return ""
 
 def _fetch_song(song_id: int) -> dict:
     if not song_id:
@@ -477,7 +495,9 @@ def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False):
     # Core fields from downloadGJLevel22.php
     name = kv.get("2", "") or ""
     user_id     = _to_int(kv.get("6", "0"))
-    account_id  = _to_int(kv.get("49", "0"))  # present on many levels
+    # downloadGJLevel22 contains the player ID, but no creator account ID.
+    # Key 49 contains song metadata and must not be used for user lookups.
+    account_id  = 0
 
     demon_flag      = kv.get("17", "0") == "1"
     stars           = _to_int(kv.get("18", "0"))
