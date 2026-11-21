@@ -15075,7 +15075,7 @@
     "rating": "Featured",
     "userCoins": 3,
     "estimatedTime": 349,
-    "objects": 32166,
+    "objects": 32174,
     "checkpoints": 25,
     "twop": true,
     "primarySong": "Celeste - Resurrections",
@@ -15112,7 +15112,7 @@
     "difficulty": "Hard Demon",
     "rating": "Epic",
     "userCoins": 3,
-    "estimatedTime": 1054,
+    "estimatedTime": 1346,
     "objects": 21004,
     "checkpoints": 25,
     "twop": true,
@@ -18579,7 +18579,7 @@
     "songID": 584131,
     "songs": 20,
     "SFX": 79,
-    "rateDate": ""
+    "rateDate": "05.11.2026"
   },
   {
     "number": 979,
@@ -18598,7 +18598,7 @@
     "songID": 960350,
     "songs": 3,
     "SFX": 19,
-    "rateDate": ""
+    "rateDate": "05.11.2026"
   },
   {
     "number": 980,
@@ -18617,7 +18617,7 @@
     "songID": 10002292,
     "songs": 12,
     "SFX": 411,
-    "rateDate": ""
+    "rateDate": "07.11.2026"
   },
   {
     "number": 981,
@@ -18636,7 +18636,7 @@
     "songID": 587501,
     "songs": 3,
     "SFX": 19,
-    "rateDate": ""
+    "rateDate": "09.11.2026"
   },
   {
     "number": 982,
@@ -18655,7 +18655,7 @@
     "songID": 10006359,
     "songs": 2,
     "SFX": 7,
-    "rateDate": ""
+    "rateDate": "09.11.2026"
   },
   {
     "number": 983,
@@ -18674,14 +18674,14 @@
     "songID": 1426759,
     "songs": 7,
     "SFX": 61,
-    "rateDate": ""
+    "rateDate": "13.11.2026"
   },
   {
     "number": 984,
     "level": "Shutter Summit",
     "creator": "Mossripper",
     "ID": 151839360,
-    "difficulty": "Insane Demon",
+    "difficulty": "Hard Demon",
     "rating": "Featured",
     "userCoins": 0,
     "estimatedTime": 118,
@@ -18693,7 +18693,7 @@
     "songID": 1632682,
     "songs": 1,
     "SFX": 15,
-    "rateDate": ""
+    "rateDate": "13.11.2026"
   },
   {
     "number": 985,
@@ -18712,7 +18712,7 @@
     "songID": 1280640,
     "songs": 9,
     "SFX": 31,
-    "rateDate": ""
+    "rateDate": "13.11.2026"
   },
   {
     "number": 986,
@@ -18731,7 +18731,7 @@
     "songID": 10002546,
     "songs": 1,
     "SFX": 11,
-    "rateDate": ""
+    "rateDate": "13.11.2026"
   },
   {
     "number": 987,
@@ -18750,7 +18750,7 @@
     "songID": 21752,
     "songs": 4,
     "SFX": 7,
-    "rateDate": ""
+    "rateDate": "13.11.2026"
   },
   {
     "number": 988,
@@ -18769,7 +18769,7 @@
     "songID": 1634998,
     "songs": 1,
     "SFX": 19,
-    "rateDate": ""
+    "rateDate": "13.11.2026"
   },
   {
     "number": 989,
@@ -18788,6 +18788,139 @@
     "songID": 1289772,
     "songs": 3,
     "SFX": 14,
-    "rateDate": ""
+    "rateDate": "13.11.2026"
+  },
+  {
+    "number": 990,
+    "level": "Kinked",
+    "creator": "DustyBud",
+    "ID": 148131726,
+    "difficulty": "Extreme Demon",
+    "rating": "Featured",
+    "userCoins": 0,
+    "estimatedTime": 315,
+    "objects": 4860,
+    "checkpoints": null,
+    "twop": true,
+    "primarySong": "timelapse",
+    "artist": "aimofficial",
+    "songID": 1249890,
+    "songs": 1,
+    "SFX": 10,
+    "rateDate": "21.11.2026"
+  },
+  {
+    "number": 991,
+    "level": "My Really Fun Plat",
+    "creator": "BombCraft2010",
+    "ID": 144793678,
+    "difficulty": "Insane Demon",
+    "rating": "Featured",
+    "userCoins": 3,
+    "estimatedTime": 438,
+    "objects": 65535,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "WAX/TAPE 5",
+    "artist": "SixImpala",
+    "songID": 1220430,
+    "songs": 9,
+    "SFX": 15,
+    "rateDate": "21.11.2026"
+  },
+  {
+    "number": 992,
+    "level": "Sleeping Awake",
+    "creator": "SijiloGD",
+    "ID": 150571625,
+    "difficulty": "Medium Demon",
+    "rating": "Featured",
+    "userCoins": 3,
+    "estimatedTime": 122,
+    "objects": 16595,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "Bad Men",
+    "artist": "Ajtastic",
+    "songID": 1224459,
+    "songs": 1,
+    "SFX": 0,
+    "rateDate": "21.11.2026"
+  },
+  {
+    "number": 993,
+    "level": "Tethered",
+    "creator": "CreatorCreepy",
+    "ID": 151848388,
+    "difficulty": "Insane Demon",
+    "rating": "Featured",
+    "userCoins": 0,
+    "estimatedTime": 410,
+    "objects": 24555,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "Solar Overdrive Ambience (Loop)",
+    "artist": "Wagedex Kaizen",
+    "songID": 10012064,
+    "songs": 7,
+    "SFX": 36,
+    "rateDate": "21.11.2026"
+  },
+  {
+    "number": 994,
+    "level": "BLACK NEVOA",
+    "creator": "IcyWindy",
+    "ID": 151601284,
+    "difficulty": "Insane Demon",
+    "rating": "Legendary",
+    "userCoins": 3,
+    "estimatedTime": 3150,
+    "objects": 52868,
+    "checkpoints": null,
+    "twop": true,
+    "primarySong": "Merry-Go-Round Of Evil",
+    "artist": "ZipZipper",
+    "songID": 362661,
+    "songs": 6,
+    "SFX": 89,
+    "rateDate": "21.11.2026"
+  },
+  {
+    "number": 995,
+    "level": "Hope",
+    "creator": "SaQreeZ",
+    "ID": 147051414,
+    "difficulty": "Insane Demon",
+    "rating": "Rated",
+    "userCoins": 0,
+    "estimatedTime": 92,
+    "objects": 33131,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "???????????????????????????????????? - green eyes",
+    "artist": "Korsak",
+    "songID": 1135786,
+    "songs": 1,
+    "SFX": 0,
+    "rateDate": "21.11.2026"
+  },
+  {
+    "number": 996,
+    "level": "The Tedious Thousand",
+    "creator": "burningmagma",
+    "ID": 145170021,
+    "difficulty": "Extreme Demon",
+    "rating": "Rated",
+    "userCoins": 1,
+    "estimatedTime": 3972,
+    "objects": 65535,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "At the Rainforest",
+    "artist": "burningmagma",
+    "songID": 1318309,
+    "songs": 11,
+    "SFX": 31,
+    "rateDate": "21.11.2026"
   }
 ]
