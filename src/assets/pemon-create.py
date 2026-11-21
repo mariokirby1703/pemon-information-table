@@ -193,7 +193,7 @@ def _post(url, data, headers, timeout=30):
         return resp
 
 # ===================== Boomlings API Helpers =====================
-BASE = "http://www.boomlings.com/database"
+BASE = "https://www.boomlings.com/database"
 SECRET = "Wmfd2893gb7"
 HEADERS = {
     "User-Agent": "",  # leave empty
@@ -484,10 +484,10 @@ def _resolve_creator_name(level_id: str, user_id: int, account_id: int, raw21: s
     stats["creator_missing"] += 1
     return ""
 
-def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False):
+def get_level_data_gd(level_id: str, number: int, skip_warnings: bool = False, downloaded: dict | None = None):
     """Fetch directly from Boomlings endpoints and map to our output schema."""
     try:
-        kv = _fetch_download(int(level_id))
+        kv = downloaded if downloaded is not None else _fetch_download(int(level_id))
     except Exception as e:
         print(f"[!] Boomlings fetch failed for level {level_id}: {e}")
         return None
