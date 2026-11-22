@@ -37,6 +37,24 @@ Pushes mit `GITHUB_TOKEN` lösen gewöhnlich keine weiteren Actions-Workflows au
 ein Actions-basiertes Deployment muss ausdrücklich angeschlossen werden.
 
 Manuell: **Actions → Sync Pemon data → Run workflow**.
+
+### HTTP 403 auf GitHub
+
+Der erste GitHub-Lauf wurde vom GD-Server mit HTTP 403 abgewiesen, obwohl die
+gleiche Listenabfrage lokal funktioniert hat. Der genaue Sperrgrund ist nicht
+bekannt. Der Fünf-Sekunden-Abstand hebt eine Zugriffssperre nicht auf.
+Die Node.js-Deprecation-Warnung war nicht die Fehlerursache.
+
+Der Workflow unterstützt deshalb optional einen eigenen GitHub Actions Runner.
+Nach Einrichtung eines dedizierten Runners kann unter **Settings → Secrets and
+variables → Actions → Variables** die Repository-Variable `PEMON_RUNNER` auf
+`["self-hosted", "Windows", "X64"]` gesetzt werden (Labels an den Runner
+anpassen). Ohne diese Variable wird weiterhin `ubuntu-latest` verwendet.
+Ein eigener Runner muss eingeschaltet sein, Python 3.13 über `setup-python`
+bereitstellen können und vom GD-Server Zugriff erhalten. Auf öffentlichen
+Repositories eigene Runner nur für vertrauenswürdige Workflows verwenden.
+Die Runner-Einrichtung und Variable sind nicht automatisch vorgenommen worden.
+
 Lokal (schreibt Daten, pusht nicht):
 
 ```sh

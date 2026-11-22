@@ -14,7 +14,8 @@ concurrency:
 
 jobs:
   sync:
-    runs-on: ubuntu-latest
+    # Optional JSON runner labels, e.g. ["self-hosted", "Windows", "X64"].
+    runs-on: ${{ fromJSON(vars.PEMON_RUNNER || '"ubuntu-latest"') }}
     timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
@@ -34,7 +35,7 @@ jobs:
       - name: Update data
         env:
           RL_MIN_INTERVAL: '5'
-        run: python scripts/sync_pemons.py
+        run: python -u scripts/sync_pemons.py
       - name: Commit and push changes
         shell: bash
         run: |

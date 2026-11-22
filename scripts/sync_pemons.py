@@ -3,6 +3,7 @@ import argparse
 from datetime import datetime
 import importlib.util
 import json
+import sys
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
@@ -29,6 +30,7 @@ def discover(full=False):
     found = {}
     previous = set()
     for page in range(5000 if full else 5):
+        print(f"Reading platformer demon list, page {page + 1}...", flush=True)
         response = builder._post(
             f"{builder.BASE}/getGJLevels21.php",
             data={"secret": builder.SECRET, "type": "0" if full else "11",
@@ -96,6 +98,7 @@ def sync(batch_size=20):
     selected = sorted(selected, key=positions.get, reverse=True)
     updated = added = 0
     for level_id in selected:
+        print(f"Checking level {level_id} ({positions[level_id]})...", flush=True)
         kv = builder._fetch_download(int(level_id))
         if kv.get("1") != level_id or not kv.get("2") or "15" not in kv or "17" not in kv:
             raise RuntimeError(f"Invalid metadata for {level_id}; no files written")
@@ -132,4 +135,16 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.batch_size < 1:
         parser.error("--batch-size must be positive")
-    sync(args.batch_size)
+    try:
+        sync(args.batch_size)
+    except builder.requests.HTTPError as exc:
+        if exc.response is not None and exc.response.status_code == 403:
+            print(
+                "GD server denied this runner's request (HTTP 403). No data was written. "
+                "This is an access denial, not a confirmed rate limit. "
+                "If GitHub-hosted runners remain blocked, configure an authorized "
+                "self-hosted runner using the PEMON_RUNNER repository variable; see README.md.",
+                file=sys.stderr,
+            )
+            raise SystemExit(1) from None
+        raise
