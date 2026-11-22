@@ -3,17 +3,17 @@ A table that displays various information about Geometry Dash's Platformer Demon
 
 ## Einmal pro Tag automatisch bei Windows-Anmeldung
 
-Nach Installation gibt es nur **Pemon Daily Sync**, mit zwei Ausloesern:
+Nach Installation gibt es nur **Pemon Daily Sync**, mit einem Ausloeser:
 
 - Beim Anmelden an Windows (auch nach PC-Neustart).
-- Jeden Tag um 20:00 Uhr als Fallback, wenn der PC seit dem Vortag durchlaeuft.
 
 Der erste **erfolgreiche** Lauf eines Berliner Kalendertags zaehlt.
 In `.sync-state/last-success.json` wird das Datum gespeichert. Weitere
 Starts am selben Tag ueberspringen den Scan, auch wenn du den PC
 mehrmals neu startest. Schlaegt der Abgleich fehl, darf der naechste
 Start am selben Tag erneut versuchen. Ein Logon ist eine Windows-Anmeldung,
-kein Start vor dem Login. Der PC muss eingeschaltet, der Benutzer
+kein Start vor dem Login. Bleibt der PC tagelang angemeldet, gibt es
+bewusst keinen neuen Lauf bis zur naechsten Windows-Anmeldung. Der PC muss eingeschaltet, der Benutzer
 angemeldet und das Netzwerk verfuegbar sein.
 
 Der taegliche **leichte Watch-Modus** geht durch die Seiten der
@@ -45,8 +45,7 @@ git pull
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/install_daily_sync.ps1
 ```
 
-Das Installationsskript aktualisiert **Pemon Daily Sync** auf beide
-Ausloeser und **loescht die alte Aufgabe Pemon Rating Watch**.
+Das Installationsskript aktualisiert **Pemon Daily Sync** auf den Anmelde-Ausloeser und **loescht die alte Aufgabe Pemon Rating Watch**.
 
 Manuell ausloesen (die Tages-Sperre bleibt aktiv):
 
