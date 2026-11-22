@@ -17,6 +17,10 @@ STATE = ROOT / ".sync-state/cursor.json"
 def refresh_batch(ids, state, batch_size):
     """Start with the latest table additions; resume older entries next run."""
     newest_first = list(reversed(ids))
+    # Watch mode deliberately skips the rolling metadata refresh without
+    # advancing its cursor. Newly rated and changed levels are still checked.
+    if batch_size == 0:
+        return [], state.get("next_level_id")
     if not newest_first:
         return [], None
     next_id = state.get("next_level_id")
@@ -100,6 +104,9 @@ def sync(batch_size=20):
         ):
             changed.append(level_id)
     selected = set([*changed, *[value for value in ids if value not in by_id], *batch])
+    if batch_size == 0:
+        print(f"Rating watch: {len(new_ids)} newly discovered, {len(changed)} changed, "
+              f"{len(selected)} level(s) to download.", flush=True)
     today = datetime.now(ZoneInfo("Europe/Berlin")).strftime("%d.%m.%Y")
     positions = {value: index + 1 for index, value in enumerate(ids)}
     selected = sorted(selected, key=positions.get, reverse=True)
@@ -139,7 +146,9 @@ def sync(batch_size=20):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--batch-size", type=int, default=20)
-    parser.add_argument("--all", action="store_true", help="Fully refresh every existing entry, newest first")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--all", action="store_true", help="Fully refresh every existing entry, newest first")
+    modes.add_argument("--watch", action="store_true", help="Scan all rated platformer demons and download only new/changed levels")
     parser.add_argument("--data-root", type=Path, help="Separate checkout containing src/assets")
     args = parser.parse_args()
     if args.batch_size < 1:
@@ -148,6 +157,8 @@ if __name__ == "__main__":
         asset_dir = args.data_root.resolve() / "src" / "assets"
         builder.INPUT_FILE = asset_dir / "pemon_ids.txt"
         builder.OUTPUT_FILE = asset_dir / "pemons.json"
+    if args.watch:
+        args.batch_size = 0
     if args.all:
         # A complete daily pass must always start at the newest entry.
         args.batch_size = sys.maxsize
