@@ -13,6 +13,18 @@ spec.loader.exec_module(builder)
 STATE = ROOT / ".sync-state/cursor.json"
 
 
+def refresh_batch(ids, state, batch_size):
+    """Start with the latest table additions; resume older entries next run."""
+    newest_first = list(reversed(ids))
+    if not newest_first:
+        return [], None
+    next_id = state.get("next_level_id")
+    start = newest_first.index(next_id) if next_id in newest_first else 0
+    batch = newest_first[start:start + batch_size]
+    end = start + len(batch)
+    return batch, newest_first[end] if end < len(newest_first) else None
+
+
 def discover(full=False):
     found = {}
     previous = set()
@@ -59,10 +71,7 @@ def sync(batch_size=20):
     new_ids = sorted(set(discovered) - set(ids), key=int)
     ids.extend(new_ids)
     state = json.loads(STATE.read_text()) if STATE.exists() else {}
-    cursor = state.get("cursor", 0)
-    cursor %= max(1, len(ids))
-    batch = [ids[(cursor + offset) % len(ids)] for offset in range(min(batch_size, len(ids)))]
-    # Recently rated entries are checked on every run, not just when first added.
+    batch, next_level_id = refresh_batch(ids, state, batch_size)
     fingerprints = {}
     changed = []
     for level_id, raw in discovered.items():
@@ -81,9 +90,10 @@ def sync(batch_size=20):
             old and (old.get("difficulty") != difficulty or old.get("rating") != rating)
         ):
             changed.append(level_id)
-    selected = list(dict.fromkeys([*changed, *[value for value in ids if value not in by_id], *batch]))
+    selected = set([*changed, *[value for value in ids if value not in by_id], *batch])
     today = datetime.now(ZoneInfo("Europe/Berlin")).strftime("%d.%m.%Y")
     positions = {value: index + 1 for index, value in enumerate(ids)}
+    selected = sorted(selected, key=positions.get, reverse=True)
     updated = added = 0
     for level_id in selected:
         kv = builder._fetch_download(int(level_id))
@@ -112,7 +122,7 @@ def sync(batch_size=20):
     if builder.INPUT_FILE.read_text(encoding="utf-8") != id_text:
         builder.INPUT_FILE.write_text(id_text, encoding="utf-8")
     STATE.parent.mkdir(exist_ok=True)
-    STATE.write_text(json.dumps({"cursor": (cursor + len(batch)) % max(1, len(ids)), "fingerprints": fingerprints}))
+    STATE.write_text(json.dumps({"next_level_id": next_level_id, "fingerprints": fingerprints}))
     print(f"Checked {len(selected)} levels; added {added}, updated {updated}.")
 
 

@@ -73,10 +73,9 @@ OFFICIAL_SONGS = {
     21: ("Dash", "MDK"),
 }
 
-# ===================== Rate Limiter (20 req/min) + robust POST =====================
-MIN_INTERVAL = float(os.getenv("RL_MIN_INTERVAL", "3"))  # ~20/min
-# Max 4 in 10s (sanft), max 20 in 60s (Zielrate)
-WINDOWS = [(10, 6), (60, 30)]
+# ===================== Rate Limiter (12 req/min) + robust POST =====================
+MIN_INTERVAL = max(5.0, float(os.getenv("RL_MIN_INTERVAL", "5")))
+WINDOWS = [(10, 2), (60, 12)]
 
 RETRY_MAX = int(os.getenv("RL_RETRY_MAX", "5"))
 BACKOFF_BASE = float(os.getenv("RL_BACKOFF_BASE", "1.5"))

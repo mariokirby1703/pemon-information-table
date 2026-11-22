@@ -32,6 +32,8 @@ jobs:
           key: pemon-cursor-${{ github.run_id }}-${{ github.run_attempt }}
           restore-keys: pemon-cursor-
       - name: Update data
+        env:
+          RL_MIN_INTERVAL: '5'
         run: python scripts/sync_pemons.py
       - name: Commit and push changes
         shell: bash

@@ -10,6 +10,11 @@ Nur neue/geänderte Levels werden vollständig heruntergeladen. Es gibt keinen
 bekannten öffentlichen Änderungsfeed; Listenabfragen bleiben erforderlich.
 Zusätzlich werden stündlich 20 bestehende Einträge reihum vollständig geprüft,
 um Änderungen zu finden, die nicht in den Listen-Metadaten erscheinen.
+Jede Runde beginnt bei den zuletzt hinzugefügten Tabelleneinträgen und arbeitet
+sich zu den älteren vor; der nächste Lauf setzt die Runde fort. Neu entdeckte
+und geänderte Einträge werden ebenfalls vom neuesten zum ältesten verarbeitet.
+Zwischen GD-Anfragen liegen mindestens fünf Sekunden (höchstens etwa zwölf
+pro Minute); bei Rate Limits oder Serverfehlern kann die Wartezeit länger sein.
 Diese zusätzliche Runde dauert bei 1.000 Einträgen etwa 50 Stunden.
 Beim ersten Lauf oder Cacheverlust wird der Vergleichsstand neu aufgebaut;
 Difficulty und Rating werden dabei direkt mit der JSON verglichen.

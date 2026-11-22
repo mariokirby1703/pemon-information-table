@@ -11,6 +11,19 @@ spec.loader.exec_module(sync)
 
 
 class SyncTests(unittest.TestCase):
+    def test_newest_first_and_resume_after_new_additions(self):
+        batch, next_id = sync.refresh_batch(["1", "2", "3", "4", "5"], {}, 2)
+        self.assertEqual(batch, ["5", "4"])
+        batch, next_id = sync.refresh_batch(["1", "2", "3", "4", "5", "6"], {"next_level_id": next_id}, 2)
+        self.assertEqual(batch, ["3", "2"])
+        batch, next_id = sync.refresh_batch(["1", "2", "3", "4", "5", "6"], {"next_level_id": next_id}, 2)
+        self.assertEqual((batch, next_id), (["1"], None))
+        self.assertEqual(sync.refresh_batch(["1", "2", "3"], {"next_level_id": None}, 2)[0], ["3", "2"])
+
+    def test_request_interval(self):
+        self.assertGreaterEqual(sync.builder.MIN_INTERVAL, 5)
+        self.assertEqual(sync.builder.WINDOWS, [(10, 2), (60, 12)])
+
     def test_protected_values_and_updates(self):
         old = {"objects": 100000, "estimatedTime": 100, "songID": "NONG",
                "primarySong": "Manual", "artist": "Artist", "rateDate": "01.01.2024", "checkpoints": 4}
