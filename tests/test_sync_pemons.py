@@ -91,6 +91,51 @@ class SyncTests(unittest.TestCase):
             self.assertEqual(saved["rating"], "Legendary")
             self.assertEqual(saved["rateDate"], "01.01.2025")
 
+    def test_creator_names_from_search_uses_player_ids(self):
+        raw = "1:101:6:42#42:RenamedFox:900|43:OtherCreator:901#songs#total"
+        self.assertEqual(sync.creator_names_from_search(raw),
+                         {"42": "RenamedFox", "43": "OtherCreator"})
+
+    def test_creator_rename_without_download_and_preserve_other_fields(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            output, ids = root / "pemons.json", root / "ids.txt"
+            previous = {"ID": 100, "number": 1, "creator": "OldFox",
+                        "level": "Example", "difficulty": "Hard Demon",
+                        "rating": "Rated", "rateDate": "01.01.2025",
+                        "checkpoints": 11, "primarySong": "Manual"}
+            output.write_text(json.dumps([previous]))
+            ids.write_text("100\n")
+            raw = ("1:100:2:Example:6:42:15:5:17:1:18:10:43:0:42:0:19:0"
+                   "#42:NewFox:900#songs#1:0:10")
+            with patch.object(sync.builder, "OUTPUT_FILE", output), \
+                 patch.object(sync.builder, "INPUT_FILE", ids), \
+                 patch.object(sync, "STATE", root / "state/cursor.json"), \
+                 patch.object(sync, "discover", return_value={"100": raw}), \
+                 patch.object(sync.builder, "_fetch_download") as download:
+                sync.sync(batch_size=0)
+                download.assert_not_called()
+            self.assertEqual(json.loads(output.read_text()),
+                             [{**previous, "creator": "NewFox"}])
+
+    def test_missing_creator_record_does_not_overwrite_name(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            output, ids = root / "pemons.json", root / "ids.txt"
+            previous = {"ID": 100, "number": 1, "creator": "KeepMe",
+                        "difficulty": "Hard Demon", "rating": "Rated"}
+            output.write_text(json.dumps([previous]))
+            ids.write_text("100\n")
+            raw = "1:100:6:42:15:5:17:1:18:10:43:0:42:0:19:0#43:SomeoneElse:900#songs"
+            with patch.object(sync.builder, "OUTPUT_FILE", output), \
+                 patch.object(sync.builder, "INPUT_FILE", ids), \
+                 patch.object(sync, "STATE", root / "state/cursor.json"), \
+                 patch.object(sync, "discover", return_value={"100": raw}), \
+                 patch.object(sync.builder, "_fetch_download") as download:
+                sync.sync(batch_size=0)
+                download.assert_not_called()
+            self.assertEqual(json.loads(output.read_text()), [previous])
+
     def test_request_interval(self):
         self.assertGreaterEqual(sync.builder.MIN_INTERVAL, 5)
         self.assertEqual(sync.builder.WINDOWS, [(10, 2), (60, 12)])

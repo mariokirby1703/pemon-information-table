@@ -30,6 +30,27 @@ def refresh_batch(ids, state, batch_size):
     return batch, newest_first[end] if end < len(newest_first) else None
 
 
+def creator_names_from_search(raw):
+    """Return verified creator names keyed by stable GD player ID.
+
+    getGJLevels21 supplies a separate creators section containing records
+    formatted as playerID:username:accountID. A rename only affects the
+    display name, not that numeric player ID. Skip missing/invalid records.
+    """
+    parts = raw.split("#", 2)
+    if len(parts) < 2:
+        return {}
+    names = {}
+    for chunk in parts[1].split("|"):
+        fields = chunk.split(":")
+        if len(fields) < 2 or not fields[0].isdigit():
+            continue
+        name = builder._valid_creator_name(fields[1].strip())
+        if name:
+            names[fields[0]] = name
+    return names
+
+
 def discover(full=False):
     found = {}
     previous = set()
@@ -87,6 +108,8 @@ def sync(batch_size=20):
     batch, next_level_id = refresh_batch(ids, state, batch_size)
     fingerprints = {}
     changed = []
+    creator_updates = {}
+    creators_cache = {}
     for level_id, raw in discovered.items():
         row = next(builder._kv_block(item) for item in raw.split("#", 1)[0].split("|")
                    if builder._kv_block(item).get("1") == level_id)
@@ -96,6 +119,14 @@ def sync(batch_size=20):
         fingerprints[level_id] = [row.get(key) for key in keys]
         previous = state.get("fingerprints", {}).get(level_id)
         old = by_id.get(level_id)
+        # One creator block per search page can cover several levels. Reuse it
+        # and compare usernames using their stable player IDs, not old names.
+        if old is not None:
+            if raw not in creators_cache:
+                creators_cache[raw] = creator_names_from_search(raw)
+            live_creator = creators_cache[raw].get(row.get("6", ""))
+            if live_creator and live_creator != old.get("creator"):
+                creator_updates[level_id] = live_creator
         difficulty = f"{builder._demon_name(int(row.get('43', 0)))} Demon"
         rating = {1: "Epic", 2: "Legendary", 3: "Mythic"}.get(int(row.get("42", 0)),
                      "Featured" if int(row.get("19", 0)) > 0 else "Rated")
@@ -105,7 +136,8 @@ def sync(batch_size=20):
             changed.append(level_id)
     selected = set([*changed, *[value for value in ids if value not in by_id], *batch])
     if batch_size == 0:
-        print(f"Rating watch: {len(new_ids)} newly discovered, {len(changed)} changed, "
+        print(f"Rating watch: {len(new_ids)} newly discovered, {len(changed)} metadata changes, "
+              f"{len(creator_updates)} creator rename(s), "
               f"{len(selected)} level(s) to download.", flush=True)
     today = datetime.now(ZoneInfo("Europe/Berlin")).strftime("%d.%m.%Y")
     positions = {value: index + 1 for index, value in enumerate(ids)}
@@ -132,6 +164,18 @@ def sync(batch_size=20):
             entry = builder.sanitize_entry(fresh)
             added += 1
         by_id[level_id] = entry
+
+    # Names come from the authenticated level-search response, so a
+    # username-only change needs no expensive level download. Apply after
+    # all downloads succeeded, preserving every other JSON field.
+    renamed = 0
+    for level_id, name in creator_updates.items():
+        entry = by_id[level_id]
+        if entry.get("creator") != name:
+            print(f"Creator renamed for level {level_id}: "
+                  f"{entry.get('creator', '')!r} -> {name!r}", flush=True)
+            by_id[level_id] = {**entry, "creator": name}
+            renamed += 1
     result = sorted(by_id.values(), key=lambda entry: entry["number"])
     if result != existing:
         builder.save_data(builder.OUTPUT_FILE, result)
@@ -140,7 +184,7 @@ def sync(batch_size=20):
         builder.INPUT_FILE.write_text(id_text, encoding="utf-8")
     STATE.parent.mkdir(exist_ok=True)
     STATE.write_text(json.dumps({"next_level_id": next_level_id, "fingerprints": fingerprints}))
-    print(f"Checked {len(selected)} levels; added {added}, updated {updated}.")
+    print(f"Checked {len(selected)} levels; added {added}, updated {updated}, renamed {renamed}.")
 
 
 if __name__ == "__main__":
@@ -148,7 +192,7 @@ if __name__ == "__main__":
     parser.add_argument("--batch-size", type=int, default=20)
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--all", action="store_true", help="Fully refresh every existing entry, newest first")
-    modes.add_argument("--watch", action="store_true", help="Scan all rated platformer demons and download only new/changed levels")
+    modes.add_argument("--watch", action="store_true", help="Scan rated platformer demons; sync creator names and download only new/changed levels")
     parser.add_argument("--data-root", type=Path, help="Separate checkout containing src/assets")
     args = parser.parse_args()
     if args.batch_size < 1:
