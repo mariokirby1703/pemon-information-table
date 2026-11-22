@@ -176,5 +176,36 @@ class SyncTests(unittest.TestCase):
                 self.assertEqual(before, (output.read_bytes(), ids.read_bytes()))
 
 
+
+class DailyRunTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        runner_spec = importlib.util.spec_from_file_location(
+            "daily_runner", Path(__file__).resolve().parents[1] / "scripts/run_daily_sync.py"
+        )
+        cls.runner = importlib.util.module_from_spec(runner_spec)
+        runner_spec.loader.exec_module(cls.runner)
+
+    def test_success_marker_survives_restarts_and_changes_by_day(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "last-success.json"
+            with patch.object(self.runner, "SUCCESS_STATE", path), \
+                 patch.object(self.runner, "RUNTIME", Path(folder)):
+                self.assertFalse(self.runner.already_synced_today("2026-11-22"))
+                self.runner.record_success("2026-11-22")
+                self.assertTrue(self.runner.already_synced_today("2026-11-22"))
+                self.assertFalse(self.runner.already_synced_today("2026-11-23"))
+                self.assertEqual(json.loads(path.read_text()), {"date": "2026-11-22"})
+
+    def test_preflight_does_not_mark_daily_success(self):
+        with tempfile.TemporaryDirectory() as folder:
+            path = Path(folder) / "last-success.json"
+            with patch.object(self.runner, "SUCCESS_STATE", path), \
+                 patch.object(self.runner, "RUNTIME", Path(folder)):
+                self.assertFalse(self.runner.already_synced_today("2026-11-22"))
+                self.assertFalse(path.exists())
+
+
+
 if __name__ == "__main__":
     unittest.main()
