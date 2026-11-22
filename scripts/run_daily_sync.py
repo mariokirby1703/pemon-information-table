@@ -1,5 +1,7 @@
-"""Run the daily local sync in an isolated checkout, then commit and push data."""
+"""Run one lightweight Platformer Demon sync per Berlin day and push data."""
 from datetime import datetime
+from zoneinfo import ZoneInfo
+import json
 from contextlib import contextmanager, redirect_stdout, redirect_stderr
 import os
 from pathlib import Path
@@ -11,6 +13,29 @@ ROOT = Path(__file__).resolve().parents[1]
 RUNTIME = ROOT / ".sync-state"
 CHECKOUT = RUNTIME / "checkout"
 DATA_FILES = ["src/assets/pemons.json", "src/assets/pemon_ids.txt"]
+SUCCESS_STATE = RUNTIME / "last-success.json"
+
+
+def berlin_today():
+    return datetime.now(ZoneInfo("Europe/Berlin")).date().isoformat()
+
+
+def already_synced_today(today=None):
+    """Only successful sync-and-push runs count towards the daily limit."""
+    today = today or berlin_today()
+    if not SUCCESS_STATE.exists():
+        return False
+    data = json.loads(SUCCESS_STATE.read_text(encoding="utf-8"))
+    return data.get("date") == today
+
+
+def record_success(today=None):
+    today = today or berlin_today()
+    RUNTIME.mkdir(exist_ok=True)
+    temporary = SUCCESS_STATE.with_suffix(".tmp")
+    temporary.write_text(json.dumps({"date": today}) + "\n", encoding="utf-8")
+    os.replace(temporary, SUCCESS_STATE)
+
 
 
 @contextmanager
@@ -58,7 +83,7 @@ def run(*args, cwd=CHECKOUT, capture=False):
     return result.stdout.strip() if capture else ""
 
 
-def main(check_only=False, watch=False):
+def main(check_only=False, full=False):
     os.environ.update(GIT_TERMINAL_PROMPT="0", GCM_INTERACTIVE="never", RL_MIN_INTERVAL="5", PYTHONUTF8="1")
     git = shutil.which("git")
     if not git:
@@ -77,7 +102,7 @@ def main(check_only=False, watch=False):
         print("Preflight passed: checkout clean and GitHub push access available.", flush=True)
         return
     run(sys.executable, "-u", str(ROOT / "scripts/sync_pemons.py"),
-        "--watch" if watch else "--all", "--data-root", str(CHECKOUT), cwd=ROOT)
+        "--all" if full else "--watch", "--data-root", str(CHECKOUT), cwd=ROOT)
     run(git, "add", "--", *DATA_FILES)
     diff = subprocess.run([git, "diff", "--cached", "--quiet"], cwd=CHECKOUT,
                           stdin=subprocess.DEVNULL, stdout=sys.stdout, stderr=sys.stderr)
@@ -96,8 +121,10 @@ def main(check_only=False, watch=False):
 
 if __name__ == "__main__":
     RUNTIME.mkdir(exist_ok=True)
-    watch = "--watch" in sys.argv
-    logfile = RUNTIME / ("preflight.log" if "--check" in sys.argv else ("rating-watch.log" if watch else "daily-sync.log"))
+    check = "--check" in sys.argv
+    full = "--all" in sys.argv
+    force = "--force" in sys.argv
+    logfile = RUNTIME / ("preflight.log" if check else "daily-sync.log")
     with logfile.open("a", encoding="utf-8", buffering=1) as log, redirect_stdout(log), redirect_stderr(log):
         # Pass real file handles to children; Windows scheduled tasks may have
         # invalid console handles, so changing CRT descriptors with dup2 fails.
@@ -105,7 +132,13 @@ if __name__ == "__main__":
         try:
             with exclusive_run() as acquired:
                 if acquired:
-                    main(check_only="--check" in sys.argv, watch=watch)
+                    if not check and not force and already_synced_today():
+                        print("Today's Pemon sync already succeeded; skipping.", flush=True)
+                    else:
+                        main(check_only=check, full=full)
+                        if not check:
+                            record_success()
+                            print(f"Daily sync completed for {berlin_today()}.", flush=True)
         except Exception:
             import traceback
             traceback.print_exc()

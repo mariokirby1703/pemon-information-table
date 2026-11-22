@@ -1,82 +1,70 @@
 # pemon-information-table
 A table that displays various information about Geometry Dash's Platformer Demons
 
-## Automatischer Rating Watch und täglicher Abgleich auf Windows
+## Einmal pro Tag automatisch bei Windows-Anmeldung
 
-Die Windows-Aufgabe **Pemon Daily Sync** startet täglich um **20:00 Uhr Ortszeit**
-(auf diesem PC Europe/Berlin). Der PC muss eingeschaltet und der Benutzer
-angemeldet sein; eine gesperrte Sitzung reicht. Verpasste Starts darf Windows
-bei nächster Gelegenheit nachholen. Der Lauf weckt den PC nicht automatisch.
+Nach Installation gibt es nur **Pemon Daily Sync**, mit zwei Ausloesern:
 
-Der Abgleich prüft täglich alle vorhandenen Levels, zuletzt hinzugefügte zuerst.
-Zwischen GD-Anfragen liegen mindestens fünf Sekunden (etwa zwölf pro Minute),
-bei Rate Limits/Serverfehlern länger. Ein vollständiger Lauf kann mehrere Stunden
-dauern. Gleichzeitig kann nur eine Instanz der Windows-Aufgabe laufen.
+- Beim Anmelden an Windows (auch nach PC-Neustart).
+- Jeden Tag um 20:00 Uhr als Fallback, wenn der PC seit dem Vortag durchlaeuft.
 
-Zusätzlich wird **Pemon Rating Watch** stündlich ab **00:15 Uhr Ortszeit**
-ausgeführt (00:15, 01:15, 02:15 usw.). Er überprüft die Liste aller
-offiziell gerateten Platformer Demons, vergleicht Schwierigkeit und
-Rating-Auszeichnung mit den gespeicherten Werten ab. Auch geänderte
-Creator-Usernames werden über die Spieler-ID aus der Creator-Liste der
-GD-Suchergebnisse erkannt und ohne vollständigen Level-Download aktualisiert.
-Nur neue Levels und Levels mit geänderten Metadaten werden vollständig
-heruntergeladen. Beide Aufgaben teilen eine Sperre:
-Ein überlappender Start wird übersprungen, statt zwei Prozesse gleichzeitig
-in der Arbeitskopie arbeiten zu lassen. Der tägliche Vollabgleich bleibt
-erhalten, um auch Änderungen außerhalb der aktuellen Such-Metadaten
-zu erfassen. Dies ist Polling und keine sofortige Push-Benachrichtigung.
-Der PC muss zum Ausführungszeitpunkt eingeschaltet und der Benutzer
-angemeldet sein. Der GD-Server kann auch lokale Anfragen blockieren.
+Der erste **erfolgreiche** Lauf eines Berliner Kalendertags zaehlt.
+In `.sync-state/last-success.json` wird das Datum gespeichert. Weitere
+Starts am selben Tag ueberspringen den Scan, auch wenn du den PC
+mehrmals neu startest. Schlaegt der Abgleich fehl, darf der naechste
+Start am selben Tag erneut versuchen. Ein Logon ist eine Windows-Anmeldung,
+kein Start vor dem Login. Der PC muss eingeschaltet, der Benutzer
+angemeldet und das Netzwerk verfuegbar sein.
 
-Neue Platformer Demons werden über die gefilterte Suche gefunden und angehängt.
-Sie erhalten in `rateDate` das Berliner Datum der ersten Erkennung
-(`TT.MM.JJJJ`), kein historisch belegtes Ratingdatum. Vorhandene Datumsangaben
-bleiben erhalten. Sinkende Estimated Times und Objektzahlen werden ignoriert,
-ebenso 65535 bei bekannten höheren Zahlen. Die NONG/UNKNOWN-Regeln sowie
-manuelle Checkpoints und Zusatzfelder bleiben erhalten. Bei reinen
-Username-Änderungen wird ausschließlich das Creator-Feld aktualisiert,
-sofern der Server einen gültigen Namen und die passende Spieler-ID liefert. Nur vom Server
-bereitgestellte Werte können aktualisiert werden. Gelöschte oder ungeratete
-Einträge werden nicht automatisch entfernt. Fehlerhafte Antworten brechen den
-Abgleich vor dem Schreiben ab.
+Der taegliche **leichte Watch-Modus** geht durch die Seiten der
+GD-Suche nach offiziell gerateten Platformer Demons. Dabei gleicht
+er Level-IDs, Ratings, Difficulty, Metadaten-Fingerprints und Creator-
+Usernames ab. **Er laedt nicht alle Levels einzeln erneut herunter.**
+Nur neu entdeckte bzw. veraenderte Levels werden vollstaendig abgefragt.
+Reine Creator-Umbenennungen aus den GD-Suchergebnissen brauchen keinen
+Level-Download. Dies reduziert die Anzahl an GD-Anfragen erheblich,
+aber der komplette Suchseiten-Scan bleibt notwendig, um auch aeltere
+geanderte Eintraege und Usernamen zu erkennen. Es ist kein Echtzeit-Push.
+Der GD-Server kann Anfragen blockieren; die Anfragen werden begrenzt.
 
-Der Lauf verwendet eine separate Arbeitskopie in `.sync-state/checkout`.
-Offene Projektdateien werden nicht verändert. Datenänderungen werden mit der
-lokalen Git-Identität committet und über Git Credential Manager auf `main`
-gepusht. Ohne Datenänderungen gibt es keinen Commit. Neue Daten im normalen
-Projektordner anschließend über **Pull origin** holen. Das Repository darf
-nicht verschoben werden, ohne die Windows-Aufgabe neu einzurichten.
+Vorhandene Eintraege werden nicht automatisch geloescht.
+Bisherige Rating-Daten, manuelle Checkpoints, NONG/UNKNOWN-Regeln und
+andere manuelle Felder bleiben erhalten; neue Levels erhalten den
+Berliner Tag ihrer ersten Erkennung als `rateDate`.
+Der Git-Push erfolgt nur bei Datenveraenderungen. Eine separate
+Arbeitskopie liegt in `.sync-state/checkout`; offene Projektdateien
+werden nicht ueberschrieben. Das Log ist `.sync-state/daily-sync.log`.
 
-Status und Protokolle:
+### Einmalige Einrichtung nach dem Update
 
-- Windows-Aufgabenplanung → **Pemon Daily Sync** (Ergebnis `0` = erfolgreich).
-- `.sync-state/daily-sync.log`: Fortschritt und Fehler des täglichen Laufs.
-- `.sync-state/rating-watch.log`: Fortschritt und Fehler der stündlichen Rating-Checks.
-- `.sync-state/preflight.log`: Prüfung von Arbeitskopie und GitHub-Pushzugang.
-- GitHub-Commits: `chore: daily platformer demon data sync` bei Datenänderungen.
-
-Einrichtung bzw. erneute Einrichtung im Projektordner:
+Im lokalen Repository in PowerShell:
 
 ```powershell
-python -m venv .sync-state/venv
-.\.sync-state\venv\Scripts\python.exe -m pip install -r requirements.txt
-git credential-manager github login --browser
-.\.sync-state\venv\Scripts\python.exe scripts/run_daily_sync.py --check
+git pull
+.\.sync-state\venv\Scripts\python.exe -m unittest discover -s tests
 powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/install_daily_sync.ps1
 ```
 
-Manuell denselben vollständigen Lauf starten:
+Das Installationsskript aktualisiert **Pemon Daily Sync** auf beide
+Ausloeser und **loescht die alte Aufgabe Pemon Rating Watch**.
+
+Manuell ausloesen (die Tages-Sperre bleibt aktiv):
 
 ```powershell
 Start-ScheduledTask -TaskName 'Pemon Daily Sync'
 ```
 
-Nur lokal aktualisieren, ohne automatischen Commit/Push:
+Fuer einen ausdruecklich erzwungenen Testlauf (auch am selben Tag)
+oder den selten gewuenschten Vollabgleich:
 
-```sh
-python scripts/sync_pemons.py --all
-python -m unittest discover -s tests
+```powershell
+.\.sync-state\venv\Scripts\python.exe scripts/run_daily_sync.py --force
+.\.sync-state\venv\Scripts\python.exe scripts/run_daily_sync.py --force --all
 ```
+
+Ein erfolgreicher erzwungener Lauf zaehlt ebenfalls als Tageslauf.
+Mit `--check` wird nur der GitHub-Zugriff ueberprueft und kein
+erfolgreicher Tageslauf gespeichert.
 
 ## GitHub Actions
 
@@ -86,19 +74,3 @@ abgewiesen; die Node.js-Warnung war nicht die Ursache. Der tägliche Windows-Lau
 verwendet keinen GitHub Actions Runner. Optional kann ein manueller Workflow
 über die Repository-Variable `PEMON_RUNNER` andere Runner-Labels erhalten.
 
-### Rating Watch manuell testen
-
-```powershell
-.\.sync-state\venv\Scripts\python.exe scripts/run_daily_sync.py --watch
-```
-
-Der Monitor arbeitet aus derselben isolierten Arbeitskopie und pusht
-nur, wenn `pemons.json` oder `pemon_ids.txt` geändert wurden.
-Die lokale Vergleichsroutine ohne Git-Push kann so gestartet werden:
-
-```powershell
-python scripts/sync_pemons.py --watch
-```
-
-Die Task-Installation mit `scripts/install_daily_sync.ps1` richtet
-sowohl **Pemon Daily Sync** als auch **Pemon Rating Watch** ein.
