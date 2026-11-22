@@ -2,7 +2,7 @@ import importlib.util
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 import json
 
 spec = importlib.util.spec_from_file_location("sync", Path(__file__).resolve().parents[1] / "scripts/sync_pemons.py")
@@ -11,6 +11,25 @@ spec.loader.exec_module(sync)
 
 
 class SyncTests(unittest.TestCase):
+    @staticmethod
+    def discovery_page(*ids):
+        raw = "|".join(f"1:{value}:15:5:17:1:18:10" for value in ids) + "#users#songs#total"
+        return Mock(text=raw)
+
+    def test_discovery_allows_overlapping_pages(self):
+        responses = [self.discovery_page(1, 2), self.discovery_page(2, 3),
+                     self.discovery_page(2, 3), self.discovery_page(3, 4), Mock(text="-1")]
+        with patch.object(sync.builder, "_post", side_effect=responses) as post:
+            result = sync.discover(True)
+        self.assertEqual(set(result), {"1", "2", "3", "4"})
+        self.assertEqual(post.call_count, 5)
+
+    def test_discovery_rejects_stuck_pagination(self):
+        with patch.object(sync.builder, "_post", return_value=self.discovery_page(1, 2)) as post:
+            with self.assertRaisesRegex(RuntimeError, "no progress for three pages"):
+                sync.discover(True)
+        self.assertEqual(post.call_count, 4)
+
     def test_newest_first_and_resume_after_new_additions(self):
         batch, next_id = sync.refresh_batch(["1", "2", "3", "4", "5"], {}, 2)
         self.assertEqual(batch, ["5", "4"])

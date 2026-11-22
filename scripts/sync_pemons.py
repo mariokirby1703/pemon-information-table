@@ -29,6 +29,7 @@ def refresh_batch(ids, state, batch_size):
 def discover(full=False):
     found = {}
     previous = set()
+    stalled_pages = 0
     for page in range(5000 if full else 5):
         print(f"Reading platformer demon list, page {page + 1}...", flush=True)
         response = builder._post(
@@ -47,13 +48,19 @@ def discover(full=False):
         rows = [builder._kv_block(row) for row in raw.split("#", 1)[0].split("|") if row]
         if not rows:
             break
-        ids = {row.get("1") for row in rows}
-        if ids & previous:
-            raise RuntimeError("Discovery pagination repeated a level; refusing incomplete scan")
+        if any(not row.get("1", "").isdigit() for row in rows):
+            raise RuntimeError("Discovery returned an invalid level ID")
+        ids = {row["1"] for row in rows}
+        # Search order is live, not a snapshot: moving levels can overlap page
+        # boundaries. Deduplicate these; only fail if pagination stops progressing.
+        stalled_pages = stalled_pages + 1 if not ids - previous else 0
+        if stalled_pages >= 3:
+            raise RuntimeError("Discovery pagination made no progress for three pages; refusing incomplete scan")
+        overlap = len(ids & previous)
+        if overlap:
+            print(f"Ignoring {overlap} overlapping level(s) on page {page + 1}.", flush=True)
         previous.update(ids)
         for row in rows:
-            if not row.get("1", "").isdigit():
-                raise RuntimeError("Discovery returned an invalid level ID")
             if row.get("15") == "5" and row.get("17") == "1" and int(row.get("18", 0)) == 10:
                 found[row["1"]] = raw
     else:
