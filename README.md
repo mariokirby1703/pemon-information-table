@@ -3,7 +3,7 @@ A table that displays various information about Geometry Dash's Platformer Demon
 
 ## Automatisierung
 
-Der Workflow `Sync Pemon data` läuft stündlich um :07 (GitHub kann Starts
+Der Workflow `Sync Pemon data` läuft stündlich um :03 (GitHub kann Starts
 verzögern). Er liest die gefilterte Platformer-Demon-Liste seitenweise und
 vergleicht Metadaten und Levelversionen mit dem letzten erfolgreichen Lauf.
 Nur neue/geänderte Levels werden vollständig heruntergeladen. Es gibt keinen
