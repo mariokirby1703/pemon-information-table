@@ -55,10 +55,10 @@ class SyncTests(unittest.TestCase):
             output.write_text(json.dumps([previous]))
             ids.write_text("100\n")
             raw = "1:100:2:Old:15:5:17:1:18:10:43:0:42:0:19:0#users#songs#1:0:10"
-            with patch.object(sync.builder, "OUTPUT_FILE", output), \\
-                 patch.object(sync.builder, "INPUT_FILE", ids), \\
-                 patch.object(sync, "STATE", root / "state/cursor.json"), \\
-                 patch.object(sync, "discover", return_value={"100": raw}), \\
+            with patch.object(sync.builder, "OUTPUT_FILE", output), \
+                 patch.object(sync.builder, "INPUT_FILE", ids), \
+                 patch.object(sync, "STATE", root / "state/cursor.json"), \
+                 patch.object(sync, "discover", return_value={"100": raw}), \
                  patch.object(sync.builder, "_fetch_download") as download:
                 sync.sync(batch_size=0)
                 download.assert_not_called()
@@ -77,13 +77,13 @@ class SyncTests(unittest.TestCase):
             fresh = {"ID": 100, "number": 1, "creator": "Author",
                      "level": "Old", "difficulty": "Extreme Demon",
                      "rating": "Legendary", "rateDate": ""}
-            with patch.object(sync.builder, "OUTPUT_FILE", output), \\
-                 patch.object(sync.builder, "INPUT_FILE", ids), \\
-                 patch.object(sync, "STATE", root / "state/cursor.json"), \\
-                 patch.object(sync, "discover", return_value={"100": raw}), \\
+            with patch.object(sync.builder, "OUTPUT_FILE", output), \
+                 patch.object(sync.builder, "INPUT_FILE", ids), \
+                 patch.object(sync, "STATE", root / "state/cursor.json"), \
+                 patch.object(sync, "discover", return_value={"100": raw}), \
                  patch.object(sync.builder, "_fetch_download",
                               return_value={"1": "100", "2": "Old", "15": "5",
-                                            "17": "1", "18": "10"}), \\
+                                            "17": "1", "18": "10"}), \
                  patch.object(sync.builder, "get_level_data_gd", return_value=fresh):
                 sync.sync(batch_size=0)
             saved = json.loads(output.read_text())[0]
