@@ -39,6 +39,58 @@ class SyncTests(unittest.TestCase):
         self.assertEqual((batch, next_id), (["1"], None))
         self.assertEqual(sync.refresh_batch(["1", "2", "3"], {"next_level_id": None}, 2)[0], ["3", "2"])
 
+    def test_watch_mode_skips_rotation_without_advancing_cursor(self):
+        ids = ["1", "2", "3"]
+        batch, cursor = sync.refresh_batch(ids, {"next_level_id": "2"}, 0)
+        self.assertEqual(batch, [])
+        self.assertEqual(cursor, "2")
+
+    def test_watch_only_downloads_new_or_changed_levels(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            output, ids = root / "pemons.json", root / "ids.txt"
+            previous = {"ID": 100, "number": 1, "creator": "Author",
+                        "level": "Old", "difficulty": "Hard Demon",
+                        "rating": "Rated", "rateDate": "01.01.2025"}
+            output.write_text(json.dumps([previous]))
+            ids.write_text("100\\n")
+            raw = "1:100:2:Old:15:5:17:1:18:10:43:0:42:0:19:0#users#songs#1:0:10"
+            with patch.object(sync.builder, "OUTPUT_FILE", output), \\
+                 patch.object(sync.builder, "INPUT_FILE", ids), \\
+                 patch.object(sync, "STATE", root / "state/cursor.json"), \\
+                 patch.object(sync, "discover", return_value={"100": raw}), \\
+                 patch.object(sync.builder, "_fetch_download") as download:
+                sync.sync(batch_size=0)
+                download.assert_not_called()
+            self.assertEqual(json.loads(output.read_text()), [previous])
+
+    def test_watch_detects_rating_change(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            output, ids = root / "pemons.json", root / "ids.txt"
+            previous = {"ID": 100, "number": 1, "creator": "Author",
+                        "level": "Old", "difficulty": "Hard Demon",
+                        "rating": "Rated", "rateDate": "01.01.2025"}
+            output.write_text(json.dumps([previous]))
+            ids.write_text("100\\n")
+            raw = "1:100:2:Old:15:5:17:1:18:10:43:6:42:2:19:1#users#songs#1:0:10"
+            fresh = {"ID": 100, "number": 1, "creator": "Author",
+                     "level": "Old", "difficulty": "Extreme Demon",
+                     "rating": "Legendary", "rateDate": ""}
+            with patch.object(sync.builder, "OUTPUT_FILE", output), \\
+                 patch.object(sync.builder, "INPUT_FILE", ids), \\
+                 patch.object(sync, "STATE", root / "state/cursor.json"), \\
+                 patch.object(sync, "discover", return_value={"100": raw}), \\
+                 patch.object(sync.builder, "_fetch_download",
+                              return_value={"1": "100", "2": "Old", "15": "5",
+                                            "17": "1", "18": "10"}), \\
+                 patch.object(sync.builder, "get_level_data_gd", return_value=fresh):
+                sync.sync(batch_size=0)
+            saved = json.loads(output.read_text())[0]
+            self.assertEqual(saved["difficulty"], "Extreme Demon")
+            self.assertEqual(saved["rating"], "Legendary")
+            self.assertEqual(saved["rateDate"], "01.01.2025")
+
     def test_request_interval(self):
         self.assertGreaterEqual(sync.builder.MIN_INTERVAL, 5)
         self.assertEqual(sync.builder.WINDOWS, [(10, 2), (60, 12)])
