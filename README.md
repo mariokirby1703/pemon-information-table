@@ -1,64 +1,69 @@
 # pemon-information-table
 A table that displays various information about Geometry Dash's Platformer Demons
 
-## Automatisierung
+## Täglicher Abgleich auf Windows
 
-Der Workflow `Sync Pemon data` läuft stündlich um :03 (GitHub kann Starts
-verzögern). Er liest die gefilterte Platformer-Demon-Liste seitenweise und
-vergleicht Metadaten und Levelversionen mit dem letzten erfolgreichen Lauf.
-Nur neue/geänderte Levels werden vollständig heruntergeladen. Es gibt keinen
-bekannten öffentlichen Änderungsfeed; Listenabfragen bleiben erforderlich.
-Zusätzlich werden stündlich 20 bestehende Einträge reihum vollständig geprüft,
-um Änderungen zu finden, die nicht in den Listen-Metadaten erscheinen.
-Jede Runde beginnt bei den zuletzt hinzugefügten Tabelleneinträgen und arbeitet
-sich zu den älteren vor; der nächste Lauf setzt die Runde fort. Neu entdeckte
-und geänderte Einträge werden ebenfalls vom neuesten zum ältesten verarbeitet.
-Zwischen GD-Anfragen liegen mindestens fünf Sekunden (höchstens etwa zwölf
-pro Minute); bei Rate Limits oder Serverfehlern kann die Wartezeit länger sein.
-Diese zusätzliche Runde dauert bei 1.000 Einträgen etwa 50 Stunden.
-Beim ersten Lauf oder Cacheverlust wird der Vergleichsstand neu aufgebaut;
-Difficulty und Rating werden dabei direkt mit der JSON verglichen.
+Die Windows-Aufgabe **Pemon Daily Sync** startet täglich um **20:00 Uhr Ortszeit**
+(auf diesem PC Europe/Berlin). Der PC muss eingeschaltet und der Benutzer
+angemeldet sein; eine gesperrte Sitzung reicht. Verpasste Starts darf Windows
+bei nächster Gelegenheit nachholen. Der Lauf weckt den PC nicht automatisch.
 
-Neue IDs werden angehängt und erhalten in `rateDate` das Berliner Datum der
-ersten Erkennung (`TT.MM.JJJJ`), kein historisch belegtes Ratingdatum.
-Vorhandene Datumsangaben bleiben erhalten. Sinkende Estimated Times und
-Objektzahlen bleiben ignoriert, ebenso 65535 bei bekannten höheren Zahlen.
-Die bestehenden NONG/UNKNOWN-Regeln und manuelle Checkpoints bleiben erhalten.
-Nur vom Server gelieferte Felder können aktualisiert werden. Gelöschte oder
-ungeratete Einträge werden nicht automatisch entfernt. Fehlerhafte Antworten
-brechen den Lauf vor dem Schreiben ab.
+Der Abgleich prüft täglich alle vorhandenen Levels, zuletzt hinzugefügte zuerst.
+Zwischen GD-Anfragen liegen mindestens fünf Sekunden (etwa zwölf pro Minute),
+bei Rate Limits/Serverfehlern länger. Ein vollständiger Lauf kann mehrere Stunden
+dauern. Gleichzeitig kann nur eine Instanz der Windows-Aufgabe laufen.
 
-Bei Datenänderungen committet und pusht der Bot `pemons.json` und
-`pemon_ids.txt` auf den Default-Branch. Ohne Datenänderungen gibt es keinen
-Commit. Der Vergleichsstand liegt im Actions-Cache.
-Der Workflow muss auf dem Default-Branch liegen, Actions muss aktiv sein und
-Branchschutz muss Bot-Pushes zulassen. Es werden keine GD-Zugangsdaten benötigt.
-Pushes mit `GITHUB_TOKEN` lösen gewöhnlich keine weiteren Actions-Workflows aus;
-ein Actions-basiertes Deployment muss ausdrücklich angeschlossen werden.
+Neue Platformer Demons werden über die gefilterte Suche gefunden und angehängt.
+Sie erhalten in `rateDate` das Berliner Datum der ersten Erkennung
+(`TT.MM.JJJJ`), kein historisch belegtes Ratingdatum. Vorhandene Datumsangaben
+bleiben erhalten. Sinkende Estimated Times und Objektzahlen werden ignoriert,
+ebenso 65535 bei bekannten höheren Zahlen. Die NONG/UNKNOWN-Regeln sowie
+manuelle Checkpoints und Zusatzfelder bleiben erhalten. Nur vom Server
+bereitgestellte Werte können aktualisiert werden. Gelöschte oder ungeratete
+Einträge werden nicht automatisch entfernt. Fehlerhafte Antworten brechen den
+Abgleich vor dem Schreiben ab.
 
-Manuell: **Actions → Sync Pemon data → Run workflow**.
+Der Lauf verwendet eine separate Arbeitskopie in `.sync-state/checkout`.
+Offene Projektdateien werden nicht verändert. Datenänderungen werden mit der
+lokalen Git-Identität committet und über Git Credential Manager auf `main`
+gepusht. Ohne Datenänderungen gibt es keinen Commit. Neue Daten im normalen
+Projektordner anschließend über **Pull origin** holen. Das Repository darf
+nicht verschoben werden, ohne die Windows-Aufgabe neu einzurichten.
 
-### HTTP 403 auf GitHub
+Status und Protokolle:
 
-Der erste GitHub-Lauf wurde vom GD-Server mit HTTP 403 abgewiesen, obwohl die
-gleiche Listenabfrage lokal funktioniert hat. Der genaue Sperrgrund ist nicht
-bekannt. Der Fünf-Sekunden-Abstand hebt eine Zugriffssperre nicht auf.
-Die Node.js-Deprecation-Warnung war nicht die Fehlerursache.
+- Windows-Aufgabenplanung → **Pemon Daily Sync** (Ergebnis `0` = erfolgreich).
+- `.sync-state/daily-sync.log`: Fortschritt und Fehler des täglichen Laufs.
+- `.sync-state/preflight.log`: Prüfung von Arbeitskopie und GitHub-Pushzugang.
+- GitHub-Commits: `chore: daily platformer demon data sync` bei Datenänderungen.
 
-Der Workflow unterstützt deshalb optional einen eigenen GitHub Actions Runner.
-Nach Einrichtung eines dedizierten Runners kann unter **Settings → Secrets and
-variables → Actions → Variables** die Repository-Variable `PEMON_RUNNER` auf
-`["self-hosted", "Windows", "X64"]` gesetzt werden (Labels an den Runner
-anpassen). Ohne diese Variable wird weiterhin `ubuntu-latest` verwendet.
-Ein eigener Runner muss eingeschaltet sein, Python 3.13 über `setup-python`
-bereitstellen können und vom GD-Server Zugriff erhalten. Auf öffentlichen
-Repositories eigene Runner nur für vertrauenswürdige Workflows verwenden.
-Die Runner-Einrichtung und Variable sind nicht automatisch vorgenommen worden.
+Einrichtung bzw. erneute Einrichtung im Projektordner:
 
-Lokal (schreibt Daten, pusht nicht):
+```powershell
+python -m venv .sync-state/venv
+.\.sync-state\venv\Scripts\python.exe -m pip install -r requirements.txt
+git credential-manager github login --browser
+.\.sync-state\venv\Scripts\python.exe scripts/run_daily_sync.py --check
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File scripts/install_daily_sync.ps1
+```
+
+Manuell denselben vollständigen Lauf starten:
+
+```powershell
+Start-ScheduledTask -TaskName 'Pemon Daily Sync'
+```
+
+Nur lokal aktualisieren, ohne automatischen Commit/Push:
 
 ```sh
-python -m pip install -r requirements.txt
-python scripts/sync_pemons.py
+python scripts/sync_pemons.py --all
 python -m unittest discover -s tests
 ```
+
+## GitHub Actions
+
+Der bisherige stündliche GitHub-Zeitplan ist entfernt. Der Workflow bleibt
+manuell startbar. Der erste GitHub-Runner wurde vom GD-Server mit HTTP 403
+abgewiesen; die Node.js-Warnung war nicht die Ursache. Der tägliche Windows-Lauf
+verwendet keinen GitHub Actions Runner. Optional kann ein manueller Workflow
+über die Repository-Variable `PEMON_RUNNER` andere Runner-Labels erhalten.

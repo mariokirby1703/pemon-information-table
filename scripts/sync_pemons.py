@@ -132,9 +132,22 @@ def sync(batch_size=20):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--batch-size", type=int, default=20)
+    parser.add_argument("--all", action="store_true", help="Fully refresh every existing entry, newest first")
+    parser.add_argument("--data-root", type=Path, help="Separate checkout containing src/assets")
     args = parser.parse_args()
     if args.batch_size < 1:
         parser.error("--batch-size must be positive")
+    if args.data_root:
+        asset_dir = args.data_root.resolve() / "src" / "assets"
+        builder.INPUT_FILE = asset_dir / "pemon_ids.txt"
+        builder.OUTPUT_FILE = asset_dir / "pemons.json"
+    if args.all:
+        # A complete daily pass must always start at the newest entry.
+        args.batch_size = sys.maxsize
+        if STATE.exists():
+            state = json.loads(STATE.read_text())
+            state["next_level_id"] = None
+            STATE.write_text(json.dumps(state))
     try:
         sync(args.batch_size)
     except builder.requests.HTTPError as exc:
