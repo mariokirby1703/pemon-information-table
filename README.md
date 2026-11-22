@@ -1,7 +1,7 @@
 # pemon-information-table
 A table that displays various information about Geometry Dash's Platformer Demons
 
-## Täglicher Abgleich auf Windows
+## Automatischer Rating Watch und täglicher Abgleich auf Windows
 
 Die Windows-Aufgabe **Pemon Daily Sync** startet täglich um **20:00 Uhr Ortszeit**
 (auf diesem PC Europe/Berlin). Der PC muss eingeschaltet und der Benutzer
@@ -12,6 +12,18 @@ Der Abgleich prüft täglich alle vorhandenen Levels, zuletzt hinzugefügte zuer
 Zwischen GD-Anfragen liegen mindestens fünf Sekunden (etwa zwölf pro Minute),
 bei Rate Limits/Serverfehlern länger. Ein vollständiger Lauf kann mehrere Stunden
 dauern. Gleichzeitig kann nur eine Instanz der Windows-Aufgabe laufen.
+
+Zusätzlich wird **Pemon Rating Watch** stündlich ab **00:15 Uhr Ortszeit**
+ausgeführt (00:15, 01:15, 02:15 usw.). Er überprüft die Liste aller
+offiziell gerateten Platformer Demons, vergleicht Schwierigkeit und
+Rating-Auszeichnung mit den gespeicherten Werten und lädt nur neue oder
+geänderte Einträge vollständig nach. Beide Aufgaben teilen eine Sperre:
+Ein überlappender Start wird übersprungen, statt zwei Prozesse gleichzeitig
+in der Arbeitskopie arbeiten zu lassen. Der tägliche Vollabgleich bleibt
+erhalten, um auch Änderungen außerhalb der aktuellen Such-Metadaten
+zu erfassen. Dies ist Polling und keine sofortige Push-Benachrichtigung.
+Der PC muss zum Ausführungszeitpunkt eingeschaltet und der Benutzer
+angemeldet sein. Der GD-Server kann auch lokale Anfragen blockieren.
 
 Neue Platformer Demons werden über die gefilterte Suche gefunden und angehängt.
 Sie erhalten in `rateDate` das Berliner Datum der ersten Erkennung
@@ -34,6 +46,7 @@ Status und Protokolle:
 
 - Windows-Aufgabenplanung → **Pemon Daily Sync** (Ergebnis `0` = erfolgreich).
 - `.sync-state/daily-sync.log`: Fortschritt und Fehler des täglichen Laufs.
+- `.sync-state/rating-watch.log`: Fortschritt und Fehler der stündlichen Rating-Checks.
 - `.sync-state/preflight.log`: Prüfung von Arbeitskopie und GitHub-Pushzugang.
 - GitHub-Commits: `chore: daily platformer demon data sync` bei Datenänderungen.
 
@@ -67,3 +80,20 @@ manuell startbar. Der erste GitHub-Runner wurde vom GD-Server mit HTTP 403
 abgewiesen; die Node.js-Warnung war nicht die Ursache. Der tägliche Windows-Lauf
 verwendet keinen GitHub Actions Runner. Optional kann ein manueller Workflow
 über die Repository-Variable `PEMON_RUNNER` andere Runner-Labels erhalten.
+
+### Rating Watch manuell testen
+
+```powershell
+.\.sync-state\venv\Scripts\python.exe scripts/run_daily_sync.py --watch
+```
+
+Der Monitor arbeitet aus derselben isolierten Arbeitskopie und pusht
+nur, wenn `pemons.json` oder `pemon_ids.txt` geändert wurden.
+Die lokale Vergleichsroutine ohne Git-Push kann so gestartet werden:
+
+```powershell
+python scripts/sync_pemons.py --watch
+```
+
+Die Task-Installation mit `scripts/install_daily_sync.ps1` richtet
+sowohl **Pemon Daily Sync** als auch **Pemon Rating Watch** ein.
