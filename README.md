@@ -16,8 +16,11 @@ dauern. Gleichzeitig kann nur eine Instanz der Windows-Aufgabe laufen.
 Zusätzlich wird **Pemon Rating Watch** stündlich ab **00:15 Uhr Ortszeit**
 ausgeführt (00:15, 01:15, 02:15 usw.). Er überprüft die Liste aller
 offiziell gerateten Platformer Demons, vergleicht Schwierigkeit und
-Rating-Auszeichnung mit den gespeicherten Werten und lädt nur neue oder
-geänderte Einträge vollständig nach. Beide Aufgaben teilen eine Sperre:
+Rating-Auszeichnung mit den gespeicherten Werten ab. Auch geänderte
+Creator-Usernames werden über die Spieler-ID aus der Creator-Liste der
+GD-Suchergebnisse erkannt und ohne vollständigen Level-Download aktualisiert.
+Nur neue Levels und Levels mit geänderten Metadaten werden vollständig
+heruntergeladen. Beide Aufgaben teilen eine Sperre:
 Ein überlappender Start wird übersprungen, statt zwei Prozesse gleichzeitig
 in der Arbeitskopie arbeiten zu lassen. Der tägliche Vollabgleich bleibt
 erhalten, um auch Änderungen außerhalb der aktuellen Such-Metadaten
@@ -30,7 +33,9 @@ Sie erhalten in `rateDate` das Berliner Datum der ersten Erkennung
 (`TT.MM.JJJJ`), kein historisch belegtes Ratingdatum. Vorhandene Datumsangaben
 bleiben erhalten. Sinkende Estimated Times und Objektzahlen werden ignoriert,
 ebenso 65535 bei bekannten höheren Zahlen. Die NONG/UNKNOWN-Regeln sowie
-manuelle Checkpoints und Zusatzfelder bleiben erhalten. Nur vom Server
+manuelle Checkpoints und Zusatzfelder bleiben erhalten. Bei reinen
+Username-Änderungen wird ausschließlich das Creator-Feld aktualisiert,
+sofern der Server einen gültigen Namen und die passende Spieler-ID liefert. Nur vom Server
 bereitgestellte Werte können aktualisiert werden. Gelöschte oder ungeratete
 Einträge werden nicht automatisch entfernt. Fehlerhafte Antworten brechen den
 Abgleich vor dem Schreiben ab.
