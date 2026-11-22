@@ -1,5 +1,6 @@
 """Run the daily local sync in an isolated checkout, then commit and push data."""
 from datetime import datetime
+from contextlib import redirect_stdout, redirect_stderr
 import os
 from pathlib import Path
 import shutil
@@ -14,12 +15,14 @@ DATA_FILES = ["src/assets/pemons.json", "src/assets/pemon_ids.txt"]
 
 def run(*args, cwd=CHECKOUT, capture=False):
     result = subprocess.run(args, cwd=cwd, check=True, text=True,
-                            stdout=subprocess.PIPE if capture else None)
+                            encoding="utf-8", errors="replace", stdin=subprocess.DEVNULL,
+                            stdout=subprocess.PIPE if capture else sys.stdout,
+                            stderr=sys.stderr)
     return result.stdout.strip() if capture else ""
 
 
 def main(check_only=False):
-    os.environ.update(GIT_TERMINAL_PROMPT="0", GCM_INTERACTIVE="never", RL_MIN_INTERVAL="5")
+    os.environ.update(GIT_TERMINAL_PROMPT="0", GCM_INTERACTIVE="never", RL_MIN_INTERVAL="5", PYTHONUTF8="1")
     git = shutil.which("git")
     if not git:
         raise RuntimeError("Git is not installed or not on PATH")
@@ -29,15 +32,17 @@ def main(check_only=False):
         run(git, "clone", "--branch", "main", "--single-branch", remote, str(CHECKOUT), cwd=ROOT)
     if run(git, "status", "--porcelain", capture=True):
         raise RuntimeError(f"The automation checkout has uncommitted files. Review {CHECKOUT} before retrying.")
-    # Deliver an earlier committed update before starting another download pass.
+    # Update a stale checkout before checking push access. Rebase also keeps an
+    # earlier committed data update whose push failed without discarding it.
+    run(git, "pull", "--rebase", "origin", "main")
     run(git, "push", "--dry-run" if check_only else "--porcelain", "origin", "HEAD:main")
-    run(git, "pull", "--ff-only", "origin", "main")
     if check_only:
         print("Preflight passed: checkout clean and GitHub push access available.", flush=True)
         return
     run(sys.executable, "-u", str(ROOT / "scripts/sync_pemons.py"), "--all", "--data-root", str(CHECKOUT), cwd=ROOT)
     run(git, "add", "--", *DATA_FILES)
-    diff = subprocess.run([git, "diff", "--cached", "--quiet"], cwd=CHECKOUT)
+    diff = subprocess.run([git, "diff", "--cached", "--quiet"], cwd=CHECKOUT,
+                          stdin=subprocess.DEVNULL, stdout=sys.stdout, stderr=sys.stderr)
     if diff.returncode == 0:
         print("No data changes; no commit needed.", flush=True)
         return
@@ -54,12 +59,9 @@ def main(check_only=False):
 if __name__ == "__main__":
     RUNTIME.mkdir(exist_ok=True)
     logfile = RUNTIME / ("preflight.log" if "--check" in sys.argv else "daily-sync.log")
-    with logfile.open("a", encoding="utf-8", buffering=1) as log:
-        # Native Git output and child Python output go into the same log.
-        sys.stdout.flush()
-        sys.stderr.flush()
-        os.dup2(log.fileno(), 1)
-        os.dup2(log.fileno(), 2)
+    with logfile.open("a", encoding="utf-8", buffering=1) as log, redirect_stdout(log), redirect_stderr(log):
+        # Pass real file handles to children; Windows scheduled tasks may have
+        # invalid console handles, so changing CRT descriptors with dup2 fails.
         print(f"\n--- {datetime.now().isoformat(timespec='seconds')} ---", flush=True)
         try:
             main(check_only="--check" in sys.argv)
