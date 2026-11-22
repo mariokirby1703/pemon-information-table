@@ -53,7 +53,7 @@ class SyncTests(unittest.TestCase):
                         "level": "Old", "difficulty": "Hard Demon",
                         "rating": "Rated", "rateDate": "01.01.2025"}
             output.write_text(json.dumps([previous]))
-            ids.write_text("100\\n")
+            ids.write_text("100\n")
             raw = "1:100:2:Old:15:5:17:1:18:10:43:0:42:0:19:0#users#songs#1:0:10"
             with patch.object(sync.builder, "OUTPUT_FILE", output), \\
                  patch.object(sync.builder, "INPUT_FILE", ids), \\
@@ -72,7 +72,7 @@ class SyncTests(unittest.TestCase):
                         "level": "Old", "difficulty": "Hard Demon",
                         "rating": "Rated", "rateDate": "01.01.2025"}
             output.write_text(json.dumps([previous]))
-            ids.write_text("100\\n")
+            ids.write_text("100\n")
             raw = "1:100:2:Old:15:5:17:1:18:10:43:6:42:2:19:1#users#songs#1:0:10"
             fresh = {"ID": 100, "number": 1, "creator": "Author",
                      "level": "Old", "difficulty": "Extreme Demon",
