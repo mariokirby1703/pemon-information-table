@@ -133,3 +133,14 @@ unrated TXT and JSON files without aborting the run. This also applies to
 temporarily unavailable levels; if rediscovered in Hyped or manually added
 again, they can be included again. Other invalid responses and HTTP errors
 still abort the sync rather than silently discarding data.
+
+### Interrupted syncs / resume
+
+Each successfully processed level (including removals and rating transitions)
+is checkpointed immediately in `.sync-state/unrated-progress.json` or
+`.sync-state/rated-progress.json` using atomic writes. After an interruption,
+rerun the same sync command. Search pages are scanned again, but completed
+level downloads are reused if their source metadata and existing record still
+match. Checkpoints are kept outside the Git checkout and cleared only after
+the respective data files have been saved successfully. The public website
+is updated after the usual successful commit/push, not after every download.

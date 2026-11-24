@@ -3,6 +3,7 @@ import argparse
 from datetime import datetime
 import importlib.util
 import json
+import os
 import sys
 from pathlib import Path
 from zoneinfo import ZoneInfo
@@ -12,6 +13,48 @@ spec = importlib.util.spec_from_file_location("builder", ROOT / "src/assets/pemo
 builder = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(builder)
 STATE = ROOT / ".sync-state/cursor.json"
+
+
+def atomic_json(path, data):
+    """Never replace a usable checkpoint with an incomplete JSON file."""
+    path.parent.mkdir(parents=True, exist_ok=True)
+    temporary = path.with_suffix(path.suffix + ".tmp")
+    with temporary.open("w", encoding="utf-8") as handle:
+        json.dump(data, handle, ensure_ascii=False)
+        handle.flush()
+        os.fsync(handle.fileno())
+    os.replace(temporary, path)
+
+
+class Progress:
+    """Per-level durable journal, separate from the Git working tree."""
+    def __init__(self, dataset):
+        self.path = STATE.with_name(f"{dataset}-progress.json")
+        self.root = str(builder.OUTPUT_FILE.resolve())
+        payload = json.loads(self.path.read_text(encoding="utf-8")) if self.path.exists() else {}
+        self.records = payload.get("records", {}) if payload.get("root") == self.root else {}
+        if self.records:
+            print(f"Resuming {dataset}: {len(self.records)} saved level result(s).", flush=True)
+
+    def get(self, level_id, fingerprint, old):
+        record = self.records.get(level_id)
+        if record and record["fingerprint"] == fingerprint and record["base"] == old:
+            print(f"Resuming level {level_id} from checkpoint (no download).", flush=True)
+            return record
+        return None
+
+    def put(self, level_id, fingerprint, old, status, entry=None):
+        self.records[level_id] = {"fingerprint": fingerprint, "base": old,
+                                  "status": status, "entry": entry}
+        atomic_json(self.path, {"root": self.root, "records": self.records})
+
+    def clear(self):
+        # A different checkout's journal must not be deleted.
+        if self.path.exists():
+            payload = json.loads(self.path.read_text(encoding="utf-8"))
+            if payload.get("root") == self.root:
+                self.path.unlink()
+
 
 
 def refresh_batch(ids, state, batch_size):
@@ -170,7 +213,18 @@ def sync(batch_size=20):
     positions = {value: index + 1 for index, value in enumerate(ids)}
     selected = sorted(selected, key=positions.get, reverse=True)
     updated = added = 0
+    progress = Progress("rated")
     for level_id in selected:
+        old = by_id.get(level_id)
+        fingerprint = fingerprints.get(level_id)
+        cached = progress.get(level_id, fingerprint, old)
+        if cached is not None:
+            entry = dict(cached["entry"])
+            entry["number"] = positions[level_id]
+            by_id[level_id] = entry
+            updated += old is not None and entry != old
+            added += old is None
+            continue
         print(f"Checking level {level_id} ({positions[level_id]})...", flush=True)
         kv = builder._fetch_download(int(level_id))
         if kv.get("1") != level_id or not kv.get("2") or "15" not in kv or "17" not in kv:
@@ -190,6 +244,7 @@ def sync(batch_size=20):
             fresh["rateDate"] = today
             entry = builder.sanitize_entry(fresh)
             added += 1
+        progress.put(level_id, fingerprint, old, "rated", entry)
         by_id[level_id] = entry
 
     # Names come from the authenticated level-search response, so a
@@ -210,7 +265,8 @@ def sync(batch_size=20):
     if builder.INPUT_FILE.read_text(encoding="utf-8") != id_text:
         builder.INPUT_FILE.write_text(id_text, encoding="utf-8")
     STATE.parent.mkdir(exist_ok=True)
-    STATE.write_text(json.dumps({"next_level_id": next_level_id, "fingerprints": fingerprints}))
+    atomic_json(STATE, {"next_level_id": next_level_id, "fingerprints": fingerprints})
+    progress.clear()
     print(f"Checked {len(selected)} levels; added {added}, updated {updated}, renamed {renamed}.")
 
 
@@ -240,6 +296,7 @@ def prepare_unrated(full=False, promotions=None):
     today = datetime.now(ZoneInfo("Europe/Berlin")).strftime("%d.%m.%Y")
     result, fingerprints = [], {}
     downloaded = unavailable = 0
+    progress = Progress("unrated")
     for level_id in ids:
         if level_id in rated_ids:
             print(f"Removing already known rated level {level_id} from unrated list.", flush=True)
@@ -253,6 +310,21 @@ def prepare_unrated(full=False, promotions=None):
         # Levels outside Hyped must be checked directly: leaving the tab is
         # not proof of a rating. Manual IDs are included in this same path.
         if full or not raw or old is None or previous.get(level_id) != fingerprint:
+            cached = progress.get(level_id, fingerprint, old)
+            if cached is not None:
+                if cached["status"] == "removed":
+                    continue
+                if cached["status"] == "promoted":
+                    if promotions is not None:
+                        promotions[level_id] = dict(cached["entry"])
+                    continue
+                entry = dict(cached["entry"], number=number)
+                name = creator_names_from_search(raw).get(row.get("6", "")) if raw else None
+                if name:
+                    entry["creator"] = name
+                result.append(entry)
+                fingerprints[level_id] = fingerprint
+                continue
             source = "hyped" if raw else "tracked/manual"
             print(f"Checking {source} platformer demon {level_id}...", flush=True)
             downloaded += 1
@@ -262,7 +334,7 @@ def prepare_unrated(full=False, promotions=None):
                 unavailable += 1
                 print(f"Removing level {level_id}: GD returned -1 (unavailable); "
                       "continuing with remaining levels.", flush=True)
-                # Do not include unavailable levels in either output or state.
+                progress.put(level_id, fingerprint, old, "removed")
                 continue
             if kv.get("1") != level_id or not kv.get("2") or "15" not in kv or "18" not in kv:
                 raise RuntimeError(f"Invalid metadata for {level_id}; preserving previous data and IDs")
@@ -271,6 +343,7 @@ def prepare_unrated(full=False, promotions=None):
                   f"demon={kv.get('17')!r}, stars={moons}", flush=True)
             if kv["15"] != "5":
                 print(f"Skipping {level_id}: not a platformer.", flush=True)
+                progress.put(level_id, fingerprint, old, "removed")
                 continue
             if moons != 0:
                 if moons == 10 and kv.get("17") == "1":
@@ -285,9 +358,11 @@ def prepare_unrated(full=False, promotions=None):
                         entry["rateDate"] = today
                         entry.pop("firstSeen", None)
                         promotions[level_id] = entry
+                        progress.put(level_id, fingerprint, old, "promoted", entry)
                     print(f"Promoting {level_id}: now a rated platformer demon.", flush=True)
                 else:
                     print(f"Removing {level_id}: rated, but not a platformer demon.", flush=True)
+                    progress.put(level_id, fingerprint, old, "removed")
                 continue
             if raw:
                 builder.levels21_cache[level_id] = raw
@@ -304,6 +379,8 @@ def prepare_unrated(full=False, promotions=None):
             entry["creator"] = name
         entry.update(number=number, difficulty="Demon", rating="Unrated", rateDate="",
                      firstSeen=(old or {}).get("firstSeen") or today)
+        if full or not raw or old is None or previous.get(level_id) != fingerprint:
+            progress.put(level_id, fingerprint, old, "unrated", entry)
         result.append(entry)
         fingerprints[level_id] = fingerprint
     print(f"Unrated watch: {len(result)} tracked unrated platformer demons, "
@@ -378,10 +455,10 @@ def save_unrated(prepared):
     if not ids.exists() or ids.read_text(encoding="utf-8") != id_text:
         ids.write_text(id_text, encoding="utf-8")
     state_path = STATE.with_name("unrated-cursor.json")
-    state_path.parent.mkdir(exist_ok=True)
-    state_path.write_text(json.dumps({"fingerprints": {
+    atomic_json(state_path, {"fingerprints": {
         value: fingerprints.get(value) for value in tracked_ids
-    }}), encoding="utf-8")
+    }})
+    Progress("unrated").clear()
 
 
 def sync_datasets(batch_size, full=False, dataset="both"):
@@ -427,7 +504,7 @@ if __name__ == "__main__":
     except builder.requests.HTTPError as exc:
         if exc.response is not None and exc.response.status_code == 403:
             print(
-                "GD server denied this runner's request (HTTP 403). No data was written. "
+                "GD server denied this runner's request (HTTP 403). Completed level checkpoints are retained. "
                 "This is an access denial, not a confirmed rate limit. "
                 "If GitHub-hosted runners remain blocked, configure an authorized "
                 "self-hosted runner using the PEMON_RUNNER repository variable; see README.md.",

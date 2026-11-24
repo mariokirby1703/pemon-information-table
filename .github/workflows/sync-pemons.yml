@@ -45,6 +45,7 @@ jobs:
           git pull --rebase origin "${{ github.event.repository.default_branch }}"
           git push origin "HEAD:${{ github.event.repository.default_branch }}"
       - uses: actions/cache/save@v4
+        if: ${{ always() }}
         with:
           path: .sync-state
           key: pemon-cursor-${{ github.run_id }}-${{ github.run_attempt }}

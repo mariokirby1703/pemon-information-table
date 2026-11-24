@@ -299,6 +299,66 @@ class SyncTests(unittest.TestCase):
                 state = json.loads((root / "unrated-cursor.json").read_text())
                 self.assertEqual(state["fingerprints"], {})
 
+    def test_unrated_resume_after_failure_preserves_completed_downloads(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            output = root / "pemons.json"
+            output.write_text("[]")
+            ids = root / "unrated-pemon-ids.txt"
+            ids.write_text("100\n101\n102\n")
+            def kv(level_id):
+                return {"1": str(level_id), "2": "Example", "15": "5", "17": "0", "18": "0"}
+            def metadata(level_id, number, *args, **kwargs):
+                return {"ID": int(level_id), "number": number, "level": "Example", "creator": "Fox"}
+            with patch.object(sync.builder, "OUTPUT_FILE", output), \
+                 patch.object(sync, "STATE", root / "cursor.json"), \
+                 patch.object(sync, "discover", return_value={}), \
+                 patch.object(sync.builder, "_fetch_download",
+                              side_effect=[kv(100), sync.builder.LevelUnavailableError("gone"),
+                                           RuntimeError("network failure")]) as download, \
+                 patch.object(sync.builder, "get_level_data_gd", side_effect=metadata):
+                with self.assertRaisesRegex(RuntimeError, "network failure"):
+                    sync.sync_datasets(0, dataset="unrated")
+                self.assertTrue((root / "unrated-progress.json").exists())
+                self.assertEqual(ids.read_text(), "100\n101\n102\n")
+                download.reset_mock()
+                download.side_effect = [kv(102)]
+                sync.sync_datasets(0, dataset="unrated")
+                download.assert_called_once_with(102)
+                self.assertEqual(ids.read_text(), "100\n102\n")
+                self.assertEqual([x["ID"] for x in json.loads((root / "unrated-pemons.json").read_text())],
+                                 [100, 102])
+                self.assertFalse((root / "unrated-progress.json").exists())
+
+    def test_rated_resume_after_failure(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            output, ids = root / "pemons.json", root / "pemon_ids.txt"
+            output.write_text("[]")
+            ids.write_text("100\n101\n")
+            def kv(level_id):
+                return {"1": str(level_id), "2": "Example", "15": "5", "17": "1", "18": "10"}
+            def metadata(level_id, number, *args, **kwargs):
+                return {"ID": int(level_id), "number": number, "level": "Example",
+                        "creator": "Fox", "rating": "Rated", "difficulty": "Hard Demon"}
+            with patch.object(sync.builder, "OUTPUT_FILE", output), \
+                 patch.object(sync.builder, "INPUT_FILE", ids), \
+                 patch.object(sync, "STATE", root / "cursor.json"), \
+                 patch.object(sync, "discover", return_value={}), \
+                 patch.object(sync.builder, "_fetch_download",
+                              side_effect=[kv(101), RuntimeError("network failure")]) as download, \
+                 patch.object(sync.builder, "get_level_data_gd", side_effect=metadata):
+                with self.assertRaisesRegex(RuntimeError, "network failure"):
+                    sync.sync(0)
+                self.assertTrue((root / "rated-progress.json").exists())
+                self.assertEqual(json.loads(output.read_text()), [])
+                download.reset_mock()
+                download.side_effect = [kv(100)]
+                sync.sync(0)
+                download.assert_called_once_with(100)
+                self.assertEqual([x["ID"] for x in json.loads(output.read_text())], [100, 101])
+                self.assertFalse((root / "rated-progress.json").exists())
+
     def test_download_minus_one_has_specific_exception(self):
         with patch.object(sync.builder, "_post", return_value=Mock(status_code=200, text="-1")):
             with self.assertRaises(sync.builder.LevelUnavailableError):
