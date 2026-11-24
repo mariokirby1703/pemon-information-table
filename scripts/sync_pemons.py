@@ -260,12 +260,9 @@ def prepare_unrated(full=False, promotions=None):
                 kv = builder._fetch_download(int(level_id))
             except builder.LevelUnavailableError:
                 unavailable += 1
-                print(f"WARNING: Level {level_id} unavailable (GD returned -1); "
-                      "keeping ID for retry, continuing with remaining levels.", flush=True)
-                # None marks a pending retry, even if the level reappears in Hyped.
-                fingerprints[level_id] = None
-                if old is not None:
-                    result.append(dict(old, number=number))
+                print(f"Removing level {level_id}: GD returned -1 (unavailable); "
+                      "continuing with remaining levels.", flush=True)
+                # Do not include unavailable levels in either output or state.
                 continue
             if kv.get("1") != level_id or not kv.get("2") or "15" not in kv or "18" not in kv:
                 raise RuntimeError(f"Invalid metadata for {level_id}; preserving previous data and IDs")
@@ -310,7 +307,7 @@ def prepare_unrated(full=False, promotions=None):
         result.append(entry)
         fingerprints[level_id] = fingerprint
     print(f"Unrated watch: {len(result)} tracked unrated platformer demons, "
-          f"{downloaded} download attempts, {unavailable} unavailable (retry next run).", flush=True)
+          f"{downloaded} download attempts, {unavailable} unavailable (removed).", flush=True)
     return result, fingerprints
 
 
@@ -375,11 +372,8 @@ def save_unrated(prepared):
     ids = builder.OUTPUT_FILE.with_name("unrated-pemon-ids.txt")
     if not output.exists() or builder.load_existing_data(output) != result:
         builder.save_data(output, result)
-    # The fingerprint map also contains unavailable IDs awaiting their first
-    # successful download. Keep them in TXT without inventing JSON metadata.
-    tracked_ids = [value for value in fingerprints if value not in rated]
-    tracked_ids.extend(str(entry["ID"]) for entry in result
-                       if str(entry["ID"]) not in tracked_ids)
+    # Only successfully verified, still-unrated entries remain tracked.
+    tracked_ids = [str(entry["ID"]) for entry in result]
     id_text = "".join(f"{value}\n" for value in tracked_ids)
     if not ids.exists() or ids.read_text(encoding="utf-8") != id_text:
         ids.write_text(id_text, encoding="utf-8")

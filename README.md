@@ -128,7 +128,8 @@ git push
 ```
 
 Manually added IDs are treated as demon candidates. Unrated levels have no
-official demon tier to verify. An individual download returning `-1` is skipped without aborting the run:
-its ID remains in the TXT file for retry on the next run, and previously
-downloaded JSON metadata is preserved. Other invalid responses and HTTP
-errors still abort the sync rather than silently discarding data.
+official demon tier to verify. An individual download returning `-1` removes the level from both the
+unrated TXT and JSON files without aborting the run. This also applies to
+temporarily unavailable levels; if rediscovered in Hyped or manually added
+again, they can be included again. Other invalid responses and HTTP errors
+still abort the sync rather than silently discarding data.

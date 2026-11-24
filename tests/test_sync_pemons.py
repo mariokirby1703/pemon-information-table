@@ -270,7 +270,7 @@ class SyncTests(unittest.TestCase):
                 self.assertNotIn("firstSeen", rated)
                 self.assertTrue(rated["rateDate"])
 
-    def test_unavailable_id_does_not_abort_and_is_retried(self):
+    def test_unavailable_id_is_removed_without_aborting(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
             output = root / "pemons.json"
@@ -286,18 +286,18 @@ class SyncTests(unittest.TestCase):
                               side_effect=[sync.builder.LevelUnavailableError("missing"), kv]) as download, \
                  patch.object(sync.builder, "get_level_data_gd", return_value=fresh):
                 sync.sync_datasets(0, dataset="unrated")
-                self.assertEqual(ids.read_text(), "100\n101\n")
+                self.assertEqual(ids.read_text(), "101\n")
                 saved = json.loads((root / "unrated-pemons.json").read_text())
                 self.assertEqual([entry["ID"] for entry in saved], [101])
                 self.assertEqual(download.call_count, 2)
-                download.side_effect = [dict(kv, **{"1": "100"}),
-                                        sync.builder.LevelUnavailableError("missing")]
-                with patch.object(sync.builder, "get_level_data_gd",
-                                  return_value=dict(fresh, ID=100)):
-                    sync.sync_datasets(0, dataset="unrated")
-                saved = json.loads((root / "unrated-pemons.json").read_text())
-                self.assertEqual([entry["ID"] for entry in saved], [100, 101])
-                self.assertEqual(ids.read_text(), "100\n101\n")
+                download.reset_mock()
+                download.side_effect = [sync.builder.LevelUnavailableError("missing")]
+                sync.sync_datasets(0, dataset="unrated")
+                download.assert_called_once_with(101)
+                self.assertEqual(ids.read_text(), "")
+                self.assertEqual(json.loads((root / "unrated-pemons.json").read_text()), [])
+                state = json.loads((root / "unrated-cursor.json").read_text())
+                self.assertEqual(state["fingerprints"], {})
 
     def test_download_minus_one_has_specific_exception(self):
         with patch.object(sync.builder, "_post", return_value=Mock(status_code=200, text="-1")):
