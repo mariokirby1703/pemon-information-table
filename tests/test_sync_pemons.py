@@ -182,7 +182,7 @@ class SyncTests(unittest.TestCase):
                "1:102:15:4:17:1:18:0|1:103:15:5:17:0:18:0"
                "#users#songs#4:0:10")
         with patch.object(sync.builder, "_post", return_value=Mock(text=raw)) as post:
-            self.assertEqual(set(sync.discover(full=True, hyped=True)), {"100"})
+            self.assertEqual(set(sync.discover(full=True, hyped=True)), {"100", "101", "103"})
         params = post.call_args.kwargs["data"]
         self.assertEqual((params["type"], params["diff"], params["len"],
                           params["noStar"], params["hypeSecret"]), ("31", "-2", "5", "1", "1"))
@@ -198,8 +198,8 @@ class SyncTests(unittest.TestCase):
             root = Path(folder)
             output = root / "pemons.json"
             output.write_text("[]")
-            raw = "1:100:2:Example:6:42:15:5:17:1:18:0#42:Fox:900#songs#1:0:10"
-            kv = {"1": "100", "2": "Example", "15": "5", "17": "1", "18": "0"}
+            raw = "1:100:2:Example:6:42:15:5:17:0:18:10#42:Fox:900#songs#1:0:10"
+            kv = {"1": "100", "2": "Example", "15": "5", "17": "0", "18": "0"}
             fresh = {"ID": 100, "number": 1, "creator": "Fox", "level": "Example",
                      "difficulty": "Hard Demon", "rateDate": ""}
             with patch.object(sync.builder, "OUTPUT_FILE", output), \
@@ -210,6 +210,7 @@ class SyncTests(unittest.TestCase):
                 sync.save_unrated(sync.prepare_unrated())
                 result = json.loads((root / "unrated-pemons.json").read_text())
                 self.assertEqual(result[0]["rating"], "Unrated")
+                self.assertEqual(result[0]["difficulty"], "Demon")
                 self.assertRegex(result[0]["firstSeen"], r"^\d{2}\.\d{2}\.\d{4}$")
                 self.assertEqual((root / "unrated-pemon-ids.txt").read_text(), "100\n")
                 sync.save_unrated(sync.prepare_unrated())
@@ -219,6 +220,21 @@ class SyncTests(unittest.TestCase):
                 self.assertEqual(json.loads((root / "unrated-pemons.json").read_text()), [])
                 self.assertEqual((root / "unrated-pemon-ids.txt").read_text(), "")
 
+
+    def test_hyped_download_rejects_awarded_moons(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            output = root / "pemons.json"
+            output.write_text("[]")
+            raw = "1:100:15:5:17:0:18:10#users#songs#1:0:10"
+            kv = {"1": "100", "2": "Example", "15": "5", "17": "1", "18": "10"}
+            with patch.object(sync.builder, "OUTPUT_FILE", output), \
+                 patch.object(sync, "STATE", root / "cursor.json"), \
+                 patch.object(sync, "discover", return_value={"100": raw}), \
+                 patch.object(sync.builder, "_fetch_download", return_value=kv), \
+                 patch.object(sync.builder, "get_level_data_gd") as metadata:
+                self.assertEqual(sync.prepare_unrated(), ([], {}))
+                metadata.assert_not_called()
 
     def test_unrated_only_skips_rated_sync(self):
         with patch.object(sync, "prepare_unrated", return_value=([], {})) as prepare, \

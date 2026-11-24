@@ -102,3 +102,10 @@ or changed entries are downloaded; creator names are refreshed from search.
 An explicit full sync also refreshes all currently hyped entries. A failed
 or ambiguous Hyped search does not overwrite the previous snapshot.
 The unofficial API's filtering and availability depend on the GD server.
+
+Hyped search results may describe a suggested rating rather than an official
+Demon flag. The filtered search supplies candidates; the download endpoint
+verifies that each new or changed candidate is a platformer with zero awarded
+moons. The log shows the raw search difficulty, Demon flag, star and length
+fields as well as the download verification. Unrated levels use the generic
+Demon label instead of claiming an official Demon tier.

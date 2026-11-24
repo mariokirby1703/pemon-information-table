@@ -89,9 +89,17 @@ def discover(full=False, hyped=False):
             print(f"Ignoring {overlap} overlapping level(s) on page {page + 1}.", flush=True)
         previous.update(ids)
         for row in rows:
-            if row.get("15") == "5" and row.get("17") == "1" and (
-                int(row.get("18") or 0) == (0 if hyped else 10)
-            ):
+            if hyped:
+                # The Demon filter on a sent/hyped query describes the search
+                # category, not necessarily the level's awarded Demon flag.
+                # Verify the real awarded moon count using the download endpoint.
+                print(f"Hyped candidate {row['1']} {row.get('2', '')!r}: "
+                      f"len={row.get('15')!r}, demon={row.get('17')!r}, "
+                      f"stars={row.get('18')!r}, difficulty={row.get('9')!r}, "
+                      f"requested={row.get('39')!r}, demonCode={row.get('43')!r}", flush=True)
+                if row.get("15") == "5":
+                    found[row["1"]] = raw
+            elif row.get("15") == "5" and row.get("17") == "1" and int(row.get("18") or 0) == 10:
                 found[row["1"]] = raw
         if hyped:
             # Use explicit page information when provided, rather than requesting
@@ -105,6 +113,11 @@ def discover(full=False, hyped=False):
     else:
         if full:
             raise RuntimeError("Discovery exceeded page limit")
+    if hyped:
+        print(f"Hyped search returned {len(previous)} unique levels; "
+              f"{len(found)} platformer candidates.", flush=True)
+        if previous and not found:
+            raise RuntimeError("Hyped search returned no platformers; check filter response above")
     return found
 
 
@@ -214,10 +227,14 @@ def prepare_unrated(full=False):
     state = json.loads(state_path.read_text(encoding="utf-8")) if state_path.exists() else {}
     previous = state.get("fingerprints", {})
     discovered = discover(full=True, hyped=True)
+    rated_ids = {str(entry["ID"]) for entry in builder.load_existing_data(builder.OUTPUT_FILE)}
     today = datetime.now(ZoneInfo("Europe/Berlin")).strftime("%d.%m.%Y")
     result, fingerprints = [], {}
     downloaded = 0
     for level_id, raw in discovered.items():
+        if level_id in rated_ids:
+            print(f"Skipping already known rated level {level_id}.", flush=True)
+            continue
         row = next(builder._kv_block(item) for item in raw.split("#", 1)[0].split("|")
                    if builder._kv_block(item).get("1") == level_id)
         fingerprint = [row.get(key) for key in HYPED_KEYS]
@@ -226,23 +243,28 @@ def prepare_unrated(full=False):
         if full or old is None or previous.get(level_id) != fingerprint:
             print(f"Checking hyped platformer demon {level_id}...", flush=True)
             kv = builder._fetch_download(int(level_id))
-            if kv.get("1") != level_id or not kv.get("2") or "15" not in kv or "17" not in kv:
+            downloaded += 1
+            if kv.get("1") != level_id or not kv.get("2") or "15" not in kv or "18" not in kv:
                 raise RuntimeError(f"Invalid hyped metadata for {level_id}; preserving previous data")
-            # A level can become rated (or change difficulty) during the scan.
-            if kv["15"] != "5" or kv["17"] != "1" or int(kv.get("18") or 0) != 0:
+            print(f"Hyped download {level_id}: len={kv.get('15')!r}, "
+                  f"demon={kv.get('17')!r}, stars={kv.get('18')!r}", flush=True)
+            # Officially awarded moons are independent of the sent difficulty.
+            # Do not require the official Demon flag for an unrated candidate.
+            if kv["15"] != "5" or int(kv.get("18") or 0) != 0:
+                print(f"Skipping {level_id}: already rated or not a platformer.", flush=True)
                 continue
             builder.levels21_cache[level_id] = raw
             fresh = builder.get_level_data_gd(level_id, number, True, downloaded=kv)
             if not fresh or not fresh.get("creator"):
                 raise RuntimeError(f"Incomplete hyped metadata for {level_id}")
             entry = builder.merge_entries(old, fresh) if old else builder.sanitize_entry(fresh)
-            downloaded += 1
         else:
             entry = dict(old)
         name = creator_names_from_search(raw).get(row.get("6", ""))
         if name:
             entry["creator"] = name
-        entry.update(number=number, rating="Unrated", rateDate="",
+        # Unrated levels have no official Easy/Medium/Hard/Insane/Extreme tier.
+        entry.update(number=number, difficulty="Demon", rating="Unrated", rateDate="",
                      firstSeen=(old or {}).get("firstSeen") or today)
         result.append(entry)
         fingerprints[level_id] = fingerprint
