@@ -95,15 +95,16 @@ platformer, noStar). It writes `src/assets/unrated-pemon-ids.txt` and
 
 This tracks discovered and manually added unrated levels permanently until
 they receive a rating (or are verified not to be platformers). Leaving Hyped
-alone does not remove a level. Tracked IDs outside Hyped are checked directly
-each run. A newly rated platformer demon is moved to the rated JSON and ID
-list, even in unrated-only mode, without scanning the full rated search.
-Rated-only scans remove duplicates from unrated data without querying Hyped.
+alone does not remove a level. Existing tracked IDs outside Hyped are
+reused from JSON without another download in watch mode. New manual IDs
+and new or changed Hyped entries are downloaded; creator names can be
+refreshed from search. The rated scan detects newly rated platformer demons
+and removes them from the unrated list, including in rated-only mode.
+An unrated-only scan can promote newly downloaded levels but does not
+recheck the rating of every existing manual entry.
 Unrated metadata uses the same schema and conservative merge rules as rated
-data, with rating Unrated and firstSeen instead of a rate date. Only new
-or changed Hyped entries and tracked IDs outside Hyped are downloaded;
-creator names are refreshed from search.
-An explicit full sync also refreshes all currently hyped entries. A failed
+data, with rating Unrated and firstSeen instead of a rate date.
+An explicit full sync refreshes all tracked unrated entries. A failed
 or ambiguous Hyped search does not overwrite the previous snapshot.
 The unofficial API's filtering and availability depend on the GD server.
 

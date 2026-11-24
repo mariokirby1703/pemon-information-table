@@ -295,7 +295,7 @@ def prepare_unrated(full=False, promotions=None):
     ids = list(dict.fromkeys([*read_unrated_ids(), *old_by_id, *discovered]))
     today = datetime.now(ZoneInfo("Europe/Berlin")).strftime("%d.%m.%Y")
     result, fingerprints = [], {}
-    downloaded = unavailable = 0
+    downloaded = unavailable = skipped = 0
     progress = Progress("unrated")
     for level_id in ids:
         if level_id in rated_ids:
@@ -307,9 +307,14 @@ def prepare_unrated(full=False, promotions=None):
         fingerprint = [row.get(key) for key in HYPED_KEYS] if raw else None
         old = old_by_id.get(level_id)
         number = len(result) + 1
-        # Levels outside Hyped must be checked directly: leaving the tab is
-        # not proof of a rating. Manual IDs are included in this same path.
-        if full or not raw or old is None or previous.get(level_id) != fingerprint:
+        # Existing manually tracked IDs need no metadata download. The rated
+        # scan detects promotions independently; Hyped changes and --all can
+        # still trigger refreshes.
+        needs_download = (
+            full or old is None
+            or (raw is not None and previous.get(level_id) != fingerprint)
+        )
+        if needs_download:
             cached = progress.get(level_id, fingerprint, old)
             if cached is not None:
                 if cached["status"] == "removed":
@@ -373,18 +378,20 @@ def prepare_unrated(full=False, promotions=None):
                 raise RuntimeError(f"Incomplete unrated metadata for {level_id}")
             entry = builder.merge_entries(old, fresh) if old else builder.sanitize_entry(fresh)
         else:
+            skipped += 1
             entry = dict(old)
         name = creator_names_from_search(raw).get(row.get("6", "")) if raw else None
         if name:
             entry["creator"] = name
         entry.update(number=number, difficulty="Demon", rating="Unrated", rateDate="",
                      firstSeen=(old or {}).get("firstSeen") or today)
-        if full or not raw or old is None or previous.get(level_id) != fingerprint:
+        if needs_download:
             progress.put(level_id, fingerprint, old, "unrated", entry)
         result.append(entry)
         fingerprints[level_id] = fingerprint
     print(f"Unrated watch: {len(result)} tracked unrated platformer demons, "
-          f"{downloaded} download attempts, {unavailable} unavailable (removed).", flush=True)
+          f"{downloaded} download attempts, {skipped} already in JSON (skipped), "
+          f"{unavailable} unavailable (removed).", flush=True)
     return result, fingerprints
 
 

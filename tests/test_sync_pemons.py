@@ -256,12 +256,12 @@ class SyncTests(unittest.TestCase):
                  patch.object(sync.builder, "get_level_data_gd", return_value=fresh) as metadata:
                 sync.sync_datasets(0, dataset="unrated")
                 sync.sync_datasets(0, dataset="unrated")
-                self.assertEqual(download.call_count, 2)
+                self.assertEqual(download.call_count, 1)
                 self.assertEqual(manual_ids.read_text(), "100\n")
                 self.assertEqual(json.loads((root / "unrated-pemons.json").read_text())[0]["ID"], 100)
                 download.return_value = dict(kv, **{"17": "1", "18": "10"})
                 metadata.return_value = dict(fresh, difficulty="Hard Demon", rating="Rated")
-                sync.sync_datasets(0, dataset="unrated")
+                sync.sync_datasets(0, full=True, dataset="unrated")
                 self.assertEqual(rated_ids.read_text(), "100\n")
                 self.assertEqual(manual_ids.read_text(), "")
                 self.assertEqual(json.loads((root / "unrated-pemons.json").read_text()), [])
@@ -269,6 +269,35 @@ class SyncTests(unittest.TestCase):
                 self.assertEqual(rated["rating"], "Rated")
                 self.assertNotIn("firstSeen", rated)
                 self.assertTrue(rated["rateDate"])
+
+    def test_appended_manual_ids_only_download_missing_json_entries(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            output = root / "pemons.json"
+            output.write_text("[]")
+            ids = root / "unrated-pemon-ids.txt"
+            ids.write_text("100\n101\n102\n102\n")
+            existing = [{"ID": value, "number": index, "creator": "Fox",
+                         "level": f"Existing {value}", "difficulty": "Demon",
+                         "rating": "Unrated", "rateDate": "", "firstSeen": "01.01.2025"}
+                        for index, value in enumerate((100, 101), 1)]
+            (root / "unrated-pemons.json").write_text(json.dumps(existing))
+            kv = {"1": "102", "2": "New", "15": "5", "17": "0", "18": "0"}
+            fresh = {"ID": 102, "number": 3, "creator": "Fox", "level": "New"}
+            with patch.object(sync.builder, "OUTPUT_FILE", output), \
+                 patch.object(sync, "STATE", root / "cursor.json"), \
+                 patch.object(sync, "discover", return_value={}), \
+                 patch.object(sync.builder, "_fetch_download", return_value=kv) as download, \
+                 patch.object(sync.builder, "get_level_data_gd", return_value=fresh):
+                sync.sync_datasets(0, dataset="unrated")
+                download.assert_called_once_with(102)
+                self.assertEqual(ids.read_text(), "100\n101\n102\n")
+                result = json.loads((root / "unrated-pemons.json").read_text())
+                self.assertEqual(result[:2], existing)
+                self.assertEqual(result[2]["ID"], 102)
+                download.reset_mock()
+                sync.sync_datasets(0, dataset="unrated")
+                download.assert_not_called()
 
     def test_unavailable_id_is_removed_without_aborting(self):
         with tempfile.TemporaryDirectory() as folder:
@@ -292,7 +321,7 @@ class SyncTests(unittest.TestCase):
                 self.assertEqual(download.call_count, 2)
                 download.reset_mock()
                 download.side_effect = [sync.builder.LevelUnavailableError("missing")]
-                sync.sync_datasets(0, dataset="unrated")
+                sync.sync_datasets(0, full=True, dataset="unrated")
                 download.assert_called_once_with(101)
                 self.assertEqual(ids.read_text(), "")
                 self.assertEqual(json.loads((root / "unrated-pemons.json").read_text()), [])
