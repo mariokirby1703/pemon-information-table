@@ -35,6 +35,11 @@
                 "glob": "demons.json",
                 "input": "src/assets",
                 "output": "assets"
+              },
+              {
+                "glob": "unrated-pemons.json",
+                "input": "src/assets",
+                "output": "assets"
               }
             ],
             "styles": [
@@ -109,6 +114,11 @@
               },
               {
                 "glob": "demons.json",
+                "input": "src/assets",
+                "output": "assets"
+              },
+              {
+                "glob": "unrated-pemons.json",
                 "input": "src/assets",
                 "output": "assets"
               }
