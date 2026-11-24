@@ -272,12 +272,30 @@ def save_unrated(prepared):
     }}), encoding="utf-8")
 
 
+def sync_datasets(batch_size, full=False, dataset="both"):
+    if dataset not in ("both", "rated", "unrated"):
+        raise ValueError(f"Unknown dataset: {dataset}")
+    prepared = prepare_unrated(full=full) if dataset != "rated" else None
+    if dataset != "unrated":
+        if full and STATE.exists():
+            state = json.loads(STATE.read_text())
+            state["next_level_id"] = None
+            STATE.write_text(json.dumps(state))
+        sync(sys.maxsize if full else batch_size)
+    if prepared is not None:
+        save_unrated(prepared)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--batch-size", type=int, default=20)
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--all", action="store_true", help="Fully refresh every existing entry, newest first")
     modes.add_argument("--watch", action="store_true", help="Scan rated platformer demons; sync creator names and download only new/changed levels")
+    scope = parser.add_mutually_exclusive_group()
+    scope.add_argument("--rated-only", dest="dataset", action="store_const", const="rated")
+    scope.add_argument("--unrated-only", dest="dataset", action="store_const", const="unrated")
+    parser.set_defaults(dataset="both")
     parser.add_argument("--data-root", type=Path, help="Separate checkout containing src/assets")
     args = parser.parse_args()
     if args.batch_size < 1:
@@ -288,17 +306,8 @@ if __name__ == "__main__":
         builder.OUTPUT_FILE = asset_dir / "pemons.json"
     if args.watch:
         args.batch_size = 0
-    if args.all:
-        # A complete daily pass must always start at the newest entry.
-        args.batch_size = sys.maxsize
-        if STATE.exists():
-            state = json.loads(STATE.read_text())
-            state["next_level_id"] = None
-            STATE.write_text(json.dumps(state))
     try:
-        prepared = prepare_unrated(full=args.all)
-        sync(args.batch_size)
-        save_unrated(prepared)
+        sync_datasets(args.batch_size, full=args.all, dataset=args.dataset)
     except builder.requests.HTTPError as exc:
         if exc.response is not None and exc.response.status_code == 403:
             print(

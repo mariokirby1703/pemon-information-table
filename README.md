@@ -61,7 +61,18 @@ oder den selten gewuenschten Vollabgleich:
 .\.sync-state\venv\Scripts\python.exe scripts/run_daily_sync.py --force --all
 ```
 
-Ein erfolgreicher erzwungener Lauf zaehlt ebenfalls als Tageslauf.
+Nur ein erfolgreicher Lauf beider Listen zaehlt als Tageslauf.
+Einzelne Listen lassen sich jederzeit manuell pruefen, ohne den Tagesmarker
+zu veraendern:
+
+```powershell
+.\.sync-state\venv\Scripts\python.exe scripts/run_daily_sync.py --force --unrated-only
+.\.sync-state\venv\Scripts\python.exe scripts/run_daily_sync.py --force --rated-only
+```
+
+Dabei werden nur die jeweilige Liste gescannt und ihre beiden Datendateien
+gestaged. Ohne Scope-Parameter bleiben beide Listen aktiv. Mit `--all`
+werden alle Eintraege der gewaehlten Liste erneut heruntergeladen.
 Mit `--check` wird nur der GitHub-Zugriff ueberprueft und kein
 erfolgreicher Tageslauf gespeichert.
 

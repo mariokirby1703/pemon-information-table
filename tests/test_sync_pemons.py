@@ -220,6 +220,34 @@ class SyncTests(unittest.TestCase):
                 self.assertEqual((root / "unrated-pemon-ids.txt").read_text(), "")
 
 
+    def test_unrated_only_skips_rated_sync(self):
+        with patch.object(sync, "prepare_unrated", return_value=([], {})) as prepare, \
+             patch.object(sync, "sync") as rated, \
+             patch.object(sync, "save_unrated") as save:
+            sync.sync_datasets(0, dataset="unrated")
+            prepare.assert_called_once_with(full=False)
+            rated.assert_not_called()
+            save.assert_called_once_with(([], {}))
+
+    def test_rated_only_skips_hyped_sync(self):
+        with patch.object(sync, "prepare_unrated") as prepare, \
+             patch.object(sync, "sync") as rated, \
+             patch.object(sync, "save_unrated") as save:
+            sync.sync_datasets(0, dataset="rated")
+            rated.assert_called_once_with(0)
+            prepare.assert_not_called()
+            save.assert_not_called()
+
+    def test_default_sync_runs_both(self):
+        with patch.object(sync, "prepare_unrated", return_value=([], {})) as prepare, \
+             patch.object(sync, "sync") as rated, \
+             patch.object(sync, "save_unrated") as save:
+            sync.sync_datasets(0)
+            prepare.assert_called_once_with(full=False)
+            rated.assert_called_once_with(0)
+            save.assert_called_once_with(([], {}))
+
+
 class DailyRunTests(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -228,6 +256,19 @@ class DailyRunTests(unittest.TestCase):
         )
         cls.runner = importlib.util.module_from_spec(runner_spec)
         runner_spec.loader.exec_module(cls.runner)
+
+    def test_dataset_arguments_and_file_scope(self):
+        runner = self.runner
+        self.assertEqual(runner.parse_args([]).dataset, "both")
+        self.assertEqual(runner.parse_args(["--force", "--unrated-only"]).dataset, "unrated")
+        self.assertEqual(runner.parse_args(["--force", "--rated-only"]).dataset, "rated")
+        self.assertEqual(runner.dataset_options("unrated"),
+                         (["--unrated-only"], runner.UNRATED_FILES))
+        self.assertEqual(runner.dataset_options("rated"),
+                         (["--rated-only"], runner.RATED_FILES))
+        self.assertEqual(runner.dataset_options("both"), ([], runner.DATA_FILES))
+        with self.assertRaises(SystemExit):
+            runner.parse_args(["--rated-only", "--unrated-only"])
 
     def test_success_marker_survives_restarts_and_changes_by_day(self):
         with tempfile.TemporaryDirectory() as folder:
