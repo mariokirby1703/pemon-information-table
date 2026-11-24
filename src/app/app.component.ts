@@ -6,6 +6,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -21,10 +22,14 @@ export class AppComponent implements OnInit {
   public paginationPageSizeSelector: number[] | boolean = [10, 25, 50, 100, 150, 250, 500, 1000];
   public enableRowStyle = false;
   public isDemonsRoute = false;
+  public isUnratedRoute = false;
+  public loadError = '';
+  private dataRequest?: Subscription;
+  private currentAsset = '';
 
   constructor(private cartService: CartService, private cookieService: CookieService, private http: HttpClient, private cdr: ChangeDetectorRef, private router: Router) {}
 
-  rowData!: any[];
+  rowData: any[] = [];
   rawData: any[] = [];
 
   getRowStyle = (params: RowClassParams<any, any>): RowStyle | undefined => {
@@ -54,39 +59,43 @@ export class AppComponent implements OnInit {
     }
     this.router.events
         .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
-        .subscribe(e => {
-          this.isDemonsRoute = e.urlAfterRedirects.startsWith('/demons');
-          this.cdr.detectChanges();
-          if (!this.isDemonsRoute) {
-            setTimeout(() => this.updateCustomPaginationText(), 0);
-          }
-        });
+        .subscribe(e => this.selectDataset(e.urlAfterRedirects));
 
     this.cookie_name = this.cookieService.get('PHPSESSID');
     this.all_cookies = this.cookieService.getAll();
-
-    this.http.get<any[]>('assets/pemons.json').subscribe(
-        data => {
-          // strip any legacy "showcase" keys from the loaded JSON
-          this.rawData = Array.isArray(data)
-              ? data.map((d: any) => {
-                if (d && typeof d === 'object' && 'showcase' in d) {
-                  const { showcase, ...rest } = d;
-                  return rest;
-                }
-                return d;
-              })
-              : [];
-
-          this.rowData = [...this.rawData]; // Set initial rowData without sorting
-          this.updateCustomPaginationText();
-          this.cdr.detectChanges();
-        },
-        error => {
-          console.error('Error loading JSON file:', error);
-        }
-    );
+    this.selectDataset(this.router.url);
   }
+
+  private selectDataset(url: string): void {
+    const path = url.split(/[?#]/)[0];
+    this.isDemonsRoute = path === '/demons';
+    this.isUnratedRoute = path === '/unrated-pemons';
+    if (this.isDemonsRoute) {
+      this.dataRequest?.unsubscribe();
+      this.currentAsset = '';
+      return;
+    }
+    const asset = this.isUnratedRoute ? 'unrated-pemons.json' : 'pemons.json';
+    if (asset === this.currentAsset) return;
+    this.currentAsset = asset;
+    this.dataRequest?.unsubscribe();
+    this.rowData = [];
+    this.loadError = '';
+    this.dataRequest = this.http.get<any[]>('assets/' + asset).subscribe({
+      next: data => {
+        this.rawData = Array.isArray(data) ? data.map(({ showcase, ...rest }) => rest) : [];
+        this.rowData = [...this.rawData];
+        this.updateCustomPaginationText();
+        this.cdr.detectChanges();
+      },
+      error: error => {
+        this.loadError = 'Could not load ' + asset;
+        console.error(this.loadError, error);
+        this.cdr.detectChanges();
+      }
+    });
+  }
+
 
   setRowStyle(enabled: boolean): void {
     if (this.enableRowStyle === enabled) return;
@@ -146,39 +155,6 @@ export class AppComponent implements OnInit {
         if (rowStyleToggle) rowStyleToggle.checked = this.enableRowStyle;
       }
 
-      // --- Dataset Switch: Demons ---
-      let datasetSwitch = document.getElementById('datasetSwitch') as HTMLDivElement | null;
-      if (!datasetSwitch) {
-        datasetSwitch = document.createElement('div');
-        datasetSwitch.id = 'datasetSwitch';
-        datasetSwitch.className = 'switch-container';
-        datasetSwitch.style.marginLeft = '12px';
-        datasetSwitch.innerHTML = `
-        <label class="switch">
-          <input type="checkbox" id="datasetToggle">
-          <span class="slider round"></span>
-        </label>
-        <span class="switch-label">Demons</span>
-      `;
-        paginationPanel.appendChild(datasetSwitch);
-
-        const datasetToggle = document.getElementById('datasetToggle') as HTMLInputElement | null;
-        if (datasetToggle) {
-          datasetToggle.checked = this.isDemonsRoute;
-          datasetToggle.addEventListener('change', (event) => {
-            const input = event.target as HTMLInputElement;
-            if (input.checked) {
-              this.router.navigateByUrl('/demons');
-            } else {
-              this.router.navigateByUrl('');
-            }
-          });
-        }
-      } else {
-        // Bereits vorhanden? Zustand synchronisieren
-        const datasetToggle = document.getElementById('datasetToggle') as HTMLInputElement | null;
-        if (datasetToggle) datasetToggle.checked = this.isDemonsRoute;
-      }
     }, 0);
   }
 
@@ -250,7 +226,7 @@ export class AppComponent implements OnInit {
         'mythic': (p: any) => !this.enableRowStyle && p.data?.rating === 'Mythic'
       },
       comparator: (valueA: string, valueB: string) => {
-        const order = ["Rated", "Featured", "Epic", "Legendary", "Mythic"];
+        const order = ["Unrated", "Rated", "Featured", "Epic", "Legendary", "Mythic"];
         return order.indexOf(valueA) - order.indexOf(valueB);
       }
     },
@@ -350,6 +326,10 @@ export class AppComponent implements OnInit {
       }
     }
   ];
+
+  unratedColDefs: ColDef[] = this.colDefs.map(column => column.field === 'rateDate'
+      ? { ...column, field: 'firstSeen', headerName: 'First Seen', sortable: false }
+      : column);
 }
 
 /*

@@ -51,27 +51,30 @@ def creator_names_from_search(raw):
     return names
 
 
-def discover(full=False):
+def discover(full=False, hyped=False):
     found = {}
     previous = set()
     stalled_pages = 0
     for page in range(5000 if full else 5):
-        print(f"Reading platformer demon list, page {page + 1}...", flush=True)
+        print(f"Reading {'hyped unrated' if hyped else 'rated'} platformer demon list, page {page + 1}...", flush=True)
         response = builder._post(
             f"{builder.BASE}/getGJLevels21.php",
-            data={"secret": builder.SECRET, "type": "0" if full else "11",
-                  "str": "", "diff": "-2", "len": "5", "star": "1",
-                  "page": str(page), "gameVersion": "22", "binaryVersion": "45"},
+            data={"secret": builder.SECRET, "type": "31" if hyped else ("0" if full else "11"),
+                  "str": "", "diff": "-2", "len": "5",
+                  **({"noStar": "1", "hypeSecret": "1"} if hyped else {"star": "1"}),
+                  "page": str(page), "gameVersion": "22", "binaryVersion": "51" if hyped else "45"},
             headers=builder.HEADERS,
         )
         response.raise_for_status()
         raw = response.text.strip()
-        if raw == "-1" and page > 0:
+        if raw == "-1" and page > 0 and not hyped:
             break
         if "#" not in raw:
             raise RuntimeError(f"Invalid discovery response on page {page}: {raw[:80]!r}")
         rows = [builder._kv_block(row) for row in raw.split("#", 1)[0].split("|") if row]
         if not rows:
+            if hyped and not (page == 0 and raw.split("#")[3:4] == ["0:0:10"]):
+                raise RuntimeError("Unexpected empty hyped page; preserving previous data")
             break
         if any(not row.get("1", "").isdigit() for row in rows):
             raise RuntimeError("Discovery returned an invalid level ID")
@@ -86,8 +89,19 @@ def discover(full=False):
             print(f"Ignoring {overlap} overlapping level(s) on page {page + 1}.", flush=True)
         previous.update(ids)
         for row in rows:
-            if row.get("15") == "5" and row.get("17") == "1" and int(row.get("18", 0)) == 10:
+            if row.get("15") == "5" and row.get("17") == "1" and (
+                int(row.get("18") or 0) == (0 if hyped else 10)
+            ):
                 found[row["1"]] = raw
+        if hyped:
+            # Use explicit page information when provided, rather than requesting
+            # one extra page that may return an ambiguous -1.
+            parts = raw.split("#")
+            info = parts[3].split(":") if len(parts) > 3 else []
+            if len(info) == 3 and all(value.isdigit() for value in info):
+                total, offset, size = map(int, info)
+                if size > 0 and offset + size >= total:
+                    break
     else:
         if full:
             raise RuntimeError("Discovery exceeded page limit")
@@ -187,6 +201,77 @@ def sync(batch_size=20):
     print(f"Checked {len(selected)} levels; added {added}, updated {updated}, renamed {renamed}.")
 
 
+HYPED_KEYS = ("2", "5", "6", "9", "12", "15", "17", "18", "19", "31", "35",
+              "37", "42", "43", "45", "46", "47", "52", "53", "57")
+
+
+def prepare_unrated(full=False):
+    """Read the current Hyped snapshot; do not touch output files until ready."""
+    output = builder.OUTPUT_FILE.with_name("unrated-pemons.json")
+    state_path = STATE.with_name("unrated-cursor.json")
+    existing = builder.load_existing_data(output)
+    old_by_id = {str(entry["ID"]): entry for entry in existing}
+    state = json.loads(state_path.read_text(encoding="utf-8")) if state_path.exists() else {}
+    previous = state.get("fingerprints", {})
+    discovered = discover(full=True, hyped=True)
+    today = datetime.now(ZoneInfo("Europe/Berlin")).strftime("%d.%m.%Y")
+    result, fingerprints = [], {}
+    downloaded = 0
+    for level_id, raw in discovered.items():
+        row = next(builder._kv_block(item) for item in raw.split("#", 1)[0].split("|")
+                   if builder._kv_block(item).get("1") == level_id)
+        fingerprint = [row.get(key) for key in HYPED_KEYS]
+        old = old_by_id.get(level_id)
+        number = len(result) + 1
+        if full or old is None or previous.get(level_id) != fingerprint:
+            print(f"Checking hyped platformer demon {level_id}...", flush=True)
+            kv = builder._fetch_download(int(level_id))
+            if kv.get("1") != level_id or not kv.get("2") or "15" not in kv or "17" not in kv:
+                raise RuntimeError(f"Invalid hyped metadata for {level_id}; preserving previous data")
+            # A level can become rated (or change difficulty) during the scan.
+            if kv["15"] != "5" or kv["17"] != "1" or int(kv.get("18") or 0) != 0:
+                continue
+            builder.levels21_cache[level_id] = raw
+            fresh = builder.get_level_data_gd(level_id, number, True, downloaded=kv)
+            if not fresh or not fresh.get("creator"):
+                raise RuntimeError(f"Incomplete hyped metadata for {level_id}")
+            entry = builder.merge_entries(old, fresh) if old else builder.sanitize_entry(fresh)
+            downloaded += 1
+        else:
+            entry = dict(old)
+        name = creator_names_from_search(raw).get(row.get("6", ""))
+        if name:
+            entry["creator"] = name
+        entry.update(number=number, rating="Unrated", rateDate="",
+                     firstSeen=(old or {}).get("firstSeen") or today)
+        result.append(entry)
+        fingerprints[level_id] = fingerprint
+    print(f"Hyped watch: {len(result)} unrated platformer demons, "
+          f"{downloaded} level downloads.", flush=True)
+    return result, fingerprints
+
+
+def save_unrated(prepared):
+    """Publish only the successful snapshot, excluding already rated IDs."""
+    result, fingerprints = prepared
+    rated = {str(entry["ID"]) for entry in builder.load_existing_data(builder.OUTPUT_FILE)}
+    result = [entry for entry in result if str(entry["ID"]) not in rated]
+    for number, entry in enumerate(result, 1):
+        entry["number"] = number
+    output = builder.OUTPUT_FILE.with_name("unrated-pemons.json")
+    ids = builder.OUTPUT_FILE.with_name("unrated-pemon-ids.txt")
+    if not output.exists() or builder.load_existing_data(output) != result:
+        builder.save_data(output, result)
+    id_text = "".join(f'{entry["ID"]}\n' for entry in result)
+    if not ids.exists() or ids.read_text(encoding="utf-8") != id_text:
+        ids.write_text(id_text, encoding="utf-8")
+    state_path = STATE.with_name("unrated-cursor.json")
+    state_path.parent.mkdir(exist_ok=True)
+    state_path.write_text(json.dumps({"fingerprints": {
+        str(entry["ID"]): fingerprints[str(entry["ID"])] for entry in result
+    }}), encoding="utf-8")
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--batch-size", type=int, default=20)
@@ -211,7 +296,9 @@ if __name__ == "__main__":
             state["next_level_id"] = None
             STATE.write_text(json.dumps(state))
     try:
+        prepared = prepare_unrated(full=args.all)
         sync(args.batch_size)
+        save_unrated(prepared)
     except builder.requests.HTTPError as exc:
         if exc.response is not None and exc.response.status_code == 403:
             print(

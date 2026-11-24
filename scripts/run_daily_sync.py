@@ -12,7 +12,8 @@ import sys
 ROOT = Path(__file__).resolve().parents[1]
 RUNTIME = ROOT / ".sync-state"
 CHECKOUT = RUNTIME / "checkout"
-DATA_FILES = ["src/assets/pemons.json", "src/assets/pemon_ids.txt"]
+DATA_FILES = ["src/assets/pemons.json", "src/assets/pemon_ids.txt",
+              "src/assets/unrated-pemons.json", "src/assets/unrated-pemon-ids.txt"]
 SUCCESS_STATE = RUNTIME / "last-success.json"
 
 

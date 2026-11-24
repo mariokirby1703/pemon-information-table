@@ -118,30 +118,6 @@ export class DemonsGridComponent implements OnInit {
         };
       }
 
-      // Dataset-Switch (wir sind auf /demons → checked = true)
-      let datasetToggle = document.getElementById('datasetToggle') as HTMLInputElement | null;
-      if (!datasetToggle) {
-        const datasetSwitch = document.createElement('div');
-        datasetSwitch.id = 'datasetSwitch';
-        datasetSwitch.className = 'switch-container';
-        datasetSwitch.style.marginLeft = '12px';
-        datasetSwitch.innerHTML = `
-          <label class="switch">
-            <input type="checkbox" id="datasetToggle">
-            <span class="slider round"></span>
-          </label>
-            <span class="switch-label">Demons</span>
-        `;
-        paginationPanel.appendChild(datasetSwitch);
-        datasetToggle = document.getElementById('datasetToggle') as HTMLInputElement | null;
-      }
-      if (datasetToggle) {
-        datasetToggle.checked = true;
-        datasetToggle.onchange = (ev: Event) => {
-          const input = ev.target as HTMLInputElement;
-          if (!input.checked) this.router.navigateByUrl('');
-        };
-      }
     }, 0);
   }
 

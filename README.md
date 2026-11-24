@@ -73,3 +73,21 @@ abgewiesen; die Node.js-Warnung war nicht die Ursache. Der tägliche Windows-Lau
 verwendet keinen GitHub Actions Runner. Optional kann ein manueller Workflow
 über die Repository-Variable `PEMON_RUNNER` andere Runner-Labels erhalten.
 
+
+
+## Unrated / Hyped Platformer Demons
+
+The same daily run also scans GD's Hyped search (type 31, demon,
+platformer, noStar). It writes `src/assets/unrated-pemon-ids.txt` and
+`src/assets/unrated-pemons.json`, which the website shows under
+**Unrated Pemons** at `/unrated-pemons`.
+
+This is the current Hyped snapshot, not a permanent archive. Entries that
+leave the search are removed after a successful scan. Newly rated levels
+are excluded from the unrated list and handled by the existing rated sync.
+Unrated metadata uses the same schema and conservative merge rules as rated
+data, with rating Unrated and firstSeen instead of a rate date. Only new
+or changed entries are downloaded; creator names are refreshed from search.
+An explicit full sync also refreshes all currently hyped entries. A failed
+or ambiguous Hyped search does not overwrite the previous snapshot.
+The unofficial API's filtering and availability depend on the GD server.
