@@ -6958,5 +6958,25 @@
     "SFX": 0,
     "rateDate": "",
     "firstSeen": "24.11.2026"
+  },
+  {
+    "number": 349,
+    "level": "Chaoz Noir",
+    "creator": "JunchiX",
+    "ID": 146297441,
+    "difficulty": "Demon",
+    "rating": "Unrated",
+    "userCoins": 1,
+    "estimatedTime": 85,
+    "objects": 0,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "Clubstep",
+    "artist": "DJ-Nate",
+    "songID": "OFFICIAL",
+    "songs": 1,
+    "SFX": 0,
+    "rateDate": "",
+    "firstSeen": "24.11.2026"
   }
 ]
