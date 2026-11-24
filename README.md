@@ -128,5 +128,7 @@ git push
 ```
 
 Manually added IDs are treated as demon candidates. Unrated levels have no
-official demon tier to verify. Invalid or unavailable metadata causes the run
-to fail without discarding the pending IDs.
+official demon tier to verify. An individual download returning `-1` is skipped without aborting the run:
+its ID remains in the TXT file for retry on the next run, and previously
+downloaded JSON metadata is preserved. Other invalid responses and HTTP
+errors still abort the sync rather than silently discarding data.

@@ -249,6 +249,10 @@ def _demon_name(code: int) -> str:
     return {3: "Easy", 4: "Medium", 0: "Hard", 5: "Insane", 6: "Extreme"}.get(code, "Unknown")
 
 # --- Boomlings fetchers & parsers ---
+class LevelUnavailableError(RuntimeError):
+    """GD returned -1 for an individual level; it may be temporarily unavailable."""
+
+
 def _fetch_download(level_id: int) -> dict:
     url = f"{BASE}/downloadGJLevel22.php"
     r = _post(url, data={"levelID": str(level_id), "secret": SECRET}, headers=HEADERS, timeout=30)
@@ -256,8 +260,10 @@ def _fetch_download(level_id: int) -> dict:
         raise RuntimeError("403/Cloudflare (download).")
     r.raise_for_status()
     txt = r.text.strip()
-    if not txt or txt == "-1":
-        raise RuntimeError(f"Level {level_id} not found / error: {txt!r}")
+    if txt == "-1":
+        raise LevelUnavailableError(f"Level {level_id} not found / error: {txt!r}")
+    if not txt:
+        raise RuntimeError(f"Empty download response for level {level_id}")
     return _kv_block(txt)
 
 def _fetch_levels21_raw(level_id: int) -> str:

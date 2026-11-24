@@ -270,6 +270,40 @@ class SyncTests(unittest.TestCase):
                 self.assertNotIn("firstSeen", rated)
                 self.assertTrue(rated["rateDate"])
 
+    def test_unavailable_id_does_not_abort_and_is_retried(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            output = root / "pemons.json"
+            output.write_text("[]")
+            ids = root / "unrated-pemon-ids.txt"
+            ids.write_text("100\n101\n")
+            kv = {"1": "101", "2": "Available", "15": "5", "17": "0", "18": "0"}
+            fresh = {"ID": 101, "creator": "Fox", "level": "Available", "number": 1}
+            with patch.object(sync.builder, "OUTPUT_FILE", output), \
+                 patch.object(sync, "STATE", root / "cursor.json"), \
+                 patch.object(sync, "discover", return_value={}), \
+                 patch.object(sync.builder, "_fetch_download",
+                              side_effect=[sync.builder.LevelUnavailableError("missing"), kv]) as download, \
+                 patch.object(sync.builder, "get_level_data_gd", return_value=fresh):
+                sync.sync_datasets(0, dataset="unrated")
+                self.assertEqual(ids.read_text(), "100\n101\n")
+                saved = json.loads((root / "unrated-pemons.json").read_text())
+                self.assertEqual([entry["ID"] for entry in saved], [101])
+                self.assertEqual(download.call_count, 2)
+                download.side_effect = [dict(kv, **{"1": "100"}),
+                                        sync.builder.LevelUnavailableError("missing")]
+                with patch.object(sync.builder, "get_level_data_gd",
+                                  return_value=dict(fresh, ID=100)):
+                    sync.sync_datasets(0, dataset="unrated")
+                saved = json.loads((root / "unrated-pemons.json").read_text())
+                self.assertEqual([entry["ID"] for entry in saved], [100, 101])
+                self.assertEqual(ids.read_text(), "100\n101\n")
+
+    def test_download_minus_one_has_specific_exception(self):
+        with patch.object(sync.builder, "_post", return_value=Mock(status_code=200, text="-1")):
+            with self.assertRaises(sync.builder.LevelUnavailableError):
+                sync.builder._fetch_download(100)
+
     def test_rated_cleanup_preserves_pending_manual_ids(self):
         with tempfile.TemporaryDirectory() as folder:
             root = Path(folder)
