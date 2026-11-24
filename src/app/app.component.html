@@ -1,17 +1,11 @@
-<nav class="dataset-nav" aria-label="Level datasets">
-    <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Rated Pemons</a>
-    <a routerLink="/unrated-pemons" routerLinkActive="active">Unrated Pemons</a>
-    <a routerLink="/demons" routerLinkActive="active">Demons</a>
-    <span *ngIf="isUnratedRoute" class="dataset-hint">Hyped · Unrated platformer demons</span>
-</nav>
 <div *ngIf="!isDemonsRoute">
     <div *ngIf="loadError" role="alert">{{ loadError }}</div>
     <ag-grid-angular
             [enableCellTextSelection]="true"
             [rowData]="rowData"
             [columnDefs]="isUnratedRoute ? unratedColDefs : colDefs"
-            class="ag-theme-quartz-dark"
-            style="height: calc(100vh - 48px);"
+            class="ag-theme-quartz-dark pemon-grid"
+            style="height: 100vh;"
             [pagination]="pagination"
             [paginationPageSize]="paginationPageSize"
             [paginationPageSizeSelector]="paginationPageSizeSelector"

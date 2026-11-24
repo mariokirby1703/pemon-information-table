@@ -1,3 +1,4 @@
+import { renderDatasetTabs } from '../dataset-tabs';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -80,7 +81,7 @@ export class DemonsGridComponent implements OnInit {
 
   updateCustomPaginationText(): void {
     setTimeout(() => {
-      const paginationPanel = document.querySelector('.ag-paging-panel') as HTMLElement | null;
+      const paginationPanel = document.querySelector('.classic-demon-grid .ag-paging-panel') as HTMLElement | null;
       if (!paginationPanel) return;
 
       // © Text
@@ -118,6 +119,7 @@ export class DemonsGridComponent implements OnInit {
         };
       }
 
+      renderDatasetTabs(paginationPanel, this.router, '/demons');
     }, 0);
   }
 

@@ -1,3 +1,4 @@
+import { renderDatasetTabs } from './dataset-tabs';
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AgGridAngular } from 'ag-grid-angular';
 import { ColDef, RowStyle, RowClassParams } from 'ag-grid-community';
@@ -75,6 +76,7 @@ export class AppComponent implements OnInit {
       this.currentAsset = '';
       return;
     }
+    this.updateCustomPaginationText();
     const asset = this.isUnratedRoute ? 'unrated-pemons.json' : 'pemons.json';
     if (asset === this.currentAsset) return;
     this.currentAsset = asset;
@@ -113,7 +115,7 @@ export class AppComponent implements OnInit {
 
   updateCustomPaginationText(): void {
     setTimeout(() => {
-      const paginationPanel = document.querySelector('.ag-paging-panel') as HTMLElement | null;
+      const paginationPanel = document.querySelector('.pemon-grid .ag-paging-panel') as HTMLElement | null;
       if (!paginationPanel) return;
 
       // © Hinweis
@@ -155,6 +157,7 @@ export class AppComponent implements OnInit {
         if (rowStyleToggle) rowStyleToggle.checked = this.enableRowStyle;
       }
 
+      renderDatasetTabs(paginationPanel, this.router, this.isUnratedRoute ? '/unrated-pemons' : '/');
     }, 0);
   }
 
