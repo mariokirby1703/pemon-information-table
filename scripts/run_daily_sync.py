@@ -19,9 +19,9 @@ DATA_FILES = RATED_FILES + UNRATED_FILES
 
 def dataset_options(dataset):
     if dataset == "rated":
-        return ["--rated-only"], RATED_FILES
+        return ["--rated-only"], DATA_FILES
     if dataset == "unrated":
-        return ["--unrated-only"], UNRATED_FILES
+        return ["--unrated-only"], DATA_FILES
     if dataset == "both":
         return [], DATA_FILES
     raise ValueError(f"Unknown dataset: {dataset}")

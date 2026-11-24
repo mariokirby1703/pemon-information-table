@@ -236,12 +236,59 @@ class SyncTests(unittest.TestCase):
                 self.assertEqual(sync.prepare_unrated(), ([], {}))
                 metadata.assert_not_called()
 
+    def test_manual_ids_persist_outside_hyped_and_promote(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            output = root / "pemons.json"
+            rated_ids = root / "pemon_ids.txt"
+            manual_ids = root / "unrated-pemon-ids.txt"
+            output.write_text("[]")
+            rated_ids.write_text("")
+            manual_ids.write_text("100\n100\n")
+            kv = {"1": "100", "2": "Manual", "15": "5", "17": "0", "18": "0"}
+            fresh = {"ID": 100, "number": 1, "level": "Manual", "creator": "Fox",
+                     "difficulty": "Demon", "rating": "", "rateDate": ""}
+            with patch.object(sync.builder, "OUTPUT_FILE", output), \
+                 patch.object(sync.builder, "INPUT_FILE", rated_ids), \
+                 patch.object(sync, "STATE", root / "cursor.json"), \
+                 patch.object(sync, "discover", return_value={}), \
+                 patch.object(sync.builder, "_fetch_download", return_value=kv) as download, \
+                 patch.object(sync.builder, "get_level_data_gd", return_value=fresh) as metadata:
+                sync.sync_datasets(0, dataset="unrated")
+                sync.sync_datasets(0, dataset="unrated")
+                self.assertEqual(download.call_count, 2)
+                self.assertEqual(manual_ids.read_text(), "100\n")
+                self.assertEqual(json.loads((root / "unrated-pemons.json").read_text())[0]["ID"], 100)
+                download.return_value = dict(kv, **{"17": "1", "18": "10"})
+                metadata.return_value = dict(fresh, difficulty="Hard Demon", rating="Rated")
+                sync.sync_datasets(0, dataset="unrated")
+                self.assertEqual(rated_ids.read_text(), "100\n")
+                self.assertEqual(manual_ids.read_text(), "")
+                self.assertEqual(json.loads((root / "unrated-pemons.json").read_text()), [])
+                rated = json.loads(output.read_text())[0]
+                self.assertEqual(rated["rating"], "Rated")
+                self.assertNotIn("firstSeen", rated)
+                self.assertTrue(rated["rateDate"])
+
+    def test_rated_cleanup_preserves_pending_manual_ids(self):
+        with tempfile.TemporaryDirectory() as folder:
+            root = Path(folder)
+            output = root / "pemons.json"
+            output.write_text(json.dumps([{"ID": 100}]))
+            (root / "unrated-pemons.json").write_text(json.dumps([{"ID": 100, "number": 1}]))
+            ids = root / "unrated-pemon-ids.txt"
+            ids.write_text("100\n101\n")
+            with patch.object(sync.builder, "OUTPUT_FILE", output):
+                sync.remove_rated_from_unrated()
+            self.assertEqual(ids.read_text(), "101\n")
+            self.assertEqual(json.loads((root / "unrated-pemons.json").read_text()), [])
+
     def test_unrated_only_skips_rated_sync(self):
         with patch.object(sync, "prepare_unrated", return_value=([], {})) as prepare, \
              patch.object(sync, "sync") as rated, \
              patch.object(sync, "save_unrated") as save:
             sync.sync_datasets(0, dataset="unrated")
-            prepare.assert_called_once_with(full=False)
+            prepare.assert_called_once_with(full=False, promotions={})
             rated.assert_not_called()
             save.assert_called_once_with(([], {}))
 
@@ -259,7 +306,7 @@ class SyncTests(unittest.TestCase):
              patch.object(sync, "sync") as rated, \
              patch.object(sync, "save_unrated") as save:
             sync.sync_datasets(0)
-            prepare.assert_called_once_with(full=False)
+            prepare.assert_called_once_with(full=False, promotions={})
             rated.assert_called_once_with(0)
             save.assert_called_once_with(([], {}))
 
@@ -279,9 +326,9 @@ class DailyRunTests(unittest.TestCase):
         self.assertEqual(runner.parse_args(["--force", "--unrated-only"]).dataset, "unrated")
         self.assertEqual(runner.parse_args(["--force", "--rated-only"]).dataset, "rated")
         self.assertEqual(runner.dataset_options("unrated"),
-                         (["--unrated-only"], runner.UNRATED_FILES))
+                         (["--unrated-only"], runner.DATA_FILES))
         self.assertEqual(runner.dataset_options("rated"),
-                         (["--rated-only"], runner.RATED_FILES))
+                         (["--rated-only"], runner.DATA_FILES))
         self.assertEqual(runner.dataset_options("both"), ([], runner.DATA_FILES))
         with self.assertRaises(SystemExit):
             runner.parse_args(["--rated-only", "--unrated-only"])

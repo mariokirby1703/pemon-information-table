@@ -70,8 +70,8 @@ zu veraendern:
 .\.sync-state\venv\Scripts\python.exe scripts/run_daily_sync.py --force --rated-only
 ```
 
-Dabei werden nur die jeweilige Liste gescannt und ihre beiden Datendateien
-gestaged. Ohne Scope-Parameter bleiben beide Listen aktiv. Mit `--all`
+Dabei wird nur die jeweilige Liste gescannt; bei einem Rating-Wechsel
+werden beide Listen gemeinsam aktualisiert und gestaged. Ohne Scope-Parameter bleiben beide Listen aktiv. Mit `--all`
 werden alle Eintraege der gewaehlten Liste erneut heruntergeladen.
 Mit `--check` wird nur der GitHub-Zugriff ueberprueft und kein
 erfolgreicher Tageslauf gespeichert.
@@ -93,12 +93,16 @@ platformer, noStar). It writes `src/assets/unrated-pemon-ids.txt` and
 `src/assets/unrated-pemons.json`, which the website shows under
 **Unrated Pemons** at `/unrated-pemons`.
 
-This is the current Hyped snapshot, not a permanent archive. Entries that
-leave the search are removed after a successful scan. Newly rated levels
-are excluded from the unrated list and handled by the existing rated sync.
+This tracks discovered and manually added unrated levels permanently until
+they receive a rating (or are verified not to be platformers). Leaving Hyped
+alone does not remove a level. Tracked IDs outside Hyped are checked directly
+each run. A newly rated platformer demon is moved to the rated JSON and ID
+list, even in unrated-only mode, without scanning the full rated search.
+Rated-only scans remove duplicates from unrated data without querying Hyped.
 Unrated metadata uses the same schema and conservative merge rules as rated
 data, with rating Unrated and firstSeen instead of a rate date. Only new
-or changed entries are downloaded; creator names are refreshed from search.
+or changed Hyped entries and tracked IDs outside Hyped are downloaded;
+creator names are refreshed from search.
 An explicit full sync also refreshes all currently hyped entries. A failed
 or ambiguous Hyped search does not overwrite the previous snapshot.
 The unofficial API's filtering and availability depend on the GD server.
@@ -109,3 +113,20 @@ verifies that each new or changed candidate is a platformer with zero awarded
 moons. The log shows the raw search difficulty, Demon flag, star and length
 fields as well as the download verification. Unrated levels use the generic
 Demon label instead of claiming an official Demon tier.
+
+### Manually add unrated IDs
+
+Append one numeric ID per line to `src/assets/unrated-pemon-ids.txt`, then
+commit and push that file before running the daily sync. The automation uses
+its own checkout and cannot see uncommitted local edits.
+
+```powershell
+git add src/assets/unrated-pemon-ids.txt
+git commit -m "Add tracked unrated platformer demons"
+git push
+.\.sync-state\venv\Scripts\python.exe scripts/run_daily_sync.py --force --unrated-only
+```
+
+Manually added IDs are treated as demon candidates. Unrated levels have no
+official demon tier to verify. Invalid or unavailable metadata causes the run
+to fail without discarding the pending IDs.

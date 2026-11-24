@@ -1,4 +1,4 @@
-"""Unattended discovery and rotating metadata refresh; never removes entries."""
+"""Unattended rated and unrated discovery, metadata refresh and promotion."""
 import argparse
 from datetime import datetime
 import importlib.util
@@ -218,8 +218,16 @@ HYPED_KEYS = ("2", "5", "6", "9", "12", "15", "17", "18", "19", "31", "35",
               "37", "42", "43", "45", "46", "47", "52", "53", "57")
 
 
-def prepare_unrated(full=False):
-    """Read the current Hyped snapshot; do not touch output files until ready."""
+def read_unrated_ids():
+    path = builder.OUTPUT_FILE.with_name("unrated-pemon-ids.txt")
+    ids = list(dict.fromkeys(path.read_text(encoding="utf-8-sig").split())) if path.exists() else []
+    if any(not value.isdigit() for value in ids):
+        raise ValueError("unrated-pemon-ids.txt must contain numeric level IDs")
+    return ids
+
+
+def prepare_unrated(full=False, promotions=None):
+    """Track all previously discovered and manually added IDs, even outside Hyped."""
     output = builder.OUTPUT_FILE.with_name("unrated-pemons.json")
     state_path = STATE.with_name("unrated-cursor.json")
     existing = builder.load_existing_data(output)
@@ -228,49 +236,122 @@ def prepare_unrated(full=False):
     previous = state.get("fingerprints", {})
     discovered = discover(full=True, hyped=True)
     rated_ids = {str(entry["ID"]) for entry in builder.load_existing_data(builder.OUTPUT_FILE)}
+    ids = list(dict.fromkeys([*read_unrated_ids(), *old_by_id, *discovered]))
     today = datetime.now(ZoneInfo("Europe/Berlin")).strftime("%d.%m.%Y")
     result, fingerprints = [], {}
     downloaded = 0
-    for level_id, raw in discovered.items():
+    for level_id in ids:
         if level_id in rated_ids:
-            print(f"Skipping already known rated level {level_id}.", flush=True)
+            print(f"Removing already known rated level {level_id} from unrated list.", flush=True)
             continue
-        row = next(builder._kv_block(item) for item in raw.split("#", 1)[0].split("|")
-                   if builder._kv_block(item).get("1") == level_id)
-        fingerprint = [row.get(key) for key in HYPED_KEYS]
+        raw = discovered.get(level_id)
+        row = next((builder._kv_block(item) for item in raw.split("#", 1)[0].split("|")
+                    if builder._kv_block(item).get("1") == level_id), {}) if raw else {}
+        fingerprint = [row.get(key) for key in HYPED_KEYS] if raw else None
         old = old_by_id.get(level_id)
         number = len(result) + 1
-        if full or old is None or previous.get(level_id) != fingerprint:
-            print(f"Checking hyped platformer demon {level_id}...", flush=True)
+        # Levels outside Hyped must be checked directly: leaving the tab is
+        # not proof of a rating. Manual IDs are included in this same path.
+        if full or not raw or old is None or previous.get(level_id) != fingerprint:
+            source = "hyped" if raw else "tracked/manual"
+            print(f"Checking {source} platformer demon {level_id}...", flush=True)
             kv = builder._fetch_download(int(level_id))
             downloaded += 1
             if kv.get("1") != level_id or not kv.get("2") or "15" not in kv or "18" not in kv:
-                raise RuntimeError(f"Invalid hyped metadata for {level_id}; preserving previous data")
-            print(f"Hyped download {level_id}: len={kv.get('15')!r}, "
-                  f"demon={kv.get('17')!r}, stars={kv.get('18')!r}", flush=True)
-            # Officially awarded moons are independent of the sent difficulty.
-            # Do not require the official Demon flag for an unrated candidate.
-            if kv["15"] != "5" or int(kv.get("18") or 0) != 0:
-                print(f"Skipping {level_id}: already rated or not a platformer.", flush=True)
+                raise RuntimeError(f"Invalid metadata for {level_id}; preserving previous data and IDs")
+            moons = int(kv.get("18") or 0)
+            print(f"Unrated check {level_id}: len={kv.get('15')!r}, "
+                  f"demon={kv.get('17')!r}, stars={moons}", flush=True)
+            if kv["15"] != "5":
+                print(f"Skipping {level_id}: not a platformer.", flush=True)
                 continue
-            builder.levels21_cache[level_id] = raw
+            if moons != 0:
+                if moons == 10 and kv.get("17") == "1":
+                    if promotions is not None:
+                        # An ID search is preferable to a potentially stale
+                        # Hyped response when a level has just been rated.
+                        builder.levels21_cache.pop(level_id, None)
+                        fresh = builder.get_level_data_gd(level_id, number, True, downloaded=kv)
+                        if not fresh or not fresh.get("creator"):
+                            raise RuntimeError(f"Incomplete promotion metadata for {level_id}")
+                        entry = builder.merge_entries(old, fresh) if old else builder.sanitize_entry(fresh)
+                        entry["rateDate"] = today
+                        entry.pop("firstSeen", None)
+                        promotions[level_id] = entry
+                    print(f"Promoting {level_id}: now a rated platformer demon.", flush=True)
+                else:
+                    print(f"Removing {level_id}: rated, but not a platformer demon.", flush=True)
+                continue
+            if raw:
+                builder.levels21_cache[level_id] = raw
+            else:
+                builder.levels21_cache.pop(level_id, None)
             fresh = builder.get_level_data_gd(level_id, number, True, downloaded=kv)
             if not fresh or not fresh.get("creator"):
-                raise RuntimeError(f"Incomplete hyped metadata for {level_id}")
+                raise RuntimeError(f"Incomplete unrated metadata for {level_id}")
             entry = builder.merge_entries(old, fresh) if old else builder.sanitize_entry(fresh)
         else:
             entry = dict(old)
-        name = creator_names_from_search(raw).get(row.get("6", ""))
+        name = creator_names_from_search(raw).get(row.get("6", "")) if raw else None
         if name:
             entry["creator"] = name
-        # Unrated levels have no official Easy/Medium/Hard/Insane/Extreme tier.
         entry.update(number=number, difficulty="Demon", rating="Unrated", rateDate="",
                      firstSeen=(old or {}).get("firstSeen") or today)
         result.append(entry)
         fingerprints[level_id] = fingerprint
-    print(f"Hyped watch: {len(result)} unrated platformer demons, "
+    print(f"Unrated watch: {len(result)} tracked unrated platformer demons, "
           f"{downloaded} level downloads.", flush=True)
     return result, fingerprints
+
+
+def publish_promotions(promotions):
+    """Append verified promotions to rated data before removing unrated copies."""
+    if not promotions:
+        return
+    existing = builder.load_existing_data(builder.OUTPUT_FILE)
+    by_id = {str(entry["ID"]): entry for entry in existing}
+    ids = list(dict.fromkeys(builder.INPUT_FILE.read_text(encoding="utf-8-sig").split()))
+    if any(not value.isdigit() for value in ids):
+        raise ValueError("pemon_ids.txt contains invalid IDs")
+    ids.extend(value for value in by_id if value not in ids)
+    added = 0
+    for level_id, entry in promotions.items():
+        if level_id not in ids:
+            ids.append(level_id)
+        if level_id in by_id:
+            # The normal rated scan may already have inserted this level.
+            # Keep the rated record and its assigned number/date.
+            continue
+        by_id[level_id] = {**entry, "number": ids.index(level_id) + 1}
+        added += 1
+    if added:
+        builder.save_data(builder.OUTPUT_FILE, sorted(by_id.values(), key=lambda entry: entry["number"]))
+    id_text = "".join(f"{level_id}\n" for level_id in ids)
+    if builder.INPUT_FILE.read_text(encoding="utf-8") != id_text:
+        builder.INPUT_FILE.write_text(id_text, encoding="utf-8")
+    print(f"Promotion: {added} level(s) added to rated data.", flush=True)
+
+
+def remove_rated_from_unrated():
+    """Rated-only scans need not query Hyped, but must remove promoted duplicates.
+    Keep pending manual IDs that have not yet been downloaded.
+    """
+    output = builder.OUTPUT_FILE.with_name("unrated-pemons.json")
+    ids_path = builder.OUTPUT_FILE.with_name("unrated-pemon-ids.txt")
+    if not output.exists() and not ids_path.exists():
+        return
+    rated = {str(entry["ID"]) for entry in builder.load_existing_data(builder.OUTPUT_FILE)}
+    existing = builder.load_existing_data(output)
+    result = [dict(entry, number=index) for index, entry in enumerate(
+        (entry for entry in existing if str(entry["ID"]) not in rated), 1)]
+    ids = [value for value in read_unrated_ids() if value not in rated]
+    if result != existing:
+        builder.save_data(output, result)
+    id_text = "".join(f"{value}\n" for value in ids)
+    if ids_path.exists() and ids_path.read_text(encoding="utf-8-sig") != id_text:
+        ids_path.write_text(id_text, encoding="utf-8")
+    if len(result) != len(existing):
+        print(f"Removed {len(existing) - len(result)} newly rated level(s) from unrated data.", flush=True)
 
 
 def save_unrated(prepared):
@@ -297,7 +378,8 @@ def save_unrated(prepared):
 def sync_datasets(batch_size, full=False, dataset="both"):
     if dataset not in ("both", "rated", "unrated"):
         raise ValueError(f"Unknown dataset: {dataset}")
-    prepared = prepare_unrated(full=full) if dataset != "rated" else None
+    promotions = {}
+    prepared = prepare_unrated(full=full, promotions=promotions) if dataset != "rated" else None
     if dataset != "unrated":
         if full and STATE.exists():
             state = json.loads(STATE.read_text())
@@ -305,7 +387,10 @@ def sync_datasets(batch_size, full=False, dataset="both"):
             STATE.write_text(json.dumps(state))
         sync(sys.maxsize if full else batch_size)
     if prepared is not None:
+        publish_promotions(promotions)
         save_unrated(prepared)
+    else:
+        remove_rated_from_unrated()
 
 
 if __name__ == "__main__":
