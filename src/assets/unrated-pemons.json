@@ -7178,5 +7178,25 @@
     "SFX": 2,
     "rateDate": "",
     "firstSeen": "26.11.2026"
+  },
+  {
+    "number": 360,
+    "level": "The Tower",
+    "creator": "zibai",
+    "ID": 146666291,
+    "difficulty": "Demon",
+    "rating": "Unrated",
+    "userCoins": 0,
+    "estimatedTime": 101,
+    "objects": 33449,
+    "checkpoints": null,
+    "twop": false,
+    "primarySong": "Ardolf - Dark Dungeon",
+    "artist": "ArdolfGD",
+    "songID": 1046481,
+    "songs": 11,
+    "SFX": 3,
+    "rateDate": "",
+    "firstSeen": "26.11.2026"
   }
 ]
